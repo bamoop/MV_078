@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/dialog_layout_shap"
+            android:orientation="vertical" >
+            <!-- 标题头 -->
+			 <LinearLayout style="@style/dialog_row_layout" android:background="@drawable/dialog_title_rectangle" >
+			    <TextView  android:text="@string/label_app_record" style="@style/title_text" />
+    		</LinearLayout>
+    		<!-- 提示语 -->
+	   	    <LinearLayout style="@style/dialog_row_layout" >
+
+			    <TextView
+			        style="@style/dialog_wifi_row_text"
+			        android:text="@string/message_save_video"
+			        android:textSize="@dimen/dialog_video_save_txt_size" />
+
+    		</LinearLayout>
+    		<LinearLayout style="@style/dialog_row_layout" >
+			    <TextView  android:text="@string/app_name" style="@style/dialog_wifi_row_text" />
+    		</LinearLayout>
+    		 <!-- ok button -->
+	   	    <LinearLayout style="@style/dialog_row_layout" android:gravity="center" >
+			    <Button android:id="@+id/ok_btn" style="@style/title_txt" android:text="@string/label_ok" android:layout_width="@dimen/dialog_wifi_ok_width" android:layout_height="wrap_content" />
+    		</LinearLayout>
+</LinearLayout>
+<!-- From: file:/C:/Users/Administrator/Desktop/android%20dom/fuck/Car_DV.android_mv031/app/src/main/res/layout/dialog_video_save.xml -->

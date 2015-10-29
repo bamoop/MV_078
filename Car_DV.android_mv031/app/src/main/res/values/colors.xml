@@ -1,0 +1,13 @@
+<resources>
+<color name="white">#FFFFFF</color>
+<color name="button_txt">#000000</color>
+<color name="button_txt_clicked">#FFFFFF</color>
+<color name="red">#440055</color>
+<color name="title_layout_color">#F5F5F5</color>
+<color name="settings_list_bg">#cacaca</color>
+<color name="settings_list_line">#CCCCCC</color>
+    <color name="title_name">#FFE36713</color>
+    <color name="selector_style_tab">#d6d6d6</color>
+    <color name="setting_item_bg">#FFCACACA</color>
+    <color name="setting_bg_tab">#9b9b9b</color>
+</resources>
