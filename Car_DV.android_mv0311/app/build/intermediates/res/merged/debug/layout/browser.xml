@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:MyBanner="http://schemas.android.com/apk/res/tw.com.a_i_t.IPCamViewer" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+	<tw.com.a_i_t.IPCamViewer.MyBanner android:layout_width="match_parent"
+    android:layout_height="@dimen/top_banner_height" MyBanner:text="@string/main_dv" />
+    <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/top_tab_height">
+          <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_video"  >
+        	<ImageButton style="@style/top_button.pic" android:background="@drawable/local_video_bg" />   
+    		<TextView android:layout_marginLeft="5dp" android:id="@+id/txt_video" android:duplicateParentState="true" android:text="@string/video" style="@style/top_button.txt"/>
+    	  </LinearLayout>
+    	  <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_photo"  >
+        	<ImageButton style="@style/top_button.pic" android:background="@drawable/local_photo_bg" />   
+    		<TextView android:layout_marginLeft="5dp" android:id="@+id/txt_photo"  android:text="@string/photo" style="@style/top_button.txt" />
+    	   </LinearLayout>
+    </LinearLayout>
+    <LinearLayout style="@style/layout_vertical" android:layout_weight="1">
+        <tw.com.a_i_t.IPCamViewer.RTPullListView
+            android:id="@+id/browserList"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <tw.com.a_i_t.IPCamViewer.RTPullListView
+            android:id="@+id/browserList_jpg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+    </LinearLayout>
+	 <LinearLayout android:layout_width="match_parent"
+           android:layout_height="@dimen/bottom_banner_height">
+        <LinearLayout style="@style/bottom_layout" android:id="@+id/browserDownloadButton" >
+            <ImageButton style="@style/bottom_button" android:background="@drawable/dv_download_bg"/>
+            <TextView android:duplicateParentState="true" android:text="@string/label_download" style="@style/bottom_button_text"/>
+        </LinearLayout>
+    	<LinearLayout style="@style/bottom_layout" android:id="@+id/browserDeleteButton"  >
+        	<ImageButton style="@style/bottom_button" android:background="@drawable/dv_delete_bg" />   
+    		<TextView android:duplicateParentState="true" android:text="@string/label_delete" style="@style/bottom_button_text" />
+    	</LinearLayout>
+    	<LinearLayout style="@style/bottom_layout" android:id="@+id/browserOpenButton"  >
+        	<ImageButton style="@style/bottom_button" android:background="@drawable/dv_open_bg" />   
+    		<TextView android:duplicateParentState="true" android:text="@string/label_open" style="@style/bottom_button_text" />
+    	</LinearLayout>
+    </LinearLayout>
+</LinearLayout><!-- From: file:/D:/john_work/Car_DV.android_mv0311/app/src/main/res/layout/browser.xml -->

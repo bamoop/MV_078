@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+  <item android:state_checked="false" android:drawable="@android:color/transparent" />
+  <item android:state_checked="true"  android:drawable="@drawable/yes" /> 
+</selector>
+<!-- From: file:/D:/john_work/Car_DV.android_mv0311/app/src/main/res/drawable/setting_checkbox_bg.xml -->

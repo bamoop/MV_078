@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:Main_button="http://schemas.android.com/apk/res/tw.com.a_i_t.IPCamViewer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+    <LinearLayout android:layout_weight="1"
+            style="@style/layout_vertical"
+           android:background="@android:color/transparent"
+        >
+        <ImageView android:background="@android:color/transparent"  android:src="@drawable/app_title" android:layout_gravity="bottom" android:layout_marginLeft="20dp" android:layout_width="150dp" android:layout_height="70dp" />"
+    </LinearLayout>
+ <RelativeLayout
+        android:layout_weight="3"
+        style="@style/layout_vertical"
+    	android:background="@android:color/transparent"
+    >
+  	<RelativeLayout
+		android:layout_height="@dimen/main_moon_height"
+	    android:layout_width="@dimen/main_moon_width"
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentTop="true"
+		android:background="@drawable/moon_bg"
+		/>
+     <ImageView android:id="@+id/title_detail" android:background="@android:color/transparent"  android:src="@drawable/second_title" android:layout_marginTop="20dp"  android:layout_marginLeft="20dp" android:layout_width="250dp" android:layout_height="30dp" />  
+    <tw.com.a_i_t.IPCamViewer.Button_main
+      	   android:id="@+id/video_btn"
+		   android:layout_height="@dimen/btn_main"
+		   android:layout_width="@dimen/btn_main"
+      	   Main_button:picblackground="@drawable/video_btn_seletor"
+      	   android:layout_alignParentRight="true"
+      	   android:layout_marginRight="@dimen/main_btn_one_marginright"
+      	   android:layout_marginTop="@dimen/btn_main_first_top"
+    	   android:layout_below="@+id/title_detail" Main_button:txt="@string/main_video" />
+     <tw.com.a_i_t.IPCamViewer.Button_main
+      	   android:id="@+id/dv_btn"
+		   android:layout_height="@dimen/btn_main"
+		   android:layout_width="@dimen/btn_main"
+      	   Main_button:picblackground="@drawable/dv_btn_seletor"
+      	   android:layout_alignParentRight="true"
+      	   android:layout_marginRight="@dimen/main_btn_two_marginright"
+      	   android:layout_below="@+id/video_btn"
+      	   android:layout_marginTop="5dp"
+    	   Main_button:txt="@string/main_dv" />
+	<tw.com.a_i_t.IPCamViewer.Button_main
+      	   android:id="@+id/local_btn"
+		   android:layout_height="@dimen/btn_main"
+		   android:layout_width="@dimen/btn_main"
+      	   Main_button:picblackground="@drawable/local_btn_seletor"
+      	   android:layout_alignParentRight="true"
+      	   android:layout_marginRight="@dimen/main_btn_three_marginright"
+      	   android:layout_marginBottom="@dimen/main_btn_three_marginbuttom"
+      	   android:layout_marginTop="@dimen/main_btn_three_marginTop"
+      	   android:layout_below="@+id/dv_btn"
+    	   Main_button:txt="@string/main_local" />
+     <tw.com.a_i_t.IPCamViewer.Button_main
+      	   android:id="@+id/settings_btn"
+		   android:layout_height="@dimen/btn_main"
+		   android:layout_width="@dimen/btn_main"
+      	   Main_button:picblackground="@drawable/settings_btn_seletor"
+      	   android:layout_alignParentRight="true"
+      	   android:layout_marginRight="@dimen/main_btn_four_marginright"
+      	   android:layout_marginBottom="@dimen/main_btn_four_marginbuttom"
+      	   android:layout_below="@+id/dv_btn"
+      	   android:layout_marginTop="@dimen/main_btn_four_marginTop"
+    	   Main_button:txt="@string/main_settings" />
+
+	</RelativeLayout>
+    	<LinearLayout android:layout_height="40dp"
+        	android:layout_width="fill_parent"
+        	android:orientation="vertical"
+    	   android:background="@android:color/transparent"
+        >
+        <ImageButton android:id="@+id/help" android:background="@drawable/help" android:layout_marginTop="0dp" android:layout_marginRight="20dp" android:layout_gravity="bottom|right" android:layout_width="30dp" android:layout_height="30dp" 
+           />
+      </LinearLayout>
+</LinearLayout><!-- From: file:/D:/john_work/Car_DV.android_mv0311/app/src/main/res/layout/function_list.xml -->

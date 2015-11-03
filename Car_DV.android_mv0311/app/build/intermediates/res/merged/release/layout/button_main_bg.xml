@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:clickable="true"
+    android:layout_height="@dimen/top_banner_height"
+    android:background="@android:color/transparent">
+    <ImageButton android:id="@+id/btn" android:background="@android:color/transparent" android:layout_width="@dimen/top_back_width" android:layout_height="@dimen/top_back_height" />
+	<TextView android:id="@+id/txt_title" android:textStyle="bold" android:textColor="@android:color/black" android:textSize="22sp" android:gravity="center" style="@style/layout_full"/>
+</LinearLayout>
+<!-- From: file:/D:/john_work/Car_DV.android_mv0311/app/src/main/res/layout/button_main_bg.xml -->

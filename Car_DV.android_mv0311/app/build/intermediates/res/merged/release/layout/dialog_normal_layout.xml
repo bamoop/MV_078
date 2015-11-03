@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:padding="50dp" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:orientation="vertical" >
+      <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dialog_title_height"
+            android:layout_gravity="bottom"
+            android:background="@drawable/dialog_title_bg"
+            android:gravity="center"
+            android:orientation="vertical" >
+        <TextView
+            android:id="@+id/title"
+			style="@style/dialog_title"
+            android:visibility="visible" />
+       <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0px"
+            android:background="#ffd0d0d0" />
+      </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+          <TextView
+              android:id="@+id/message"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:gravity="left|center"
+              android:lineSpacingMultiplier="1.5"
+              android:minHeight="120.0dp"
+              android:paddingBottom="15.0dip"
+              android:paddingLeft="20.0dip"
+              android:paddingRight="20.0dip"
+              android:paddingTop="15.0dip"
+              android:textColor="@android:color/black"
+              android:textSize="@dimen/dialog_video_save_txt_size" />
+
+          <LinearLayout android:orientation="vertical" android:id="@+id/content_view"
+              android:layout_width="fill_parent" android:layout_height="wrap_content" />
+		</LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/dialog_bottom_bg"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/positiveButton"
+                style="@style/dialog_button"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/label_ok" />
+
+            <Button
+                android:id="@+id/negativeButton"
+                style="@style/dialog_button"
+                android:layout_gravity="center"
+                android:text="@string/label_cancel"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout><!-- From: file:/D:/john_work/Car_DV.android_mv0311/app/src/main/res/layout/dialog_normal_layout.xml -->
