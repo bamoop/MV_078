@@ -1,8 +1,0 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="tw.com.a_i_t.IPCamViewer.TestMainActivity">
-    <item android:id="@+id/action_settings"
-        android:title="action_settings"
-        android:orderInCategory="100" android:showAsAction="never" />
-</menu>
-<!-- From: file:/C:/Users/Administrator/Desktop/android%20dom/fuck/Car_DV.android_mv031/app/src/main/res/menu/menu_test_main.xml -->
