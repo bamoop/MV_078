@@ -1,0 +1,66 @@
+Activity Resolver Table:
+  Full MIME Types:
+      video/avi:
+        434c4188 tw.com.a_i_t.IPCamViewer/.FileBrowser.VideoPlayerActivity filter 434c42d8
+      video/x-msvideo:
+        434c4188 tw.com.a_i_t.IPCamViewer/.FileBrowser.VideoPlayerActivity filter 434c42d8
+
+  Base MIME Types:
+      video:
+        434c4188 tw.com.a_i_t.IPCamViewer/.FileBrowser.VideoPlayerActivity filter 434c42d8
+        434c4188 tw.com.a_i_t.IPCamViewer/.FileBrowser.VideoPlayerActivity filter 434c42d8
+
+  Schemes:
+      :
+        434c4188 tw.com.a_i_t.IPCamViewer/.FileBrowser.VideoPlayerActivity filter 434c42d8
+        434c4188 tw.com.a_i_t.IPCamViewer/.FileBrowser.VideoPlayerActivity filter 434c48d0
+      file:
+        434c4188 tw.com.a_i_t.IPCamViewer/.FileBrowser.VideoPlayerActivity filter 434c42d8
+        434c4188 tw.com.a_i_t.IPCamViewer/.FileBrowser.VideoPlayerActivity filter 434c48d0
+      content:
+        434c4188 tw.com.a_i_t.IPCamViewer/.FileBrowser.VideoPlayerActivity filter 434c42d8
+        434c4188 tw.com.a_i_t.IPCamViewer/.FileBrowser.VideoPlayerActivity filter 434c48d0
+
+  Non-Data Actions:
+      android.intent.action.MAIN:
+        434c3bf0 tw.com.a_i_t.IPCamViewer/.ViewPagerDemoActivity filter 434c3ce8
+        434c4e80 tw.com.a_i_t.IPCamViewer/.LocalFileListActivity filter 434c4fb8
+
+  MIME Typed Actions:
+      android.intent.action.VIEW:
+        434c4188 tw.com.a_i_t.IPCamViewer/.FileBrowser.VideoPlayerActivity filter 434c42d8
+ 
+Packages:
+  Package [tw.com.a_i_t.IPCamViewer] (41809298):
+    userId=10117 gids=[3003, 1015, 1028]
+    sharedUser=null
+    pkg=Package{4349d788 tw.com.a_i_t.IPCamViewer}
+    codePath=/data/app/tw.com.a_i_t.IPCamViewer-2.apk
+    resourcePath=/data/app/tw.com.a_i_t.IPCamViewer-2.apk
+    nativeLibraryPath=/data/app-lib/tw.com.a_i_t.IPCamViewer-2
+    versionCode=12
+    applicationInfo=ApplicationInfo{4349d828 tw.com.a_i_t.IPCamViewer}
+    flags=[ DEBUGGABLE HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    versionName=1.0.3
+    dataDir=/data/data/tw.com.a_i_t.IPCamViewer
+    targetSdk=18
+    supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]
+    timeStamp=2013-01-01 00:11:44
+    firstInstallTime=2013-01-01 00:02:39
+    lastUpdateTime=2013-01-01 00:11:47
+    signatures=PackageSignatures{419eead0 [419a7c50]}
+    permissionsFixed=true haveGids=true installStatus=1
+    pkgFlags=[ DEBUGGABLE HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    User 0:  installed=true stopped=false notLaunched=false enabled=0
+    grantedPermissions:
+      android.permission.READ_EXTERNAL_STORAGE
+      android.permission.READ_PHONE_STATE
+      android.permission.CHANGE_WIFI_MULTICAST_STATE
+      android.permission.WRITE_SETTINGS
+      android.permission.WRITE_EXTERNAL_STORAGE
+      android.permission.INTERNET
+      android.permission.CHANGE_WIFI_STATE
+      android.permission.ACCESS_WIFI_STATE
+      android.permission.CHANGE_NETWORK_STATE
+      android.permission.WAKE_LOCK
+      android.permission.ACCESS_NETWORK_STATE

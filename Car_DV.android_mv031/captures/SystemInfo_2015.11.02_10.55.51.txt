@@ -1,0 +1,83 @@
+TASK tw.com.a_i_t.IPCamViewer id=26
+  ACTIVITY tw.com.a_i_t.IPCamViewer/.MainActivity 41ab0cd0 pid=12897
+    Local Activity 41349c78 State:
+      mResumed=true mStopped=false mFinished=false
+      mLoadersStarted=true
+      mChangingConfigurations=false
+      mCurrentConfig={(default font) 1.1 ?mcc?mnc zh_CN ldltr sw360dp w360dp h615dp 320dpi nrml long port finger -keyb/v/h -nav/h skin=/system/framework/framework-res.apk s.8}
+    Active Fragments in 41349da0:
+      #0: FunctionListFragment{41d51970 #0 id=0x7f0c0008}
+        mFragmentId=#7f0c0008 mContainerId=#7f0c0008 mTag=null
+        mState=1 mIndex=0 mWho=android:fragment:0 mBackStackNesting=1
+        mAdded=false mRemoving=true mResumed=false mFromLayout=false mInLayout=false
+        mHidden=false mDetached=false mMenuVisible=true mHasMenu=false
+        mRetainInstance=false mRetaining=false mUserVisibleHint=true
+        mFragmentManager=FragmentManager{41349da0 in MainActivity{41349c78}}
+        mActivity=tw.com.a_i_t.IPCamViewer.MainActivity@41349c78
+        mSavedViewState=android.util.SparseArray@41d7a460
+      #1: StreamPlayerFragment{41d782a8 #1 id=0x7f0c0008}
+        mFragmentId=#7f0c0008 mContainerId=#7f0c0008 mTag=null
+        mState=5 mIndex=1 mWho=android:fragment:1 mBackStackNesting=1
+        mAdded=true mRemoving=false mResumed=true mFromLayout=false mInLayout=false
+        mHidden=false mDetached=false mMenuVisible=true mHasMenu=false
+        mRetainInstance=false mRetaining=false mUserVisibleHint=true
+        mFragmentManager=FragmentManager{41349da0 in MainActivity{41349c78}}
+        mActivity=tw.com.a_i_t.IPCamViewer.MainActivity@41349c78
+        mArguments=Bundle[{mediaUrl=http://192.72.1.1/cgi-bin/liveMJPEG}]
+        mContainer=android.widget.RelativeLayout{41d4f8c0 V.E..... ........ 0,0-720,1230 #7f0c0008 app:id/mainMainFragmentLayout}
+        mView=android.widget.LinearLayout{41d8aa38 V.E..... ........ 0,0-720,1230}
+    Added Fragments:
+      #0: StreamPlayerFragment{41d782a8 #1 id=0x7f0c0008}
+    Back Stack:
+      #0: BackStackEntry{41d7a248 #0 tw.com.a_i_t.IPCamViewer.Viewer.StreamPlayerFragment}
+        mName=tw.com.a_i_t.IPCamViewer.Viewer.StreamPlayerFragment mIndex=0 mCommitted=true
+        Operations:
+          Op #0: REPLACE StreamPlayerFragment{41d782a8 #1 id=0x7f0c0008}
+            Removed: FunctionListFragment{41d51970 #0 id=0x7f0c0008}
+    Back Stack Indices:
+      #0: BackStackEntry{41d7a248 #0 tw.com.a_i_t.IPCamViewer.Viewer.StreamPlayerFragment}
+    FragmentManager misc state:
+      mActivity=tw.com.a_i_t.IPCamViewer.MainActivity@41349c78
+      mContainer=android.app.Activity$1@41349e18
+      mCurState=5 mStateSaved=false mDestroyed=false
+    View Hierarchy:
+      com.android.internal.policy.impl.PhoneWindow$DecorView{4135df38 V.E..... R....... 0,0-720,1280}
+        android.widget.LinearLayout{4135e650 V.E..... ........ 0,0-720,1280}
+          android.view.ViewStub{4135f1f0 G.E..... ......I. 0,0-0,0 #1020354}
+          android.widget.RelativeLayout{4135f4a0 G.E..... ......ID 0,0-0,0 #1020240 android:id/title_container}
+            android.widget.ProgressBar{41363c20 G.ED.... ......I. 0,0-0,0 #1020357 android:id/progress_circular}
+            android.widget.ProgressBar{41c41748 I.ED.... ......I. 0,0-0,0 #1020358 android:id/progress_horizontal}
+            android.widget.TextView{41c4b970 V.ED.... ......ID 0,0-0,0 #1020016 android:id/title}
+          android.widget.FrameLayout{41c4dd78 V.E..... ........ 0,50-720,1280 #1020002 android:id/content}
+            android.widget.RelativeLayout{41d4f210 V.E..... ........ 0,0-720,1230}
+              android.widget.RelativeLayout{41d4f8c0 V.E..... ........ 0,0-720,1230 #7f0c0008 app:id/mainMainFragmentLayout}
+                android.widget.LinearLayout{41d8aa38 V.E..... ........ 0,0-720,1230}
+                  tw.com.a_i_t.IPCamViewer.MyBanner{41d8b428 V.E..... ........ 0,0-720,100}
+                    android.widget.RelativeLayout{41d8c250 V.E...C. ........ 0,0-720,100}
+                      android.widget.ImageButton{41d8d198 VFED..C. ........ 20,20-90,80 #7f0c0009 app:id/btn_back}
+                      android.widget.TextView{41ddc0b0 V.ED.... ........ 0,0-720,100 #7f0c000a app:id/txt_title}
+                  android.widget.LinearLayout{41ddd200 V.E..... ........ 0,100-720,1130}
+                    android.widget.RelativeLayout{41ddd758 V.E..... ........ 0,0-720,1030}
+                      android.widget.FrameLayout{41dddd50 V.E..... ........ 0,0-720,1030 #7f0c0064 app:id/player_frame}
+                        android.widget.FrameLayout{41dde2b0 V.E..... ........ 0,308-720,722 #7f0c0053 app:id/player_surface_frame}
+                          android.view.SurfaceView{41de1180 V.E..... ........ 0,-9-720,423 #7f0c0054 app:id/player_surface}
+                      android.widget.TextView{41de1940 V.ED.... ........ 20,20-406,74 #7f0c0065 app:id/TimeStampLabel}
+                      android.widget.ImageButton{41de2890 VFED..C. ........ 600,40-680,120 #7f0c0066 app:id/sound}
+                      android.widget.ImageButton{41df38c8 GFED..C. ......I. 600,40-680,120 #7f0c0067 app:id/sound_disable}
+                      android.widget.LinearLayout{41e14cb0 V.E..... ........ 0,950-720,1030}
+                        android.widget.LinearLayout{41e16900 V.E..... ........ 0,0-360,80}
+                          android.widget.Button{41e16e60 VFED..C. ........ 300,10-360,70 #7f0c0068 app:id/cameraRecordButton}
+                        android.widget.LinearLayout{41e2df90 V.E..... ........ 360,0-720,80}
+                          android.widget.Button{41e2e388 GFED..C. ......I. 20,10-80,70 #7f0c0069 app:id/cameraStopButton}
+                      android.widget.Button{4254f4d8 GFED..C. ......I. 0,0-0,0 #7f0c006a app:id/findCameraButton}
+                      android.widget.Button{4256a5d8 GFED..C. ......I. 0,0-0,0 #7f0c006b app:id/cameraSnapshotButton}
+                  android.widget.LinearLayout{4256b9a0 V.E..... ........ 0,1130-720,1230}
+                    android.widget.LinearLayout{4256be88 V.E...C. ........ 0,0-360,100 #7f0c006c app:id/snapshotButton}
+                      android.widget.ImageButton{4256ca38 VFED.... ........ 69,18-139,82}
+                      android.widget.TextView{43036aa0 V.ED.... ........ 159,28-291,72}
+                    android.widget.LinearLayout{43039290 V.E..... ........ 360,0-360,0}
+                    android.widget.LinearLayout{43039728 V.E...C. ........ 360,0-720,100 #7f0c006d app:id/recordButton}
+                      android.widget.LinearLayout{43040b78 V.E..... ........ 0,0-180,100}
+                        android.widget.ImageButton{43041000 VFED.... ........ 90,18-160,82}
+                      android.widget.LinearLayout{4308a7c0 V.E..... ........ 180,0-360,100}
+                        android.widget.TextView{4308b358 V.ED.... ........ 0,28-132,72 #7f0c006e app:id/record_txt}
