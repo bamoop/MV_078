@@ -8,14 +8,14 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 public class ViewPagerAdapter extends PagerAdapter {
-	//½çÃæÁÐ±í  
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½  
     private List<View> views;  
       
     public ViewPagerAdapter (List<View> views){  
         this.views = views;  
     }  
   
-    //Ïú»Ùarg1Î»ÖÃµÄ½çÃæ  
+    //ï¿½ï¿½ï¿½arg1Î»ï¿½ÃµÄ½ï¿½ï¿½ï¿½  
     @Override  
     public void destroyItem(View arg0, int arg1, Object arg2) {  
         ((ViewPager) arg0).removeView(views.get(arg1));       
@@ -27,19 +27,18 @@ public class ViewPagerAdapter extends PagerAdapter {
           
     }  
   
-    //»ñµÃµ±Ç°½çÃæÊý  
+    //ï¿½ï¿½Ãµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
     @Override  
     public int getCount() {  
         if (views != null)  
         {  
             return views.size();  
-        }  
-          
+        }
         return 0;  
     }  
       
   
-    //³õÊ¼»¯arg1Î»ÖÃµÄ½çÃæ  
+    //ï¿½ï¿½Ê¼ï¿½ï¿½arg1Î»ï¿½ÃµÄ½ï¿½ï¿½ï¿½  
     @Override  
     public Object instantiateItem(View arg0, int arg1) {  
           
@@ -48,7 +47,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         return views.get(arg1);  
     }  
   
-    //ÅÐ¶ÏÊÇ·ñÓÉ¶ÔÏóÉú³É½çÃæ  
+    //ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½É¶ï¿½ï¿½ï¿½ï¿½ï¿½É½ï¿½ï¿½ï¿½  
     @Override  
     public boolean isViewFromObject(View arg0, Object arg1) {  
         return (arg0 == arg1);  

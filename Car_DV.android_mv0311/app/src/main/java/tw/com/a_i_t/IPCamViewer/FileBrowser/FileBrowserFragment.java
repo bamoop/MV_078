@@ -101,6 +101,7 @@ public class FileBrowserFragment extends Fragment {
 	private boolean isfirstPhoto=true;//判断第一次点击照片选项
 	//add by John 2015.11.3
 	public boolean isdeletesos=false;
+	public boolean isdeletSOStoast=false;
 	private int mycompare(FileNode arg0, FileNode arg1)
 	{
 		try
@@ -363,13 +364,7 @@ public class FileBrowserFragment extends Fragment {
 					}
 				}
 				sortfile();
-				mFileListJPGAdapter.notifyDataSetChanged();
-				mFileListVIDEOAdapter.notifyDataSetChanged();
-				mFileListView.setSelection(videolistsize);
-				videolistsize=sFileListVIDEO.size()-9;
-				jpgFileListview.setSelection(jpglistsize);
-				jpglistsize=sFileListJPG.size()-9;
-				myHandler.sendEmptyMessage(LOAD_MORE_SUCCESS);
+
 				if (isstatusVideo) {
 					isstatusVideo = false;
 					mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
@@ -381,8 +376,6 @@ public class FileBrowserFragment extends Fragment {
 					isstatusPhoto = true;
 					if (!result.isCompleted() && sFileListJPG.size() < 6) {
 						new ContiunedDownloadTask().execute(rowsers);
-						mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
-
 					} else {
 						isstatusPhoto = false;
 						mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
@@ -390,12 +383,22 @@ public class FileBrowserFragment extends Fragment {
 				}
 
 					if (!result.isCompleted() && fileList.size() != 0) {
+						mFileListJPGAdapter.notifyDataSetChanged();
+						mFileListVIDEOAdapter.notifyDataSetChanged();
+						mFileListView.setSelection(videolistsize);
+						videolistsize=sFileListVIDEO.size()-9;
+						jpgFileListview.setSelection(jpglistsize);
+						jpglistsize=sFileListJPG.size()-9;
+						myHandler.sendEmptyMessage(LOAD_MORE_SUCCESS);
+						Log.i("moop","请求---392");
 					} else {
 //						mFileListView.setSelection(0);
 						Toast.makeText(getActivity(), "没有更多了",
 								Toast.LENGTH_SHORT).show();
+						moreProgressBar.setVisibility(View.GONE);
 						mHandler.sendEmptyMessage(MSG_NOMORE);
 						mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
+						Log.i("moop", "请求---400");
 						setWaitingState(false);
 					}
 				}
@@ -506,6 +509,7 @@ public class FileBrowserFragment extends Fragment {
 	private LinearLayout btn_video;
 	private LinearLayout btn_photo;
 	private Boolean isvideo = true;	/*video is default*/
+	private boolean isfirstOpen=true;
 	private static String gDownloadStr;
 	private static String gpleasewait;
 	private static String gcancel;
@@ -999,7 +1003,9 @@ public class FileBrowserFragment extends Fragment {
 			if(fileNode.mName.contains("SOS"))
 			{
 				mProgDlg.dismiss() ;
+				if(isdeletSOStoast)
 				isdeletesos=true;
+				isdeletSOStoast=false;
 //				mProgDlg.setMessage("Can not delete " + fileNode.mName);
 				return "next" ;
 			}
@@ -1015,25 +1021,29 @@ public class FileBrowserFragment extends Fragment {
 			Log.d(TAG, "delete file response:"+result) ;
 			Log.i("moop", "1019");
 			if (isdeletesos){
-
 				Toast.makeText(getActivity(), "不能删除加锁的SOS文件",
 						Toast.LENGTH_SHORT).show();
+				Log.i("moop", "执行----" );
 				isdeletesos=false;
 			}
 			Log.i("moop","result11--"+result);
 			if (result != null && result.equals("709\n?") != true) {
-				Log.i("moop","result"+result);
+				Log.i("moop", "result" + result);
 				sFileListJPG.remove(fileNode);
-				fileNode.mSelected = false ;
 				if(result.equals("next"))
 				{
 //					mFileListJPGAdapter.notifyDataSetChanged() ;
-//					mFileListVIDEOAdapter.notifyDataSetChanged();
+					mFileListVIDEOAdapter.notifyDataSetChanged();
 					mProgDlg.setMessage("Can not delete " + fileNode.mName);
+					fileNode.mSelected = false ;
+
 				}
 				else
 				{
 					sFileListVIDEO.remove(fileNode);
+					sFileListJPG.remove(fileNode);
+					stackFileListVIDEO.remove(fileNode);
+					stackFileListJPG.remove(fileNode);
 					mFileListJPGAdapter.notifyDataSetChanged() ;
 					mFileListVIDEOAdapter.notifyDataSetChanged();
 					//mFileListTitle.setText(mFileBrowser + " : " + mDirectory + " (" + sFileList.size()
@@ -1043,9 +1053,9 @@ public class FileBrowserFragment extends Fragment {
 				}
 
 				if (sSelectedFiles.size() > 0 && !mCancelDelete) {
-					if (!fileNode.mName.contains("SOS")){
+//					if (!fileNode.mName.contains("SOS")){
 					new CameraDeleteFile().execute();
-					}
+//					}
 				} else {
 					if (mProgDlg != null) {
 						mProgDlg.dismiss() ;
@@ -1140,6 +1150,7 @@ public class FileBrowserFragment extends Fragment {
 					mProgDlg.setMessage("Please wait ...");
 					mCancelDelete = false;
 					mProgDlg.show();
+					isdeletSOStoast=true;
 					new CameraDeleteFile().execute();
 				}
 //				mSaveButton.setEnabled(false) ;
@@ -1494,6 +1505,7 @@ public class FileBrowserFragment extends Fragment {
 	public void onResume() {
 
 		restoreWaitingIndicator() ;
+		if (isfirstOpen){
 		if (sDownloadTask != null) {
 			sDownloadTask.showProgress(getActivity()) ;
 		} else {
@@ -1507,17 +1519,17 @@ public class FileBrowserFragment extends Fragment {
 				e.printStackTrace() ;
 			}
 		}
+			isfirstOpen=false;
+		}
 	    ////begin added by eric for update record status
 		MainActivity.setUpdateRecordStatusFlag(false);
 		///end
-
 		super.onResume() ;
 	}
 
 	@Override
 	public void onPause() {
 		clearWaitingIndicator() ;
-
 		if (sDownloadTask != null) {
 
 			sDownloadTask.hideProgress() ;

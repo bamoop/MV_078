@@ -35,6 +35,7 @@ import android.content.Intent ;
 import android.content.IntentFilter ;
 import android.content.SharedPreferences ;
 import android.content.res.Configuration ;
+import android.graphics.Color;
 import android.graphics.ImageFormat ;
 import android.graphics.PixelFormat ;
 import android.media.AudioManager ;
@@ -92,7 +93,7 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	private static final int MSG_SUCCESS = 1;
 	private static final int MSG_FAIL = 2;
 	private static final int MSG_DESTORY = 3;
-	
+	private static final int MSG_PLYDISSMISS=4;
 	
 	private static final int SURFACE_BEST_FIT = 0 ;
 	private static final int SURFACE_FIT_HORIZONTAL = 1 ;
@@ -132,11 +133,14 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	private boolean isVISIBLE=true;
 	private boolean isINVISIABLE=true;
 
+	//add by John 2015.11.3
+	Button btn_changmediaurl,btn_changmediaurltwo;
 
+	//add by John 2015.10.27
 /*用来记录handle延时发送的时间，防止延时发送产生重复的指令*/
+	Timer timer=new Timer();
 	public  void isVISIBLEs(){
 		countTime=0;
-		Timer timer=new Timer();
 		TimerTask task=new TimerTask() {
 			@Override
 				public void run() {
@@ -146,13 +150,13 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	}
 	public void isINVISIABLEs(){
 		countTime=0;
-		Timer timer=new Timer();
 		TimerTask task=new TimerTask() {
 			@Override
 			public void run() {
 				isINVISIABLE=true;
 			}
 		};timer.schedule(task, 100 * 5);
+
 	}
 
 
@@ -165,14 +169,12 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 					if (isVISIBLE){
 						isVISIBLE=false;
 					cameraRecordButton.setVisibility(View.VISIBLE);
-					Log.d("video","MSG_VISIABLE_RECORD_BTN");
 					mHandlerUI.sendEmptyMessageDelayed(MSG_INVISIABLE_RECORD_BTN, button_fresh_delaytime);
 						isVISIBLEs();
 					}
 						break;
 				case MSG_INVISIABLE_RECORD_BTN:
 					if (isINVISIABLE) {
-						Log.d("video", "MSG_INVISIABLE_RECORD_BTN");
 						cameraRecordButton.setVisibility(View.INVISIBLE);
 						mHandlerUI.sendEmptyMessageDelayed(MSG_VISIABLE_RECORD_BTN, button_fresh_delaytime);
 					isINVISIABLEs();
@@ -207,6 +209,7 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 		
 		Bundle args = new Bundle() ;
 		args.putString(KEY_MEDIA_URL, mediaUrl) ;
+		Log.i("moop",args.getString(KEY_MEDIA_URL));
 		fragment.setArguments(args) ;
 
 		return fragment ;
@@ -498,13 +501,14 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	        // GET CAMERA STATE
 	    }
 		mMediaUrl = getArguments().getString(KEY_MEDIA_URL) ;
+		Log.i("moop","501-mLibVLC="+mMediaUrl );
 
 		IntentFilter filter = new IntentFilter() ;
 		filter.addAction(VLCApplication.SLEEP_INTENT) ;
 		getActivity().registerReceiver(mReceiver, filter) ;
 
 		try {
-
+			//初始化LibVLC
 			mLibVLC = Util.getLibVlcInstance() ;
 
 //			Context context = VLCApplication.getAppContext() ;
@@ -698,11 +702,11 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 			public void onClick(View v) {
 				//ȡ��¼��
 				/*dufrense delete 2014-10-*/
-				URL url = CameraCommand.commandMuteOnUrl() ;
+				URL url = CameraCommand.commandMuteOnUrl();
 				if (url != null) {
-					new CameraCommand.SendRequest().execute(url) ;
+					new CameraCommand.SendRequest().execute(url);
 					new GetRecordStatus().execute();
-				}	
+				}
 
 			}
 		}) ;
@@ -720,6 +724,25 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 
 			}
 		}) ;
+		btn_changmediaurl= (Button) view.findViewById(R.id.btn_changmediaurl);
+		btn_changmediaurl.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mMediaUrl="http://192.72.1.1/cgi-bin/liveMJPEG";
+//				play(MainActivity.sConnectionDelay);
+				playLiveStream();
+			}
+		});
+		btn_changmediaurltwo= (Button) view.findViewById(R.id.btn_changmediaurltwo);
+		btn_changmediaurltwo.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mMediaUrl="http://192.72.1.1/cgi-bin/liveMJPEGa";
+//				play(MainActivity.sConnectionDelay);
+				playLiveStream();
+			}
+		});
+
 		getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC) ;
 		mHandlerUI.sendEmptyMessage(MSG_REFRESH_MUTE_STATE);
 		return view ;
@@ -728,7 +751,6 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	@Override
 	public void onPause() {
 		super.onPause() ;
-		
 		stop() ;
 		
 		mSurface.setKeepScreenOn(false) ;
@@ -767,30 +789,50 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 			mLibVLC.stop() ;
 		}
 	}
-	
+	//add by john 2015.11.3
+	public void showwattingDialog()
+	{
+		Activity activity = getActivity() ;
+		if (mProgressDialog==null){
+			Log.i("moop", "747" );
+			mProgressDialog = new ProgressDialog(activity) ;
+			mProgressDialog.setCancelable(false) ;
+		}
+		LayoutInflater layoutInflater = LayoutInflater.from(activity);
+		View v = layoutInflater.inflate(R.layout.loading_dialog, null);
+		mProgressDialog.show() ;
+		mProgressDialog.setContentView(v);
+	}
+	private void dismissdialog()
+	{
+		if(mProgressDialog!=null)
+		{
+			Log.i("moop", "mProgressDialog" );
+			mProgressDialog.dismiss() ;
+			mProgressDialog = null ;
+		}
+	}
 	public void play(int connectionDelay) {
-
 		Activity activity = getActivity() ;
 		if (activity != null) {
-			LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-			View v = layoutInflater.inflate(R.layout.loading_dialog, null);
-			mProgressDialog = new ProgressDialog(activity) ;
-			//mProgressDialog.setTitle("Connecting to Camera") ;
-			mProgressDialog.setCancelable(false) ;
-			mProgressDialog.show() ;
-			mProgressDialog.setContentView(v);
-			Handler handler = new Handler(); 
+				URL url = CameraCommand.commandCameraTimeSettingsUrl() ;
+				if (url != null) {
+					new CameraCommand.SendRequest().execute(url) ;
+				}
+				showwattingDialog();
+			Handler handler = new Handler();
 		    handler.postDelayed(new Runnable() { 
 		         public void run() { 
 		        	if (mPlaying == false && mLibVLC != null && mRecordmode.equals("Videomode"))
 		        	{
 		        		mPlaying = true ;
 		        		mLibVLC.playMRL(mMediaUrl) ;
+						Log.i("moop", "791-mLibVLC=" + mLibVLC);
 		    			mEndReached = false ;
 		        	}
 		        	if (mProgressDialog != null && mProgressDialog.isShowing()) {
-		        		mProgressDialog.dismiss() ;
-		        		mProgressDialog = null ;
+						mLibVLC.playMRL(mMediaUrl) ;
+						mHandler_ui.sendEmptyMessageDelayed(MSG_PLYDISSMISS, 2000);
 		        	}
 		         } 
 		    }, connectionDelay) ;
@@ -798,7 +840,6 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	}
 	
 	private void playLiveStream() {
-		
 		play(MainActivity.sConnectionDelay) ;
 	}
 	
@@ -806,7 +847,6 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	@Override
 	public void onResume() {
 		super.onResume() ;
-
 		playLiveStream() ;
 		
 		mSurface.setKeepScreenOn(true) ;
@@ -825,6 +865,7 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		setSurfaceSize(mVideoWidth, mVideoHeight, mVideoVisibleWidth, mVideoVisibleHeight, mSarNum, mSarDen) ;
+		Log.i("moop", "mSarDen"+String.valueOf(mSarDen));
 		super.onConfigurationChanged(newConfig) ;
 	}
 
@@ -841,6 +882,7 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 		mVideoVisibleWidth = visible_width ;
 		mSarNum = sar_num ;
 		mSarDen = sar_den ;
+		Log.i("moop", "mSarDen-----"+String.valueOf(mSarDen)+"------"+sar_num);
 		Message msg = mHandler.obtainMessage(SURFACE_SIZE) ;
 		mHandler.sendMessage(msg) ;
 	}
@@ -848,6 +890,10 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 		public void handleMessage(Message msg){
 			switch(msg.what)
 			{
+			case MSG_PLYDISSMISS:
+					Log.i("moop","Streamplay--827");
+					dismissdialog();
+					break;
 			case MSG_SUCCESS:
 					break;
 			case MSG_FAIL:
@@ -979,9 +1025,7 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 
 	private void handleVout(Message msg) {
 		if (msg.getData().getInt("data") == 0 && mEndReached) {
-
 			Log.i(TAG, "Video track lost") ;
-			
 			stop() ;
 			playLiveStream() ;
 		}
@@ -1007,13 +1051,14 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 			dh = d ;
 		}
 
-		// sanity check
+		// sanity check||检查完整性
 		if (dw * dh == 0 || mVideoWidth * mVideoHeight == 0) {
 			Log.e(TAG, "Invalid surface size") ;
 			return ;
 		}
 
 		// compute the aspect ratio
+		//计算比例
 		double ar, vw ;
 		double density = (double) mSarNum / (double) mSarDen ;
 		if (density == 1.0) {
@@ -1078,7 +1123,7 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 		lp.width = dw ;
 		lp.height = dh ;
 		mSurfaceFrame.setLayoutParams(lp) ;
-		mSurfaceFrame.setBackgroundColor(color.black);
+		mSurfaceFrame.setBackgroundColor(Color.BLACK);
 		mSurface.invalidate() ;
 	}
 
@@ -1102,7 +1147,6 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 		@Override
 		public void surfaceCreated(SurfaceHolder holder) {
 		}
-
 		@Override
 		public void surfaceDestroyed(SurfaceHolder holder) {
 			mLibVLC.detachSurface() ;

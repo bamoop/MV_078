@@ -9,6 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.videolan.libvlc.EventHandler ;
 import org.videolan.libvlc.IVideoPlayer ;
@@ -134,21 +136,50 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	private static final String MuteOn ="MuteOn";
 	private static final String MuteOff ="MuteOff";
 	private TimeThread timestampthread;
+	private int countTime=0;
 	private String mMuteStatus = MuteOn;
+	private boolean isVISIBLE=true;
+	private boolean isINVISIABLE=true;
+	//add by John 2015.10.27
+/*用来记录handle延时发送的时间，防止延时发送产生重复的指令*/
+	Timer timer=new Timer();
+	public  void isVISIBLEs(){
+		countTime=0;
+		TimerTask task=new TimerTask() {
+			@Override
+			public void run() {
+				isVISIBLE=true;
+			}
+		};timer.schedule(task, 100 * 5);
+	}
+	public void isINVISIABLEs(){
+		countTime=0;
+		TimerTask task=new TimerTask() {
+			@Override
+			public void run() {
+				isINVISIABLE=true;
+			}
+		};timer.schedule(task, 100 * 5);
+
+	}
 	private Handler mHandlerUI = new Handler()
 	{
 		public void handleMessage(Message msg){
 			switch(msg.what)
 			{
 				case MSG_VISIABLE_RECORD_BTN:
-					cameraRecordButton.setVisibility(View.VISIBLE);
-					Log.d("video","MSG_VISIABLE_RECORD_BTN");
-					mHandlerUI.sendEmptyMessageDelayed(MSG_INVISIABLE_RECORD_BTN, button_fresh_delaytime);
+					if (isVISIBLE){
+						isVISIBLE=false;
+						cameraRecordButton.setVisibility(View.VISIBLE);
+						mHandlerUI.sendEmptyMessageDelayed(MSG_INVISIABLE_RECORD_BTN, button_fresh_delaytime);
+						isVISIBLEs();
+					}
 						break;
 				case MSG_INVISIABLE_RECORD_BTN:
-					Log.d("video","MSG_INVISIABLE_RECORD_BTN");
-					cameraRecordButton.setVisibility(View.INVISIBLE);
-					mHandlerUI.sendEmptyMessageDelayed(MSG_VISIABLE_RECORD_BTN, button_fresh_delaytime);
+					if (isINVISIABLE) {
+						cameraRecordButton.setVisibility(View.INVISIBLE);
+						mHandlerUI.sendEmptyMessageDelayed(MSG_VISIABLE_RECORD_BTN, button_fresh_delaytime);
+						isINVISIABLEs();}
 						break;
 				case MSG_REFRESH_MUTE_STATE:
 						if(mMuteStatus.equals(MuteOff))
@@ -464,7 +495,10 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState) ;
-
+		URL url = CameraCommand.commandCameraTimeSettingsUrl() ;
+		if (url != null) {
+			new CameraCommand.SendRequest().execute(url) ;
+		}
 	    if (savedInstanceState == null) {
 	    	mRecordthread = true;
 	    	new GetTimeStamp().execute();
@@ -766,10 +800,6 @@ if (mProgressDialog==null){
 	public void play(int connectionDelay) {
 		Activity activity = getActivity() ;
 		if (activity != null) {
-			URL url = CameraCommand.commandCameraTimeSettingsUrl() ;
-			if (url != null) {
-				new CameraCommand.SendRequest().execute(url) ;
-			}
 			//mProgressDialog.setTitle("Connecting to Camera") ;
 			showwattingDialog();
 			Handler handler = new Handler(); 

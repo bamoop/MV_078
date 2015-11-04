@@ -70,11 +70,11 @@ public class FileBrowserFragment extends Fragment {
 	public final static String TAG = "FileBrowserFragment" ;
 	public static final String DEFAULT_PATH = "/cgi-bin/Config.cgi" ;
 	public static final String DEFAULT_DIR = "DCIM" ;
-    public static String mRecordStatus="";
-    public static String mRecordmode="";
+	public static String mRecordStatus="";
+	public static String mRecordmode="";
 	private ProgressDialog mProgDlg;
 	private int	mTotalFile;
-    ProgressDialog mProgressDialog =null;
+	ProgressDialog mProgressDialog =null;
 	private boolean mCancelDelete;
 	private static final int MSG_SHOWDIALOG = 1;
 	private static final int MSG_DISMISSDIALOG = 2;
@@ -98,9 +98,10 @@ public class FileBrowserFragment extends Fragment {
 	private boolean isstatusPhoto=false; //判断是照片还是视频加载更多
 	private boolean isfirstPhoto=true;//判断第一次点击照片选项
 	public int jpglistsize=0,videolistsize=0;
+	private boolean isdeletesos=false;
 
 	private int mycompare(FileNode arg0, FileNode arg1)
-	{ 
+	{
 		try
 		{
 			Date  d0= DateFormat.getDateTimeInstance().parse(arg0.mTime);
@@ -139,7 +140,7 @@ public class FileBrowserFragment extends Fragment {
 				sFileListVIDEO.add(stackFileListVIDEO.get(i));
 			}
 		}
-		
+
 		if(len_pic>0)
 		{
 //			for(int i=len_pic-1;i>=0;i--) //倒序
@@ -205,20 +206,20 @@ public class FileBrowserFragment extends Fragment {
 		@Override
 		protected void onPostExecute(String result) {
 			if (result != null) {
-				String[] lines;		
+				String[] lines;
 				String[] lines_temp = result.split("Camera.Preview.MJPEG.status.record=");
 				if(null != lines_temp && 1 < lines_temp.length)
 				{
 					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
 					if(lines!=null)
-					mRecordStatus = lines[0];
+						mRecordStatus = lines[0];
 				}
 				lines_temp = result.split("Camera.Preview.MJPEG.status.mode=");
 				if(null != lines_temp && 1 < lines_temp.length)
 				{
 					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
 					if(lines!=null)
-					mRecordmode = lines[0];
+						mRecordmode = lines[0];
 				}
 			}
 			else
@@ -234,9 +235,7 @@ public class FileBrowserFragment extends Fragment {
 					new CameraVideoRecord().execute();
 				}
 			}
-			
 			super.onPostExecute(result) ;
-
 		}
 	}
 	//得到记录状态
@@ -256,20 +255,20 @@ public class FileBrowserFragment extends Fragment {
 		@Override
 		protected void onPostExecute(String result) {
 			if (result != null) {
-				String[] lines;		
+				String[] lines;
 				String[] lines_temp = result.split("Camera.Preview.MJPEG.status.record=");
 				if(null != lines_temp && 1 < lines_temp.length)
 				{
 					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
 					if(lines!=null)
-					mRecordStatus = lines[0];
+						mRecordStatus = lines[0];
 				}
 				lines_temp = result.split("Camera.Preview.MJPEG.status.mode=");
 				if(null != lines_temp && 1 < lines_temp.length)
 				{
 					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
 					if(lines!=null)
-					mRecordmode = lines[0];
+						mRecordmode = lines[0];
 				}
 			}
 			else
@@ -295,12 +294,13 @@ public class FileBrowserFragment extends Fragment {
 						///modify by eric
 						FileNode fileNode = sSelectedFiles.get(0);
 						if (fileNode.mFormat == Format.mov
-							||fileNode.mFormat == Format.mp4
-							||fileNode.mFormat == Format.avi) {
+								||fileNode.mFormat == Format.mp4
+								||fileNode.mFormat == Format.avi) {
 							Intent intent = new Intent(Intent.ACTION_VIEW);
 							// CarDV WiFi Support Video container is 3GP (.MOV) 
 							// For HTTP File Streaming 
 							intent.setDataAndType(Uri.parse("http://" + mIp + fileNode.mName), "video/3gp") ;
+							Log.i("moop", "视频地址----" + "http://" + mIp + fileNode.mName);
 							startActivity(intent);
 
 							// For HTML5 Video Streaming 
@@ -318,25 +318,23 @@ public class FileBrowserFragment extends Fragment {
 							// CarDV WiFi Support Video container is 3GP (.MOV) 
 							// For HTTP File Streaming 
 							intent.setDataAndType(Uri.parse("http://" + mIp + fileNode.mName), "image/jpeg") ;
+							Log.i("moop", "图片地址----" + "http://" + mIp + fileNode.mName);
 							startActivity(intent);
 						}
 					}
 				}
 			}
-			
-			super.onPostExecute(result) ;
 
+			super.onPostExecute(result) ;
 		}
 	}
 	/*继续下载任务*/
 	private class ContiunedDownloadTask extends AsyncTask<FileBrowser, Integer, FileBrowser> {
-
 		@Override
 		protected FileBrowser doInBackground(FileBrowser... browsers) {
 			browsers[0].retrieveFileList(mDirectory, m_fileformat, false) ;
 			return browsers[0] ;
 		}
-
 		@Override
 		protected void onPostExecute(FileBrowser result) {
 
@@ -364,36 +362,32 @@ public class FileBrowserFragment extends Fragment {
 					}
 				}
 				sortfile();
-				mFileListJPGAdapter.notifyDataSetChanged();
-				mFileListVIDEOAdapter.notifyDataSetChanged();
-				//mFileListView.setSelection(0);
-				jpgFileListview.setSelection(jpglistsize);
-				Log.i("moop", "照片定位在" + jpglistsize);
-				jpglistsize=sFileListJPG.size()-9;
-				mFileListView.setSelection(videolistsize);
-				Log.i("moop", "视频定位在"+videolistsize);
-				videolistsize=sFileListVIDEO.size()-9;
-				myHandler.sendEmptyMessage(LOAD_MORE_SUCCESS);
 				if (isstatusVideo){
 					Log.i("moop","视频请求一次");
 					isstatusVideo=false;
 					mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
 				}
 				if(isstatusPhoto)
-				  {
-					  isstatusPhoto=true;
-					  if (!result.isCompleted() && sFileListJPG.size() <6) {
-							new ContiunedDownloadTask().execute(rowsers);
+				{
+					isstatusPhoto=true;
+					if (!result.isCompleted() && sFileListJPG.size() <6) {
+						new ContiunedDownloadTask().execute(rowsers);
 						Log.i("moop","照片请求——————");
-				}else {
-						  Log.i("moop","结束照片请求");
-						  isstatusPhoto=false;
-				   	 mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
-				}
+					}else {
+						Log.i("moop","结束照片请求");
+						isstatusPhoto=false;
+						mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
+					}
 				}
 				//判断
 				if (!result.isCompleted() && fileList.size() != 0) {
-
+					mFileListJPGAdapter.notifyDataSetChanged();
+					mFileListVIDEOAdapter.notifyDataSetChanged();
+					jpgFileListview.setSelection(jpglistsize);
+					jpglistsize=sFileListJPG.size()-9;
+					mFileListView.setSelection(videolistsize);
+					videolistsize=sFileListVIDEO.size()-9;
+					myHandler.sendEmptyMessage(LOAD_MORE_SUCCESS);
 				} else {
 
 //					mFileListView.setSelection(0);//返回diy
@@ -430,7 +424,6 @@ public class FileBrowserFragment extends Fragment {
 			//mFileListTitle.setText(mFileBrowser + " : " + mReading + " " + mDirectory) ;
 			super.onPreExecute() ;
 		}
-
 		@Override
 		protected FileBrowser doInBackground(FileBrowser... browsers) {
 			//发送第一次请求
@@ -452,20 +445,19 @@ public class FileBrowserFragment extends Fragment {
 				{
 					Log.d(TAG,"onPostExecute() size()>0");
 					mTryTimes = G_TRYMAXTIMES;
-				//	mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
+					//	mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
 				}
 				else
 				{
 					//try again!
 					Log.d(TAG,"error! try again");
 					mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_GETFILELIST),G_TRYTIME);
-					
 				}
 				for(int i=0;i<fileList.size();i++)
 				{
 					if(fileList.get(i).mFormat == FileNode.Format.avi
-						||fileList.get(i).mFormat == FileNode.Format.mov
-						||fileList.get(i).mFormat == FileNode.Format.mp4)
+							||fileList.get(i).mFormat == FileNode.Format.mov
+							||fileList.get(i).mFormat == FileNode.Format.mp4)
 					{
 						//sFileListVIDEO.add(fileList.get(i));
 						stackFileListVIDEO.add(fileList.get(i));
@@ -476,8 +468,6 @@ public class FileBrowserFragment extends Fragment {
 					}
 				}
 				sortfile();
-				mFileListJPGAdapter.notifyDataSetChanged();
-				mFileListVIDEOAdapter.notifyDataSetChanged();
 				Log.i("moop","fileList.size="+fileList.size());
 				Log.i("moop","sFileListJPG.size="+sFileListJPG.size());
 				Log.i("moop","sFileListVIDEO.size="+sFileListVIDEO.size());
@@ -491,6 +481,7 @@ public class FileBrowserFragment extends Fragment {
 				}
 				if (!result.isCompleted() && fileList.size() > 0) {
 					mFileListVIDEOAdapter.notifyDataSetChanged();
+					mFileListJPGAdapter.notifyDataSetChanged();
 					mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
 					//mFileListTitle.setText(mFileBrowser + " : " + mReading + " " + mDirectory + " ("
 					//		+ sFileList.size() + " " + mItems + ")") ;
@@ -533,44 +524,44 @@ public class FileBrowserFragment extends Fragment {
 	private static String gDownloadStr;
 	private static String gpleasewait;
 	private static String gcancel;
-	
+
 	///added by eric for show stop recording dialog
 
 	public Handler mRecordStatusHandler = new Handler() {
 		public void handleMessage(Message msg){
-			
+
 			if (mRecordmode.equals("Videomode"))
 			{
 				if(mRecordStatus.equals("Recording"))
 				{
 					CustomDialog alertDialog = new CustomDialog.Builder(getActivity())
-					.setTitle(getResources().getString(R.string.trip))
-					.setMessage(R.string.sd_browser_stoprecord)
-					.setPositiveButton(R.string.yes,new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface arg0, int arg1) {
-							// TODO Auto-generated method stub
-							arg0.dismiss();
-							new CameraVideoRecord().execute();
-							
-							if(BUTTON_DOWNLOAD == mCurrentButton)
-							{
-								downloadFile(getActivity(), mIp) ;
-							}
-							else if (BUTTON_OPEN == mCurrentButton)
-							{
-								///modify by eric
-								FileNode fileNode = sSelectedFiles.get(0);
-								if (fileNode.mFormat == Format.mov
-									||fileNode.mFormat == Format.mp4
-									||fileNode.mFormat == Format.avi) {
-									Intent intent = new Intent(Intent.ACTION_VIEW);
-									// CarDV WiFi Support Video container is 3GP (.MOV) 
-									// For HTTP File Streaming 
-									intent.setDataAndType(Uri.parse("http://" + mIp + fileNode.mName), "video/3gp") ;
-									startActivity(intent);
+							.setTitle(getResources().getString(R.string.trip))
+							.setMessage(R.string.sd_browser_stoprecord)
+							.setPositiveButton(R.string.yes,new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface arg0, int arg1) {
+									// TODO Auto-generated method stub
+									arg0.dismiss();
+									new CameraVideoRecord().execute();
 
-									// For HTML5 Video Streaming 
+									if(BUTTON_DOWNLOAD == mCurrentButton)
+									{
+										downloadFile(getActivity(), mIp) ;
+									}
+									else if (BUTTON_OPEN == mCurrentButton)
+									{
+										///modify by eric
+										FileNode fileNode = sSelectedFiles.get(0);
+										if (fileNode.mFormat == Format.mov
+												||fileNode.mFormat == Format.mp4
+												||fileNode.mFormat == Format.avi) {
+											Intent intent = new Intent(Intent.ACTION_VIEW);
+											// CarDV WiFi Support Video container is 3GP (.MOV)
+											// For HTTP File Streaming
+											intent.setDataAndType(Uri.parse("http://" + mIp + fileNode.mName), "video/3gp") ;
+											startActivity(intent);
+
+											// For HTML5 Video Streaming
 //									String filename = fileNode.mName.replaceAll("/", "\\$");
 //									Intent browserIntent = new Intent(Intent.ACTION_VIEW,
 //												Uri.parse("http://"+mIp+"/cgi-bin/Config.cgi?action=play&property=" + filename));
@@ -578,37 +569,37 @@ public class FileBrowserFragment extends Fragment {
 //									mSaveButton.setEnabled(false) ;
 //									mDeleteButton.setEnabled(false) ;
 //									mOpenButton.setEnabled(false) ;
+										}
+										else if(fileNode.mFormat ==Format.jpeg)
+										{
+											Intent intent = new Intent(Intent.ACTION_VIEW);
+											// CarDV WiFi Support Video container is 3GP (.MOV)
+											// For HTTP File Streaming
+											intent.setDataAndType(Uri.parse("http://" + mIp + fileNode.mName), "image/jpeg") ;
+											startActivity(intent);
+										}
+									}
 								}
-								else if(fileNode.mFormat ==Format.jpeg)
-								{
-									Intent intent = new Intent(Intent.ACTION_VIEW);
-									// CarDV WiFi Support Video container is 3GP (.MOV) 
-									// For HTTP File Streaming 
-									intent.setDataAndType(Uri.parse("http://" + mIp + fileNode.mName), "image/jpeg") ;
-									startActivity(intent);
+							})
+							.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									dialog.dismiss() ;
+									//disconnectWifi();///added by eric for disconnect wifi
+									//finish();
 								}
-							}
-						}
-					})
-					.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss() ;
-							//disconnectWifi();///added by eric for disconnect wifi
-							//finish();
-						}
-					}).create();
+							}).create();
 					alertDialog.show();
-					super.handleMessage(msg);  
+					super.handleMessage(msg);
 					return;
 				}
-				
+
 			}
 			//finish();
-            super.handleMessage(msg);  
+			super.handleMessage(msg);
 		}
 	};
-	
+
 	public static FileBrowserFragment newInstance(String ip, String url, String directory) {
 
 		FileBrowserFragment fragment = new FileBrowserFragment() ;
@@ -705,7 +696,7 @@ public class FileBrowserFragment extends Fragment {
 					while ((bufferLength = inputStream.read(buffer)) > 0) {
 						publishProgress(Long.valueOf(urlConnection.getContentLength()), file.length()) ;
 						fileOutput.write(buffer, 0, bufferLength) ;
-						
+
 						if (mCancelled) {
 							urlConnection.disconnect();
 							/*begin delete file when cancel download files*/
@@ -715,7 +706,7 @@ public class FileBrowserFragment extends Fragment {
 							}
 							catch(IOException exio)
 							{
-								
+
 							}
 							file.delete();
 							/*end delete file when cancel download files*/
@@ -738,7 +729,7 @@ public class FileBrowserFragment extends Fragment {
 						}
 						catch(IOException exio)
 						{
-							
+
 						}
 					}
 					/*end leak mem*/
@@ -764,13 +755,13 @@ public class FileBrowserFragment extends Fragment {
 				int progress = values[1].intValue() ;
 				String unit = "Bytes" ;
 				mProgressDialog.setTitle(gDownloadStr + mFileName) ;
-				
+
 				if (max > 1024) {
 					max /= 1024 ;
 					progress /= 1024 ;
 					unit = "KB" ;
 				}
-				
+
 				if (max > 1024) {
 					max /= 1024 ;
 					progress /= 1024 ;
@@ -786,7 +777,7 @@ public class FileBrowserFragment extends Fragment {
 		private void cancelDownload() {
 
 			mCancelled = true ;
-			
+
 			for (FileNode fileNode : sSelectedFiles) {
 				fileNode.mSelected = false ;
 			}
@@ -888,7 +879,7 @@ public class FileBrowserFragment extends Fragment {
 			}
 			if (!mCancelled)
 				downloadFile(mContext, mIp) ;
-			
+
 			super.onPostExecute(result) ;
 		}
 
@@ -928,7 +919,7 @@ public class FileBrowserFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState) ;
 		mIp = getArguments().getString(KEY_IP) ;
-
+		//获取当前WIFI连接的IP地址
 		if (mIp == null) {
 			WifiManager wifiManager = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE) ;
 
@@ -937,13 +928,14 @@ public class FileBrowserFragment extends Fragment {
 			if (dhcpInfo != null && dhcpInfo.gateway != 0) {
 
 				mIp = MainActivity.intToIp(dhcpInfo.gateway) ;
+				Log.i("moop","mIp"+mIp);
 			}
 		}
 		gDownloadStr = getString(R.string.downloading);
 		gpleasewait = getString(R.string.pleasewait);
 		gcancel = getString(R.string.label_cancel);
 		mPath = getArguments().getString(KEY_PATH) ;
-		
+
 		if (mPath == null) {
 			mPath = DEFAULT_PATH ;
 		}
@@ -956,7 +948,7 @@ public class FileBrowserFragment extends Fragment {
 		}
 //		
 	}
-/*下载文件*/
+	/*下载文件*/
 	private static void downloadFile(final Context context, String ip) {
 		if (sSelectedFiles.size() == 0) {
 			return ;
@@ -975,30 +967,30 @@ public class FileBrowserFragment extends Fragment {
 
 		if (file.exists()) {
 			CustomDialog alertDialog = new CustomDialog.Builder(context)
-			.setTitle(filename)
-			.setMessage(R.string.message_overwrite_file)
-			.setPositiveButton(R.string.yes,new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					file.delete() ;
-					try {
-						sDownloadTask = new DownloadTask(context) ;
-						sDownloadTask.execute(new URL(urlString)) ;
-					} catch (MalformedURLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace() ;
-					}
-					dialog.dismiss() ;
-				}
-			})
-			.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+					.setTitle(filename)
+					.setMessage(R.string.message_overwrite_file)
+					.setPositiveButton(R.string.yes,new DialogInterface.OnClickListener() {
 
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss() ;
-				}
-			}).create();
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							file.delete() ;
+							try {
+								sDownloadTask = new DownloadTask(context) ;
+								sDownloadTask.execute(new URL(urlString)) ;
+							} catch (MalformedURLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace() ;
+							}
+							dialog.dismiss() ;
+						}
+					})
+					.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss() ;
+						}
+					}).create();
 			alertDialog.show() ;
 
 		} else {
@@ -1024,6 +1016,8 @@ public class FileBrowserFragment extends Fragment {
 			///added by eric
 			if(fileNode.mName.contains("SOS"))
 			{
+				mProgDlg.dismiss() ;
+				isdeletesos=true;
 				return "next" ;
 			}
 			URL url = CameraCommand.commandSetdeletesinglefileUrl(fileNode.mName);
@@ -1037,19 +1031,24 @@ public class FileBrowserFragment extends Fragment {
 			Activity activity = getActivity() ;
 			FileNode fileNode = sSelectedFiles.remove(0);
 			Log.d(TAG, "delete file response:"+result) ;
-			if (result != null && result.equals("709\n?") != true) {	
-				
+			if (isdeletesos){
+				Toast.makeText(getActivity(), "不能删除加锁的SOS文件",
+						Toast.LENGTH_SHORT).show();
+				isdeletesos=false;
+			}
+			if (result != null && result.equals("709\n?") != true) {
 				fileNode.mSelected = false ;
 				sFileListJPG.remove(fileNode);
-				sFileListVIDEO.remove(fileNode);
+//				sFileListVIDEO.remove(fileNode);
 				if(result.equals("next"))
 				{
-					mFileListJPGAdapter.notifyDataSetChanged() ;
-					mFileListVIDEOAdapter.notifyDataSetChanged();
+//					mFileListJPGAdapter.notifyDataSetChanged() ;
+//					mFileListVIDEOAdapter.notifyDataSetChanged();
 					mProgDlg.setMessage("Can not delete " + fileNode.mName);
 				}
 				else
 				{
+					sFileListVIDEO.remove(fileNode);
 					mFileListJPGAdapter.notifyDataSetChanged() ;
 					mFileListVIDEOAdapter.notifyDataSetChanged();
 					//mFileListTitle.setText(mFileBrowser + " : " + mDirectory + " (" + sFileList.size()
@@ -1057,9 +1056,11 @@ public class FileBrowserFragment extends Fragment {
 					mProgDlg.setMessage("Please wait, deleteing " + fileNode.mName);
 					mProgDlg.setProgress(mTotalFile - sSelectedFiles.size()) ;
 				}
-				
+
 				if (sSelectedFiles.size() > 0 && !mCancelDelete) {
-					new CameraDeleteFile().execute();
+					if (!fileNode.mName.contains("SOS")){
+						new CameraDeleteFile().execute();
+					}
 				} else {
 					if (mProgDlg != null) {
 						mProgDlg.dismiss() ;
@@ -1079,30 +1080,30 @@ public class FileBrowserFragment extends Fragment {
 			super.onPostExecute(result);
 		}
 	}
-	
+
 	DataSetObserver mDataSetobserver = new DataSetObserver() {
-		   @Override   
-		   public void onChanged()
-		   {
-			   mFileListJPGAdapter.notifyDataSetChanged();
-			   mFileListVIDEOAdapter.notifyDataSetChanged();
-			   super.onChanged();
-		   }
-		   @Override   
-		   public void onInvalidated() 
-		   {   // TODO Auto-generated method stub   super.onInvalidated();  
-			   super.onInvalidated();
-		   }
+		@Override
+		public void onChanged()
+		{
+			mFileListJPGAdapter.notifyDataSetChanged();
+			mFileListVIDEOAdapter.notifyDataSetChanged();
+			super.onChanged();
+		}
+		@Override
+		public void onInvalidated()
+		{   // TODO Auto-generated method stub   super.onInvalidated();
+			super.onInvalidated();
+		}
 	};
-	
+
 	public void OnDestory()
 	{
 		getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		mHandler.removeMessages(MSG_GETFILELIST);
-		
+
 		super.onDestroy();
 	}
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -1189,8 +1190,8 @@ public class FileBrowserFragment extends Fragment {
 				if (isfirstPhoto){
 					isfirstPhoto=false;
 					isstatusPhoto=true;
-				mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
-				new ContiunedDownloadTask().execute(rowsers);
+					mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
+					new ContiunedDownloadTask().execute(rowsers);
 					isfirstPhoto=false;
 					Log.i("moop", "请求照片");}
 
@@ -1240,7 +1241,7 @@ public class FileBrowserFragment extends Fragment {
 		jpgFileListview= (RTPullListView) view.findViewById(R.id.browserList_jpg);
 		initVideoListview();
 		initJPGListView();
-		
+
 		mFileListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE) ;
 		jpgFileListview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE) ;
 
@@ -1351,8 +1352,8 @@ public class FileBrowserFragment extends Fragment {
 	{
 		if(mProgressDialog!=null)
 		{
-    		mProgressDialog.dismiss() ;
-    		mProgressDialog = null ;
+			mProgressDialog.dismiss() ;
+			mProgressDialog = null ;
 		}
 	}
 	private void setWaitingState(boolean waiting) {
@@ -1404,14 +1405,14 @@ public class FileBrowserFragment extends Fragment {
 	RelativeLayout footerView;
 	LayoutInflater inflater;
 	View vieww;
-    TextView tv_nomore;
+	TextView tv_nomore;
 	private void initJPGListView() {
 		//添加listview底部获取更多按钮（可自定义）
 		Activity activity = getActivity();
 		inflater = LayoutInflater.from(activity);
 		vieww = inflater.inflate(R.layout.list_footview, null);
 		footerView =(RelativeLayout) vieww.findViewById(R.id.list_footview);
-		 tv_nomore=	 (TextView)vieww.findViewById(R.id.text_view) ;
+		tv_nomore=	 (TextView)vieww.findViewById(R.id.text_view) ;
 		moreProgressBar = (ProgressBar) vieww.findViewById(R.id.footer_progress);
 		jpgFileListview.addFooterView(footerView);
 		//获取更多监听器
@@ -1469,24 +1470,26 @@ public class FileBrowserFragment extends Fragment {
 		public void handleMessage(Message msg){
 			switch(msg.what)
 			{
-			case MSG_NOMORE:
-				videoNomore.setText("没有更多了");
-				tv_nomore.setText("没有更多了");
-				break;
-			case MSG_SHOWDIALOG:
+				case MSG_NOMORE:
+					videoNomore.setText("没有更多了");
+					tv_nomore.setText("没有更多了");
+					moreProgressBar.setVisibility(View.GONE);
+					moreProgressBar.setVisibility(View.GONE);
+					break;
+				case MSG_SHOWDIALOG:
 					showWattingDialog();
 					break;
-			case MSG_DISMISSDIALOG:
+				case MSG_DISMISSDIALOG:
 					dismissdialog();
 					break;
-			case MSG_GETFILELIST:
+				case MSG_GETFILELIST:
 					try {
 						Log.d(TAG,"MSG_GETFILELIST mTryTimes="+mTryTimes);
 						mTryTimes --;
 						if(mTryTimes > 0)
 						{
 							new DownloadFileListTask().execute(new FileBrowser(new URL("http://" + mIp + mPath),
-								FileBrowser.COUNT_MAX)) ;
+									FileBrowser.COUNT_MAX)) ;
 						}
 						else
 						{
@@ -1497,7 +1500,7 @@ public class FileBrowserFragment extends Fragment {
 						e.printStackTrace() ;
 					}
 					break;
-			default:
+				default:
 					break;
 			}
 			super.handleMessage(msg);
@@ -1514,12 +1517,13 @@ public class FileBrowserFragment extends Fragment {
 				mTryTimes = G_TRYMAXTIMES;
 				new DownloadFileListTask().execute(new FileBrowser(new URL("http://" + mIp + mPath),
 						FileBrowser.COUNT_MAX)) ;
+				Log.i("moop", "资源接口"+String.valueOf(new URL("http://" + mIp + mPath)));
 				showWattingDialog();
 			} catch (MalformedURLException e) {
 				e.printStackTrace() ;
 			}
 		}
-	    ////begin added by eric for update record status 
+		////begin added by eric for update record status
 		MainActivity.setUpdateRecordStatusFlag(false);
 		///end
 		super.onResume() ;
@@ -1528,7 +1532,7 @@ public class FileBrowserFragment extends Fragment {
 	@Override
 	public void onPause() {
 		clearWaitingIndicator() ;
-
+		isstatusPhoto=true;
 		if (sDownloadTask != null) {
 
 			sDownloadTask.hideProgress() ;

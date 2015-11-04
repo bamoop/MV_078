@@ -93,6 +93,20 @@
                    android:layout_gravity="center"
                    android:layout_width="@dimen/bottom_dv_record_size"
                    android:layout_height="@dimen/bottom_dv_record_size"/>
+               <Button
+                   android:id="@+id/btn_changmediaurl"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp"
+                   android:text="1路"
+                   android:visibility="visible"/>
+               <Button
+                   android:id="@+id/btn_changmediaurltwo"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp"
+                   android:text="2路"
+                   android:visibility="visible"/>
            </LinearLayout>
 	   </LinearLayout>
        <Button

@@ -400,8 +400,8 @@ public class FunctionListFragment extends Fragment {
 			}
 			String gateway = MainActivity.intToIp(dhcpInfo.gateway) ;
 			// set http push as default for streaming
+			//设置视频流接口
 			liveStreamUrl = "http://" + gateway + MjpegPlayerFragment.DEFAULT_MJPEG_PUSH_URL ;
-			Log.i("moop",liveStreamUrl+"gateway="+gateway);
 			if (result != null) {
 				String[] lines;
 				try {
@@ -471,12 +471,7 @@ public class FunctionListFragment extends Fragment {
 			public void onClick(View v) {
 				Log.d("Button_main", "ONCLICK");
 				boolean engineerMode = ((MainActivity) getActivity()).mEngineerMode;
-				URL url = CameraCommand.commandCameraTimeSettingsUrl() ;
-				if (url != null) {
-					new CameraCommand.SendRequest().execute(url) ;
-			}
 				if (engineerMode) {
-					Log.d("moop", "FunctionListFragment_479");
 					MainActivity.addFragment(FunctionListFragment.this, new ViewerSettingFragment());
 				} else {
 					Log.d("moop", "FunctionListFragment_481");
