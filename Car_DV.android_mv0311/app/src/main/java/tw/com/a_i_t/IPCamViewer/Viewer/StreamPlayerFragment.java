@@ -98,6 +98,7 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	private static final int MSG_SUCCESS = 1;
 	private static final int MSG_FAIL = 2;
 	private static final int MSG_DESTORY = 3;
+	private static final int MSG_PLYDISSMISS=4;
 	
 	
 	private static final int SURFACE_BEST_FIT = 0 ;
@@ -123,7 +124,7 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	private int mSarDen ;
 	
 	private boolean mPlaying ;
-	ProgressDialog mProgressDialog ;
+	ProgressDialog mProgressDialog=null ;
 	private String mMediaUrl ;
 	private static final int MSG_VISIABLE_RECORD_BTN =1;
 	private static final int MSG_INVISIABLE_RECORD_BTN =2;
@@ -738,18 +739,39 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 			mLibVLC.stop() ;
 		}
 	}
+	//add by john 2015.11.3
+	public void showwattingDialog()
+	{
+		Activity activity = getActivity() ;
+if (mProgressDialog==null){
+	Log.i("moop", "747" );
+		mProgressDialog = new ProgressDialog(activity) ;
+		mProgressDialog.setCancelable(false) ;
+}
+		LayoutInflater layoutInflater = LayoutInflater.from(activity);
+		View v = layoutInflater.inflate(R.layout.loading_dialog, null);
+		mProgressDialog.show() ;
+		mProgressDialog.setContentView(v);
+	}
+	private void dismissdialog()
+	{
+		if(mProgressDialog!=null)
+		{
+			Log.i("moop", "mProgressDialog" );
+			mProgressDialog.dismiss() ;
+			mProgressDialog = null ;
+		}
+	}
 	
 	public void play(int connectionDelay) {
-
 		Activity activity = getActivity() ;
 		if (activity != null) {
-			LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-			View v = layoutInflater.inflate(R.layout.loading_dialog, null);
-			mProgressDialog = new ProgressDialog(activity) ;
+			URL url = CameraCommand.commandCameraTimeSettingsUrl() ;
+			if (url != null) {
+				new CameraCommand.SendRequest().execute(url) ;
+			}
 			//mProgressDialog.setTitle("Connecting to Camera") ;
-			mProgressDialog.setCancelable(false) ;
-			mProgressDialog.show() ;
-			mProgressDialog.setContentView(v);
+			showwattingDialog();
 			Handler handler = new Handler(); 
 		    handler.postDelayed(new Runnable() { 
 		         public void run() { 
@@ -760,8 +782,12 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 		    			mEndReached = false ;
 		        	}
 		        	if (mProgressDialog != null && mProgressDialog.isShowing()) {
-		        		mProgressDialog.dismiss() ;
-		        		mProgressDialog = null ;
+//						Message msg =  mHandler_ui.obtainMessage();
+//						msg.what = MSG_PLYDISSMISS;
+//						mHandler_ui.sendMessage(msg);
+						mHandler_ui.sendEmptyMessageDelayed(MSG_PLYDISSMISS, 1800);
+						Log.i("moop","Streamplay--764");
+//		        		mProgressDialog = null ;
 		        	}
 		         } 
 		    }, connectionDelay) ;
@@ -819,7 +845,11 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 		public void handleMessage(Message msg){
 			switch(msg.what)
 			{
-			case MSG_SUCCESS:
+				case MSG_PLYDISSMISS:
+					Log.i("moop","Streamplay--827");
+					dismissdialog();
+					break;
+				case MSG_SUCCESS:
 					break;
 			case MSG_FAIL:
 				CustomDialog alertDialog = new CustomDialog.Builder(getActivity())

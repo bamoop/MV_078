@@ -470,10 +470,6 @@ public class FunctionListFragment extends Fragment {
 			public void onClick(View v) {
 				Log.d("Button_main","ONCLICK");
 				boolean engineerMode = ((MainActivity) getActivity()).mEngineerMode ;
-				URL url = CameraCommand.commandCameraTimeSettingsUrl() ;
-				if (url != null) {
-					new CameraCommand.SendRequest().execute(url) ;
-				}
 				if (engineerMode) {
 
 					MainActivity.addFragment(FunctionListFragment.this, new ViewerSettingFragment()) ;

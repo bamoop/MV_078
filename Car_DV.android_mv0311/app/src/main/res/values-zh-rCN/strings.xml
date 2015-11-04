@@ -52,8 +52,9 @@
     <string name="label_camera_language">语言</string>
     <string name="message_command_succeed">指令成功!</string>
     <string name="message_command_failed">指令失败!</string>
+    <string name="warn_ondeletesos">不能删除加锁的SOS文件</string>
     <string name="message_fail_get_info">无法取得相机资讯.</string>
-    <string name="error_no_ssid">请输入 WiFi SSID.</string>
+    <string name="error_no_ssid">请输入 WiFi SSID.</string>warn
     <string name="error_ssid_too_long">SSID 超过长度限制.</string>
     <string name="error_no_key">请输入密码.</string>
     <string name="error_key_too_short">密码字元过少.</string>
