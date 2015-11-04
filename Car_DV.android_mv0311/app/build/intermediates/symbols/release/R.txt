@@ -431,7 +431,7 @@ int string Flicker_60 0x7f05000b
 int string SyncDevice 0x7f05000c
 int string SyncDeviceBTN 0x7f050064
 int string Timesettings 0x7f05000d
-int string action_settings 0x7f05009e
+int string action_settings 0x7f05009f
 int string app_Version 0x7f05000e
 int string app_name 0x7f05000f
 int string connecting_to_camera 0x7f050065
@@ -454,7 +454,7 @@ int string format_attaction 0x7f05006d
 int string help 0x7f05006e
 int string label_50Hz 0x7f050018
 int string label_60Hz 0x7f050019
-int string label_Close 0x7f05009f
+int string label_Close 0x7f0500a0
 int string label_DV_quality 0x7f05006f
 int string label_High 0x7f05001a
 int string label_Low 0x7f05001b
@@ -515,7 +515,7 @@ int string label_local_album 0x7f05004c
 int string label_lockproetect 0x7f050075
 int string label_motion_detection 0x7f05004d
 int string label_move 0x7f050076
-int string label_net_disconnected 0x7f0500a0
+int string label_net_disconnected 0x7f0500a1
 int string label_network_configurations 0x7f05004e
 int string label_off 0x7f05004f
 int string label_ok 0x7f050050
@@ -567,8 +567,8 @@ int string refreshing 0x7f050091
 int string release_to_refresh 0x7f050092
 int string sd_browser_open_stoprecord 0x7f050093
 int string sd_browser_stoprecord 0x7f050094
-int string title_activity_local_file_list 0x7f0500a1
-int string title_activity_main_activity_ui 0x7f0500a2
+int string title_activity_local_file_list 0x7f0500a2
+int string title_activity_main_activity_ui 0x7f0500a3
 int string trip 0x7f050095
 int string updating 0x7f050096
 int string verify 0x7f050097
@@ -576,8 +576,9 @@ int string verify_error 0x7f050098
 int string version_hardware 0x7f050099
 int string version_software 0x7f05009a
 int string video 0x7f05009b
-int string warnnig 0x7f05009c
-int string yes 0x7f05009d
+int string warn_ondeletesos 0x7f05009c
+int string warnnig 0x7f05009d
+int string yes 0x7f05009e
 int style AppBaseTheme 0x7f060000
 int style AppTheme 0x7f060001
 int style Dialog 0x7f060002

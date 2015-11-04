@@ -25,4 +25,4 @@
     		<ImageView android:layout_width="fill_parent" android:layout_height="1dp" android:background="@color/settings_list_line"/>
 </LinearLayout>
 
-<!-- From: file:/D:/john_work/Car_DV.android_mv0311/app/src/main/res/layout/dialog_setting_connet.xml -->
+<!-- From: file:/E:/john_work/Car_DV.android_mv0311/app/src/main/res/layout/dialog_setting_connet.xml -->

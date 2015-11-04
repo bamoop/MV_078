@@ -35,7 +35,7 @@ public class HelpFramgment extends Fragment {
         LinearLayout.LayoutParams mParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,  
                 LinearLayout.LayoutParams.MATCH_PARENT);
         views = new ArrayList<View>();  
-        //³õÊ¼»¯Òýµ¼Í¼Æ¬ÁÐ±í  
+        //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½Ð±ï¿½  
         for(int i=0; i<pics.length; i++) {  
             ImageView iv = new ImageView(getActivity());  
             iv.setLayoutParams(mParams);  
@@ -44,13 +44,12 @@ public class HelpFramgment extends Fragment {
             views.add(iv);  
         }
         vp = (ViewPager) view.findViewById(R.id.viewpager_help);  
-        //³õÊ¼»¯Adapter  
+        //ï¿½ï¿½Ê¼ï¿½ï¿½Adapter  
         vpAdapter = new ViewPagerAdapter(views);  
         vp.setAdapter(vpAdapter);  
-        //°ó¶¨»Øµ÷  
+        //ï¿½ó¶¨»Øµï¿½  
         //vp.setOnPageChangeListener(this); 
-		
-		
+
 		return view;
 	}
 }

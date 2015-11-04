@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/D:/john_work/Car_DV.android_mv0311/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/E:/john_work/Car_DV.android_mv0311/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="button_txt">#000000</color>
     <color name="button_txt_clicked">#FFFFFF</color>
@@ -11,7 +11,7 @@
     <color name="white">#FFFFFF</color>
     <declare-styleable name="Main_button"><attr format="reference|string" name="txt"/><attr format="reference" name="picblackground"/></declare-styleable>
     <declare-styleable name="MyBanner"><attr format="reference|string" name="text"/></declare-styleable>
-    <!-- From: file:/D:/john_work/Car_DV.android_mv0311/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/E:/john_work/Car_DV.android_mv0311/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
@@ -63,11 +63,11 @@
     <dimen name="top_pic_width">35dp</dimen>
     <dimen name="top_tab_height">42dp</dimen>
     <dimen name="wifi_row_txt_margin_right">5dp</dimen>
-    <!-- From: file:/D:/john_work/Car_DV.android_mv0311/app/src/main/res/values/integar.xml -->
+    <!-- From: file:/E:/john_work/Car_DV.android_mv0311/app/src/main/res/values/integar.xml -->
     <eat-comment/>
     <integer name="card_flip_time_full">500</integer>
     <integer name="card_flip_time_half">250</integer>
-    <!-- From: file:/D:/john_work/Car_DV.android_mv0311/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/E:/john_work/Car_DV.android_mv0311/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="AWB_Auto">Auto</string>
     <string name="AWB_Cloudy">Cloudy</string>
@@ -226,7 +226,7 @@
     <string name="video">Video</string>
     <string name="warnnig">Warnnig!</string>
     <string name="yes">Yes</string>
-    <!-- From: file:/D:/john_work/Car_DV.android_mv0311/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/E:/john_work/Car_DV.android_mv0311/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
@@ -327,7 +327,7 @@
        <item name="android:textColor">@android:color/black</item>
        <item name="android:layout_marginLeft">@dimen/dialog_wifi_row_txt_margin_left</item>
     </style>
-    <!-- From: file:/D:/john_work/Car_DV.android_mv0311/app/src/main/res/values/style_layout.xml -->
+    <!-- From: file:/E:/john_work/Car_DV.android_mv0311/app/src/main/res/values/style_layout.xml -->
     <eat-comment/>
     <style name="layout_full">  
     <item name="android:layout_width">fill_parent</item>  
@@ -343,7 +343,7 @@
     <item name="android:layout_width">wrap_content</item>  
     <item name="android:layout_height">wrap_content</item>  
   </style>
-    <!-- From: file:/D:/john_work/Car_DV.android_mv0311/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/E:/john_work/Car_DV.android_mv0311/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="loading_dialog" parent="android:style/Theme.Dialog">  
        <item name="android:windowFrame">@null</item>  

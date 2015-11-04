@@ -471,7 +471,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int SyncDevice=0x7f05000c;
         public static final int SyncDeviceBTN=0x7f050064;
         public static final int Timesettings=0x7f05000d;
-        public static final int action_settings=0x7f05009e;
+        public static final int action_settings=0x7f05009f;
         public static final int app_Version=0x7f05000e;
         public static final int app_name=0x7f05000f;
         public static final int connecting_to_camera=0x7f050065;
@@ -494,7 +494,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int help=0x7f05006e;
         public static final int label_50Hz=0x7f050018;
         public static final int label_60Hz=0x7f050019;
-        public static final int label_Close=0x7f05009f;
+        public static final int label_Close=0x7f0500a0;
         public static final int label_DV_quality=0x7f05006f;
         public static final int label_High=0x7f05001a;
         public static final int label_Low=0x7f05001b;
@@ -555,7 +555,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int label_lockproetect=0x7f050075;
         public static final int label_motion_detection=0x7f05004d;
         public static final int label_move=0x7f050076;
-        public static final int label_net_disconnected=0x7f0500a0;
+        public static final int label_net_disconnected=0x7f0500a1;
         public static final int label_network_configurations=0x7f05004e;
         public static final int label_off=0x7f05004f;
         public static final int label_ok=0x7f050050;
@@ -607,8 +607,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int release_to_refresh=0x7f050092;
         public static final int sd_browser_open_stoprecord=0x7f050093;
         public static final int sd_browser_stoprecord=0x7f050094;
-        public static final int title_activity_local_file_list=0x7f0500a1;
-        public static final int title_activity_main_activity_ui=0x7f0500a2;
+        public static final int title_activity_local_file_list=0x7f0500a2;
+        public static final int title_activity_main_activity_ui=0x7f0500a3;
         public static final int trip=0x7f050095;
         public static final int updating=0x7f050096;
         public static final int verify=0x7f050097;
@@ -616,8 +616,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int version_hardware=0x7f050099;
         public static final int version_software=0x7f05009a;
         public static final int video=0x7f05009b;
-        public static final int warnnig=0x7f05009c;
-        public static final int yes=0x7f05009d;
+        public static final int warn_ondeletesos=0x7f05009c;
+        public static final int warnnig=0x7f05009d;
+        public static final int yes=0x7f05009e;
     }
     public static final class style {
         /**  API 11 theme customizations can go here. 

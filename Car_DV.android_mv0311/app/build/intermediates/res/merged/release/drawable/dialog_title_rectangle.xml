@@ -11,4 +11,4 @@
        android:right="0dp"  
        android:top="0dp" />
     <corners android:topLeftRadius="10dp" android:topRightRadius="10dp"/>
-</shape><!-- From: file:/D:/john_work/Car_DV.android_mv0311/app/src/main/res/drawable/dialog_title_rectangle.xml -->
+</shape><!-- From: file:/E:/john_work/Car_DV.android_mv0311/app/src/main/res/drawable/dialog_title_rectangle.xml -->

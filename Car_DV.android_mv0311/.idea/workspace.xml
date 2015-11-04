@@ -6,11 +6,10 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="moop" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba2c21ee-15cf-4f85-a007-c43be073864a" name="Default" comment="" />
+    <list default="true" id="b7f9f812-e71c-408b-bfaf-767987767e24" name="Default" comment="" />
     <ignored path="Car_DV.android_mv0311.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,223 +35,64 @@
     <favorites_list name="Car_DV.android_mv0311" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.46217853">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="LibVLC.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/main/java/org/videolan/libvlc/LibVLC.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="434" column="0" selection-start-line="434" selection-start-column="0" selection-end-line="435" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="FileBrowserFragment.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/FileBrowser/FileBrowserFragment.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="15.810345">
-                  <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="e#5373#5374#0" expanded="true" />
-                    <element signature="e#5403#5404#0" expanded="true" />
-                    <element signature="e#5837#5838#0" expanded="true" />
-                    <element signature="e#5867#5868#0" expanded="true" />
-                    <element signature="e#7080#7081#0" expanded="true" />
-                    <element signature="e#7110#7111#0" expanded="true" />
-                    <element signature="e#14493#14503#0" expanded="true" />
-                    <element signature="e#14574#14584#0" expanded="true" />
-                    <element signature="e#14660#14670#0" expanded="true" />
-                    <element signature="e#14742#14752#0" expanded="true" />
-                    <element signature="e#14819#14829#0" expanded="true" />
-                    <element signature="e#15532#17986#0" expanded="true" />
-                    <element signature="e#15771#15810#0" expanded="true" />
-                    <element signature="e#15829#15859#0" expanded="true" />
-                    <element signature="e#15885#15897#0" expanded="true" />
-                    <element signature="e#15899#17555#0" expanded="true" />
-                    <element signature="e#17554#17555#0" expanded="true" />
-                    <element signature="e#17581#17592#0" expanded="true" />
-                    <element signature="e#17594#17834#0" expanded="true" />
-                    <element signature="e#17833#17834#0" expanded="true" />
-                    <element signature="e#17985#17986#0" expanded="true" />
-                    <element signature="e#25813#25833#0" expanded="true" />
-                    <element signature="e#26140#26325#0" expanded="true" />
-                    <element signature="e#26324#26325#0" expanded="true" />
-                    <element signature="e#26943#26974#0" expanded="true" />
-                    <element signature="e#26992#27022#0" expanded="true" />
-                    <element signature="e#27036#27068#0" expanded="true" />
-                    <element signature="e#28034#28065#0" expanded="true" />
-                    <element signature="e#28089#28101#0" expanded="true" />
-                    <element signature="e#28103#28497#0" expanded="true" />
-                    <element signature="e#28496#28497#0" expanded="true" />
-                    <element signature="e#28521#28532#0" expanded="true" />
-                    <element signature="e#28534#28683#0" expanded="true" />
-                    <element signature="e#28682#28683#0" expanded="true" />
-                    <element signature="e#31056#31116#0" expanded="true" />
-                    <element signature="e#31531#31597#0" expanded="true" />
-                    <element signature="e#32004#32005#0" expanded="true" />
-                    <element signature="e#32102#32103#0" expanded="true" />
-                    <element signature="e#32697#32764#0" expanded="true" />
-                    <element signature="e#32780#32842#0" expanded="true" />
-                    <element signature="e#32856#32916#0" expanded="true" />
-                    <element signature="e#33202#33558#0" expanded="true" />
-                    <element signature="e#33557#33558#0" expanded="true" />
-                    <element signature="e#33677#34595#0" expanded="true" />
-                    <element signature="e#34106#34278#0" expanded="true" />
-                    <element signature="e#34277#34278#0" expanded="true" />
-                    <element signature="e#34594#34595#0" expanded="true" />
-                    <element signature="e#41912#42400#0" expanded="true" />
-                    <element signature="e#42399#42400#0" expanded="true" />
-                    <element signature="e#43784#44613#0" expanded="true" />
-                    <element signature="e#44612#44613#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/main/res/values-zh-rCN/strings.xml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-4.535714">
-                  <caret line="54" column="48" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="48" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="CameraCommand.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/CameraCommand.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="FileNode.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/FileBrowser/Model/FileNode.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ProgressDialog.java" pinned="false" current-in-tab="false">
-            <entry file="file://E:/Android/sdk/sources/android-20/android/app/ProgressDialog.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="310" column="16" selection-start-line="310" selection-start-column="16" selection-end-line="310" selection-end-column="16" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="StreamPlayerFragment.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/Viewer/StreamPlayerFragment.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.2882883">
-                  <caret line="145" column="54" selection-start-line="145" selection-start-column="31" selection-end-line="145" selection-end-column="54" />
-                  <folding>
-                    <element signature="e#4764#5906#0" expanded="true" />
-                    <element signature="e#5905#5906#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="HelpFramgment.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/HelpFramgment.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.5382883">
-                  <caret line="41" column="31" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="FunctionListFragment.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/FunctionListFragment.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-5.1666665">
-                  <caret line="470" column="42" selection-start-line="470" selection-start-column="42" selection-end-line="470" selection-end-column="42" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="StreamPlayerFragment.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/Viewer/StreamPlayerFragment.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-3.7931035">
-                  <caret line="775" column="32" selection-start-line="775" selection-start-column="32" selection-end-line="775" selection-end-column="32" />
-                  <folding>
-                    <element signature="e#9095#9160#0" expanded="true" />
-                    <element signature="e#11983#12041#0" expanded="true" />
-                    <element signature="e#12178#12235#0" expanded="true" />
-                    <element signature="e#12441#12507#0" expanded="true" />
-                    <element signature="e#13275#13340#0" expanded="true" />
-                    <element signature="e#13454#13521#0" expanded="true" />
-                    <element signature="e#15706#15844#0" expanded="true" />
-                    <element signature="e#15843#15844#0" expanded="true" />
-                    <element signature="e#17204#17742#0" expanded="true" />
-                    <element signature="e#17741#17742#0" expanded="true" />
-                    <element signature="e#17774#17839#0" expanded="true" />
-                    <element signature="e#17869#17927#0" expanded="true" />
-                    <element signature="e#18098#19570#0" expanded="true" />
-                    <element signature="e#19569#19570#0" expanded="true" />
-                    <element signature="e#19686#19907#0" expanded="true" />
-                    <element signature="e#19906#19907#0" expanded="true" />
-                    <element signature="e#20022#20223#0" expanded="true" />
-                    <element signature="e#20222#20223#0" expanded="true" />
-                    <element signature="e#20344#20519#0" expanded="true" />
-                    <element signature="e#20518#20519#0" expanded="true" />
-                    <element signature="e#20648#20771#0" expanded="true" />
-                    <element signature="e#20770#20771#0" expanded="true" />
-                    <element signature="e#21065#21362#0" expanded="true" />
-                    <element signature="e#21361#21362#0" expanded="true" />
-                    <element signature="e#21499#21800#0" expanded="true" />
-                    <element signature="e#21799#21800#0" expanded="true" />
-                    <element signature="e#22093#22094#0" expanded="true" />
-                    <element signature="e#22115#22116#0" expanded="true" />
-                    <element signature="e#23648#24291#0" expanded="true" />
-                    <element signature="e#24290#24291#0" expanded="true" />
-                    <element signature="e#25847#25888#0" expanded="true" />
-                    <element signature="e#25906#25927#0" expanded="true" />
-                    <element signature="e#25952#25969#0" expanded="true" />
-                    <element signature="e#28681#28801#0" expanded="true" />
-                    <element signature="e#28800#28801#0" expanded="true" />
-                    <element signature="e#32456#32457#0" expanded="true" />
-                    <element signature="e#32489#32490#0" expanded="true" />
-                    <element signature="e#32530#33482#0" expanded="true" />
-                    <element signature="e#33481#33482#0" expanded="true" />
-                    <element signature="e#33525#34906#0" expanded="true" />
-                    <element signature="e#33816#33834#0" expanded="true" />
-                    <element signature="e#34171#34196#0" expanded="true" />
-                    <element signature="e#34497#34514#0" expanded="true" />
-                    <element signature="e#34515#34780#0" expanded="true" />
-                    <element signature="e#34779#34780#0" expanded="true" />
-                    <element signature="e#34905#34906#0" expanded="true" />
-                    <element signature="e#35485#35486#0" expanded="true" />
-                    <element signature="e#35512#35513#0" expanded="true" />
-                    <element signature="e#35561#35562#0" expanded="true" />
-                    <element signature="e#35590#35591#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="HelpFramgment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/HelpFramgment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CameraCommand.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/CameraCommand.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="58" column="69" selection-start-line="58" selection-start-column="69" selection-end-line="58" selection-end-column="69" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileBrowserFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/FileBrowser/FileBrowserFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.31325302">
+              <caret line="1022" column="46" selection-start-line="1022" selection-start-column="46" selection-end-line="1022" selection-end-column="46" />
+              <folding>
+                <element signature="e#31262#31328#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ViewPagerAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/ViewPagerAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values-zh-rCN/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.775862">
+              <caret line="54" column="34" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="KEY_STORE_PATH" value="E:\john_work\car.jks" />
+    <option name="KEY_ALIAS" value="key" />
   </component>
   <component name="GradleLocalSettings">
     <option name="availableProjects">
@@ -1355,7 +1195,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="D:\john_work\Car_DV.android_mv0311" value="4338558257973" />
+        <entry key="E:\john_work\Car_DV.android_mv0311" value="4338558257973" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1673,26 +1513,26 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/ViewPagerDemoActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/app_spon_bg.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/Button_main.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values-zh-rCN/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/FileBrowser/FileBrowserFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/FunctionListFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/HelpFramgment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/Viewer/StreamPlayerFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/FileBrowser/FileBrowserFragment.java" />
       </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Bundled (Maven 3)" />
+      </MavenGeneralSettings>
     </option>
   </component>
   <component name="NamedScopeManager">
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="544" />
-    <option name="y" value="65" />
-    <option name="width" value="1068" />
-    <option name="height" value="682" />
+    <option name="x" value="-1" />
+    <option name="y" value="64" />
+    <option name="width" value="981" />
+    <option name="height" value="660" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -1718,9 +1558,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1742,6 +1579,10 @@
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -1757,7 +1598,43 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="drawable" />
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="strings.xml" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car_DV.android_mv0311" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Car_DV.android_mv0311" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="anim" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1851,7 +1728,11 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Control" />
+              <option name="myItemId" value="FileBrowser" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1869,8 +1750,12 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="videolan" />
+              <option name="myItemId" value="IPCamViewer" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Control" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1887,22 +1772,11 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Car_DV.android_mv0311" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manifests" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1913,7 +1787,10 @@
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="recentsLimit" value="5" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="5c48237f" />
-    <property name="last_opened_file_path" value="E:/john_work/Car_DV.App3147" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../car.jks" />
+    <property name="ExportApk.ApkPath" value="E:\john_work\Car_DV.android_mv0311\app" />
+    <property name="ExportApk.Flavors" value="" />
+    <property name="ExportApk.BuildType" value="release" />
   </component>
   <component name="RunManager" selected="Android Application.app">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -1922,36 +1799,6 @@
       <option name="MODE" value="default_activity" />
       <option name="DEPLOY" value="true" />
       <option name="ARTIFACT_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
-      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
-      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
-      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
       <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
       <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
@@ -2009,11 +1856,6 @@
       </option>
       <envs />
       <patterns />
-      <method />
-    </configuration>
-    <configuration default="true" type="JarApplication" factoryName="JAR Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -2098,46 +1940,48 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ba2c21ee-15cf-4f85-a007-c43be073864a" name="Default" comment="" />
-      <created>1446462950676</created>
+      <changelist id="b7f9f812-e71c-408b-bfaf-767987767e24" name="Default" comment="" />
+      <created>1446600106463</created>
       <option name="number" value="Default" />
-      <updated>1446462950676</updated>
+      <updated>1446600106463</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="544" y="65" width="1068" height="682" extended-state="0" />
+    <frame x="-1" y="64" width="981" height="660" extended-state="1" />
     <editor active="true" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32829046" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33892617" sideWeight="0.5030257" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12919463" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.097328246" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.0" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.0" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2246596" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1442953" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30944625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -2148,184 +1992,34 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/HelpFramgment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/Viewer/StreamPlayerFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="49" column="17" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/ViewPagerDemoActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="73" selection-start-line="48" selection-start-column="73" selection-end-line="48" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#13385#13443#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/ViewPagerDemoActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="73" selection-start-line="48" selection-start-column="73" selection-end-line="48" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="479" column="49" selection-start-line="479" selection-start-column="49" selection-end-line="479" selection-end-column="49" />
-          <folding>
-            <element signature="e#13385#13443#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/app_spon_bg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/Button_main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/ConnectConfigBg.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_local_file_list.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.8">
-          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/local_browser.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49668875">
-          <caret line="46" column="24" selection-start-line="46" selection-start-column="24" selection-end-line="46" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/browser.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.2">
-          <caret line="39" column="63" selection-start-line="39" selection-start-column="63" selection-end-line="39" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://E:/Android/sdk/sources/android-20/android/os/Handler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="512" column="25" selection-start-line="512" selection-start-column="25" selection-end-line="512" selection-end-column="25" />
-          <folding>
-            <element signature="e#21199#21200#0" expanded="false" />
-            <element signature="e#21254#21255#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3500931">
-          <caret line="51" column="18" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://E:/Android/sdk/sources/android-20/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1943" column="79" selection-start-line="1943" selection-start-column="7" selection-end-line="1943" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/FileBrowser/Model/FileNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
+        <state vertical-scroll-proportion="-0.6657682">
+          <caret line="78" column="36" selection-start-line="78" selection-start-column="36" selection-end-line="78" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values-zh-rCN/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.535714">
-          <caret line="54" column="48" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="48" />
+        <state vertical-scroll-proportion="-2.775862">
+          <caret line="54" column="34" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/HelpFramgment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="66" selection-start-line="10" selection-start-column="66" selection-end-line="10" selection-end-column="66" />
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://E:/Android/sdk/sources/android-20/android/app/ProgressDialog.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/ViewPagerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="310" column="16" selection-start-line="310" selection-start-column="16" selection-end-line="310" selection-end-column="16" />
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2333,163 +2027,18 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/CameraCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/loading_dialog.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.64235294">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/videolan/libvlc/LibVLC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="434" column="0" selection-start-line="434" selection-start-column="0" selection-end-line="435" selection-end-column="0" />
+          <caret line="58" column="69" selection-start-line="58" selection-start-column="69" selection-end-line="58" selection-end-column="69" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/FileBrowser/FileBrowserFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="15.810345">
-          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.31325302">
+          <caret line="1022" column="46" selection-start-line="1022" selection-start-column="46" selection-end-line="1022" selection-end-column="46" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5373#5374#0" expanded="true" />
-            <element signature="e#5403#5404#0" expanded="true" />
-            <element signature="e#5837#5838#0" expanded="true" />
-            <element signature="e#5867#5868#0" expanded="true" />
-            <element signature="e#7080#7081#0" expanded="true" />
-            <element signature="e#7110#7111#0" expanded="true" />
-            <element signature="e#14493#14503#0" expanded="true" />
-            <element signature="e#14574#14584#0" expanded="true" />
-            <element signature="e#14660#14670#0" expanded="true" />
-            <element signature="e#14742#14752#0" expanded="true" />
-            <element signature="e#14819#14829#0" expanded="true" />
-            <element signature="e#15532#17986#0" expanded="true" />
-            <element signature="e#15771#15810#0" expanded="true" />
-            <element signature="e#15829#15859#0" expanded="true" />
-            <element signature="e#15885#15897#0" expanded="true" />
-            <element signature="e#15899#17555#0" expanded="true" />
-            <element signature="e#17554#17555#0" expanded="true" />
-            <element signature="e#17581#17592#0" expanded="true" />
-            <element signature="e#17594#17834#0" expanded="true" />
-            <element signature="e#17833#17834#0" expanded="true" />
-            <element signature="e#17985#17986#0" expanded="true" />
-            <element signature="e#25813#25833#0" expanded="true" />
-            <element signature="e#26140#26325#0" expanded="true" />
-            <element signature="e#26324#26325#0" expanded="true" />
-            <element signature="e#26943#26974#0" expanded="true" />
-            <element signature="e#26992#27022#0" expanded="true" />
-            <element signature="e#27036#27068#0" expanded="true" />
-            <element signature="e#28034#28065#0" expanded="true" />
-            <element signature="e#28089#28101#0" expanded="true" />
-            <element signature="e#28103#28497#0" expanded="true" />
-            <element signature="e#28496#28497#0" expanded="true" />
-            <element signature="e#28521#28532#0" expanded="true" />
-            <element signature="e#28534#28683#0" expanded="true" />
-            <element signature="e#28682#28683#0" expanded="true" />
-            <element signature="e#31056#31116#0" expanded="true" />
-            <element signature="e#31531#31597#0" expanded="true" />
-            <element signature="e#32004#32005#0" expanded="true" />
-            <element signature="e#32102#32103#0" expanded="true" />
-            <element signature="e#32697#32764#0" expanded="true" />
-            <element signature="e#32780#32842#0" expanded="true" />
-            <element signature="e#32856#32916#0" expanded="true" />
-            <element signature="e#33202#33558#0" expanded="true" />
-            <element signature="e#33557#33558#0" expanded="true" />
-            <element signature="e#33677#34595#0" expanded="true" />
-            <element signature="e#34106#34278#0" expanded="true" />
-            <element signature="e#34277#34278#0" expanded="true" />
-            <element signature="e#34594#34595#0" expanded="true" />
-            <element signature="e#41912#42400#0" expanded="true" />
-            <element signature="e#42399#42400#0" expanded="true" />
-            <element signature="e#43784#44613#0" expanded="true" />
-            <element signature="e#44612#44613#0" expanded="true" />
+            <element signature="e#31262#31328#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/FunctionListFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.1666665">
-          <caret line="470" column="42" selection-start-line="470" selection-start-column="42" selection-end-line="470" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/Viewer/StreamPlayerFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.7931035">
-          <caret line="775" column="32" selection-start-line="775" selection-start-column="32" selection-end-line="775" selection-end-column="32" />
-          <folding>
-            <element signature="e#9095#9160#0" expanded="true" />
-            <element signature="e#11983#12041#0" expanded="true" />
-            <element signature="e#12178#12235#0" expanded="true" />
-            <element signature="e#12441#12507#0" expanded="true" />
-            <element signature="e#13275#13340#0" expanded="true" />
-            <element signature="e#13454#13521#0" expanded="true" />
-            <element signature="e#15706#15844#0" expanded="true" />
-            <element signature="e#15843#15844#0" expanded="true" />
-            <element signature="e#17204#17742#0" expanded="true" />
-            <element signature="e#17741#17742#0" expanded="true" />
-            <element signature="e#17774#17839#0" expanded="true" />
-            <element signature="e#17869#17927#0" expanded="true" />
-            <element signature="e#18098#19570#0" expanded="true" />
-            <element signature="e#19569#19570#0" expanded="true" />
-            <element signature="e#19686#19907#0" expanded="true" />
-            <element signature="e#19906#19907#0" expanded="true" />
-            <element signature="e#20022#20223#0" expanded="true" />
-            <element signature="e#20222#20223#0" expanded="true" />
-            <element signature="e#20344#20519#0" expanded="true" />
-            <element signature="e#20518#20519#0" expanded="true" />
-            <element signature="e#20648#20771#0" expanded="true" />
-            <element signature="e#20770#20771#0" expanded="true" />
-            <element signature="e#21065#21362#0" expanded="true" />
-            <element signature="e#21361#21362#0" expanded="true" />
-            <element signature="e#21499#21800#0" expanded="true" />
-            <element signature="e#21799#21800#0" expanded="true" />
-            <element signature="e#22093#22094#0" expanded="true" />
-            <element signature="e#22115#22116#0" expanded="true" />
-            <element signature="e#23648#24291#0" expanded="true" />
-            <element signature="e#24290#24291#0" expanded="true" />
-            <element signature="e#25847#25888#0" expanded="true" />
-            <element signature="e#25906#25927#0" expanded="true" />
-            <element signature="e#25952#25969#0" expanded="true" />
-            <element signature="e#28681#28801#0" expanded="true" />
-            <element signature="e#28800#28801#0" expanded="true" />
-            <element signature="e#32456#32457#0" expanded="true" />
-            <element signature="e#32489#32490#0" expanded="true" />
-            <element signature="e#32530#33482#0" expanded="true" />
-            <element signature="e#33481#33482#0" expanded="true" />
-            <element signature="e#33525#34906#0" expanded="true" />
-            <element signature="e#33816#33834#0" expanded="true" />
-            <element signature="e#34171#34196#0" expanded="true" />
-            <element signature="e#34497#34514#0" expanded="true" />
-            <element signature="e#34515#34780#0" expanded="true" />
-            <element signature="e#34779#34780#0" expanded="true" />
-            <element signature="e#34905#34906#0" expanded="true" />
-            <element signature="e#35485#35486#0" expanded="true" />
-            <element signature="e#35512#35513#0" expanded="true" />
-            <element signature="e#35561#35562#0" expanded="true" />
-            <element signature="e#35590#35591#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/com/a_i_t/IPCamViewer/HelpFramgment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5382883">
-          <caret line="41" column="31" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>

@@ -3,4 +3,4 @@
     <item android:state_enabled="true" android:drawable="@drawable/dot_dark" />  
     <item android:state_enabled="false" android:drawable="@drawable/dot_white" />  
 </selector>
-<!-- From: file:/D:/john_work/Car_DV.android_mv0311/app/src/main/res/drawable/dot.xml -->
+<!-- From: file:/E:/john_work/Car_DV.android_mv0311/app/src/main/res/drawable/dot.xml -->

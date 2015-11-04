@@ -100,7 +100,7 @@ public class FileBrowserFragment extends Fragment {
 	private boolean isstatusPhoto=false; //判断是照片还是视频加载更多
 	private boolean isfirstPhoto=true;//判断第一次点击照片选项
 	//add by John 2015.11.3
-	public boolean isdeletesos=true;
+	public boolean isdeletesos=false;
 	private int mycompare(FileNode arg0, FileNode arg1)
 	{
 		try
@@ -996,23 +996,16 @@ public class FileBrowserFragment extends Fragment {
 			FileNode fileNode = sSelectedFiles.get(0) ;
 			///added by eric
 			URL url = CameraCommand.commandSetdeletesinglefileUrl(fileNode.mName);
-			for (int i=0;i<sSelectedFiles.size();i++){
-				sSelectedFiles.get(i);
-				Log.i("moop", fileNode.mName);
-			}
 			if(fileNode.mName.contains("SOS"))
 			{
 				mProgDlg.dismiss() ;
 				isdeletesos=true;
-
 //				mProgDlg.setMessage("Can not delete " + fileNode.mName);
 				return "next" ;
 			}
-
 				if (url != null) {
 					return CameraCommand.sendRequest(url);
 			}
-
 			return null ;
 		}
 		@Override
@@ -1027,7 +1020,9 @@ public class FileBrowserFragment extends Fragment {
 						Toast.LENGTH_SHORT).show();
 				isdeletesos=false;
 			}
+			Log.i("moop","result11--"+result);
 			if (result != null && result.equals("709\n?") != true) {
+				Log.i("moop","result"+result);
 				sFileListJPG.remove(fileNode);
 				fileNode.mSelected = false ;
 				if(result.equals("next"))
@@ -1050,13 +1045,6 @@ public class FileBrowserFragment extends Fragment {
 				if (sSelectedFiles.size() > 0 && !mCancelDelete) {
 					if (!fileNode.mName.contains("SOS")){
 					new CameraDeleteFile().execute();
-					}else {
-						Log.i("moop","亲，SOS文件不能删除哦");
-						Toast.makeText(activity,
-								activity.getResources().getString(R.string.warn_ondeletesos),
-								Toast.LENGTH_SHORT).show();
-						mProgDlg.dismiss() ;
-						return;
 					}
 				} else {
 					if (mProgDlg != null) {

@@ -6,21 +6,21 @@
         jumboMode="false"
         revision="23.0.0 rc3"
         sha1="9d9013e9ff35fc3756411e62873c363c70c638fa">
-        <dex dex="D:\john_work\Car_DV.android_mv0311\app\build\intermediates\pre-dexed\release\support-annotations-20.0.0-5b16f73fbc8a40c20d77aefb75b595d0c21c6c23.jar" />
+        <dex dex="E:\john_work\Car_DV.android_mv0311\app\build\intermediates\pre-dexed\release\support-annotations-20.0.0-5b16f73fbc8a40c20d77aefb75b595d0c21c6c23.jar" />
     </item>
     <item
-        jar="D:\john_work\Car_DV.android_mv0311\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\jars\libs\internal_impl-20.0.0.jar"
+        jar="E:\john_work\Car_DV.android_mv0311\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\jars\libs\internal_impl-20.0.0.jar"
         jumboMode="false"
         revision="23.0.0 rc3"
         sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d">
-        <dex dex="D:\john_work\Car_DV.android_mv0311\app\build\intermediates\pre-dexed\release\internal_impl-20.0.0-a9b892c12353000f5697abcde71c4684cb116356.jar" />
+        <dex dex="E:\john_work\Car_DV.android_mv0311\app\build\intermediates\pre-dexed\release\internal_impl-20.0.0-00efd4f5a202c5424974de8f8c28c7bd46c5c4b0.jar" />
     </item>
     <item
-        jar="D:\john_work\Car_DV.android_mv0311\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\jars\classes.jar"
+        jar="E:\john_work\Car_DV.android_mv0311\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0 rc3"
         sha1="8694693636ab36910c8100ce527c258ff3ebece0">
-        <dex dex="D:\john_work\Car_DV.android_mv0311\app\build\intermediates\pre-dexed\release\classes-792b96490f97feec9dcb6b388ba88fc6e427c3ac.jar" />
+        <dex dex="E:\john_work\Car_DV.android_mv0311\app\build\intermediates\pre-dexed\release\classes-234c200b9a0bf086eed0bdc2ccd32acf9951ea17.jar" />
     </item>
 
 </items>
