@@ -114,7 +114,8 @@
     <string name="main_settings">Settings</string>
     <string name="open">Open</string>
     <string name="photo">Photo</string>
-    <string name="video">Video</string>
+    <string name="backvideo">BackVideo</string>
+    <string name="video">FrontVideo</string>
     <string name="label_download">Download</string>
     <string name="label_DV_quality">DV Quality</string>
     <string name="label_move">Motion Detection</string>

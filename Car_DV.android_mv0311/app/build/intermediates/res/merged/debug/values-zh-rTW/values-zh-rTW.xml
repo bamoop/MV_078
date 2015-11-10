@@ -20,6 +20,7 @@
     <string name="Timesettings">時間設定</string>
     <string name="app_Version">應用程式版本</string>
     <string name="app_name">行車拍拍</string>
+    <string name="backvideo">後視頻</string>
     <string name="connecting_to_camera">Connecting to Camera</string>
     <string name="dialog_DHCP_error">請檢查DHCP設定</string>
     <string name="dialog_no_connection_message">1. 確認相機WiFi已開啟.\n2. 確認手機WiFi已開啟.\n3. 將手機連線至相機.</string>

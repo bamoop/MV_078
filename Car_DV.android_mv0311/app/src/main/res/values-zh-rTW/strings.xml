@@ -110,6 +110,7 @@
     <string name="open">打開</string>
     <string name="photo">照片</string>
     <string name="video">視頻</string>
+    <string name="backvideo">後視頻</string>
     <string name="label_download">下載</string>
     <string name="label_DV_quality">錄影質量</string>
     <string name="label_move">移動偵測</string>

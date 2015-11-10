@@ -387,8 +387,10 @@ public class MainActivity extends Activity {
 		s_Activity = this;
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 		int v = pref.getInt(g_version_check,G_UNKNOWN_VERSION);
-		if(v ==G_UNKNOWN_VERSION)
+//		if(v ==G_UNKNOWN_VERSION)
+		if(true)
 		{
+			Log.i("moop","请求版本信息");
 			new CameraFWVersion().execute();
 		}
 	}
@@ -609,16 +611,23 @@ public class MainActivity extends Activity {
 					if(lines!=null)
 					{
 						String fwVersion = lines[0];
+						Log.i("moop","版本="+fwVersion);
 						SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(s_Activity);
 						SharedPreferences.Editor editor = pref.edit();
 						int value = G_UNKNOWN_VERSION;
 						if(fwVersion.startsWith("1"))
 						{
+							Log.i("moop","版本1");
 							value = G_OLD_VERSION;
 						}
-						else if(fwVersion.startsWith("2") || fwVersion.startsWith("3"))
+						else if(fwVersion.startsWith("2"))
 						{
+							Log.i("moop","版本2");
 							value = G_NEW_VERSION;
+//							value = 3;
+						}else if (fwVersion.startsWith("3")){
+							Log.i("moop","版本3");
+							value = 3;
 						}
 						editor.putInt(g_version_check, value);
 						editor.commit();

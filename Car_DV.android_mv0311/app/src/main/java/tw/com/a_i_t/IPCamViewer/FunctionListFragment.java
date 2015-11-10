@@ -371,6 +371,7 @@ public class FunctionListFragment extends Fragment {
 		@Override
 		protected String doInBackground(URL... params) {
 			URL url = CameraCommand.commandQueryAV1Url() ;
+			Log.i("moop","请求属性"+url);
 			if (url != null) {		
 				return CameraCommand.sendRequest(url) ;
 			}
@@ -401,12 +402,14 @@ public class FunctionListFragment extends Fragment {
 			String gateway = MainActivity.intToIp(dhcpInfo.gateway) ;
 			// set http push as default for streaming
 			liveStreamUrl = "http://" + gateway + MjpegPlayerFragment.DEFAULT_MJPEG_PUSH_URL ;
+			Log.i("moop","请求属2"+liveStreamUrl);
 			if (result != null) {
 				String[] lines;
 				try {
 					String[] lines_temp = result.split("Camera.Preview.RTSP.av=");
 					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
 					int av = Integer.valueOf(lines[0]);
+					Log.i("moop","请求属4"+av);
 					switch (av) {
 					case 1:	// liveRTSP/av1 for RTSP MJPEG+AAC
 						liveStreamUrl = "rtsp://" + gateway + MjpegPlayerFragment.DEFAULT_RTSP_MJPEG_AAC_URL ;
@@ -418,6 +421,7 @@ public class FunctionListFragment extends Fragment {
 						liveStreamUrl = "rtsp://" + gateway + MjpegPlayerFragment.DEFAULT_RTSP_H264_AAC_URL ;
 						break;
 					}
+					Log.i("moop","请求属3"+liveStreamUrl);
 				} catch (Exception e) {/* not match, for firmware of MJPEG only */}
 			}
 			Fragment fragment = StreamPlayerFragment.newInstance(liveStreamUrl) ;

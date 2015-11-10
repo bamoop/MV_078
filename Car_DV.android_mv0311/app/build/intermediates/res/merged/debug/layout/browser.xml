@@ -15,9 +15,13 @@
         	<ImageButton style="@style/top_button.pic" android:background="@drawable/local_video_bg" />   
     		<TextView android:layout_marginLeft="5dp" android:id="@+id/txt_video" android:duplicateParentState="true" android:text="@string/video" style="@style/top_button.txt"/>
     	  </LinearLayout>
-    	  <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_photo"  >
-        	<ImageButton style="@style/top_button.pic" android:background="@drawable/local_photo_bg" />   
-    		<TextView android:layout_marginLeft="5dp" android:id="@+id/txt_photo"  android:text="@string/photo" style="@style/top_button.txt" />
+    	  <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_backvideo"
+              android:visibility="gone">
+        	<ImageButton style="@style/top_button.pic" android:background="@drawable/local_video_bg" />
+    		<TextView android:layout_marginLeft="5dp" android:id="@+id/txt_photo"  android:text="@string/backvideo" style="@style/top_button.txt" />
+    	   </LinearLayout>    	  <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_photo"  >
+        	<ImageButton style="@style/top_button.pic" android:background="@drawable/local_photo_bg" />
+    		<TextView android:layout_marginLeft="5dp" android:id="@+id/txt_twovideo"  android:text="@string/photo" style="@style/top_button.txt" />
     	   </LinearLayout>
     </LinearLayout>
     <LinearLayout style="@style/layout_vertical" android:layout_weight="1">
@@ -30,6 +34,12 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"/>
+        <tw.com.a_i_t.IPCamViewer.RTPullListView
+            android:id="@+id/browserList_backvideo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
     </LinearLayout>
 	 <LinearLayout android:layout_width="match_parent"
            android:layout_height="@dimen/bottom_banner_height">

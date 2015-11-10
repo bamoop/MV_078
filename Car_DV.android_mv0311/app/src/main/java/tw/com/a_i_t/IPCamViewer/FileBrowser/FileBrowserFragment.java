@@ -36,6 +36,7 @@ import android.app.ProgressDialog ;
 import android.content.Context ;
 import android.content.DialogInterface ;
 import android.content.Intent ;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.DataSetObserver;
 import android.net.DhcpInfo ;
@@ -47,6 +48,7 @@ import android.os.Bundle ;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager ;
+import android.preference.PreferenceManager;
 import android.util.Log ;
 import android.view.LayoutInflater ;
 import android.view.View ;
@@ -65,6 +67,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView ;
 import android.widget.Toast;
 
+import org.w3c.dom.Node;
+
 public class FileBrowserFragment extends Fragment {
 
 	public final static String TAG = "FileBrowserFragment" ;
@@ -79,7 +83,9 @@ public class FileBrowserFragment extends Fragment {
 	private static final int MSG_SHOWDIALOG = 1;
 	private static final int MSG_DISMISSDIALOG = 2;
 	private static final int MSG_GETFILELIST = 3;
-	private static final int MSG_NOMORE = 4;
+	private static final int MSG_VIDEONOMORE = 4;
+	private static final int MSG_BACKVIDEONOMORE = 5;
+	private static final int MSG_PHOTONOMORE = 6;
 	private static final int G_TRYMAXTIMES = 5;
 	private static final int LOAD_MORE_SUCCESS = 3;//点击加载更多成功
 	private static final int LOAD_NEW_INFO = 5;    //加载新信息
@@ -94,14 +100,22 @@ public class FileBrowserFragment extends Fragment {
 	private ProgressBar moreProgressBar;
 	Activity activitytoals;
 
-	private RTPullListView mFileListView,jpgFileListview ;
+	private RTPullListView mFileListView,jpgFileListview,backFileListview;
 	public FileBrowser rowsers=null;
 	private boolean isstatusVideo; //判断是照片还是视频加载更多
 	private boolean isstatusPhoto=false; //判断是照片还是视频加载更多
 	private boolean isfirstPhoto=true;//判断第一次点击照片选项
+	private boolean isfirstonePhoto=true;//判断第一次点击照片选项
+	private boolean isfirstBackViedeo=true;//判断第一次点击后路视频选项
+	private boolean isfirstViedeo=true;//判断第一次点击视频选项
 	//add by John 2015.11.3
 	public boolean isdeletesos=false;
 	public boolean isdeletSOStoast=false;
+	private int VERSION=0;
+	URL threeviedourl;//第三版本URl地址
+	URL threebackviedourl;//第三版本URl地址
+	URL threephotourl;//第三版本URl地址
+	String qingqiu;
 	private int mycompare(FileNode arg0, FileNode arg1)
 	{
 		try
@@ -132,8 +146,10 @@ public class FileBrowserFragment extends Fragment {
 
 		sFileListVIDEO.clear();
 		sFileListJPG.clear();
+		sFilelistBACKVIDEO.clear();
 		int len = stackFileListVIDEO.size();
 		int len_pic = stackFileListJPG.size();
+		int len_backvieo = stackFileListBACKVIDEO.size();
 		if(len>0)
 		{
 //			for(int i=len-1;i>=0;i--)
@@ -149,6 +165,11 @@ public class FileBrowserFragment extends Fragment {
 			for(int i=0;i<len_pic;i++)
 			{
 				sFileListJPG.add(stackFileListJPG.get(i));
+			}
+		}
+		if (len_backvieo>0){
+			for(int i=0; i<len_backvieo;i++){
+				sFilelistBACKVIDEO.add(stackFileListBACKVIDEO.get(i));
 			}
 		}
 		/*
@@ -330,18 +351,149 @@ public class FileBrowserFragment extends Fragment {
 
 		}
 	}
+	/*请求视频数据（单独）*/
+	private class VideoDownFileListTask extends AsyncTask<FileBrowser,Integer,FileBrowser>{
+		@Override
+		protected void onPreExecute(){
+			if(isfirstOpen) {
+			setWaitingState(true) ;
+			sFileListVIDEO.clear();
+			stackFileListVIDEO.clear();
+			mFileListVIDEOAdapter.notifyDataSetChanged();
+			sFileListJPG.clear();
+			stackFileListJPG.clear();
+			mFileListJPGAdapter.notifyDataSetChanged();
+			sFilelistBACKVIDEO.clear();
+			stackFileListBACKVIDEO.clear();
+			mFileListBACKVIDEOAdapter.notifyDataSetChanged();
+			}
+			super.onPreExecute() ;
+		}
+		@Override
+		protected FileBrowser doInBackground(FileBrowser... browsers) {
+			if (isfirstViedeo){
+			browsers[0].retrieveFileList(mDirectory, m_fileformat, true);
+			isfirstViedeo=false;
+			}
+			else browsers[0].retrieveFileList(mDirectory, m_fileformat, false);
+			return browsers[0];
+		}
+		@Override
+		protected void onPostExecute(FileBrowser result) {
+			Activity activity=getActivity();
+			if (activity==null){
+				return;
+			}
+			if(activity!=null){
+				List<FileNode>fileNodeList=result.getFileList();
+				Log.d("moop","视频请求返---"+fileNodeList.size());
+				for (int i = 0; i < fileNodeList.size(); i++) {
+					stackFileListVIDEO.add(fileNodeList.get(i));
+				}
+				sortfile();
+				mFileListVIDEOAdapter.notifyDataSetChanged();
+				if (!result.isCompleted()&&fileNodeList.size()>0){
+					mFileListVIDEOAdapter.notifyDataSetChanged();
+					mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
+					moreProgressBar.setVisibility(View.GONE);
+				}
+				else {
+					moreProgressBar.setVisibility(View.GONE);
+					mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
+					mHandler.sendEmptyMessage(MSG_VIDEONOMORE);
+					setWaitingState(false) ;
+				}
+			}
+		}
+	}
+	/*请求照片数据（单独）*/
+	private class PhotoDownFileListTask extends AsyncTask<FileBrowser,Integer,FileBrowser>{
+
+		@Override
+		protected FileBrowser doInBackground(FileBrowser... browsers) {
+			if (isfirstonePhoto){
+				isfirstonePhoto=false;
+			browsers[0].retrieveFileList(mDirectory, m_fileformat, true);
+			}else browsers[0].retrieveFileList(mDirectory, m_fileformat, false);
+			return browsers[0];
+		}
+		@Override
+		protected void onPostExecute(FileBrowser result) {
+			Activity activity=getActivity();
+			if (activity==null){
+				return;
+			}
+			if(activity!=null){
+				List<FileNode>fileNodeList=result.getFileList();
+				Log.d("moop","照片请求返---"+fileNodeList.size());
+				for (int i = 0; i < fileNodeList.size(); i++) {
+					stackFileListJPG.add(fileNodeList.get(i));
+				}
+				sortfile();
+				mFileListJPGAdapter.notifyDataSetChanged();
+				if (!result.isCompleted()&&fileNodeList.size()>0){
+					mFileListJPGAdapter.notifyDataSetChanged();
+					mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
+					moreProgressBar.setVisibility(View.GONE);
+				}
+				else {
+					moreProgressBar.setVisibility(View.GONE);
+					mHandler.sendEmptyMessage(MSG_PHOTONOMORE);
+					mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
+					setWaitingState(false) ;
+				}
+			}
+	}
+	}
+	/*请求后路摄像头视频文件（单独）*/
+	private class BackViedoDownFileListTask extends AsyncTask<FileBrowser,Integer,FileBrowser>{
+
+		@Override
+		protected FileBrowser doInBackground(FileBrowser... browsers) {
+			if(isfirstBackViedeo){
+			browsers[0].retrieveFileList(mDirectory, m_fileformat, true);
+			isfirstBackViedeo=false;
+			}else browsers[0].retrieveFileList(mDirectory, m_fileformat, false);
+			return browsers[0];
+		}
+
+		@Override
+		protected void onPostExecute(FileBrowser result) {
+			Activity activity=getActivity();
+			if (activity==null){
+				return;
+			}
+			if(activity!=null){
+				List<FileNode>fileNodeList=result.getFileList();
+				Log.d("moop","后路视频请求返---"+fileNodeList.size());
+				for (int i = 0; i < fileNodeList.size(); i++) {
+				    stackFileListBACKVIDEO.add(fileNodeList.get(i));
+				}
+				sortfile();
+				mFileListBACKVIDEOAdapter.notifyDataSetChanged();
+					if (!result.isCompleted()&&fileNodeList.size()>0){
+						mFileListBACKVIDEOAdapter.notifyDataSetChanged();
+						mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
+						moreProgressBar.setVisibility(View.GONE);
+					}
+					else {
+						moreProgressBar.setVisibility(View.GONE);
+						mHandler.sendEmptyMessage(MSG_BACKVIDEONOMORE);
+						mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
+						setWaitingState(false) ;
+					}
+			}
+		}
+	}
 
 	/*继续请求SD卡文件列表*/
 	private class ContiunedDownloadTask extends AsyncTask<FileBrowser, Integer, FileBrowser> {
 
 		@Override
 		protected FileBrowser doInBackground(FileBrowser... browsers) {
-
 			browsers[0].retrieveFileList(mDirectory, m_fileformat, false);
-
 			return browsers[0];
 		}
-
 		@Override
 		protected void onPostExecute(FileBrowser result) {
 
@@ -364,13 +516,11 @@ public class FileBrowserFragment extends Fragment {
 					}
 				}
 				sortfile();
-
 				if (isstatusVideo) {
 					isstatusVideo = false;
-					mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
-				}else if (isstatusVideo){
-					mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
 				}
+				mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
+
 				if (isstatusPhoto)
 				{
 					isstatusPhoto = true;
@@ -390,15 +540,14 @@ public class FileBrowserFragment extends Fragment {
 						jpgFileListview.setSelection(jpglistsize);
 						jpglistsize=sFileListJPG.size()-9;
 						myHandler.sendEmptyMessage(LOAD_MORE_SUCCESS);
-						Log.i("moop","请求---392");
 					} else {
 //						mFileListView.setSelection(0);
 						Toast.makeText(getActivity(), "没有更多了",
 								Toast.LENGTH_SHORT).show();
 						moreProgressBar.setVisibility(View.GONE);
-						mHandler.sendEmptyMessage(MSG_NOMORE);
+						mHandler.sendEmptyMessage(MSG_VIDEONOMORE);
+						mHandler.sendEmptyMessage(MSG_PHOTONOMORE);
 						mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
-						Log.i("moop", "请求---400");
 						setWaitingState(false);
 					}
 				}
@@ -449,6 +598,7 @@ public class FileBrowserFragment extends Fragment {
 					mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_GETFILELIST),G_TRYTIME);
 
 				}
+				Log.d("moop","第一次请求视频有--"+fileList.size());
 				for(int i=0;i<fileList.size();i++)
 				{
 					if(fileList.get(i).mFormat == FileNode.Format.avi
@@ -463,8 +613,8 @@ public class FileBrowserFragment extends Fragment {
 					}
 				}
 				sortfile();
-				mFileListJPGAdapter.notifyDataSetChanged();
-				mFileListVIDEOAdapter.notifyDataSetChanged();
+//				mFileListJPGAdapter.notifyDataSetChanged();
+//				mFileListVIDEOAdapter.notifyDataSetChanged();
 				rowsers=result;
 				if (!result.isCompleted() && sFileListVIDEO.size() < 6 ) {
 					new ContiunedDownloadTask().execute(result);
@@ -492,13 +642,17 @@ public class FileBrowserFragment extends Fragment {
 
 	private static ArrayList<FileNode> sFileListJPG = new ArrayList<FileNode>() ;
 	private static ArrayList<FileNode> sFileListVIDEO = new ArrayList<FileNode>() ;
+	private static ArrayList<FileNode> sFilelistBACKVIDEO=new ArrayList<FileNode>();
 
 	private static ArrayList<FileNode> stackFileListVIDEO = new ArrayList<FileNode>();
 	private static ArrayList<FileNode> stackFileListJPG = new ArrayList<FileNode>();
+	private static ArrayList<FileNode> stackFileListBACKVIDEO=new ArrayList<FileNode>();
 
 	private static List<FileNode> sSelectedFiles = new LinkedList<FileNode>() ;
+	private static List<FileNode> sSelectedbackFiles = new LinkedList<FileNode>() ;
 	private static FileListAdapter mFileListJPGAdapter ;
 	private static FileListAdapter mFileListVIDEOAdapter ;
+	private static FileListAdapter mFileListBACKVIDEOAdapter;
 	//private TextView mFileListTitle ;
 	private LinearLayout mSaveButton ;
 	private LinearLayout mDeleteButton ;
@@ -508,6 +662,7 @@ public class FileBrowserFragment extends Fragment {
 	private String mItems ;
 	private LinearLayout btn_video;
 	private LinearLayout btn_photo;
+	private LinearLayout btn_backvideo;
 	private Boolean isvideo = true;	/*video is default*/
 	private boolean isfirstOpen=true;
 	private static String gDownloadStr;
@@ -931,6 +1086,7 @@ public class FileBrowserFragment extends Fragment {
 
 			mDirectory = DEFAULT_DIR ;
 		}
+
 //
 	}
 
@@ -1034,6 +1190,7 @@ public class FileBrowserFragment extends Fragment {
 				{
 //					mFileListJPGAdapter.notifyDataSetChanged() ;
 					mFileListVIDEOAdapter.notifyDataSetChanged();
+					mFileListBACKVIDEOAdapter.notifyDataSetChanged();
 					mProgDlg.setMessage("Can not delete " + fileNode.mName);
 					fileNode.mSelected = false ;
 
@@ -1042,10 +1199,13 @@ public class FileBrowserFragment extends Fragment {
 				{
 					sFileListVIDEO.remove(fileNode);
 					sFileListJPG.remove(fileNode);
+					sFilelistBACKVIDEO.remove(fileNode);
+					stackFileListBACKVIDEO.remove(fileNode);
 					stackFileListVIDEO.remove(fileNode);
 					stackFileListJPG.remove(fileNode);
 					mFileListJPGAdapter.notifyDataSetChanged() ;
 					mFileListVIDEOAdapter.notifyDataSetChanged();
+					mFileListBACKVIDEOAdapter.notifyDataSetChanged();
 					//mFileListTitle.setText(mFileBrowser + " : " + mDirectory + " (" + sFileList.size()
 					//		+ " " + mItems + ")") ;
 					mProgDlg.setMessage("Please wait, deleteing " + fileNode.mName);
@@ -1101,20 +1261,54 @@ public class FileBrowserFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+		Log.i("moop", "onCreateView");
 		View view = inflater.inflate(R.layout.browser, container, false) ;
 		mFileListJPGAdapter = new FileListAdapter(inflater, sFileListJPG) ;
 		mFileListVIDEOAdapter = new FileListAdapter(inflater, sFileListVIDEO) ;
+		mFileListBACKVIDEOAdapter = new FileListAdapter(inflater, stackFileListBACKVIDEO) ;
+		mSaveButton = (LinearLayout) view.findViewById(R.id.browserDownloadButton) ;
+		mDeleteButton = (LinearLayout) view.findViewById(R.id.browserDeleteButton) ;
+		btn_video = (LinearLayout) view.findViewById(R.id.btn_video) ;
+		btn_backvideo= (LinearLayout) view.findViewById(R.id.btn_backvideo);
+		btn_photo = (LinearLayout) view.findViewById(R.id.btn_photo) ;
+		mOpenButton = (LinearLayout) view.findViewById(R.id.browserOpenButton) ;
+		mFileListView = (RTPullListView) view.findViewById(R.id.browserList) ;
+		jpgFileListview= (RTPullListView) view.findViewById(R.id.browserList_jpg);
+		backFileListview= (RTPullListView) view.findViewById(R.id.browserList_backvideo);
 		//mFileListAdapter.registerDataSetObserver(mDataSetobserver);
 		mFileBrowser = getActivity().getResources().getString(R.string.label_file_browser) ;
 		mReading = getActivity().getResources().getString(R.string.label_reading) ;
 		mItems = getActivity().getResources().getString(R.string.label_items) ;
 		activitytoals = getActivity() ;
+		try {
+			threeviedourl=new URL("http://"+mIp+ mPath);
+			threebackviedourl=new URL("http://"+mIp+ mPath);
+			threephotourl=new URL("http://"+mIp+ mPath);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		/*判断当前版本信息*/
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		int v = pref.getInt(MainActivity.g_version_check,MainActivity.G_UNKNOWN_VERSION);
+		switch (v)
+		{
+			case 1:
+				VERSION=v;
+				break;
+			case 2:
+				VERSION=v;
+				break;
+			case 3:
+				VERSION=v;
+				btn_backvideo.setVisibility(View.VISIBLE);
+				break;
+			default:
+				break;
+		}
 
 		//mFileListTitle = (TextView) view.findViewById(R.id.browserTitle) ;
 		//mFileListTitle.setText(mFileBrowser + " : " + mDirectory) ;
 
-		mSaveButton = (LinearLayout) view.findViewById(R.id.browserDownloadButton) ;
 		mSaveButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -1127,7 +1321,6 @@ public class FileBrowserFragment extends Fragment {
 			}
 		}) ;
 
-		mDeleteButton = (LinearLayout) view.findViewById(R.id.browserDeleteButton) ;
 		mDeleteButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1136,21 +1329,21 @@ public class FileBrowserFragment extends Fragment {
 				if (mTotalFile > 0) {
 					mProgDlg = new ProgressDialog(getActivity());
 					mProgDlg.setCancelable(false);
-					mProgDlg.setMax(mTotalFile) ;
+					mProgDlg.setMax(mTotalFile);
 					mProgDlg.setProgress(0);
-					mProgDlg.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL) ;
+					mProgDlg.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 					mProgDlg.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
 							new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									mCancelDelete = true;
 								}
-							}) ;
+							});
 					mProgDlg.setTitle("Delete file in Camera");
 					mProgDlg.setMessage("Please wait ...");
 					mCancelDelete = false;
 					mProgDlg.show();
-					isdeletSOStoast=true;
+					isdeletSOStoast = true;
 					new CameraDeleteFile().execute();
 				}
 //				mSaveButton.setEnabled(false) ;
@@ -1158,36 +1351,68 @@ public class FileBrowserFragment extends Fragment {
 //				mOpenButton.setEnabled(false) ;
 			}
 		}) ;
-		btn_video = (LinearLayout) view.findViewById(R.id.btn_video) ;
-		btn_video.setOnClickListener(new OnClickListener(){
+
+		btn_video.setEnabled(false);
+		btn_video.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				mFileListView.setVisibility(View.VISIBLE);
 				jpgFileListview.setVisibility(View.GONE);
+				backFileListview.setVisibility(View.GONE);
 				isvideo = true;
 				btn_video.setEnabled(false);
+				btn_backvideo.setEnabled(true);
 				btn_photo.setEnabled(true);
 				//m_fileformat = FileNode.Format.all;
 				mFileListView.setAdapter(mFileListVIDEOAdapter);
 				mFileListVIDEOAdapter.notifyDataSetChanged();
 			}
 		});
-		btn_video.setEnabled(false);
-		btn_photo = (LinearLayout) view.findViewById(R.id.btn_photo) ;
+		btn_backvideo.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				btn_video.setEnabled(true);
+				btn_photo.setEnabled(true);
+				btn_backvideo.setEnabled(false);
+				mFileListView.setVisibility(View.GONE);
+				jpgFileListview.setVisibility(View.GONE);
+				backFileListview.setVisibility(View.VISIBLE);
+				if (isfirstBackViedeo){
+					mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
+						new BackViedoDownFileListTask().execute(new FileBrowser(threebackviedourl,
+								FileBrowser.COUNT_MAX)) ;
+
+				}
+				backFileListview.setAdapter(mFileListBACKVIDEOAdapter);
+				mFileListBACKVIDEOAdapter.notifyDataSetChanged();
+			}
+		});
 		btn_photo.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				mFileListView.setVisibility(View.GONE);
+				backFileListview.setVisibility(View.GONE);
 				jpgFileListview.setVisibility(View.VISIBLE);
 				isvideo = false;
-				btn_video.setEnabled(true);
 				btn_photo.setEnabled(false);
+				btn_video.setEnabled(true);
+				btn_backvideo.setEnabled(true);
 				if (isfirstPhoto){
 					isfirstPhoto=false;
 					isstatusPhoto=true;
 					mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
-					new ContiunedDownloadTask().execute(rowsers);
-					isfirstPhoto=false;
+					switch (VERSION){
+						case 1:	new ContiunedDownloadTask().execute(rowsers);
+							break;
+						case 2: new ContiunedDownloadTask().execute(rowsers);
+							break;
+						case 3:
+								new PhotoDownFileListTask().execute(new FileBrowser(threephotourl,
+										FileBrowser.COUNT_MAX)) ;
+							break;
+						default:
+							break;
+					}
 				}
 
 				//m_fileformat = FileNode.Format.jpeg;
@@ -1195,7 +1420,6 @@ public class FileBrowserFragment extends Fragment {
 				mFileListJPGAdapter.notifyDataSetChanged();
 			}
 		});
-		mOpenButton = (LinearLayout) view.findViewById(R.id.browserOpenButton) ;
 		mOpenButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -1232,13 +1456,14 @@ public class FileBrowserFragment extends Fragment {
 			}
 		}) ;
 
-		mFileListView = (RTPullListView) view.findViewById(R.id.browserList) ;
-		jpgFileListview= (RTPullListView) view.findViewById(R.id.browserList_jpg);
+
 		initVideoListview();
 		initJPGListView();
+		initBackVideoListview();
 
 		mFileListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE) ;
 		jpgFileListview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE) ;
+		backFileListview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		if(isvideo)
 		{
 			mFileListView.setAdapter(mFileListVIDEOAdapter);
@@ -1247,27 +1472,29 @@ public class FileBrowserFragment extends Fragment {
 		{
 			jpgFileListview.setAdapter(mFileListJPGAdapter);
 		}
+		backFileListview.setAdapter(mFileListBACKVIDEOAdapter);
+
 		mFileListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-				ViewTag viewTag = (ViewTag) view.getTag() ;
+				ViewTag viewTag = (ViewTag) view.getTag();
 				if (viewTag != null) {
 
-					FileNode file = viewTag.mFileNode ;
+					FileNode file = viewTag.mFileNode;
 
-					CheckedTextView checkBox = (CheckedTextView) view.findViewById(R.id.fileListCheckBox) ;
-					checkBox.setChecked(!checkBox.isChecked()) ;
-					file.mSelected = checkBox.isChecked() ;
+					CheckedTextView checkBox = (CheckedTextView) view.findViewById(R.id.fileListCheckBox);
+					checkBox.setChecked(!checkBox.isChecked());
+					file.mSelected = checkBox.isChecked();
 
 					if (file.mSelected)
-						sSelectedFiles.add(file) ;
+						sSelectedFiles.add(file);
 					else
-						sSelectedFiles.remove(file) ;
+						sSelectedFiles.remove(file);
 
 					if (sSelectedFiles.size() > 0) {
-						if(sSelectedFiles.size() < 2) {
+						if (sSelectedFiles.size() < 2) {
 							mOpenButton.setEnabled(true);
 						}
 							/*
@@ -1277,12 +1504,12 @@ public class FileBrowserFragment extends Fragment {
 						} else {
 							mOpenButton.setEnabled(false) ;
 						}*/
-						mSaveButton.setEnabled(true) ;
-						mDeleteButton.setEnabled(true) ;
+						mSaveButton.setEnabled(true);
+						mDeleteButton.setEnabled(true);
 					} else {
-						mOpenButton.setEnabled(false) ;
-						mSaveButton.setEnabled(false) ;
-						mDeleteButton.setEnabled(false) ;
+						mOpenButton.setEnabled(false);
+						mSaveButton.setEnabled(false);
+						mDeleteButton.setEnabled(false);
 					}
 				}
 			}
@@ -1326,7 +1553,54 @@ public class FileBrowserFragment extends Fragment {
 				}
 			}
 		}) ;
+		backFileListview.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				ViewTag viewTag= (ViewTag) view.getTag();
+				if (viewTag!=null){
+					FileNode file=viewTag.mFileNode;
+					CheckedTextView checkBox = (CheckedTextView) view.findViewById(R.id.fileListCheckBox) ;
+					checkBox.setChecked(!checkBox.isChecked()) ;
+					file.mSelected = checkBox.isChecked() ;
+					if (file.mSelected)
+						sSelectedFiles.add(file);
+					else
+						sSelectedFiles.remove(file);
+					if (sSelectedFiles.size() > 0) {
+						if(sSelectedFiles.size() < 2) {
+							mOpenButton.setEnabled(true);
+						}
+						mSaveButton.setEnabled(true) ;
+						mDeleteButton.setEnabled(true) ;
+					}
+					else {
+						mOpenButton.setEnabled(false) ;
+						mSaveButton.setEnabled(false) ;
+						mDeleteButton.setEnabled(false) ;
+					}
+				}
+			}
+		});
 		return view ;
+	}
+	TextView backvideoNomre;
+	private void initBackVideoListview() {
+		Activity activity=getActivity();
+		LayoutInflater inflater=LayoutInflater.from(activity);
+		View view=inflater.inflate(R.layout.list_footview, null);
+		RelativeLayout footerView= (RelativeLayout) view.findViewById(R.id.list_footview);
+		backvideoNomre= (TextView) view.findViewById(R.id.text_view);
+		moreProgressBar= (ProgressBar) view.findViewById(R.id.footer_progress);
+		backFileListview.addFooterView(footerView);
+		footerView.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				moreProgressBar.setVisibility(View.VISIBLE);
+					new BackViedoDownFileListTask().execute(new FileBrowser(threebackviedourl,
+                            FileBrowser.COUNT_MAX)) ;
+				mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
+			}
+		});
 	}
 
 	TextView videoNomore;
@@ -1345,35 +1619,43 @@ public class FileBrowserFragment extends Fragment {
 			public void onClick(View v) {
 				isstatusVideo = true;
 				moreProgressBar.setVisibility(View.VISIBLE);
+				if (VERSION==3){
+					new VideoDownFileListTask().execute(new FileBrowser(threeviedourl,
+							FileBrowser.COUNT_MAX)) ;
+				}else if (VERSION==2||VERSION==1||VERSION==0){
 				new ContiunedDownloadTask().execute(rowsers);
+				}
 				mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
 //				mFileListView.setSelection(0);
 				//myHandler.sendEmptyMessage(LOAD_MORE_SUCCESS);
 			}
 		});
 	}
-
-	RelativeLayout footerView;
-	LayoutInflater inflater;
-	View vieww;
-	TextView tv_nomore;
+	TextView tv_photonomore;
 	private void initJPGListView() {
+		RelativeLayout footerView;
+		LayoutInflater inflater;
+		View vieww;
 		//添加listview底部获取更多按钮（可自定义）
 		Activity activity = getActivity();
 		inflater = LayoutInflater.from(activity);
 		vieww = inflater.inflate(R.layout.list_footview, null);
 		footerView =(RelativeLayout) vieww.findViewById(R.id.list_footview);
-		tv_nomore=	 (TextView)vieww.findViewById(R.id.text_view) ;
+		tv_photonomore=	 (TextView)vieww.findViewById(R.id.text_view) ;
 		moreProgressBar = (ProgressBar) vieww.findViewById(R.id.footer_progress);
 		jpgFileListview.addFooterView(footerView);
 		//获取更多监听器
 		footerView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				moreProgressBar.setVisibility(View.VISIBLE);
-//				new ContiunedDownloadTask().execute(rowsers);
+				//moreProgressBar.setVisibility(View.VISIBLE);
 				Log.d("ssss", "图片点击事件");
+				if (VERSION==3){
+					new PhotoDownFileListTask().execute(new FileBrowser(threephotourl,
+							FileBrowser.COUNT_MAX)) ;
+				}else {
 				new ContiunedDownloadTask().execute(rowsers);
+				}
 //				jpgFileListview.setSelection(0);
 				mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
 				//myHandler.sendEmptyMessage(LOAD_MORE_SUCCESS);
@@ -1468,9 +1750,16 @@ public class FileBrowserFragment extends Fragment {
 		public void handleMessage(Message msg){
 			switch(msg.what)
 			{
-				case MSG_NOMORE:
-					tv_nomore.setText("没有更多了");
+
+				case MSG_VIDEONOMORE:
 					videoNomore.setText("没有更多了");
+					break;
+				case MSG_BACKVIDEONOMORE:
+					backvideoNomre.setText("没有更多了");
+					break;
+				case MSG_PHOTONOMORE:
+					tv_photonomore.setText("没有更多了");
+					break;
 			case MSG_SHOWDIALOG:
 					showWattingDialog();
 					break;
@@ -1503,7 +1792,7 @@ public class FileBrowserFragment extends Fragment {
 	};
 	@Override
 	public void onResume() {
-
+		Log.d("moop","  onResume");
 		restoreWaitingIndicator() ;
 		if (isfirstOpen){
 		if (sDownloadTask != null) {
@@ -1512,8 +1801,19 @@ public class FileBrowserFragment extends Fragment {
 
 			try {
 				mTryTimes = G_TRYMAXTIMES;
-				new DownloadFileListTask().execute(new FileBrowser(new URL("http://" + mIp + mPath),
-						FileBrowser.COUNT_MAX)) ;
+				switch (VERSION){
+					case 1:	new DownloadFileListTask().execute(new FileBrowser(new URL("http://" + mIp + mPath),
+							FileBrowser.COUNT_MAX)) ;
+						Log.d("moop", "  第一个版本请求");
+						break;
+					case 2:new DownloadFileListTask().execute(new FileBrowser(new URL("http://" + mIp + mPath),
+							FileBrowser.COUNT_MAX)) ;
+						Log.d("moop", "  第二个版本请求");
+						break;
+					case 3:new VideoDownFileListTask().execute(new FileBrowser(threeviedourl,
+							FileBrowser.COUNT_MAX)) ;
+						Log.d("moop", "  第三个版本请求");
+				}
 				showWattingDialog();
 			} catch (MalformedURLException e) {
 				e.printStackTrace() ;

@@ -9,7 +9,7 @@
     <dimen name="bottom_pic_size">35dp</dimen>
     <dimen name="bottom_pic_height">32dp</dimen>
     <dimen name="bottom_banner_txt_size">14sp</dimen>
-    <dimen name="top_banner_txt_size">20sp</dimen>
+    <dimen name="top_banner_txt_size">18sp</dimen>
     <dimen name="top_tab_height">42dp</dimen>
     <dimen name="top_back_height">30dp</dimen>
     <dimen name="top_back_width">35dp</dimen>
