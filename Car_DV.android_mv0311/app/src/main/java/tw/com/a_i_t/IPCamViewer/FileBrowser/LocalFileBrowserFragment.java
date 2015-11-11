@@ -1,8 +1,10 @@
 package tw.com.a_i_t.IPCamViewer.FileBrowser ;
 
 import java.io.File ;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat ;
 import java.util.ArrayList ;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date ;
@@ -24,6 +26,7 @@ import android.content.Intent ;
 import android.net.Uri ;
 import android.os.AsyncTask ;
 import android.os.Bundle ;
+import android.text.format.Time;
 import android.util.Log ;
 import android.view.LayoutInflater ;
 import android.view.View ;
@@ -62,7 +65,11 @@ public class LocalFileBrowserFragment extends Fragment {
 	private Boolean isvideo = true;	/*video is default*/
 	private LoadFileListTask MyLoadFileListTask;
 	ListView fileListView,filePhotoListView;
-	
+	//add by john 2015.11.11
+	private static final int ONEDAYS=7;
+	private static final int TRIDDAYS=7;
+	private static final int SEVENDAYS=7;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState) ;
@@ -329,10 +336,27 @@ public class LocalFileBrowserFragment extends Fragment {
 				FileNode fileNode=null;
 				try {
 					fileNode = new FileNode(file.getPath(), format, (int) size, attr, time) ;
-					Log.i("LocalFileBrowserFragment", "file.getPath()="+file.getPath()+"---format="+format+" ---size"+size+"---attr="+attr+"---time="+time+"----file.lastModified();="+file.lastModified() );
+					//Log.i("LocalFileBrowserFragment", "file.getPath()="+file.getPath()+"   format="+format+"  size"+size+"   attr="+attr+"   time="+time+"    file.lastModified();="+file.lastModified() );
+//					SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//					String date = sDateFormat.format(new java.util.Date());
+//					Log.i("moop", " ;当前系统时间=="+date) ;
+					Calendar c   =   Calendar.getInstance();
+					Date   date   =   c.getTime();
 					fileNode.mModifiedTime =file.lastModified();
-					Log.i("moop", "\tfileList.add(fileNode) ;") ;
-
+					date.toLocaleString();
+					Log.i("moop", "当前系统时间---" + date.toLocaleString());
+					Log.i("moop", "文件创建时间---" + time);
+					Log.i("moop", "比较出来的时间=" + calculateTime(time)) ;
+					int calculate= Integer.parseInt(calculateTime(time));
+					if (calculate>=0&&calculate<1){
+						Log.i("moop", "一天内");
+					}else if(calculate>=1&&calculate<3){
+						Log.i("moop", "一天前");
+					}else if(calculate>=3&&calculate<7){
+						Log.i("moop", "三天前");
+					}else {
+						Log.i("moop", "七天前");
+					}
 				} catch (ModelException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace() ;
@@ -414,7 +438,24 @@ public class LocalFileBrowserFragment extends Fragment {
 	
 	private boolean mWaitingState = false ;
 	private boolean mWaitingVisible = false ;
-
+	/*获取当前系统时间*/
+	public  String calculateTime(String time){
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Time localTime = new Time("Asia/Hong_Kong");
+		localTime.setToNow();
+		Log.i("moop","24小时时间="+localTime.format("%Y-%m-%d %H:%M:%S"));
+		String bjtime = null;
+		try{
+			Date d1=df.parse(localTime.format("%Y-%m-%d %H:%M:%S"));
+			Date d2=df.parse("2015-11-04 16:44");
+			long diff = d1.getTime() - d2.getTime();
+			long days = diff / (1000 * 60 * 60 * 24);
+			bjtime= String.valueOf(days);
+		}catch(Exception e){
+			Log.i("moop","Exception"+e);
+		}
+		return bjtime;
+	}
 	/*删除操作*/
 	private void deleteFile(){
 		FileNode fileNode = mSelectedFiles.remove(0);
