@@ -43,20 +43,25 @@ import android.widget.TextView ;
 public class LocalFileBrowserFragment extends Fragment {
 
 	private ArrayList<FileNode> mFileList = new ArrayList<FileNode>() ;
+	private ArrayList<FileNode> mPhotoFilelist = new ArrayList<FileNode>() ;
 	private List<FileNode> mSelectedFiles = new LinkedList<FileNode>() ;
 	private final String TAG="LocalFileBrowserFragment";
 	private LocalFileListAdapter mFileListAdapter ;
+	private LocalFileListAdapter mPhotoFileListAdapter ;
 	//private TextView mFileListTitle ;
 	private LinearLayout mOpenButton ;
 	private LinearLayout mDeleteButton ;
 	private LinearLayout mSharedButton ;
 	private LinearLayout btn_video;
 	private LinearLayout btn_photo;
+	private boolean isfirstclickphotobtn=true;
+	private boolean isfirstclickvideobtn=true;
 	private ImageView btn_back;
 	//private TextView mPhontoTxt;
 	//private TextView mVideoTxt;
 	private Boolean isvideo = true;	/*video is default*/
 	private LoadFileListTask MyLoadFileListTask;
+	ListView fileListView,filePhotoListView;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -69,6 +74,7 @@ public class LocalFileBrowserFragment extends Fragment {
 		View view = inflater.inflate(R.layout.activity_local_file_list, container, false) ;
 
 		mFileListAdapter = new LocalFileListAdapter(inflater, mFileList) ;
+		mPhotoFileListAdapter = new LocalFileListAdapter(inflater, mPhotoFilelist) ;
 
 		//mFileListTitle = (TextView) view.findViewById(R.id.browserTitle) ;
 		String fileBrowser = getActivity().getResources().getString(R.string.label_file_browser) ;
@@ -76,11 +82,12 @@ public class LocalFileBrowserFragment extends Fragment {
 		
 
 		
-		ListView fileListView = (ListView) view.findViewById(R.id.browserList) ;
+		 fileListView = (ListView) view.findViewById(R.id.browserList) ;
+		filePhotoListView = (ListView) view.findViewById(R.id.browserPhotoList) ;
 
 		fileListView.setAdapter(mFileListAdapter) ;
+		filePhotoListView.setAdapter(mPhotoFileListAdapter) ;
 		fileListView.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -117,16 +124,60 @@ public class LocalFileBrowserFragment extends Fragment {
 				}
 			}
 		}) ;
+		filePhotoListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+				final FileNode fileNode = mPhotoFilelist.get(position) ;
+				if (fileNode != null) {
+
+					ViewTag viewTag = (ViewTag) view.getTag() ;
+					if (viewTag != null) {
+
+						FileNode file = viewTag.mFileNode ;
+
+						CheckedTextView checkBox = (CheckedTextView) view.findViewById(R.id.fileListCheckBox) ;
+						checkBox.setChecked(!checkBox.isChecked()) ;
+						file.mSelected = checkBox.isChecked() ;
+
+						if (file.mSelected)
+							mSelectedFiles.add(file) ;
+						else
+							mSelectedFiles.remove(file) ;
+
+						if (mSelectedFiles.size() == 1) {
+							mOpenButton.setEnabled(true) ;
+						} else {
+							mOpenButton.setEnabled(false) ;
+						}
+
+						if (mSelectedFiles.size() > 0) {
+							mDeleteButton.setEnabled(true) ;
+						} else {
+							mDeleteButton.setEnabled(false) ;
+						}
+
+					}
+				}
+			}
+		}) ;
 		btn_video = (LinearLayout) view.findViewById(R.id.btn_video) ;
 		btn_video.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
+				filePhotoListView.setVisibility(View.GONE);
+				fileListView.setVisibility(View.VISIBLE);
 				isvideo = true;
+//				mSelectedFiles.clear();
+				fileListView.setAdapter(mFileListAdapter);
+				mFileListAdapter.notifyDataSetChanged();
+				mFileListAdapter.notifyDataSetChanged();
+				Log.i("moop", "视频点击");
 				btn_video.setEnabled(false);
 				btn_photo.setEnabled(true);
 				//mPhontoTxt.setEnabled(true);
 				//mVideoTxt.setEnabled(false);
-				new LoadFileListTask().execute() ;
+
 			}
 		});
 		btn_video.setEnabled(false);
@@ -134,12 +185,24 @@ public class LocalFileBrowserFragment extends Fragment {
 		btn_photo.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
+//				mSelectedFiles.clear();
+				filePhotoListView.setAdapter(mPhotoFileListAdapter);
+				mPhotoFileListAdapter.notifyDataSetChanged();
+				mFileListAdapter.notifyDataSetChanged();
+
+				Log.i("moop", "图片点击");
+
+				if (isfirstclickphotobtn){
+					new LoadFileListTask().execute() ;
+					isfirstclickphotobtn=false;
+				}
+				filePhotoListView.setVisibility(View.VISIBLE);
+				fileListView.setVisibility(View.GONE);
 				isvideo = false;
 				btn_video.setEnabled(true);
 				btn_photo.setEnabled(false);
 				//mPhontoTxt.setEnabled(false);
 				//mVideoTxt.setEnabled(true);
-				new LoadFileListTask().execute() ;
 			}
 		});
 		/*
@@ -179,27 +242,20 @@ public class LocalFileBrowserFragment extends Fragment {
 				mDeleteButton.setEnabled(false) ;
 			}
 		}) ;
-
+		/*删除方法*/
 		mDeleteButton = (LinearLayout) view.findViewById(R.id.browserDeleteButton) ;
 		mDeleteButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				
-				for (FileNode fileNode : mSelectedFiles) {
-					
-					File file = new File(fileNode.mName) ;
-					
-					file.delete() ;
-				}
-				new LoadFileListTask().execute() ;
+				deleteFile();
+			//	new LoadFileListTask().execute() ;
 			}
 		}) ;
 		mSharedButton = (LinearLayout) view.findViewById(R.id.browserSharedButton) ;
 		mSharedButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
 				if (mSelectedFiles.size() == 1) {
 					FileNode fileNode = mSelectedFiles.get(0) ;
 					File file = new File(fileNode.mName) ;
@@ -225,10 +281,7 @@ public class LocalFileBrowserFragment extends Fragment {
 		protected void onPreExecute() {
 
 			setWaitingState(true) ;
-			mFileList.clear() ;
-			mFileListAdapter.notifyDataSetChanged() ;
 
-			mSelectedFiles.clear() ;
 			mDeleteButton.setEnabled(false) ;
 			mOpenButton.setEnabled(false) ;
 
@@ -248,8 +301,10 @@ public class LocalFileBrowserFragment extends Fragment {
 			Log.i(TAG, "list file size="+files.length) ;
 
 			ArrayList<FileNode> fileList = new ArrayList<FileNode>() ;
-
+			ArrayList<FileNode> photofileList = new ArrayList<FileNode>() ;
+			int i=0;
 			for (File file : files) {
+				i++;
 				String name = file.getName() ;
 				String ext = name.substring(name.lastIndexOf(".") + 1) ;
 				String attr = (file.canRead() ? "r" : "") + (file.canWrite() ? "w" : "") ;
@@ -262,17 +317,38 @@ public class LocalFileBrowserFragment extends Fragment {
 
 				if (ext.equalsIgnoreCase("jpeg") || ext.equalsIgnoreCase("jpg")) {
 					format = FileNode.Format.jpeg;
+					Log.i("moop", "264format = FileNode.Format.jpeg;") ;
 				} else if (ext.equalsIgnoreCase("avi")) {
 					format = FileNode.Format.avi;
+					Log.i("moop", "267format = FileNode.Format.avi;") ;
 				} else if (ext.equalsIgnoreCase("mov") || ext.equalsIgnoreCase("3gp")) {
 					format = FileNode.Format.mov;
+					Log.i("moop", "270format = FileNode.Format.mov;") ;
 				}
+//			//amend by john 2015.11.10
+				FileNode fileNode=null;
+				try {
+					fileNode = new FileNode(file.getPath(), format, (int) size, attr, time) ;
+					Log.i("LocalFileBrowserFragment", "file.getPath()="+file.getPath()+"---format="+format+" ---size"+size+"---attr="+attr+"---time="+time+"----file.lastModified();="+file.lastModified() );
+					fileNode.mModifiedTime =file.lastModified();
+					Log.i("moop", "\tfileList.add(fileNode) ;") ;
 
+				} catch (ModelException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace() ;
+				}
 				if (format != FileNode.Format.all) {
-					if(!isvideo)
+//					if (isvideo){
+//						if (format !=FileNode.Format.jpeg||format ==FileNode.Format.jpeg){
+//							continue;
+//						}
+//					}
+					if(isvideo)
 					{
 						if(format !=FileNode.Format.jpeg)
 						{
+							fileList.add(fileNode) ;
+							Log.i("moop", "图片278format !=FileNode.Format.jpeg") ;
 							continue;
 						}
 					}
@@ -280,63 +356,78 @@ public class LocalFileBrowserFragment extends Fragment {
 					{
 						if(format ==FileNode.Format.jpeg)
 						{
+							photofileList.add(fileNode);
+							Log.i("moop", "”视频“286format ==FileNode.Format.jpeg") ;
 							continue;
 						}
 					}
-					try {
-						FileNode fileNode = new FileNode(file.getPath(), format, (int) size, attr, time) ;
-						fileNode.mModifiedTime =file.lastModified(); 
-						fileList.add(fileNode) ;
-						
-					} catch (ModelException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace() ;
-					}
+
 				}
 			}
+			Log.i("moop", "i=" + i);
 			Log.i("LocalFileBrowserFragment", "file parsed") ;
-			
-			Collections.sort(fileList,new Comparator<FileNode>(){
-				@Override
-				public int compare(FileNode arg0, FileNode arg1) {
-					// TODO Auto-generated method stub
-					//Log.d("LocalFileBrowserFragment",arg0. + "  - "+ arg1.mModifiedTime);
-					long ret = arg0.mModifiedTime - arg1.mModifiedTime;
-					if( ret < 0)
-					{
-						return 1;
+
+			/*根据下载到本地的时间有近到远进行排序*/
+			Collections.sort(fileList, new Comparator<FileNode>() {
+						@Override
+						public int compare(FileNode arg0, FileNode arg1) {
+							// TODO Auto-generated method stub
+							//Log.d("LocalFileBrowserFragment",arg0. + "  - "+ arg1.mModifiedTime);
+							long ret = arg0.mModifiedTime - arg1.mModifiedTime;
+							if (ret < 0) {
+								return 1;
+							} else if (ret > 0) {
+								return -1;
+							} else {
+								return 0;
+							}
+							//return (int) (arg0.mModifiedTime - arg1.mModifiedTime);
+
+						}
 					}
-					else if(ret >0)
-					{
-						return -1;
-					}
-					else
-					{
-						return 0;
-					}
-					//return (int) (arg0.mModifiedTime - arg1.mModifiedTime);
-					
-				}}
-				);
-				
-			return fileList ;
+			);
+			Log.i("moop1", "fileList.size==;" + fileList.size()) ;
+			if (isvideo){
+				return fileList;
+			}else {
+				return photofileList;
+			}
 		}
 
 		@Override
 		protected void onPostExecute(ArrayList<FileNode> result) {
 
-			Log.i("LocalFileBrowserFragment", "post exec") ;
+			Log.i("LocalFileBrowserFragment", "post exec");
 
-			
-			mFileList.addAll(result) ;
-			mFileListAdapter.notifyDataSetChanged() ;
-			setWaitingState(false) ;
+			Log.i("moop", "mFileList.addAll(result) ;");
+			if (isvideo){
+				mFileList.addAll(result) ;
+			}else {
+				mPhotoFilelist.addAll(result);
+			}
+			mFileListAdapter.notifyDataSetChanged();
+			mPhotoFileListAdapter.notifyDataSetChanged();
+			setWaitingState(false);
 			super.onPostExecute(result) ;
 		}
 	}
 	
 	private boolean mWaitingState = false ;
 	private boolean mWaitingVisible = false ;
+
+	/*删除操作*/
+	private void deleteFile(){
+		FileNode fileNode = mSelectedFiles.remove(0);
+		File file = new File(fileNode.mName);
+		file.delete();
+		mPhotoFilelist.remove(fileNode);
+		mFileList.remove(fileNode);
+		mPhotoFileListAdapter.notifyDataSetChanged();
+		mFileListAdapter.notifyDataSetChanged();
+		if (mSelectedFiles.size()>0){
+			deleteFile();
+		}
+	}
 
 	private void setWaitingState(boolean waiting) {
 
@@ -368,26 +459,34 @@ public class LocalFileBrowserFragment extends Fragment {
 
 	private void restoreWaitingIndicator() {
 
-		mWaitingVisible = true ;
+		mWaitingVisible = true;
 		setWaitingIndicator(mWaitingState, true) ;
 	}
-
+	@Override
+	public void onDestroy() {
+		super.onPause() ;
+		Log.i("moop","onDestroy");
+		clearWaitingIndicator() ;
+		mFileList.clear() ;
+		mPhotoFilelist.clear();
+		mFileListAdapter.notifyDataSetChanged() ;
+		mPhotoFileListAdapter.notifyDataSetChanged();
+	}
 	@Override
 	public void onResume() {
-		
 		restoreWaitingIndicator() ;
 		//new LoadFileListTask().executeOnExecutor(AsyncTask.SERIAL_EXECUTOR) ;
 		MyLoadFileListTask = new LoadFileListTask();
 		MyLoadFileListTask.execute();
 		super.onResume() ;
 	}
-	
+
 	@Override
 	public void onPause() {
-		clearWaitingIndicator() ;
-		mFileList.clear() ;
-		mFileListAdapter.notifyDataSetChanged() ;
-		
 		super.onPause() ;
+	}
+	@Override
+	public void onStop(){
+		super.onStop();
 	}
 }

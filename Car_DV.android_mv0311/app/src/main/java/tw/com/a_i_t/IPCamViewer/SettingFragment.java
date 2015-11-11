@@ -299,7 +299,8 @@ public class SettingFragment extends Fragment {
 		
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		int v = pref.getInt(MainActivity.g_version_check,MainActivity.G_UNKNOWN_VERSION);
-		if(v != MainActivity.G_NEW_VERSION)
+//		if(v != MainActivity.G_NEW_VERSION)
+		if(v < MainActivity.G_NEW_VERSION)
 		{
 			view.findViewById(R.id.tmp).setVisibility(View.GONE);
 			settings_TV_OUT.setVisibility(View.GONE);

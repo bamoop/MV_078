@@ -402,14 +402,14 @@ public class FunctionListFragment extends Fragment {
 			String gateway = MainActivity.intToIp(dhcpInfo.gateway) ;
 			// set http push as default for streaming
 			liveStreamUrl = "http://" + gateway + MjpegPlayerFragment.DEFAULT_MJPEG_PUSH_URL ;
-			Log.i("moop","请求属2"+liveStreamUrl);
+//			liveStreamUrl = null;
 			if (result != null) {
 				String[] lines;
 				try {
 					String[] lines_temp = result.split("Camera.Preview.RTSP.av=");
 					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
 					int av = Integer.valueOf(lines[0]);
-					Log.i("moop","请求属4"+av);
+					Log.i("moop","请求属4--"+av);
 					switch (av) {
 					case 1:	// liveRTSP/av1 for RTSP MJPEG+AAC
 						liveStreamUrl = "rtsp://" + gateway + MjpegPlayerFragment.DEFAULT_RTSP_MJPEG_AAC_URL ;

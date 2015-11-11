@@ -1193,7 +1193,6 @@ public class FileBrowserFragment extends Fragment {
 					mFileListBACKVIDEOAdapter.notifyDataSetChanged();
 					mProgDlg.setMessage("Can not delete " + fileNode.mName);
 					fileNode.mSelected = false ;
-
 				}
 				else
 				{
