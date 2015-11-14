@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<TextView
+    android:id="@+id/tv_local_expandName"
+    android:layout_width="wrap_content"
+    android:layout_height="50dp"
+    android:text="Name"
+    android:gravity="center"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true"
+    android:layout_centerInParent="true"
+    />
+    <TextView
+        android:id="@+id/tv_local_expandPosition"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="16"
+        android:gravity="center"
+        android:layout_marginLeft="100dp"
+        android:layout_toRightOf="@+id/tv_local_expandName"
+        android:layout_centerVertical="true"
+
+        />
+</RelativeLayout><!-- From: file:/C:/Users/bzmoop/Desktop/xinc/app/src/main/res/layout/local_expand_parent.xml -->

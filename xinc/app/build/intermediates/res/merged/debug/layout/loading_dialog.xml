@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?><LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:orientation="vertical" >
+            <!-- 标题头 -->
+			 <LinearLayout
+			  android:orientation="vertical" 
+			  android:gravity="center"
+			  android:layout_width="250dp"
+              android:layout_height="@dimen/dialog_title_height"
+              android:background="@drawable/dialog_title_bg" >
+			    <TextView android:id="@+id/title_txt"  android:text="@string/connecting_to_camera" style="@style/title_text" />
+    		</LinearLayout>
+    		<!-- 提示语 -->
+    		<!--  android:layoutAnimation="@anim/loading_animation" -->
+	   	    <LinearLayout android:orientation="vertical"
+	   	        	android:gravity="center" android:layout_width="250dp"
+	   	        	android:layout_height="150dp"
+	   	        	android:background="@android:color/white"
+	   	        >
+				<ProgressBar
+	             android:id="@+id/loadingProgressBar"
+	             android:indeterminateDrawable="@anim/image_progress"
+	             android:layout_width="50dp"
+	             android:layout_height="50dp"
+	              android:layout_gravity="center"
+	             />
+			    <!-- <ImageView android:layout_height="50dp" android:layout_width="50dp" android:src="@drawable/loading" /> -->
+			    <TextView android:id="@+id/content_txt"  android:layout_marginTop="20dp" android:textSize="@dimen/dialog_content_txt_size" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/loading" style="@style/title_txt" />
+    		</LinearLayout>
+</LinearLayout>
+<!-- From: file:/C:/Users/bzmoop/Desktop/xinc/app/src/main/res/layout/loading_dialog.xml -->

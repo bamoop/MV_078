@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:MyBanner="http://schemas.android.com/apk/res/tw.com.a_i_t.IPCamViewer" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/transparent">
+    <tw.com.a_i_t.IPCamViewer.MyBanner android:layout_marginTop="0dp" android:layout_width="match_parent"
+    android:layout_height="@dimen/top_banner_height" MyBanner:text="@string/Timesettings" />
+    <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="150dp"
+       android:layout_gravity="center"
+       android:layout_margin="25dp"
+       android:background="@drawable/setting_layout_shap"
+       android:orientation="vertical" >
+    <TextView 
+        android:gravity="center_vertical|left"
+        android:layout_width="wrap_content"
+        android:text="@string/SyncDevice"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content" 
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:background="@android:color/transparent" 
+        android:layout_marginLeft="35dp"
+         />
+    <Button android:id="@+id/synctime_btn" android:layout_width="fill_parent" 
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:textColor="@android:color/white"
+        android:text="@string/SyncDeviceBTN" 
+        android:background="@drawable/setting_time_sync_btn_bg" 
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_gravity="center_vertical" />
+	</LinearLayout>
+</LinearLayout>
