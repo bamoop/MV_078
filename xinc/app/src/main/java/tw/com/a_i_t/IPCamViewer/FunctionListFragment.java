@@ -424,12 +424,12 @@ public class FunctionListFragment extends Fragment {
 					Log.i("moop","请求属3"+liveStreamUrl);
 				} catch (Exception e) {/* not match, for firmware of MJPEG only */}
 			}
+			else Log.i("moop","没有拿到视频属性");
 			Fragment fragment = StreamPlayerFragment.newInstance(liveStreamUrl) ;
 			MainActivity.addFragment(FunctionListFragment.this, fragment) ;
 			super.onPostExecute(result) ;
 		}
 	}
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -475,7 +475,6 @@ public class FunctionListFragment extends Fragment {
 				Log.d("Button_main","ONCLICK");
 				boolean engineerMode = ((MainActivity) getActivity()).mEngineerMode ;
 				if (engineerMode) {
-
 					MainActivity.addFragment(FunctionListFragment.this, new ViewerSettingFragment()) ;
 				} else {
 					

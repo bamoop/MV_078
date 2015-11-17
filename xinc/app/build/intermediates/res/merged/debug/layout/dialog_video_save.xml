@@ -26,4 +26,4 @@
 			    <Button android:id="@+id/ok_btn" style="@style/title_txt" android:text="@string/label_ok" android:layout_width="@dimen/dialog_wifi_ok_width" android:layout_height="wrap_content" />
     		</LinearLayout>
 </LinearLayout>
-<!-- From: file:/C:/Users/bzmoop/Desktop/xinc/app/src/main/res/layout/dialog_video_save.xml -->
+<!-- From: file:/E:/john_work/xinc/app/src/main/res/layout/dialog_video_save.xml -->

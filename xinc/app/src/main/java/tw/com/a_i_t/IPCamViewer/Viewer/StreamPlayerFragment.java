@@ -43,6 +43,7 @@ import android.content.IntentFilter ;
 import android.content.SharedPreferences ;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration ;
+import android.graphics.Color;
 import android.graphics.ImageFormat ;
 import android.graphics.PixelFormat ;
 import android.media.AudioManager ;
@@ -88,21 +89,21 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	private ImageButton mSoundControlButton;
 	private ImageButton mSoundControlButtonDisable;
 	private AudioManager audioManager;
-    private static Date mCameraTime ;
-    private static long mCameraUptimeMills ;
-    private String mTime;
-    public static String mRecordStatus="";
-    public static String mRecordmode="";
-    private boolean mRecordthread = false;
-    
+	private static Date mCameraTime ;
+	private static long mCameraUptimeMills ;
+	private String mTime;
+	public static String mRecordStatus="";
+	public static String mRecordmode="";
+	private boolean mRecordthread = false;
+
 	private int mB = -1;
 	private int mlocalB=0;
 	private static final int MSG_SUCCESS = 1;
 	private static final int MSG_FAIL = 2;
 	private static final int MSG_DESTORY = 3;
 	private static final int MSG_PLYDISSMISS=4;
-	
-	
+
+
 	private static final int SURFACE_BEST_FIT = 0 ;
 	private static final int SURFACE_FIT_HORIZONTAL = 1 ;
 	private static final int SURFACE_FIT_VERTICAL = 2 ;
@@ -124,7 +125,7 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	private int mVideoVisibleWidth ;
 	private int mSarNum ;
 	private int mSarDen ;
-	
+
 	private boolean mPlaying ;
 	ProgressDialog mProgressDialog=null ;
 	private String mMediaUrl ;
@@ -132,7 +133,7 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	private static final int MSG_INVISIABLE_RECORD_BTN =2;
 	private static final int MSG_REFRESH_MUTE_STATE =3;
 	private static final int button_fresh_delaytime = 500; //ms
-	private static final String KEY_MEDIA_URL = "mediaUrl" ;
+	private static final String KEY_MEDIA_URL = "mediaUrl";
 	private static final String MuteOn ="MuteOn";
 	private static final String MuteOff ="MuteOff";
 	private TimeThread timestampthread;
@@ -145,7 +146,7 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	Button btn_changemedia;
 	private Boolean isMideaURL=false;//默认是前路视频，第一次点击换后路
 	private Boolean isfirstOpenView=false;
-/*用来记录handle延时发送的时间，防止延时发送产生重复的指令*/
+	/*用来记录handle延时发送的时间，防止延时发送产生重复的指令*/
 	Timer timer=new Timer();
 	public  void isVISIBLEs(){
 		countTime=0;
@@ -178,55 +179,54 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 						mHandlerUI.sendEmptyMessageDelayed(MSG_INVISIABLE_RECORD_BTN, button_fresh_delaytime);
 						isVISIBLEs();
 					}
-						break;
+					break;
 				case MSG_INVISIABLE_RECORD_BTN:
 					if (isINVISIABLE) {
 						cameraRecordButton.setVisibility(View.INVISIBLE);
 						mHandlerUI.sendEmptyMessageDelayed(MSG_VISIABLE_RECORD_BTN, button_fresh_delaytime);
 						isINVISIABLEs();}
-						break;
+					break;
 				case MSG_REFRESH_MUTE_STATE:
-						if(mMuteStatus.equals(MuteOff))
-						{
-							mSoundControlButton.setVisibility(View.VISIBLE);
-							mSoundControlButtonDisable.setVisibility(View.GONE);
-						}
-						else if(mMuteStatus.equals(MuteOn))
-						{
-							mSoundControlButton.setVisibility(View.GONE);
-							mSoundControlButtonDisable.setVisibility(View.VISIBLE);
-						}
-						else
-						{
-							mSoundControlButton.setVisibility(View.VISIBLE);
-							mSoundControlButtonDisable.setVisibility(View.GONE);
-						}
-						
-						break;
+					if(mMuteStatus.equals(MuteOff))
+					{
+						mSoundControlButton.setVisibility(View.VISIBLE);
+						mSoundControlButtonDisable.setVisibility(View.GONE);
+					}
+					else if(mMuteStatus.equals(MuteOn))
+					{
+						mSoundControlButton.setVisibility(View.GONE);
+						mSoundControlButtonDisable.setVisibility(View.VISIBLE);
+					}
+					else
+					{
+						mSoundControlButton.setVisibility(View.VISIBLE);
+						mSoundControlButtonDisable.setVisibility(View.GONE);
+					}
+					break;
 				default:
 					break;
 			}
 		}
 	};
-	
+
 	public static StreamPlayerFragment newInstance(String mediaUrl) {
 		StreamPlayerFragment fragment = new StreamPlayerFragment() ;
-		
+
 		Bundle args = new Bundle() ;
 		args.putString(KEY_MEDIA_URL, mediaUrl) ;
 		fragment.setArguments(args) ;
 
 		return fragment ;
 	}
-	
-   public String checkTime(int i)
+
+	public String checkTime(int i)
 	{
-	    	mTime = Integer.toString(i);
-	    	if (i<10) 
-	    	{
-	    		mTime = "0" + mTime;
-	    	}
-	    	return mTime;
+		mTime = Integer.toString(i);
+		if (i<10)
+		{
+			mTime = "0" + mTime;
+		}
+		return mTime;
 	}
 	//yining
 	private class GetTimeStamp extends AsyncTask<URL, Integer, String> {
@@ -238,16 +238,16 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 		@Override
 		protected String doInBackground(URL... params) {
 			URL url = CameraCommand.commandTimeStampUrl() ;
-			if (url != null) {		
+			if (url != null) {
 				return CameraCommand.sendRequest(url) ;
 			}
-			
+
 			return null ;
 		}
-			@Override
+		@Override
 		protected void onPostExecute(String result) {
 			Activity activity = getActivity() ;
-			//Log.d(TAG, "TimeStamp property "+result) ;
+//Log.d(TAG, "TimeStamp property "+result) ;
 			if (result != null) {
 				int year = 2015;
 				int month = 1;
@@ -255,10 +255,10 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 				int hour = 1;
 				int minute = 1;
 				int second = 1;
-				String[] lines;		
+				String[] lines;
 				String[] lines_temp = result.split("Camera.Preview.MJPEG.TimeStamp.year=");
 				if(null != lines_temp && 1 < lines_temp.length)
-				{	
+				{
 					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
 					year = Integer.valueOf(lines[0]);
 				}
@@ -266,48 +266,48 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 				if(null != lines_temp && 1 < lines_temp.length)
 				{
 					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
-					month = Integer.valueOf(lines[0]); 
+					month = Integer.valueOf(lines[0]);
 				}
 				lines_temp = result.split("Camera.Preview.MJPEG.TimeStamp.day=");
 				if(null != lines_temp && 1 < lines_temp.length)
 				{
 					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
-					day = Integer.valueOf(lines[0]); 
+					day = Integer.valueOf(lines[0]);
 				}
 				lines_temp = result.split("Camera.Preview.MJPEG.TimeStamp.hour=");
 				if(null != lines_temp && 1 < lines_temp.length)
 				{
 					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
-					hour= Integer.valueOf(lines[0]); 
+					hour= Integer.valueOf(lines[0]);
 				}
 				lines_temp = result.split("Camera.Preview.MJPEG.TimeStamp.minute=");
 				if(null != lines_temp && 1 < lines_temp.length)
 				{
 					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
-					minute = Integer.valueOf(lines[0]); 
+					minute = Integer.valueOf(lines[0]);
 				}
 				lines_temp = result.split("Camera.Preview.MJPEG.TimeStamp.second=");
 				if(null != lines_temp && 1 < lines_temp.length)
 				{
 					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
-					second = Integer.valueOf(lines[0]); 
+					second = Integer.valueOf(lines[0]);
 				}
-				SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.US);  
+				SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.US);
 				try {
-					String cameraUptimeStr = String.format("%04d-%02d-%02d %02d:%02d:%02d", 
+					String cameraUptimeStr = String.format("%04d-%02d-%02d %02d:%02d:%02d",
 							year, month, day, hour, minute, second) ;
-					mCameraTime = format.parse(cameraUptimeStr);  
-				    Log.i("GetTimeStamp", cameraUptimeStr);  
-				} catch (ParseException e) {  
-				    // TODO Auto-generated catch block  
-				    e.printStackTrace();  
+					mCameraTime = format.parse(cameraUptimeStr);
+					Log.i("GetTimeStamp", cameraUptimeStr);
+				} catch (ParseException e) {
+// TODO Auto-generated catch block  
+					e.printStackTrace();
 				}
 				mCameraUptimeMills = SystemClock.uptimeMillis() ;
 
 			}
 			else if (activity != null) {
 				Toast.makeText(activity, activity.getResources().getString(R.string.message_fail_get_info),
-						Toast.LENGTH_LONG).show() ;			
+						Toast.LENGTH_LONG).show() ;
 			}
 			setWaitingState(false) ;
 			setInputEnabled(true) ;
@@ -317,66 +317,66 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	}
 
 	private class GetRecordStatus extends AsyncTask<URL, Integer, String> {
-			@Override
-			protected void onPreExecute() {
-				setWaitingState(true) ;
-				super.onPreExecute() ;
+		@Override
+		protected void onPreExecute() {
+			setWaitingState(true) ;
+			super.onPreExecute() ;
+		}
+		@Override
+		protected String doInBackground(URL... params) {
+			URL url = CameraCommand.commandRecordStatusUrl() ;
+			if (url != null) {
+				return CameraCommand.sendRequest(url) ;
 			}
-			@Override
-			protected String doInBackground(URL... params) {
-				URL url = CameraCommand.commandRecordStatusUrl() ;
-				if (url != null) {
-					return CameraCommand.sendRequest(url) ;
-				}
-				return null ;
-			}
-			@Override
-			protected void onPostExecute(String result) {
-				Activity activity = getActivity() ;
-				//Log.d(TAG, "TimeStamp property "+result) ;
-				if (result != null) {
-					String[] lines;		
-					String[] lines_temp = result.split("Camera.Preview.MJPEG.status.record=");
-					if(null != lines_temp && 1 < lines_temp.length)
-					{
-						lines = lines_temp[1].split(System.getProperty("line.separator")) ;
-						if(lines!=null)
+			return null ;
+		}
+		@Override
+		protected void onPostExecute(String result) {
+			Activity activity = getActivity() ;
+//Log.d(TAG, "TimeStamp property "+result) ;
+			if (result != null) {
+				String[] lines;
+				String[] lines_temp = result.split("Camera.Preview.MJPEG.status.record=");
+				if(null != lines_temp && 1 < lines_temp.length)
+				{
+					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
+					if(lines!=null)
 						mRecordStatus = lines[0];
-						Log.d(TAG,"mMuteStatus="+mRecordmode);
-					}
-					lines_temp = result.split("Camera.Preview.MJPEG.status.mode=");
-					if(null != lines_temp && 1 < lines_temp.length)
-					{
-						lines = lines_temp[1].split(System.getProperty("line.separator")) ;
-						if(lines!=null)
+					Log.d(TAG,"mMuteStatus="+mRecordmode);
+				}
+				lines_temp = result.split("Camera.Preview.MJPEG.status.mode=");
+				if(null != lines_temp && 1 < lines_temp.length)
+				{
+					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
+					if(lines!=null)
 						mRecordmode = lines[0];
-						Log.d(TAG,"mMuteStatus="+mRecordmode);
-					}
-					lines_temp = result.split("Camera.Preview.MJPEG.status.mute=");
-					if(null != lines_temp && 1 < lines_temp.length)
-					{
-						lines = lines_temp[1].split(System.getProperty("line.separator")) ;
-						if(lines!=null)
+					Log.d(TAG,"mMuteStatus="+mRecordmode);
+				}
+				lines_temp = result.split("Camera.Preview.MJPEG.status.mute=");
+				if(null != lines_temp && 1 < lines_temp.length)
+				{
+					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
+					if(lines!=null)
 						mMuteStatus = lines[0];
-						Log.d(TAG,"mMuteStatus="+mMuteStatus);
-					}
-					
-					mHandlerUI.sendEmptyMessage(MSG_REFRESH_MUTE_STATE);
-					mRecordStatusHandler.sendMessage(mRecordStatusHandler.obtainMessage());
+					Log.d(TAG,"mMuteStatus="+mMuteStatus);
+				}
 
-				}
-				else if (activity != null) {
-					//Toast.makeText(activity, activity.getResources().getString(R.string.message_fail_get_info),
-							//Toast.LENGTH_LONG).show() ;			
-				}
-				setWaitingState(false) ;
-				setInputEnabled(true) ;
-				super.onPostExecute(result) ;
+				mHandlerUI.sendEmptyMessage(MSG_REFRESH_MUTE_STATE);
+				mRecordStatusHandler.sendMessage(mRecordStatusHandler.obtainMessage());
+
+			}
+			else if (activity != null) {
+//Toast.makeText(activity, activity.getResources().getString(R.string.message_fail_get_info),
+				//Toast.LENGTH_LONG).show() ;
+			}
+			setWaitingState(false) ;
+			setInputEnabled(true) ;
+			super.onPostExecute(result) ;
 
 		}
-	}	
-	
-	
+	}
+
+
 	private class CameraVideoRecord extends AsyncTask<URL, Integer, String> {
 		@Override
 		protected void onPreExecute() {
@@ -396,7 +396,7 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 		protected void onPostExecute(String result) {
 			Activity activity = getActivity() ;
 			Log.d(TAG, "Video record response:"+result) ;
-			if (result != null && result.equals("709\n?") != true) {			
+			if (result != null && result.equals("709\n?") != true) {
 				if (mRecordmode.equals("Videomode"))
 				{
 					if(mRecordStatus.equals("Recording"))
@@ -417,18 +417,18 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 				}
 			}
 			else if (activity != null) {
-				
+
 				Toast.makeText(activity,
 						activity.getResources().getString(R.string.message_command_failed),
-						Toast.LENGTH_SHORT).show() ;	
+						Toast.LENGTH_SHORT).show() ;
 			}
 			setWaitingState(false) ;
 			setInputEnabled(true) ;
 			super.onPostExecute(result) ;
 
+		}
 	}
-}	
-	
+
 	private class CameraSnapShot extends AsyncTask<URL, Integer, String> {
 		@Override
 		protected void onPreExecute() {
@@ -447,24 +447,23 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 		protected void onPostExecute(String result) {
 			Activity activity = getActivity() ;
 			Log.d(TAG, "snapshot response:"+result) ;
-			if (result != null && result.equals("709\n?") != true) {			
+			if (result != null && result.equals("709\n?") != true) {
 				Toast.makeText(activity,
 						activity.getResources().getString(R.string.message_command_camer),
 						Toast.LENGTH_SHORT).show() ;
 			}
 			else if (activity != null) {
-				
+
 				Toast.makeText(activity,
 						activity.getResources().getString(R.string.message_command_uncamer),
-						Toast.LENGTH_SHORT).show() ;	
+						Toast.LENGTH_SHORT).show() ;
 			}
 			setWaitingState(false) ;
 			setInputEnabled(true) ;
 			super.onPostExecute(result) ;
-
+		}
 	}
-}		
-	
+
 	private List<View> mViewList = new LinkedList<View>() ;
 	private void setInputEnabled(boolean enabled) {
 		for (View view : mViewList) {
@@ -475,29 +474,29 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	private boolean mWaitingVisible = false ;
 	private void setWaitingState(boolean waiting) {
 		if (mWaitingState != waiting) {
-		mWaitingState = waiting ;
+			mWaitingState = waiting ;
 			setWaitingIndicator(mWaitingState, mWaitingVisible) ;
 		}
 	}
 	private void setWaitingIndicator(boolean waiting, boolean visible) {
-	if (!visible)
+		if (!visible)
 			return ;
 		setInputEnabled(!waiting) ;
 		Activity activity = getActivity() ;
 		if (activity != null) {
 			activity.setProgressBarIndeterminate(true) ;
-		activity.setProgressBarIndeterminateVisibility(waiting) ;
+			activity.setProgressBarIndeterminateVisibility(waiting) ;
 		}
 	}
 	private void clearWaitingIndicator() {
-	mWaitingVisible = false ;
+		mWaitingVisible = false ;
 		setWaitingIndicator(false, true) ;
 	}
 	private void restoreWaitingIndicator() {
 		mWaitingVisible = true ;
 		setWaitingIndicator(mWaitingState, true) ;
 	}
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState) ;
@@ -505,12 +504,12 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 		if (url != null) {
 			new CameraCommand.SendRequest().execute(url) ;
 		}
-	    if (savedInstanceState == null) {
-	    	mRecordthread = true;
-	    	new GetTimeStamp().execute();
-	    	new GetRecordStatus().execute();
-	        // GET CAMERA STATE
-	    }
+		if (savedInstanceState == null) {
+			mRecordthread = true;
+			new GetTimeStamp().execute();
+			new GetRecordStatus().execute();
+// GET CAMERA STATE
+		}
 		mMediaUrl = getArguments().getString(KEY_MEDIA_URL) ;
 
 		IntentFilter filter = new IntentFilter() ;
@@ -521,11 +520,11 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 
 			mLibVLC = Util.getLibVlcInstance() ;
 
-//			Context context = VLCApplication.getAppContext() ;
-//			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context) ;
-//			int cacheSize = pref.getInt("network_caching_value", 1000) ;
+//       Context context = VLCApplication.getAppContext() ;
+//       SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context) ;
+//       int cacheSize = pref.getInt("network_caching_value", 1000) ;
 //
-//			mLibVLC.setNetworkCaching(cacheSize) ;
+//       mLibVLC.setNetworkCaching(cacheSize) ;
 
 			mRecording = false ;
 
@@ -538,15 +537,14 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 		em.addHandler(eventHandler) ;
 		timestampthread = new TimeThread();
 		timestampthread.start();
-		
+
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
+// TODO Auto-generated method stub
 				new GSetRandomValues().execute();
 			}
 		}).start();
-		
 	}
 
 	@Override
@@ -582,18 +580,18 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 			@Override
 			public void onClick(View v) {
 				new CameraSnapShot().execute();
-				/*
-				File path = MainActivity.getAppDir() ;
-				String fileName = MainActivity.getSnapshotFileName() ;
+/*
+            File path = MainActivity.getAppDir() ;
+            String fileName = MainActivity.getSnapshotFileName() ;
 
-				if (mLibVLC.takeSnapShot(path.getPath() + File.separator + fileName, mVideoWidth,
-						mVideoHeight)) {
-					long dateTaken = System.currentTimeMillis() ;
+            if (mLibVLC.takeSnapShot(path.getPath() + File.separator + fileName, mVideoWidth,
+                  mVideoHeight)) {
+               long dateTaken = System.currentTimeMillis() ;
 
-					MainActivity.addImageAsApplication(getActivity().getContentResolver(), fileName,
-							dateTaken, path.getPath(), fileName) ;
-				}
-				*/
+               MainActivity.addImageAsApplication(getActivity().getContentResolver(), fileName,
+                     dateTaken, path.getPath(), fileName) ;
+            }
+            */
 			}
 		}) ;
 
@@ -604,58 +602,53 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 		recordButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
+
 				new CameraVideoRecord().execute();
-				/*
-				if (!mRecording) {
+/*
+            if (!mRecording) {
+               Activity activity = getActivity() ;
+               if (activity == null)
+                  return ;
+               CustomDialog alertDialog = new CustomDialog.Builder(activity)
+               .setTitle(R.string.label_app_record)
+               .setCancelable(false)
+               .setMessage(R.string.message_save_video)
+               .setPositiveButton(R.string.label_ok,new DialogInterface.OnClickListener() {
+                  @Override
+                  public void onClick(DialogInterface arg0, int arg1) {
+                     // TODO Auto-generated method stub
+                     arg0.dismiss();
+                     File path = MainActivity.getAppDir() ;
+                     String fileName = MainActivity.getMJpegFileName() ;
+                     fileName = "APP_"+fileName;
+                     if (mLibVLC.toggleRecord(path.getPath(), fileName)) {
+                        mRecording = !mRecording ;
+                     }
+                     if (mRecording) {
+                        mRecordTxt.setText(recording) ;
+                     } else {
+                        mRecordTxt.setText(appRecord) ;
+                     }
+                  }
+               }).create();
+               alertDialog.show() ;
+            } else {
 
-					Activity activity = getActivity() ;
+               File path = MainActivity.getAppDir() ;
+               String fileName = MainActivity.getMJpegFileName() ;
+               fileName = "APP_"+fileName;
+               if (mLibVLC.toggleRecord(path.getPath(), fileName)) {
 
-					if (activity == null)
-						return ;
-					
-					CustomDialog alertDialog = new CustomDialog.Builder(activity)
-					.setTitle(R.string.label_app_record)
-					.setCancelable(false)
-					.setMessage(R.string.message_save_video)
-					.setPositiveButton(R.string.label_ok,new DialogInterface.OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface arg0, int arg1) {
-							// TODO Auto-generated method stub
-							arg0.dismiss();
-							File path = MainActivity.getAppDir() ;
-							String fileName = MainActivity.getMJpegFileName() ;
-							fileName = "APP_"+fileName;
-							if (mLibVLC.toggleRecord(path.getPath(), fileName)) {
+                  mRecording = !mRecording ;
+               }
 
-								mRecording = !mRecording ;
-							}
-							if (mRecording) {
-								mRecordTxt.setText(recording) ;
-							} else {
-								mRecordTxt.setText(appRecord) ;
-							}
-						}
-					}).create();
-					alertDialog.show() ;
-				} else {
-
-					File path = MainActivity.getAppDir() ;
-					String fileName = MainActivity.getMJpegFileName() ;
-					fileName = "APP_"+fileName;
-					if (mLibVLC.toggleRecord(path.getPath(), fileName)) {
-
-						mRecording = !mRecording ;
-					}
-
-					if (mRecording) {
-						mRecordTxt.setText(recording) ;
-					} else {
-						mRecordTxt.setText(appRecord) ;
-					}
-				}
-				*/
+               if (mRecording) {
+                  mRecordTxt.setText(recording) ;
+               } else {
+                  mRecordTxt.setText(appRecord) ;
+               }
+            }
+            */
 			}
 		}) ;
 
@@ -676,7 +669,7 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 			@Override
 			public void onClick(View v) {
 
-				//stop cameraRecord
+//stop cameraRecord
 				cameraRecordButton.setVisibility(View.VISIBLE);
 				new CameraVideoRecord().execute();
 			}
@@ -690,7 +683,7 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 
 			}
 		}) ;
-	
+
 		cameraSnapshotButton = (Button) view.findViewById(R.id.cameraSnapshotButton) ;
 		cameraSnapshotButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
@@ -705,13 +698,13 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 		cameraStopButton.setVisibility(View.GONE);
 		cameraSnapshotButton.setEnabled(true) ;
 		findCameraButton.setEnabled(true);
-		
+
 		mSoundControlButton = (ImageButton) view.findViewById(R.id.sound) ;
 		mSoundControlButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//ȡ��¼��
-				/*dufrense delete 2014-10-12		*/
+//ȡ��¼��
+/*dufrense delete 2014-10-12      */
 				URL url = CameraCommand.commandMuteOnUrl();
 				if (url != null) {
 					new CameraCommand.SendRequest().execute(url);
@@ -723,8 +716,8 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 		mSoundControlButtonDisable.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//����¼��
-				/*dufrense delete 2014-10-12*/
+//����¼��
+/*dufrense delete 2014-10-12*/
 
 				URL url = CameraCommand.commandMuteOffUrl();
 				if (url != null) {
@@ -739,22 +732,24 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 			@Override
 			public void onClick(View v) {
 				if (isMideaURL){
-					mLibVLC.stop();
 					mPlaying=false;
-					mMediaUrl="http://192.72.1.1/cgi-bin/liveMJPEG";
+					stop();
+//             mMediaUrl="http://192.72.1.1/cgi-bin/liveMJPEG";
+					//mMediaUrl="rtsp://192.72.1.1/liveRTSP/av1";
 					btn_changemedia.setText("后");
-					Log.i("moop","后");
-					isMideaURL=false;
+					Log.i("moop", "后");
+					playLiveStream();
+             isMideaURL=false;
 				}else {
 					mPlaying=false;
-					mLibVLC.stop();
-					mMediaUrl="http://192.72.1.1/cgi-bin/li";
+					stop();
+					//mMediaUrl="rtsp://192.72.1.1/liveRTSP/av1";
 					btn_changemedia.setText("前");
 					Log.i("moop", "前");
-					isMideaURL=true;
+					playLiveStream();
+             isMideaURL=true;
 				}
-//				play(MainActivity.sConnectionDelay);
-				playLiveStream();
+//          play(MainActivity.sConnectionDelay);
 			}
 		});
 
@@ -767,14 +762,14 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	@Override
 	public void onPause() {
 		super.onPause();
-
 		stop() ;
-		
+
 		mSurface.setKeepScreenOn(false) ;
 	}
 
 	@Override
 	public void onStop() {
+		Log.i("moop","onResume");
 		super.onStop() ;
 	}
 
@@ -790,17 +785,16 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 		EventHandler em = EventHandler.getInstance() ;
 		em.removeHandler(eventHandler) ;
 		mRecordthread = false;
-		
+
 	}
-	
+
 	private void stop() {
-		
+
 		if (mProgressDialog != null && mProgressDialog.isShowing()) {
-			
+
 			mProgressDialog.dismiss() ;
 			mProgressDialog = null ;
 		}
-		
 		if (mPlaying == true) {
 			mPlaying = false ;
 			mLibVLC.stop() ;
@@ -810,11 +804,11 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	public void showwattingDialog()
 	{
 		Activity activity = getActivity() ;
-if (mProgressDialog==null){
-	Log.i("moop", "747" );
-		mProgressDialog = new ProgressDialog(activity) ;
-		mProgressDialog.setCancelable(false) ;
-}
+		if (mProgressDialog==null){
+			Log.i("moop", "747" );
+			mProgressDialog = new ProgressDialog(activity) ;
+			mProgressDialog.setCancelable(false) ;
+		}
 		LayoutInflater layoutInflater = LayoutInflater.from(activity);
 		View v = layoutInflater.inflate(R.layout.loading_dialog, null);
 		mProgressDialog.show() ;
@@ -829,50 +823,49 @@ if (mProgressDialog==null){
 			mProgressDialog = null ;
 		}
 	}
-	
+
 	public void play(int connectionDelay) {
 		Activity activity = getActivity() ;
 		if (activity != null) {
-			//mProgressDialog.setTitle("Connecting to Camera") ;
+//mProgressDialog.setTitle("Connecting to Camera") ;
 			showwattingDialog();
-			Handler handler = new Handler(); 
-		    handler.postDelayed(new Runnable() { 
-		         public void run() { 
-		        	if (mPlaying == false && mLibVLC != null && mRecordmode.equals("Videomode"))
-		        	{
-		        		mPlaying = true ;
+			Handler handler = new Handler();
+			handler.postDelayed(new Runnable() {
+				public void run() {
+					if (mPlaying == false && mLibVLC != null && mRecordmode.equals("Videomode"))
+					{
+						mPlaying = true ;
 						mLibVLC.playMRL(mMediaUrl) ;
-						Log.i("moop", mMediaUrl);
+						Log.i("moop", "地址" + mMediaUrl);
 						mEndReached = false ;
-		        	}
-		        	if (mProgressDialog != null && mProgressDialog.isShowing()) {
-//						Message msg =  mHandler_ui.obtainMessage();
-//						msg.what = MSG_PLYDISSMISS;
-//						mHandler_ui.sendMessage(msg);
+					}
+					if (mProgressDialog != null && mProgressDialog.isShowing()) {
+//                Message msg =  mHandler_ui.obtainMessage();
+//                msg.what = MSG_PLYDISSMISS;
+//                mHandler_ui.sendMessage(msg);
 						if (!isfirstOpenView){
-						mHandler_ui.sendEmptyMessageDelayed(MSG_PLYDISSMISS, 1800);
+							mHandler_ui.sendEmptyMessageDelayed(MSG_PLYDISSMISS, 1800);
 						}
-						Log.i("moop", mMediaUrl);
-//		        		mProgressDialog = null ;
-		        	}
-		         } 
-		    }, connectionDelay) ;
-		}		
+//                Log.i("moop", mMediaUrl);
+//                  mProgressDialog = null ;
+					}
+				}
+			}, connectionDelay) ;
+		}
 	}
-	
+
 	private void playLiveStream() {
-		
+
 		play(MainActivity.sConnectionDelay) ;
 		Log.i("moop", " playLiveStream");
 	}
-	
+
 
 	@Override
 	public void onResume() {
 		super.onResume() ;
-
+		Log.i("moop","onResume");
 		playLiveStream() ;
-		
 		mSurface.setKeepScreenOn(true) ;
 	}
 
@@ -894,11 +887,11 @@ if (mProgressDialog==null){
 
 	@Override
 	public void setSurfaceSize(int width, int height, int visible_width, int visible_height, int sar_num,
-			int sar_den) {
+							   int sar_den) {
 		if (width * height == 0)
 			return ;
 
-		// store video size
+// store video size
 		mVideoHeight = height ;
 		mVideoWidth = width ;
 		mVideoVisibleHeight = visible_height ;
@@ -918,30 +911,30 @@ if (mProgressDialog==null){
 					break;
 				case MSG_SUCCESS:
 					break;
-			case MSG_FAIL:
-				CustomDialog alertDialog = new CustomDialog.Builder(getActivity())
-				.setTitle(getResources().getString(R.string.verify))
-				.setMessage(R.string.verify_error)
-				.setPositiveButton(R.string.label_ok,new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface arg0, int arg1) {
-						// TODO Auto-generated method stub
-						arg0.dismiss();
-						Activity act = getActivity();
-						if(act!=null)
-							act.finish();
-					}
-				}).create();
-				
-				alertDialog.show() ;
-				mHandler.sendEmptyMessageDelayed(MSG_DESTORY, 5000);
+				case MSG_FAIL:
+					CustomDialog alertDialog = new CustomDialog.Builder(getActivity())
+							.setTitle(getResources().getString(R.string.verify))
+							.setMessage(R.string.verify_error)
+							.setPositiveButton(R.string.label_ok,new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface arg0, int arg1) {
+// TODO Auto-generated method stub
+									arg0.dismiss();
+									Activity act = getActivity();
+									if(act!=null)
+										act.finish();
+								}
+							}).create();
+
+					alertDialog.show() ;
+					mHandler.sendEmptyMessageDelayed(MSG_DESTORY, 5000);
 					break;
-			case MSG_DESTORY:
-				Activity act = getActivity();
-				if(act!=null)
-					act.finish();
+				case MSG_DESTORY:
+					Activity act = getActivity();
+					if(act!=null)
+						act.finish();
 					break;
-			default:
+				default:
 					break;
 			}
 			super.handleMessage(msg);
@@ -963,9 +956,9 @@ if (mProgressDialog==null){
 
 			switch (msg.what) {
 
-			case SURFACE_SIZE:
-				activity.changeSurfaceSize() ;
-				break ;
+				case SURFACE_SIZE:
+					activity.changeSurfaceSize() ;
+					break ;
 			}
 		}
 	} ;
@@ -987,54 +980,55 @@ if (mProgressDialog==null){
 				return ;
 
 			switch (msg.getData().getInt("event")) {
-			case EventHandler.MediaPlayerPlaying:
-				activity.playing();
-				Log.i(TAG, "MediaPlayerPlaying") ;
-				break ;
-			case EventHandler.MediaPlayerPaused:
-				Log.i(TAG, "MediaPlayerPaused") ;
-				break ;
-			case EventHandler.MediaPlayerStopped:
-				Log.i(TAG, "MediaPlayerStopped") ;
-				break ;
-			case EventHandler.MediaPlayerEndReached:
-				Log.i(TAG, "MediaPlayerEndReached") ;
-				activity.endReached() ;
-				break ;
-			case EventHandler.MediaPlayerVout:
-				activity.handleVout(msg) ;
-				break ;
-			case EventHandler.MediaPlayerPositionChanged:
-				// don't spam the logs
-				break ;
-			case EventHandler.MediaPlayerEncounteredError:
-				Log.i(TAG, "MediaPlayerEncounteredError") ;
-				activity.encounteredError();
-				break ;
-			default:
-				Log.e(TAG, String.format("Event not handled (0x%x)", msg.getData().getInt("event"))) ;
-				break ;
+				case EventHandler.MediaPlayerPlaying:
+					activity.playing();
+					Log.i(TAG, "MediaPlayerPlaying") ;
+					break ;
+				case EventHandler.MediaPlayerPaused:
+					Log.i(TAG, "MediaPlayerPaused") ;
+					break ;
+				case EventHandler.MediaPlayerStopped:
+					Log.i(TAG, "MediaPlayerStopped") ;
+					break ;
+				case EventHandler.MediaPlayerEndReached:
+					Log.i(TAG, "MediaPlayerEndReached") ;
+					activity.endReached() ;
+					break ;
+				case EventHandler.MediaPlayerVout:
+					Log.i(TAG, "handleVout") ;
+					activity.handleVout(msg) ;
+					break ;
+				case EventHandler.MediaPlayerPositionChanged:
+// don't spam the logs
+					break ;
+				case EventHandler.MediaPlayerEncounteredError:
+					Log.i(TAG, "MediaPlayerEncounteredError") ;
+					activity.encounteredError();
+					break ;
+				default:
+					Log.e(TAG, String.format("Event not handled (0x%x)", msg.getData().getInt("event"))) ;
+					break ;
 			}
 		}
 	} ;
 
 	private void endReached() {
-		/* Exit player when reach the end */
+/* Exit player when reach the end */
 		mEndReached = true ;
-		//getActivity().onBackPressed() ;
-		
+//getActivity().onBackPressed() ;
+
 		//play() ;
 	}
 	private void encounteredError() {
 		if(false)
 		{
-		new MediaUrlDialog(getActivity(), mMediaUrl, new MediaUrlDialogHandler() {
+			new MediaUrlDialog(getActivity(), mMediaUrl, new MediaUrlDialogHandler() {
 
-			@Override
-			public void onCancel() {
-				// TODO Auto-generated method stub
-			}
-		}).show() ;
+				@Override
+				public void onCancel() {
+// TODO Auto-generated method stub
+				}
+			}).show() ;
 		}
 		cameraStopButton.setVisibility(View.GONE);
 		mHandler_ui.sendEmptyMessage(MSG_PLYDISSMISS);
@@ -1044,12 +1038,13 @@ if (mProgressDialog==null){
 		mSurface.setVisibility(View.GONE);
 		cameraRecordButton.setVisibility(View.GONE);
 		cameraSnapshotButton.setVisibility(View.GONE);
-		mSoundControlButtonDisable.setVisibility(View.GONE);
-		mSoundControlButton.setVisibility(View.GONE);
+//		mSoundControlButtonDisable.setVisibility(View.GONE);
+//		mSoundControlButton.setVisibility(View.GONE);
 		curdate.setVisibility(View.GONE);
 		findCameraButton.setEnabled(false);
 		recordButton.setEnabled(false);
 		snapshotButton.setEnabled(false);
+//		playLiveStream();
 	}
 	private void playing() {
 		if (isfirstOpenView){
@@ -1066,8 +1061,8 @@ if (mProgressDialog==null){
 		mSurface.setVisibility(View.VISIBLE);
 		cameraRecordButton.setVisibility(View.VISIBLE);
 		cameraSnapshotButton.setVisibility(View.VISIBLE);
-		mSoundControlButtonDisable.setVisibility(View.VISIBLE);
-		mSoundControlButton.setVisibility(View.VISIBLE);
+//		mSoundControlButtonDisable.setVisibility(View.VISIBLE);
+//		mSoundControlButton.setVisibility(View.VISIBLE);
 		curdate.setVisibility(View.VISIBLE);
 		findCameraButton.setEnabled(true);
 		recordButton.setEnabled(true);
@@ -1083,17 +1078,17 @@ if (mProgressDialog==null){
 	}
 
 	private void changeSurfaceSize() {
-		// get screen size
+// get screen size
 		int dw = 0;
 		int dh = 0;
 		if(getActivity() ==null)
 			return;
 		if(getActivity().getWindow()!=null && getActivity().getWindow().getDecorView()!=null)
 		{
-			 dw = getActivity().getWindow().getDecorView().getWidth() ;
-			 dh = getActivity().getWindow().getDecorView().getHeight() ;
+			dw = getActivity().getWindow().getDecorView().getWidth() ;
+			dh = getActivity().getWindow().getDecorView().getHeight() ;
 		}
-		// getWindow().getDecorView() doesn't always take orientation into
+// getWindow().getDecorView() doesn't always take orientation into
 		// account, we have to correct the values
 		boolean isPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ;
 		if (dw > dh && isPortrait || dw < dh && !isPortrait) {
@@ -1102,78 +1097,78 @@ if (mProgressDialog==null){
 			dh = d ;
 		}
 
-		// sanity check
+// sanity check
 		if (dw * dh == 0 || mVideoWidth * mVideoHeight == 0) {
 			Log.e(TAG, "Invalid surface size") ;
 			return ;
 		}
 
-		// compute the aspect ratio
+// compute the aspect ratio
 		double ar, vw ;
 		double density = (double) mSarNum / (double) mSarDen ;
 		if (density == 1.0) {
-			/* No indication about the density, assuming 1:1 */
+/* No indication about the density, assuming 1:1 */
 			vw = mVideoVisibleWidth ;
 			ar = (double) mVideoVisibleWidth / (double) mVideoVisibleHeight ;
 		} else {
-			/* Use the specified aspect ratio */
+/* Use the specified aspect ratio */
 			vw = mVideoVisibleWidth * density ;
 			ar = vw / mVideoVisibleHeight ;
 		}
 
-		// compute the display aspect ratio
+// compute the display aspect ratio
 		double dar = (double) dw / (double) dh ;
 
 		switch (mCurrentSize) {
-		case SURFACE_BEST_FIT:
-			if (dar < ar)
+			case SURFACE_BEST_FIT:
+				if (dar < ar)
+					dh = (int) (dw / ar) ;
+				else
+					dw = (int) (dh * ar) ;
+				break ;
+			case SURFACE_FIT_HORIZONTAL:
 				dh = (int) (dw / ar) ;
-			else
+				break ;
+			case SURFACE_FIT_VERTICAL:
 				dw = (int) (dh * ar) ;
-			break ;
-		case SURFACE_FIT_HORIZONTAL:
-			dh = (int) (dw / ar) ;
-			break ;
-		case SURFACE_FIT_VERTICAL:
-			dw = (int) (dh * ar) ;
-			break ;
-		case SURFACE_FILL:
-			break ;
-		case SURFACE_16_9:
-			ar = 16.0 / 9.0 ;
-			if (dar < ar)
-				dh = (int) (dw / ar) ;
-			else
-				dw = (int) (dh * ar) ;
-			break ;
-		case SURFACE_4_3:
-			ar = 4.0 / 3.0 ;
-			if (dar < ar)
-				dh = (int) (dw / ar) ;
-			else
-				dw = (int) (dh * ar) ;
-			break ;
-		case SURFACE_ORIGINAL:
-			dh = mVideoVisibleHeight ;
-			dw = (int) vw ;
-			break ;
+				break ;
+			case SURFACE_FILL:
+				break ;
+			case SURFACE_16_9:
+				ar = 16.0 / 9.0 ;
+				if (dar < ar)
+					dh = (int) (dw / ar) ;
+				else
+					dw = (int) (dh * ar) ;
+				break ;
+			case SURFACE_4_3:
+				ar = 4.0 / 3.0 ;
+				if (dar < ar)
+					dh = (int) (dw / ar) ;
+				else
+					dw = (int) (dh * ar) ;
+				break ;
+			case SURFACE_ORIGINAL:
+				dh = mVideoVisibleHeight ;
+				dw = (int) vw ;
+				break ;
 		}
 
-		// force surface buffer size
+// force surface buffer size
 		mSurfaceHolder.setFixedSize(mVideoWidth, mVideoHeight) ;
 
-		// set display size
+// set display size
 		LayoutParams lp = mSurface.getLayoutParams() ;
 		lp.width = dw * mVideoWidth / mVideoVisibleWidth ;
 		lp.height = dh * mVideoHeight / mVideoVisibleHeight ;
 		mSurface.setLayoutParams(lp) ;
 
-		// set frame size (crop if necessary)
+// set frame size (crop if necessary)
 		lp = mSurfaceFrame.getLayoutParams() ;
 		lp.width = dw ;
 		lp.height = dh ;
 		mSurfaceFrame.setLayoutParams(lp) ;
-		mSurfaceFrame.setBackgroundColor(color.black);
+		mSurfaceFrame.setBackgroundColor(Color.BLACK);
 		mSurface.invalidate() ;
 	}
 
@@ -1203,112 +1198,112 @@ if (mProgressDialog==null){
 			mLibVLC.detachSurface() ;
 		}
 	} ;
-	
+
 	private Handler mTimeHandler = new Handler() {
 		public void handleMessage(Message msg){
-			/*
-            	mSecond++;
-				if(mSecond==60)
-				{
-					mSecond=0;
-					mMinute++;
-					if(mMinute==60)
-					{
-						mHour++;
-						mMinute=0;
-						if(mHour==24)
-						{
-							mDay++;
-						mHour=0;
-						}
-					}
-				}
-				timestamp = checkTime(mYear)+"/"+checkTime(mMonth)+"/"+checkTime(mDay);
-				timestamp += " " + checkTime(mHour)+":"+checkTime(mMinute)+":"+checkTime(mSecond);
-            	curdate.setText(timestamp);
-            	timestamp = " ";
+/*
+               mSecond++;
+            if(mSecond==60)
+            {
+               mSecond=0;
+               mMinute++;
+               if(mMinute==60)
+               {
+                  mHour++;
+                  mMinute=0;
+                  if(mHour==24)
+                  {
+                     mDay++;
+                  mHour=0;
+                  }
+               }
+            }
+            timestamp = checkTime(mYear)+"/"+checkTime(mMonth)+"/"+checkTime(mDay);
+            timestamp += " " + checkTime(mHour)+":"+checkTime(mMinute)+":"+checkTime(mSecond);
+               curdate.setText(timestamp);
+               timestamp = " ";
             */
-            long timeElapsed = SystemClock.uptimeMillis() - mCameraUptimeMills ;
-            	
-            Date currentTime = new Date(mCameraTime.getTime() + timeElapsed) ;
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss",Locale.US) ;
-            String currentTimeStr = sdf.format(currentTime);
-            curdate.setText(currentTimeStr) ;
-            super.handleMessage(msg);  
+			long timeElapsed = SystemClock.uptimeMillis() - mCameraUptimeMills ;
+
+			Date currentTime = new Date(mCameraTime.getTime() + timeElapsed) ;
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss",Locale.US) ;
+			String currentTimeStr = sdf.format(currentTime);
+			curdate.setText(currentTimeStr) ;
+			super.handleMessage(msg);
 		}
 	};
-	
+
 	public Handler mRecordStatusHandler = new Handler() {
 		public void handleMessage(Message msg){
-			
-            	if(mRecordStatus.equals("Recording"))
-            	{
-            		cameraStopButton.setVisibility(View.VISIBLE);
-            		mHandlerUI.sendEmptyMessage(MSG_INVISIABLE_RECORD_BTN);
-            		mRecordTxt.setText(R.string.recording);
-            	}
-            	else
-            	{
-            		mHandlerUI.removeMessages(MSG_INVISIABLE_RECORD_BTN);
-            		mHandlerUI.removeMessages(MSG_VISIABLE_RECORD_BTN);
-            		cameraStopButton.setVisibility(View.GONE);
-            		cameraRecordButton.setVisibility(View.VISIBLE);
-            		mRecordTxt.setText(R.string.label_app_record);
-            	}
-            	if (mRecordmode.equals("NotVideomode"))
-            	{
-            		
-            		CustomDialog alertDialog = new CustomDialog.Builder(getActivity())
-            		.setTitle("Mode Error!")
-            		.setMessage("Not At Video Mode")
-            		.setPositiveButton(R.string.label_ok,new DialogInterface.OnClickListener() {
-            			
-            			@Override
-            			public void onClick(DialogInterface arg0, int arg1) {
-            				// TODO Auto-generated method stub
-            				arg0.dismiss();
-            			}
-            		}).create();
-            		alertDialog.show() ;		
-            	}
-            			
-            super.handleMessage(msg);  
+
+			if(mRecordStatus.equals("Recording"))
+			{
+				cameraStopButton.setVisibility(View.VISIBLE);
+				mHandlerUI.sendEmptyMessage(MSG_INVISIABLE_RECORD_BTN);
+				mRecordTxt.setText(R.string.recording);
+			}
+			else
+			{
+				mHandlerUI.removeMessages(MSG_INVISIABLE_RECORD_BTN);
+				mHandlerUI.removeMessages(MSG_VISIABLE_RECORD_BTN);
+				cameraStopButton.setVisibility(View.GONE);
+				cameraRecordButton.setVisibility(View.VISIBLE);
+				mRecordTxt.setText(R.string.label_app_record);
+			}
+			if (mRecordmode.equals("NotVideomode"))
+			{
+
+				CustomDialog alertDialog = new CustomDialog.Builder(getActivity())
+						.setTitle("Mode Error!")
+						.setMessage("Not At Video Mode")
+						.setPositiveButton(R.string.label_ok,new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface arg0, int arg1) {
+// TODO Auto-generated method stub
+								arg0.dismiss();
+							}
+						}).create();
+				alertDialog.show() ;
+			}
+
+			super.handleMessage(msg);
 		}
 	};
 
 	private class TimeThread extends Thread{
 
-			boolean mPlaying=true;
-			public void run() {
-				while(mPlaying)
-				{	
-					try{				
-						Thread.sleep(1000);
-					} catch (Exception e){
-						e.printStackTrace();
-					}
-					
-					if (mCameraTime == null) {
-						
-						continue ;
-					}
-					
-					//if(mRecordthread)
-						//mRecordStatusHandler.sendMessage(mRecordStatusHandler.obtainMessage());
-					
-					mTimeHandler.sendMessage(mTimeHandler.obtainMessage());			
+		boolean mPlaying=true;
+		public void run() {
+			while(mPlaying)
+			{
+				try{
+					Thread.sleep(1000);
+				} catch (Exception e){
+					e.printStackTrace();
 				}
+
+				if (mCameraTime == null) {
+
+					continue ;
+				}
+
+//if(mRecordthread)
+				//mRecordStatusHandler.sendMessage(mRecordStatusHandler.obtainMessage());
+
+				mTimeHandler.sendMessage(mTimeHandler.obtainMessage());
 			}
-			public void stopPlay(){
-				mPlaying=false;
-			}
+		}
+		public void stopPlay(){
+			mPlaying=false;
+		}
 	};
-	
+
 	public String IsStatusRecording()
 	{
 		return mRecordStatus;
 	}
-	
+
 	public void SetRecordStatus(String Status)
 	{
 		mRecordStatus = Status;
@@ -1321,9 +1316,9 @@ if (mProgressDialog==null){
 		{
 			v=-v;
 		}
-		return v; 
+		return v;
 	}
-	private class GSetRandomValues extends AsyncTask <URL, Integer, String> 
+	private class GSetRandomValues extends AsyncTask <URL, Integer, String>
 	{
 		protected void onPreExecute() {
 			int v = getRandomvalue();
@@ -1348,7 +1343,7 @@ if (mProgressDialog==null){
 			int what = 0;
 			if (result != null) {
 				Log.d(TAG, "result="+result);
-				String[] lines;		
+				String[] lines;
 				String[] lines_temp = result.split("Camera.Cruise.Seq1.Count=");
 				if(lines_temp!=null && lines_temp.length>1)
 				{
@@ -1366,11 +1361,11 @@ if (mProgressDialog==null){
 					}
 					if(mlocalB==mB)
 					{
-						flag = true;	
+						flag = true;
 					}
 				}
 			}
-			
+
 			if(flag)
 			{
 				what = MSG_SUCCESS;

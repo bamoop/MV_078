@@ -13,7 +13,12 @@
           android:layout_height="@dimen/top_tab_height">
           <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_video"  >
         	<ImageButton style="@style/top_button.pic" android:background="@drawable/local_video_bg" />   
-    		<TextView android:layout_marginLeft="5dp" android:id="@+id/txt_video" android:duplicateParentState="true" android:text="@string/video" style="@style/top_button.txt"/>
+    		<TextView
+                android:layout_marginLeft="5dp"
+                android:id="@+id/txt_video"
+                android:duplicateParentState="true"
+                android:text="@string/video"
+                style="@style/top_button.txt"/>
     	  </LinearLayout>
     	  <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_backvideo"
               android:visibility="gone">
@@ -56,4 +61,4 @@
     		<TextView android:duplicateParentState="true" android:text="@string/label_open" style="@style/bottom_button_text" />
     	</LinearLayout>
     </LinearLayout>
-</LinearLayout><!-- From: file:/C:/Users/bzmoop/Desktop/xinc/app/src/main/res/layout/browser.xml -->
+</LinearLayout><!-- From: file:/E:/john_work/xinc/app/src/main/res/layout/browser.xml -->

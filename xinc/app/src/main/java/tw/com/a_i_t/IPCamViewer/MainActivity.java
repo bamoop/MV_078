@@ -255,6 +255,8 @@ public class MainActivity extends Activity {
 		Log.i("Main", "Width = " + W);
 
 		Log.i("Main", "Height = " + H);
+		Bundle args=new Bundle();
+		args.putString("nima","123");
 		System.setProperty("http.keepAlive", "false") ;
 		super.onCreate(savedInstanceState) ;
 		mWifiManager = (WifiManager)this  

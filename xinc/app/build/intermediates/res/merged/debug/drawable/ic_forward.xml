@@ -4,4 +4,4 @@
     <item android:drawable="@drawable/ic_forward_glow" android:state_focused="true" android:state_pressed="true"/>
     <item android:drawable="@drawable/ic_forward_glow" android:state_focused="false" android:state_pressed="true"/>
     <item android:drawable="@drawable/ic_forward_normal"/>
-</selector><!-- From: file:/C:/Users/bzmoop/Desktop/xinc/app/src/main/res/drawable/ic_forward.xml -->
+</selector><!-- From: file:/E:/john_work/xinc/app/src/main/res/drawable/ic_forward.xml -->

@@ -935,7 +935,6 @@ public class FileBrowserFragment extends Fragment {
 				mProgressDialog = null ;
 			}
 			sDownloadTask = null ;
-
 			mWakeLock.release() ;
 			mWifiLock.release() ;
 
@@ -1053,7 +1052,6 @@ public class FileBrowserFragment extends Fragment {
 		}
 	}
 
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState) ;
@@ -1087,7 +1085,6 @@ public class FileBrowserFragment extends Fragment {
 			mDirectory = DEFAULT_DIR ;
 		}
 
-//
 	}
 
 	private static void downloadFile(final Context context, String ip) {

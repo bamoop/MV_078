@@ -1,12 +1,16 @@
 package tw.com.a_i_t.IPCamViewer;
 
-import java.util.ArrayList;  
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;   
-import android.app.Activity;  
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.os.Bundle;  
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;  
@@ -62,7 +66,9 @@ public class ViewPagerDemoActivity extends Activity implements OnClickListener, 
         for(int i=0; i<pics.length; i++) {  
             ImageView iv = new ImageView(this);  
             iv.setLayoutParams(mParams);  
-            iv.setImageResource(pics[i]);
+//            iv.setImageResource(pics[i]);
+            Bitmap bitmap=readBitMap(this,pics[i]);
+            iv.setImageBitmap(bitmap);
             iv.setScaleType(ScaleType.FIT_XY);
             views.add(iv);  
         }
@@ -107,7 +113,17 @@ public class ViewPagerDemoActivity extends Activity implements OnClickListener, 
   
         currentIndex = 0;  
         dots[currentIndex].setEnabled(false);//����Ϊ��ɫ����ѡ��״̬  
-    }  
+    }
+    public static Bitmap readBitMap(Context context,int resID){
+        BitmapFactory.Options opt=new BitmapFactory.Options();
+        opt.inPreferredConfig=Bitmap.Config.RGB_565;
+        opt.inPurgeable =true;
+        opt.inInputShareable=true;
+        //获取资源图片
+        InputStream is=context.getResources().openRawResource(resID);
+        return BitmapFactory.decodeStream(is,null,opt);
+
+    }
       
     /** 
      *���õ�ǰ����ҳ  

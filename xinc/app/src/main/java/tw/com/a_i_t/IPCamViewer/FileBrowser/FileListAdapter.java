@@ -54,22 +54,16 @@ public class FileListAdapter extends BaseAdapter {
 					(TextView) convertView.findViewById(R.id.fileListTime),
 					(TextView) convertView.findViewById(R.id.fileListSize), mFileList.get(position),
 					(CheckedTextView) convertView.findViewById(R.id.fileListCheckBox)) ;
-
 			convertView.setTag(viewTag) ;
-
 		} else {
-
 			viewTag = (ViewTag) convertView.getTag() ;
 		}
-
 		viewTag.mFileNode = mFileList.get(position) ;
 		String filename = viewTag.mFileNode.mName.substring(viewTag.mFileNode.mName.lastIndexOf("/") + 1) ;
 		viewTag.mFilename.setText(filename) ;
 		viewTag.mTime.setText(viewTag.mFileNode.mTime) ;
 		viewTag.setSize(viewTag.mFileNode.mSize) ;
 		viewTag.mCheckBox.setChecked(viewTag.mFileNode.mSelected) ;
-
 		return convertView ;
 	}
-
 }

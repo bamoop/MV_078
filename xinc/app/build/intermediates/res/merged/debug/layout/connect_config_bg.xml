@@ -8,4 +8,4 @@
     android:background="@android:color/transparent">
     <tw.com.a_i_t.IPCamViewer.MyBanner android:id="@+id/banner" android:layout_marginTop="0dp" android:layout_width="match_parent"
     android:layout_height="@dimen/top_banner_height" MyBanner:text="@string/main_title" />
-</LinearLayout><!-- From: file:/C:/Users/bzmoop/Desktop/xinc/app/src/main/res/layout/connect_config_bg.xml -->
+</LinearLayout><!-- From: file:/E:/john_work/xinc/app/src/main/res/layout/connect_config_bg.xml -->

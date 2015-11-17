@@ -19,7 +19,7 @@ import android.widget.Button ;
 import android.widget.EditText ;
 import android.widget.Toast ;
 
-public class NetworkConfigurationsFragment extends Fragment {
+public class  NetworkConfigurationsFragment extends Fragment {
 
 	private class NetworkConfigurationSendRequest extends CameraCommand.SendRequest {
 

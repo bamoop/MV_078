@@ -143,4 +143,4 @@
     		<TextView android:id="@+id/record_txt" android:duplicateParentState="true" android:text="@string/label_app_record" style="@style/bottom_button_text" />
     	</LinearLayout>
       </LinearLayout>
-</LinearLayout><!-- From: file:/C:/Users/bzmoop/Desktop/xinc/app/src/main/res/layout/preview_player.xml -->
+</LinearLayout><!-- From: file:/E:/john_work/xinc/app/src/main/res/layout/preview_player.xml -->

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/C:/Users/bzmoop/Desktop/xinc/app/src/main/res/values-zh-rCN/strings.xml -->
+    <!-- From: file:/E:/john_work/xinc/app/src/main/res/values-zh-rCN/strings.xml -->
     <eat-comment/>
     <string name="AWB_Auto">自动</string>
     <string name="AWB_Cloudy">阴天</string>
@@ -159,7 +159,7 @@
     <string name="verify_error">请确认已连接到行车记录仪！</string>
     <string name="version_hardware">固件版本号</string>
     <string name="version_software">软件版本号</string>
-    <string name="video">前视频</string>
+    <string name="video">视频</string>
     <string name="warn_ondeletesos">不能删除加锁的SOS文件</string>
     <string name="warnnig">警告！</string>
     <string name="yes">是</string>
