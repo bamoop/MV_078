@@ -29,6 +29,7 @@ import tw.com.a_i_t.IPCamViewer.RTPullListView;
 import android.app.Activity ;
 import android.app.AlertDialog ;
 import android.app.Fragment ;
+import android.app.FragmentManager;
 import android.app.Notification ;
 import android.app.NotificationManager ;
 import android.app.PendingIntent ;
@@ -86,12 +87,20 @@ public class FileBrowserFragment extends Fragment {
 	private static final int MSG_VIDEONOMORE = 4;
 	private static final int MSG_BACKVIDEONOMORE = 5;
 	private static final int MSG_PHOTONOMORE = 6;
+	private static final int MSG_SOSFRONTVIDEONOMORE = 7;
+	private static final int MSG_SOSBACKVIDEONOMORE = 8;
+	private static final int MSG_CONNECTERROREXIT = 9;//连接失败退出Dialog
 	private static final int G_TRYMAXTIMES = 5;
 	private static final int LOAD_MORE_SUCCESS = 3;//点击加载更多成功
 	private static final int LOAD_NEW_INFO = 5;    //加载新信息
 	private static final int G_TRYTIME = 5000;  //5s
 	private int mTryTimes = G_TRYMAXTIMES;
 	private FileNode.Format m_fileformat = FileNode.Format.all;
+	private FileNode.Format m_fileformatJPGE = Format.jpeg;
+	private FileNode.Format m_fileformatFnoemal = Format.Fnormal;
+	private FileNode.Format m_fileformatRnormal = Format.Rnormal;
+	private FileNode.Format m_fileformatFsos = Format.Fsos;
+	private FileNode.Format m_fileformatRsos = Format.Rsos;
 	private static final int FILEREADBLOCK_SIZE= 1024 * 1000;
 	private static final int BUTTON_NONE = 0;
 	private static final int BUTTON_DOWNLOAD = 1;
@@ -100,14 +109,17 @@ public class FileBrowserFragment extends Fragment {
 	private ProgressBar moreProgressBar;
 	Activity activitytoals;
 
-	private RTPullListView mFileListView,jpgFileListview,backFileListview;
+	private RTPullListView mFileListView,jpgFileListview,backFileListview,sosfrontListview,sosbackListview;
 	public FileBrowser rowsers=null;
 	private boolean isstatusVideo; //判断是照片还是视频加载更多
 	private boolean isstatusPhoto=false; //判断是照片还是视频加载更多
+
 	private boolean isfirstPhoto=true;//判断第一次点击照片选项
 	private boolean isfirstonePhoto=true;//判断第一次点击照片选项
 	private boolean isfirstBackViedeo=true;//判断第一次点击后路视频选项
 	private boolean isfirstViedeo=true;//判断第一次点击视频选项
+	private boolean isfirstSOSfrontViedeo=true;//判断第一次点击视频选项
+	private boolean isfirstSOSbackViedeo=true;//判断第一次点击视频选项
 	//add by John 2015.11.3
 	public boolean isdeletesos=false;
 	public boolean isdeletSOStoast=false;
@@ -115,6 +127,9 @@ public class FileBrowserFragment extends Fragment {
 	URL threeviedourl;//第三版本URl地址
 	URL threebackviedourl;//第三版本URl地址
 	URL threephotourl;//第三版本URl地址
+	URL threesosfrontvideo;
+	URL threesosbackvideo;
+	FileBrowser fileBrowser;
 	String qingqiu;
 	private int mycompare(FileNode arg0, FileNode arg1)
 	{
@@ -346,9 +361,7 @@ public class FileBrowserFragment extends Fragment {
 					}
 				}
 			}
-
 			super.onPostExecute(result) ;
-
 		}
 	}
 	/*请求视频数据（单独）*/
@@ -366,16 +379,24 @@ public class FileBrowserFragment extends Fragment {
 			sFilelistBACKVIDEO.clear();
 			stackFileListBACKVIDEO.clear();
 			mFileListBACKVIDEOAdapter.notifyDataSetChanged();
+			stackFileListSOSFrontVIDEO.clear();
+			mFileListSOSFrontVIDEOAdapter.notifyDataSetChanged();
+			sFilelistSOSBACKVIDEO.clear();
+			mFileListSOSBACKVIDEOAdapter.notifyDataSetChanged();
+			sFilelistSOSFrontVIDEO.clear();
+			mFileListSOSFrontVIDEOAdapter.notifyDataSetChanged();
+			sFilelistSOSBACKVIDEO.clear();
+			mFileListSOSBACKVIDEOAdapter.notifyDataSetChanged();
 			}
 			super.onPreExecute() ;
 		}
 		@Override
 		protected FileBrowser doInBackground(FileBrowser... browsers) {
 			if (isfirstViedeo){
-			browsers[0].retrieveFileList(mDirectory, m_fileformat, true);
+			browsers[0].retrieveFileList(mDirectory, m_fileformatFnoemal, true,stackFileListVIDEO.size());
 			isfirstViedeo=false;
 			}
-			else browsers[0].retrieveFileList(mDirectory, m_fileformat, false);
+			else browsers[0].retrieveFileList(mDirectory, m_fileformatFnoemal, false,stackFileListVIDEO.size());
 			return browsers[0];
 		}
 		@Override
@@ -384,12 +405,32 @@ public class FileBrowserFragment extends Fragment {
 			if (activity==null){
 				return;
 			}
+
 			if(activity!=null){
 				List<FileNode>fileNodeList=result.getFileList();
 				Log.d("moop","视频请求返---"+fileNodeList.size());
+				Log.d("moop", String.valueOf(result.mIsError));
+				if(!result.mIsError)
+				{
+					Log.d(TAG,"onPostExecute() !IsError");
+					mTryTimes = G_TRYMAXTIMES;
+				}
+				else if(fileNodeList.size()>0)
+				{
+					Log.d(TAG,"onPostExecute() size()>0");
+					mTryTimes = G_TRYMAXTIMES;
+				}
+				else {
+					//try again!
+					Log.d(TAG, "error! try again");
+					Log.i("moop", "IsError---");
+					mHandler.sendEmptyMessage(MSG_CONNECTERROREXIT);
+//					mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_GETFILELIST),G_TRYTIME);
+				}
 				for (int i = 0; i < fileNodeList.size(); i++) {
 					stackFileListVIDEO.add(fileNodeList.get(i));
 				}
+
 				sortfile();
 				mFileListVIDEOAdapter.notifyDataSetChanged();
 				if (!result.isCompleted()&&fileNodeList.size()>0){
@@ -408,13 +449,12 @@ public class FileBrowserFragment extends Fragment {
 	}
 	/*请求照片数据（单独）*/
 	private class PhotoDownFileListTask extends AsyncTask<FileBrowser,Integer,FileBrowser>{
-
 		@Override
 		protected FileBrowser doInBackground(FileBrowser... browsers) {
 			if (isfirstonePhoto){
 				isfirstonePhoto=false;
-			browsers[0].retrieveFileList(mDirectory, m_fileformat, true);
-			}else browsers[0].retrieveFileList(mDirectory, m_fileformat, false);
+			browsers[0].retrieveFileList(mDirectory, m_fileformatJPGE, true,stackFileListJPG.size());
+			}else browsers[0].retrieveFileList(mDirectory, m_fileformatJPGE, false,stackFileListJPG.size());
 			return browsers[0];
 		}
 		@Override
@@ -447,16 +487,14 @@ public class FileBrowserFragment extends Fragment {
 	}
 	/*请求后路摄像头视频文件（单独）*/
 	private class BackViedoDownFileListTask extends AsyncTask<FileBrowser,Integer,FileBrowser>{
-
 		@Override
 		protected FileBrowser doInBackground(FileBrowser... browsers) {
 			if(isfirstBackViedeo){
-			browsers[0].retrieveFileList(mDirectory, m_fileformat, true);
+			browsers[0].retrieveFileList(mDirectory, m_fileformatRnormal, true,stackFileListBACKVIDEO.size());
 			isfirstBackViedeo=false;
-			}else browsers[0].retrieveFileList(mDirectory, m_fileformat, false);
+			}else browsers[0].retrieveFileList(mDirectory, m_fileformatRnormal, false,stackFileListBACKVIDEO.size());
 			return browsers[0];
 		}
-
 		@Override
 		protected void onPostExecute(FileBrowser result) {
 			Activity activity=getActivity();
@@ -485,13 +523,94 @@ public class FileBrowserFragment extends Fragment {
 			}
 		}
 	}
+	/*请求SOS前路摄像头视频文件（单独）*/
+	private class SOSFrontViedoDownFileListTask extends AsyncTask<FileBrowser,Integer,FileBrowser>{
+		@Override
+		protected FileBrowser doInBackground(FileBrowser... browsers) {
+			if(isfirstSOSfrontViedeo){
+			browsers[0].retrieveFileList(mDirectory, m_fileformatFsos, true,sFilelistSOSFrontVIDEO.size());
+				isfirstSOSfrontViedeo=false;
+			}else browsers[0].retrieveFileList(mDirectory, m_fileformatFsos, false,sFilelistSOSFrontVIDEO.size());
+			return browsers[0];
+		}
+		@Override
+		protected void onPostExecute(FileBrowser result) {
+			Activity activity=getActivity();
+			if (activity==null){
+				return;
+			}
+			if(activity!=null){
+				List<FileNode>fileNodeList=result.getFileList();
+				Log.d("moop","SOS前路视频请求返---"+fileNodeList.size());
+				for (int i = 0; i < fileNodeList.size(); i++) {
+					sFilelistSOSFrontVIDEO.add(fileNodeList.get(i));
+				}
+				sortfile();
+				mFileListSOSFrontVIDEOAdapter.notifyDataSetChanged();
+					if (!result.isCompleted()&&fileNodeList.size()>0){
+						Log.d("moop","SOS前路视频有---"+sFilelistSOSFrontVIDEO.size());
+						mFileListSOSFrontVIDEOAdapter.notifyDataSetChanged();
+						mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
+						moreProgressBar.setVisibility(View.GONE);
+					}
+					else {
+						moreProgressBar.setVisibility(View.GONE);
+						mHandler.sendEmptyMessage(MSG_SOSFRONTVIDEONOMORE);
+						mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
+						setWaitingState(false) ;
+						}
+			}
+		}
+	}
+	/*请求SOS后路摄像头视频文件（单独）*/
+	private class SOSBackViedoDownFileListTask extends AsyncTask<FileBrowser,Integer,FileBrowser>{
+		@Override
+		protected FileBrowser doInBackground(FileBrowser... browsers) {
+			if(isfirstSOSbackViedeo){
+			browsers[0].retrieveFileList(mDirectory, m_fileformatRsos, true,sFilelistSOSBACKVIDEO.size());
+				isfirstSOSbackViedeo=false;
+			}else
+				browsers[0].retrieveFileList(mDirectory, m_fileformatRsos, false, sFilelistSOSBACKVIDEO.size());
+
+			return browsers[0];
+		}
+		@Override
+		protected void onPostExecute(FileBrowser result) {
+			Activity activity=getActivity();
+			if (activity==null){
+				return;
+			}
+			if(activity!=null){
+				List<FileNode>fileNodeList=result.getFileList();
+				Log.d("moop","SOS后路视频请求返---"+fileNodeList.size());
+				for (int i = 0; i < fileNodeList.size(); i++) {
+					sFilelistSOSBACKVIDEO.add(fileNodeList.get(i));
+				}
+				sortfile();
+				mFileListSOSBACKVIDEOAdapter.notifyDataSetChanged();
+					if (!result.isCompleted()&&fileNodeList.size()>0){
+						mFileListSOSBACKVIDEOAdapter.notifyDataSetChanged();
+						mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
+						moreProgressBar.setVisibility(View.GONE);
+					}
+					else {
+						moreProgressBar.setVisibility(View.GONE);
+						mHandler.sendEmptyMessage(MSG_SOSBACKVIDEONOMORE);
+						mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
+						setWaitingState(false) ;
+					}
+
+			}
+		}
+	}
 
 	/*继续请求SD卡文件列表*/
 	private class ContiunedDownloadTask extends AsyncTask<FileBrowser, Integer, FileBrowser> {
 
 		@Override
 		protected FileBrowser doInBackground(FileBrowser... browsers) {
-			browsers[0].retrieveFileList(mDirectory, m_fileformat, false);
+			browsers[0].retrieveFileList(mDirectory, m_fileformat, false,-1);
+
 			return browsers[0];
 		}
 		@Override
@@ -525,13 +644,12 @@ public class FileBrowserFragment extends Fragment {
 				{
 					isstatusPhoto = true;
 					if (!result.isCompleted() && sFileListJPG.size() < 6) {
-						new ContiunedDownloadTask().execute(rowsers);
+							new ContiunedDownloadTask().execute(rowsers);
 					} else {
 						isstatusPhoto = false;
 						mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
 					}
 				}
-
 					if (!result.isCompleted() && fileList.size() != 0) {
 						mFileListJPGAdapter.notifyDataSetChanged();
 						mFileListVIDEOAdapter.notifyDataSetChanged();
@@ -541,7 +659,6 @@ public class FileBrowserFragment extends Fragment {
 						jpglistsize=sFileListJPG.size()-9;
 						myHandler.sendEmptyMessage(LOAD_MORE_SUCCESS);
 					} else {
-//						mFileListView.setSelection(0);
 						Toast.makeText(getActivity(), "没有更多了",
 								Toast.LENGTH_SHORT).show();
 						moreProgressBar.setVisibility(View.GONE);
@@ -555,6 +672,7 @@ public class FileBrowserFragment extends Fragment {
 	}
 	/*第一次请求Sd卡文件列表*/
 	private class DownloadFileListTask extends AsyncTask<FileBrowser, Integer, FileBrowser> {
+		private boolean error;
 		@Override
 		protected void onPreExecute() {
 			setWaitingState(true) ;
@@ -562,6 +680,8 @@ public class FileBrowserFragment extends Fragment {
 			sFileListVIDEO.clear();
 			stackFileListJPG.clear();
 			stackFileListVIDEO.clear();
+			sFilelistSOSFrontVIDEO.clear();
+			sFilelistSOSBACKVIDEO.clear();
 			mFileListJPGAdapter.notifyDataSetChanged();
 			mFileListVIDEOAdapter.notifyDataSetChanged();
 			sSelectedFiles.clear() ;
@@ -572,15 +692,16 @@ public class FileBrowserFragment extends Fragment {
 		}
 		@Override
 		protected FileBrowser doInBackground(FileBrowser... browsers) {
-			browsers[0].retrieveFileList(mDirectory, m_fileformat, true) ;
+			browsers[0].retrieveFileList(mDirectory, m_fileformat, true,-1) ;
+			error=browsers[0].mIsError;
 			return browsers[0] ;
 		}
-
 		@Override
 		protected void onPostExecute(FileBrowser result) {
 			Activity activity = getActivity() ;
 			if (activity != null) {
 				List<FileNode> fileList = result.getFileList() ;
+
 				if(!result.mIsError)
 				{
 					Log.d(TAG,"onPostExecute() !IsError");
@@ -594,9 +715,10 @@ public class FileBrowserFragment extends Fragment {
 				else
 				{
 					//try again!
-					Log.d(TAG,"error! try again");
-					mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_GETFILELIST),G_TRYTIME);
-
+					Log.d(TAG, "error! try again");
+					Log.i("moop", "IsError---");
+					mHandler.sendEmptyMessage(MSG_CONNECTERROREXIT);
+//					mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_GETFILELIST),G_TRYTIME);
 				}
 				Log.d("moop","第一次请求视频有--"+fileList.size());
 				for(int i=0;i<fileList.size();i++)
@@ -613,8 +735,6 @@ public class FileBrowserFragment extends Fragment {
 					}
 				}
 				sortfile();
-//				mFileListJPGAdapter.notifyDataSetChanged();
-//				mFileListVIDEOAdapter.notifyDataSetChanged();
 				rowsers=result;
 				if (!result.isCompleted() && sFileListVIDEO.size() < 6 ) {
 					new ContiunedDownloadTask().execute(result);
@@ -643,16 +763,22 @@ public class FileBrowserFragment extends Fragment {
 	private static ArrayList<FileNode> sFileListJPG = new ArrayList<FileNode>() ;
 	private static ArrayList<FileNode> sFileListVIDEO = new ArrayList<FileNode>() ;
 	private static ArrayList<FileNode> sFilelistBACKVIDEO=new ArrayList<FileNode>();
+	private static ArrayList<FileNode> sFilelistSOSFrontVIDEO=new ArrayList<FileNode>();
+	private static ArrayList<FileNode> sFilelistSOSBACKVIDEO=new ArrayList<FileNode>();
 
 	private static ArrayList<FileNode> stackFileListVIDEO = new ArrayList<FileNode>();
 	private static ArrayList<FileNode> stackFileListJPG = new ArrayList<FileNode>();
 	private static ArrayList<FileNode> stackFileListBACKVIDEO=new ArrayList<FileNode>();
+	private static ArrayList<FileNode> stackFileListSOSFrontVIDEO=new ArrayList<FileNode>();
+	private static ArrayList<FileNode> stackFileListSOSBACKVIDEO=new ArrayList<FileNode>();
 
 	private static List<FileNode> sSelectedFiles = new LinkedList<FileNode>() ;
-	private static List<FileNode> sSelectedbackFiles = new LinkedList<FileNode>() ;
+
 	private static FileListAdapter mFileListJPGAdapter ;
 	private static FileListAdapter mFileListVIDEOAdapter ;
 	private static FileListAdapter mFileListBACKVIDEOAdapter;
+	private static FileListAdapter mFileListSOSBACKVIDEOAdapter;
+	private static FileListAdapter mFileListSOSFrontVIDEOAdapter;
 	//private TextView mFileListTitle ;
 	private LinearLayout mSaveButton ;
 	private LinearLayout mDeleteButton ;
@@ -660,9 +786,14 @@ public class FileBrowserFragment extends Fragment {
 	private String mFileBrowser ;
 	private String mReading ;
 	private String mItems ;
-	private LinearLayout btn_video;
 	private LinearLayout btn_photo;
+	private LinearLayout btn_video;
+	private LinearLayout btn_frontvideo;
 	private LinearLayout btn_backvideo;
+	private LinearLayout btn_sosvideo;
+	private LinearLayout btn_sosfrontvideo;
+	private LinearLayout btn_sosbackvideo;
+	private LinearLayout sosfb_layout,fblayout;
 	private Boolean isvideo = true;	/*video is default*/
 	private boolean isfirstOpen=true;
 	private static String gDownloadStr;
@@ -1170,17 +1301,14 @@ public class FileBrowserFragment extends Fragment {
 		protected void onPostExecute(String result) {
 			Activity activity = getActivity() ;
 			FileNode fileNode = sSelectedFiles.remove(0);
-			Log.d(TAG, "delete file response:"+result) ;
+			Log.d(TAG, "delete file response:" + result) ;
 			Log.i("moop", "1019");
 			if (isdeletesos){
 				Toast.makeText(getActivity(), "不能删除加锁的SOS文件",
 						Toast.LENGTH_SHORT).show();
-				Log.i("moop", "执行----" );
 				isdeletesos=false;
 			}
-			Log.i("moop","result11--"+result);
 			if (result != null && result.equals("709\n?") != true) {
-				Log.i("moop", "result" + result);
 				sFileListJPG.remove(fileNode);
 				if(result.equals("next"))
 				{
@@ -1195,12 +1323,17 @@ public class FileBrowserFragment extends Fragment {
 					sFileListVIDEO.remove(fileNode);
 					sFileListJPG.remove(fileNode);
 					sFilelistBACKVIDEO.remove(fileNode);
+					sFilelistSOSFrontVIDEO.remove(fileNode);
+					sFilelistSOSBACKVIDEO.remove(fileNode);
 					stackFileListBACKVIDEO.remove(fileNode);
 					stackFileListVIDEO.remove(fileNode);
 					stackFileListJPG.remove(fileNode);
 					mFileListJPGAdapter.notifyDataSetChanged() ;
 					mFileListVIDEOAdapter.notifyDataSetChanged();
 					mFileListBACKVIDEOAdapter.notifyDataSetChanged();
+					mFileListSOSFrontVIDEOAdapter.notifyDataSetChanged();
+					mFileListSOSBACKVIDEOAdapter.notifyDataSetChanged();
+
 					//mFileListTitle.setText(mFileBrowser + " : " + mDirectory + " (" + sFileList.size()
 					//		+ " " + mItems + ")") ;
 					mProgDlg.setMessage("Please wait, deleteing " + fileNode.mName);
@@ -1261,15 +1394,27 @@ public class FileBrowserFragment extends Fragment {
 		mFileListJPGAdapter = new FileListAdapter(inflater, sFileListJPG) ;
 		mFileListVIDEOAdapter = new FileListAdapter(inflater, sFileListVIDEO) ;
 		mFileListBACKVIDEOAdapter = new FileListAdapter(inflater, stackFileListBACKVIDEO) ;
+		mFileListSOSFrontVIDEOAdapter=new FileListAdapter(inflater,sFilelistSOSFrontVIDEO);
+		mFileListSOSBACKVIDEOAdapter=new FileListAdapter(inflater,sFilelistSOSBACKVIDEO);
 		mSaveButton = (LinearLayout) view.findViewById(R.id.browserDownloadButton) ;
 		mDeleteButton = (LinearLayout) view.findViewById(R.id.browserDeleteButton) ;
-		btn_video = (LinearLayout) view.findViewById(R.id.btn_video) ;
+
+		btn_frontvideo = (LinearLayout) view.findViewById(R.id.btn_frontvideo) ;
 		btn_backvideo= (LinearLayout) view.findViewById(R.id.btn_backvideo);
 		btn_photo = (LinearLayout) view.findViewById(R.id.btn_photo) ;
+		btn_video= (LinearLayout) view.findViewById(R.id.btn_video);
+		btn_sosvideo= (LinearLayout) view.findViewById(R.id.btn_sosfile);
+		btn_sosfrontvideo= (LinearLayout) view.findViewById(R.id.btn_sosfrontvideo);
+		btn_sosbackvideo= (LinearLayout) view.findViewById(R.id.btn_sosbackvideo);
 		mOpenButton = (LinearLayout) view.findViewById(R.id.browserOpenButton) ;
+		sosfb_layout= (LinearLayout) view.findViewById(R.id.sosfb_layout);
+		fblayout= (LinearLayout) view.findViewById(R.id.fb_layout);
+
 		mFileListView = (RTPullListView) view.findViewById(R.id.browserList) ;
 		jpgFileListview= (RTPullListView) view.findViewById(R.id.browserList_jpg);
 		backFileListview= (RTPullListView) view.findViewById(R.id.browserList_backvideo);
+		sosfrontListview= (RTPullListView) view.findViewById(R.id.browserList_sosfrontvideo);
+		sosbackListview= (RTPullListView) view.findViewById(R.id.browserList_sosbackvideo);
 		//mFileListAdapter.registerDataSetObserver(mDataSetobserver);
 		mFileBrowser = getActivity().getResources().getString(R.string.label_file_browser) ;
 		mReading = getActivity().getResources().getString(R.string.label_reading) ;
@@ -1279,6 +1424,8 @@ public class FileBrowserFragment extends Fragment {
 			threeviedourl=new URL("http://"+mIp+ mPath);
 			threebackviedourl=new URL("http://"+mIp+ mPath);
 			threephotourl=new URL("http://"+mIp+ mPath);
+			threesosbackvideo=new URL("http://"+mIp+ mPath);
+			threesosfrontvideo=new URL("http://"+mIp+ mPath);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -1289,20 +1436,23 @@ public class FileBrowserFragment extends Fragment {
 		{
 			case 1:
 				VERSION=v;
+				fblayout.setVisibility(View.GONE);
+				btn_sosvideo.setVisibility(View.GONE);
 				break;
 			case 2:
 				VERSION=v;
+				fblayout.setVisibility(View.GONE);
+				btn_sosvideo.setVisibility(View.GONE);
 				break;
 			case 3:
 				VERSION=v;
 				btn_backvideo.setVisibility(View.VISIBLE);
+				fblayout.setVisibility(View.VISIBLE);
+				btn_sosvideo.setVisibility(View.VISIBLE);
 				break;
 			default:
 				break;
 		}
-
-		//mFileListTitle = (TextView) view.findViewById(R.id.browserTitle) ;
-		//mFileListTitle.setText(mFileBrowser + " : " + mDirectory) ;
 
 		mSaveButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -1347,17 +1497,110 @@ public class FileBrowserFragment extends Fragment {
 			}
 		}) ;
 
+		mOpenButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mCurrentButton = BUTTON_OPEN;
+				new GetRecordStatus().execute();
+			}
+		}) ;
+
 		btn_video.setEnabled(false);
 		btn_video.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(VERSION>2){
+					fblayout.setVisibility(View.VISIBLE);
+					sosfb_layout.setVisibility(View.GONE);
+				}
+
+				btn_video.setEnabled(false);
+				btn_sosvideo.setEnabled(true);
+				btn_photo.setEnabled(true);
+
+				mFileListView.setVisibility(View.VISIBLE);
+				jpgFileListview.setVisibility(View.GONE);
+				backFileListview.setVisibility(View.GONE);
+				sosfrontListview.setVisibility(View.GONE);
+				sosbackListview.setVisibility(View.GONE);
+
+			}
+		});
+		btn_sosvideo.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				fblayout.setVisibility(View.GONE);
+				sosfb_layout.setVisibility(View.VISIBLE);
+
+				jpgFileListview.setVisibility(View.GONE);
+				backFileListview.setVisibility(View.GONE);
+				mFileListView.setVisibility(View.GONE);
+				sosfrontListview.setVisibility(View.VISIBLE);
+				sosbackListview.setVisibility(View.GONE);
+				btn_sosvideo.setEnabled(false);
+				btn_video.setEnabled(true);
+				btn_photo.setEnabled(true);
+				if (isfirstSOSfrontViedeo) {
+					mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
+					new SOSFrontViedoDownFileListTask().execute(new FileBrowser(threesosfrontvideo,
+							FileBrowser.COUNT_MAX));
+				}
+				sosfrontListview.setAdapter(mFileListSOSFrontVIDEOAdapter);
+				mFileListSOSFrontVIDEOAdapter.notifyDataSetChanged();
+
+			}
+		});
+		btn_photo.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mFileListView.setVisibility(View.GONE);
+				backFileListview.setVisibility(View.GONE);
+				jpgFileListview.setVisibility(View.VISIBLE);
+				fblayout.setVisibility(View.GONE);
+				sosfb_layout.setVisibility(View.GONE);
+
+				isvideo = false;
+				btn_photo.setEnabled(false);
+				btn_sosvideo.setEnabled(true);
+				btn_video.setEnabled(true);
+
+				if (isfirstPhoto) {
+					isfirstPhoto = false;
+					isstatusPhoto = true;
+					mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
+					switch (VERSION) {
+						case 1:
+							new ContiunedDownloadTask().execute(rowsers);
+							break;
+						case 2:
+							new ContiunedDownloadTask().execute(rowsers);
+							break;
+						case 3:
+							new PhotoDownFileListTask().execute(new FileBrowser(threephotourl,
+									FileBrowser.COUNT_MAX));
+							break;
+						default:
+							break;
+					}
+				}
+				jpgFileListview.setAdapter(mFileListJPGAdapter);
+				mFileListJPGAdapter.notifyDataSetChanged();
+			}
+		});
+
+		btn_frontvideo.setEnabled(false);
+		btn_frontvideo.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				mFileListView.setVisibility(View.VISIBLE);
 				jpgFileListview.setVisibility(View.GONE);
 				backFileListview.setVisibility(View.GONE);
+				sosfrontListview.setVisibility(View.GONE);
+				sosbackListview.setVisibility(View.GONE);
 				isvideo = true;
-				btn_video.setEnabled(false);
+				btn_frontvideo.setEnabled(false);
 				btn_backvideo.setEnabled(true);
-				btn_photo.setEnabled(true);
+
 				//m_fileformat = FileNode.Format.all;
 				mFileListView.setAdapter(mFileListVIDEOAdapter);
 				mFileListVIDEOAdapter.notifyDataSetChanged();
@@ -1366,99 +1609,70 @@ public class FileBrowserFragment extends Fragment {
 		btn_backvideo.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				btn_video.setEnabled(true);
-				btn_photo.setEnabled(true);
+				btn_frontvideo.setEnabled(true);
 				btn_backvideo.setEnabled(false);
 				mFileListView.setVisibility(View.GONE);
 				jpgFileListview.setVisibility(View.GONE);
 				backFileListview.setVisibility(View.VISIBLE);
-				if (isfirstBackViedeo){
+				sosfrontListview.setVisibility(View.GONE);
+				sosbackListview.setVisibility(View.GONE);
+				if (isfirstBackViedeo) {
 					mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
-						new BackViedoDownFileListTask().execute(new FileBrowser(threebackviedourl,
-								FileBrowser.COUNT_MAX)) ;
+					new BackViedoDownFileListTask().execute(new FileBrowser(threebackviedourl,
+							FileBrowser.COUNT_MAX));
 
 				}
 				backFileListview.setAdapter(mFileListBACKVIDEOAdapter);
 				mFileListBACKVIDEOAdapter.notifyDataSetChanged();
 			}
 		});
-		btn_photo.setOnClickListener(new OnClickListener(){
+		btn_sosfrontvideo.setEnabled(false);
+		btn_sosfrontvideo.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				btn_sosfrontvideo.setEnabled(false);
+				btn_sosbackvideo.setEnabled(true);
 				mFileListView.setVisibility(View.GONE);
+				jpgFileListview.setVisibility(View.GONE);
 				backFileListview.setVisibility(View.GONE);
-				jpgFileListview.setVisibility(View.VISIBLE);
-				isvideo = false;
-				btn_photo.setEnabled(false);
-				btn_video.setEnabled(true);
-				btn_backvideo.setEnabled(true);
-				if (isfirstPhoto){
-					isfirstPhoto=false;
-					isstatusPhoto=true;
-					mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
-					switch (VERSION){
-						case 1:	new ContiunedDownloadTask().execute(rowsers);
-							break;
-						case 2: new ContiunedDownloadTask().execute(rowsers);
-							break;
-						case 3:
-								new PhotoDownFileListTask().execute(new FileBrowser(threephotourl,
-										FileBrowser.COUNT_MAX)) ;
-							break;
-						default:
-							break;
-					}
-				}
+				sosfrontListview.setVisibility(View.VISIBLE);
+				sosbackListview.setVisibility(View.GONE);
 
-				//m_fileformat = FileNode.Format.jpeg;
-				jpgFileListview.setAdapter(mFileListJPGAdapter);
-				mFileListJPGAdapter.notifyDataSetChanged();
 			}
 		});
-		mOpenButton.setOnClickListener(new OnClickListener() {
+
+		btn_sosbackvideo.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mCurrentButton = BUTTON_OPEN;
-				new GetRecordStatus().execute();
-				///modify by eric
-				/*FileNode fileNode = sSelectedFiles.get(0);
-				if (fileNode.mFormat == Format.mov
-					||fileNode.mFormat == Format.mp4
-					||fileNode.mFormat == Format.avi) {
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					 CarDV WiFi Support Video container is 3GP (.MOV) 
-					 For HTTP File Streaming 
-					intent.setDataAndType(Uri.parse("http://" + mIp + fileNode.mName), "video/3gp") ;
-					startActivity(intent);
-
-					 For HTML5 Video Streaming 
-//					String filename = fileNode.mName.replaceAll("/", "\\$");
-//					Intent browserIntent = new Intent(Intent.ACTION_VIEW,
-//								Uri.parse("http://"+mIp+"/cgi-bin/Config.cgi?action=play&property=" + filename));
-//					startActivity(browserIntent);
-//					mSaveButton.setEnabled(false) ;
-//					mDeleteButton.setEnabled(false) ;
-//					mOpenButton.setEnabled(false) ;
+				btn_sosbackvideo.setEnabled(false);
+				btn_sosfrontvideo.setEnabled(true);
+				mFileListView.setVisibility(View.GONE);
+				jpgFileListview.setVisibility(View.GONE);
+				backFileListview.setVisibility(View.GONE);
+				sosfrontListview.setVisibility(View.GONE);
+				sosbackListview.setVisibility(View.VISIBLE);
+				if (isfirstSOSbackViedeo) {
+					mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
+					new SOSBackViedoDownFileListTask().execute(new FileBrowser(threesosbackvideo,
+							FileBrowser.COUNT_MAX));
 				}
-				else if(fileNode.mFormat ==Format.jpeg)
-				{
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					 CarDV WiFi Support Video container is 3GP (.MOV) 
-					 For HTTP File Streaming 
-					intent.setDataAndType(Uri.parse("http://" + mIp + fileNode.mName), "image/jpeg") ;
-					startActivity(intent);
-				}*/
+				sosbackListview.setAdapter(mFileListSOSBACKVIDEOAdapter);
+				mFileListSOSBACKVIDEOAdapter.notifyDataSetChanged();
 			}
-		}) ;
+		});
 
 
 		initVideoListview();
 		initJPGListView();
 		initBackVideoListview();
+		initSOSFrontvideoListView();
+		initSOSBcakvideoListView();
 
 		mFileListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE) ;
 		jpgFileListview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE) ;
 		backFileListview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		sosfrontListview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		sosbackListview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		if(isvideo)
 		{
 			mFileListView.setAdapter(mFileListVIDEOAdapter);
@@ -1468,37 +1682,23 @@ public class FileBrowserFragment extends Fragment {
 			jpgFileListview.setAdapter(mFileListJPGAdapter);
 		}
 		backFileListview.setAdapter(mFileListBACKVIDEOAdapter);
-
 		mFileListView.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
 				ViewTag viewTag = (ViewTag) view.getTag();
 				if (viewTag != null) {
-
 					FileNode file = viewTag.mFileNode;
-
 					CheckedTextView checkBox = (CheckedTextView) view.findViewById(R.id.fileListCheckBox);
 					checkBox.setChecked(!checkBox.isChecked());
 					file.mSelected = checkBox.isChecked();
-
 					if (file.mSelected)
 						sSelectedFiles.add(file);
 					else
 						sSelectedFiles.remove(file);
-
 					if (sSelectedFiles.size() > 0) {
 						if (sSelectedFiles.size() < 2) {
 							mOpenButton.setEnabled(true);
 						}
-							/*
-							if (sSelectedFiles.get(0).mFormat == Format.mov) {
-								mOpenButton.setEnabled(true);
-							}
-						} else {
-							mOpenButton.setEnabled(false) ;
-						}*/
 						mSaveButton.setEnabled(true);
 						mDeleteButton.setEnabled(true);
 					} else {
@@ -1515,29 +1715,18 @@ public class FileBrowserFragment extends Fragment {
 
 				ViewTag viewTag = (ViewTag) view.getTag() ;
 				if (viewTag != null) {
-
 					FileNode file = viewTag.mFileNode ;
-
 					CheckedTextView checkBox = (CheckedTextView) view.findViewById(R.id.fileListCheckBox) ;
 					checkBox.setChecked(!checkBox.isChecked()) ;
 					file.mSelected = checkBox.isChecked() ;
-
 					if (file.mSelected)
 						sSelectedFiles.add(file) ;
 					else
 						sSelectedFiles.remove(file) ;
-
 					if (sSelectedFiles.size() > 0) {
 						if(sSelectedFiles.size() < 2) {
 							mOpenButton.setEnabled(true);
 						}
-							/*
-							if (sSelectedFiles.get(0).mFormat == Format.mov) {
-								mOpenButton.setEnabled(true);
-							}
-						} else {
-							mOpenButton.setEnabled(false) ;
-						}*/
 						mSaveButton.setEnabled(true) ;
 						mDeleteButton.setEnabled(true) ;
 					} else {
@@ -1549,6 +1738,62 @@ public class FileBrowserFragment extends Fragment {
 			}
 		}) ;
 		backFileListview.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				ViewTag viewTag= (ViewTag) view.getTag();
+				if (viewTag!=null){
+					FileNode file=viewTag.mFileNode;
+					CheckedTextView checkBox = (CheckedTextView) view.findViewById(R.id.fileListCheckBox) ;
+					checkBox.setChecked(!checkBox.isChecked()) ;
+					file.mSelected = checkBox.isChecked() ;
+					if (file.mSelected)
+						sSelectedFiles.add(file);
+					else
+						sSelectedFiles.remove(file);
+					if (sSelectedFiles.size() > 0) {
+						if(sSelectedFiles.size() < 2) {
+							mOpenButton.setEnabled(true);
+						}
+						mSaveButton.setEnabled(true) ;
+						mDeleteButton.setEnabled(true) ;
+					}
+					else {
+						mOpenButton.setEnabled(false) ;
+						mSaveButton.setEnabled(false) ;
+						mDeleteButton.setEnabled(false) ;
+					}
+				}
+			}
+		});
+		sosfrontListview.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				ViewTag viewTag= (ViewTag) view.getTag();
+				if (viewTag!=null){
+					FileNode file=viewTag.mFileNode;
+					CheckedTextView checkBox = (CheckedTextView) view.findViewById(R.id.fileListCheckBox) ;
+					checkBox.setChecked(!checkBox.isChecked()) ;
+					file.mSelected = checkBox.isChecked() ;
+					if (file.mSelected)
+						sSelectedFiles.add(file);
+					else
+						sSelectedFiles.remove(file);
+					if (sSelectedFiles.size() > 0) {
+						if(sSelectedFiles.size() < 2) {
+							mOpenButton.setEnabled(true);
+						}
+						mSaveButton.setEnabled(true) ;
+						mDeleteButton.setEnabled(true) ;
+					}
+					else {
+						mOpenButton.setEnabled(false) ;
+						mSaveButton.setEnabled(false) ;
+						mDeleteButton.setEnabled(false) ;
+					}
+				}
+			}
+		});
+		sosbackListview.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				ViewTag viewTag= (ViewTag) view.getTag();
@@ -1643,7 +1888,6 @@ public class FileBrowserFragment extends Fragment {
 		footerView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//moreProgressBar.setVisibility(View.VISIBLE);
 				Log.d("ssss", "图片点击事件");
 				if (VERSION==3){
 					new PhotoDownFileListTask().execute(new FileBrowser(threephotourl,
@@ -1651,9 +1895,59 @@ public class FileBrowserFragment extends Fragment {
 				}else {
 				new ContiunedDownloadTask().execute(rowsers);
 				}
-//				jpgFileListview.setSelection(0);
 				mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
-				//myHandler.sendEmptyMessage(LOAD_MORE_SUCCESS);
+			}
+		});
+	}
+	TextView tv_sosfrontvideonomore;
+	private void initSOSFrontvideoListView() {
+		RelativeLayout footerView;
+		LayoutInflater inflater;
+		View vieww;
+		//添加listview底部获取更多按钮（可自定义）
+		Activity activity = getActivity();
+		inflater = LayoutInflater.from(activity);
+		vieww = inflater.inflate(R.layout.list_footview, null);
+		footerView =(RelativeLayout) vieww.findViewById(R.id.list_footview);
+		tv_sosfrontvideonomore=	 (TextView)vieww.findViewById(R.id.text_view) ;
+		moreProgressBar = (ProgressBar) vieww.findViewById(R.id.footer_progress);
+		sosfrontListview.addFooterView(footerView);
+		//获取更多监听器
+		footerView.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Log.d("moop", "SOS前路加载更多");
+				if (VERSION==3){
+					new SOSFrontViedoDownFileListTask().execute(new FileBrowser(threesosfrontvideo,
+							FileBrowser.COUNT_MAX)) ;
+				}
+				mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
+			}
+		});
+	}
+	TextView tv_sosbackvideonomore;
+	private void initSOSBcakvideoListView() {
+		RelativeLayout footerView;
+		LayoutInflater inflater;
+		View vieww;
+		//添加listview底部获取更多按钮（可自定义）
+		Activity activity = getActivity();
+		inflater = LayoutInflater.from(activity);
+		vieww = inflater.inflate(R.layout.list_footview, null);
+		footerView =(RelativeLayout) vieww.findViewById(R.id.list_footview);
+		tv_sosbackvideonomore=	 (TextView)vieww.findViewById(R.id.text_view) ;
+		moreProgressBar = (ProgressBar) vieww.findViewById(R.id.footer_progress);
+		sosbackListview.addFooterView(footerView);
+		//获取更多监听器
+		footerView.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Log.d("moop", "SOS后路加载更多");
+				if (VERSION==3){
+					new SOSBackViedoDownFileListTask().execute(new FileBrowser(threesosfrontvideo,
+							FileBrowser.COUNT_MAX)) ;
+				}
+				mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
 			}
 		});
 	}
@@ -1755,6 +2049,12 @@ public class FileBrowserFragment extends Fragment {
 				case MSG_PHOTONOMORE:
 					tv_photonomore.setText("没有更多了");
 					break;
+				case MSG_SOSFRONTVIDEONOMORE:
+					tv_sosfrontvideonomore.setText("没有更多了");
+					break;
+				case MSG_SOSBACKVIDEONOMORE:
+					tv_sosbackvideonomore.setText("没有更多了");
+					break;
 			case MSG_SHOWDIALOG:
 					showWattingDialog();
 					break;
@@ -1779,6 +2079,22 @@ public class FileBrowserFragment extends Fragment {
 						e.printStackTrace() ;
 					}
 					break;
+				case MSG_CONNECTERROREXIT:
+					final CustomDialog alertDialog = new CustomDialog.Builder(getActivity())
+							.setTitle(getResources().getString(R.string.connecterror))
+							.setMessage(R.string.verify_error)
+							.setCancelable(false)
+							.setPositiveButton(R.string.label_ok, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface arg0, int arg1) {
+// TODO Auto-generated method stub
+									Log.i("moop", "点击退出");
+									getFragmentManager().popBackStack();
+									arg0.dismiss();
+									return;
+								}
+							}).create();
+					alertDialog.show();
 			default:
 					break;
 			}
@@ -1792,8 +2108,8 @@ public class FileBrowserFragment extends Fragment {
 		if (isfirstOpen){
 		if (sDownloadTask != null) {
 			sDownloadTask.showProgress(getActivity()) ;
-		} else {
 
+		} else {
 			try {
 				mTryTimes = G_TRYMAXTIMES;
 				switch (VERSION){
@@ -1809,6 +2125,23 @@ public class FileBrowserFragment extends Fragment {
 							FileBrowser.COUNT_MAX)) ;
 						Log.d("moop", "  第三个版本请求");
 				}
+				if (VERSION==0){
+					CustomDialog alertDialog = new CustomDialog.Builder(getActivity())
+							.setTitle(getResources().getString(R.string.verify))
+							.setMessage(R.string.verify_error)
+							.setPositiveButton(R.string.label_ok,new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface arg0, int arg1) {
+// TODO Auto-generated method stub
+									arg0.dismiss();
+									Activity act = getActivity();
+									if(act!=null)
+										act.finish();
+								}
+							}).create();
+
+					alertDialog.show() ;
+				}else
 				showWattingDialog();
 			} catch (MalformedURLException e) {
 				e.printStackTrace() ;

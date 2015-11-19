@@ -21,6 +21,7 @@
     <string name="app_Version">应用程序版本</string>
     <string name="app_name">行车拍拍</string>
     <string name="backvideo">后视频</string>
+    <string name="connecterror">连接错误</string>
     <string name="connecting_to_camera">Connecting to Camera</string>
     <string name="dialog_DHCP_error">请检查DHCP设定</string>
     <string name="dialog_no_connection_message">1. 确认相机WiFi已开启.\n2. 确认手机WiFi已开启.\n3. 将手机连线至相机.</string>
@@ -31,13 +32,14 @@
     <string name="dialog_no_connection_title">请检查连线设定:</string>
     <string name="downloading">正在下载....</string>
     <string name="ensure">确定</string>
-    <string name="error_key_too_long">密码字元过多.</string>
-    <string name="error_key_too_short">密码字元过少.</string>
+    <string name="error_key_too_long">密码字符过长.</string>
+    <string name="error_key_too_short">请输入八位长度的密码.</string>
     <string name="error_no_key">请输入密码.</string>
     <string name="error_no_ssid">请输入 WiFi SSID.</string>
     <string name="error_ssid_too_long">SSID 超过长度限制.</string>
     <string name="exit_trip">退出后是否继续录像?</string>
     <string name="format_attaction">即将执行格式化存储卡操作</string>
+    <string name="frontvideo">前视频</string>
     <string name="help">使用指南</string>
     <string name="label_50Hz">50Hz</string>
     <string name="label_60Hz">60Hz</string>
@@ -153,6 +155,9 @@
     <string name="release_to_refresh">松开刷新</string>
     <string name="sd_browser_open_stoprecord">需要停止录像才能开启文档</string>
     <string name="sd_browser_stoprecord">需要停止录像才能完成该操作</string>
+    <string name="sosbackvideo">后sos视频</string>
+    <string name="sosfile">sos文件</string>
+    <string name="sosfrontvideo">前sos视频</string>
     <string name="trip">提示</string>
     <string name="updating">最近更新：</string>
     <string name="verify">版本校验</string>

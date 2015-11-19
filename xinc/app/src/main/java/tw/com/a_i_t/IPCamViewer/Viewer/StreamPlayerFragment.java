@@ -748,11 +748,10 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 					Log.i("moop", "前");
 					playLiveStream();
              isMideaURL=true;
-				}
+					}
 //          play(MainActivity.sConnectionDelay);
 			}
 		});
-
 		getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC) ;
 		mHandlerUI.sendEmptyMessage(MSG_REFRESH_MUTE_STATE);
 		return view ;
@@ -919,13 +918,14 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 								@Override
 								public void onClick(DialogInterface arg0, int arg1) {
 // TODO Auto-generated method stub
+//									arg0.dismiss();
+//									Activity act = getActivity();
+//									if(act!=null)
+//										act.finish();
+									getFragmentManager().popBackStack();
 									arg0.dismiss();
-									Activity act = getActivity();
-									if(act!=null)
-										act.finish();
 								}
 							}).create();
-
 					alertDialog.show() ;
 					mHandler.sendEmptyMessageDelayed(MSG_DESTORY, 5000);
 					break;
@@ -1356,7 +1356,7 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 						}
 						catch(NumberFormatException e)
 						{
-							Log.e(TAG,"NumberFormatException="+lines[0]);
+							Log.e(TAG,"NumberFormatE4xception="+lines[0]);
 						}
 					}
 					if(mlocalB==mB)

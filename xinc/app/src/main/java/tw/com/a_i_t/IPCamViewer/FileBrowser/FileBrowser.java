@@ -75,9 +75,12 @@ public class FileBrowser {
 		return action + "&" + property + "&" + format + "&" + count ;
 	}
 	
-	private static String buildFirstQuery(String directory, Format aFormat, int aCount) {
-		
-		String from = "from=0" ;
+	public static String buildFirstQuery(String directory, Format aFormat, int aCount,int getDataCount) {
+		String from;
+		if (getDataCount>0){
+			from = "from="+String.valueOf(getDataCount);
+		}else
+			   from = "from=0" ;
 		
 		return buildQuery(directory, aFormat, aCount) + "&" + from ;
 	}
@@ -154,26 +157,24 @@ public class FileBrowser {
 		return null ;
 	}
 
-	public void retrieveFileList(String directory, Format format, boolean fromHead) {
+	public void retrieveFileList(String directory, Format format, boolean fromHead,int getDataCount) {
 
 		if (mCompleted && !fromHead) {
-			
 			return ;
 		}
-		
 		mCompleted = false ;
 		mFileList.clear() ;
-		
-		String query = fromHead ? buildFirstQuery(directory, format, mCount) : buildQuery(directory, format, mCount) ; 
-
+		String query;
+		if (getDataCount>=0){
+			query = buildFirstQuery(directory, format, mCount,getDataCount)  ;
+		}else {
+			 query = fromHead ? buildFirstQuery(directory, format, mCount,getDataCount) : buildQuery(directory, format, mCount) ;
+		}
 		URL url = null ;
-		
 		try {
-			
 			URI uri = new URI(mUrl.getProtocol(), mUrl.getUserInfo(), mUrl.getHost(), mUrl.getPort(),
 					mUrl.getPath(), query, mUrl.getRef()) ;
 			url = uri.toURL() ;
-			
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -181,16 +182,11 @@ public class FileBrowser {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		if (url == null) {
-			
 			return ;
 		}
-
 		Log.i("FileBrowser", url.toString()) ;
-
 		Document document = sendRequest(url) ;
-				
 		if (document == null) {
 			mIsError = true;
 			return ;
@@ -210,7 +206,7 @@ public class FileBrowser {
 
 	public void retrieveAllFileList(String directory, Format format) {
 
-		String firstQuery = buildFirstQuery(directory, format, mCount) ;
+		String firstQuery = buildFirstQuery(directory, format, mCount,0) ;
 		String query = buildQuery(directory, format, mCount) ;
 		
 		mFileList.clear() ;

@@ -2,20 +2,6 @@
 <items version="2" >
 
     <item
-        jar="E:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
-        jumboMode="false"
-        revision="23.0.0 rc3"
-        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa">
-        <dex dex="C:\Users\bzmoop\Desktop\xinc\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-5b16f73fbc8a40c20d77aefb75b595d0c21c6c23.jar" />
-    </item>
-    <item
-        jar="C:\Users\bzmoop\Desktop\xinc\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0 rc3"
-        sha1="8694693636ab36910c8100ce527c258ff3ebece0">
-        <dex dex="C:\Users\bzmoop\Desktop\xinc\app\build\intermediates\pre-dexed\debug\classes-9e14ce2d0877f8b2835ee182f8888b424af29303.jar" />
-    </item>
-    <item
         jar="E:\john_work\xinc\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\jars\libs\internal_impl-20.0.0.jar"
         jumboMode="false"
         revision="23.0.0 rc3"
@@ -23,18 +9,18 @@
         <dex dex="E:\john_work\xinc\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-be095b60cdcb167bd9fd4d3bbf728da64ee7b4a7.jar" />
     </item>
     <item
+        jar="E:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
+        jumboMode="false"
+        revision="23.0.0 rc3"
+        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa">
+        <dex dex="E:\john_work\xinc\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-5b16f73fbc8a40c20d77aefb75b595d0c21c6c23.jar" />
+    </item>
+    <item
         jar="E:\john_work\xinc\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0 rc3"
         sha1="8694693636ab36910c8100ce527c258ff3ebece0">
         <dex dex="E:\john_work\xinc\app\build\intermediates\pre-dexed\debug\classes-1ae8c724301d8c7a096cf8dae7389d505cac0fd4.jar" />
-    </item>
-    <item
-        jar="C:\Users\bzmoop\Desktop\xinc\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\jars\libs\internal_impl-20.0.0.jar"
-        jumboMode="false"
-        revision="23.0.0 rc3"
-        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d">
-        <dex dex="C:\Users\bzmoop\Desktop\xinc\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-11e34dbf6b42fed42af92f2176e9ab4d27c9878f.jar" />
     </item>
 
 </items>

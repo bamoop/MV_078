@@ -30,8 +30,7 @@ public class MySettingAdapter extends BaseAdapter {
 		mAdapter = this;
 	}
 	public MySettingAdapter(LayoutInflater inflater,
-			SettingItem[] fileList) {
-
+		SettingItem[] fileList) {
 		mInflater = inflater;
 		mFileList = new ArrayList<SettingItem>();
 		for(int i=0;i<fileList.length;i++)
@@ -91,7 +90,6 @@ public class MySettingAdapter extends BaseAdapter {
 					int position =  (Integer) arg0.getTag();
 					if(arg1)
 					{
-						
 						for(int i=0;i<getCount();i++)
 						{
 							if(i!=position)
@@ -105,7 +103,6 @@ public class MySettingAdapter extends BaseAdapter {
 								{
 									mAdapterClickListener.OnClickListener(position);
 								}
-								
 							}
 						}
 					}

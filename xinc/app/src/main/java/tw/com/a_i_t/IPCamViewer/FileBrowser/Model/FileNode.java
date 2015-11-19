@@ -12,7 +12,7 @@ public class FileNode extends FileBrowserNode{
 	
 	public enum Format {
 		
-		mov, avi, mp4, jpeg, all
+		mov, avi, mp4, jpeg, all,Fnormal,Rnormal,Fsos,Rsos;
 	}
 	
 	public String mName ;
