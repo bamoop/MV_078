@@ -93,6 +93,7 @@ public class FileBrowserFragment extends Fragment {
 	private static final int G_TRYMAXTIMES = 5;
 	private static final int LOAD_MORE_SUCCESS = 3;//点击加载更多成功
 	private static final int LOAD_NEW_INFO = 5;    //加载新信息
+	private static final int MSG_CLEARSELECT=1;		//清除listviewitem选中状态
 	private static final int G_TRYTIME = 5000;  //5s
 	private int mTryTimes = G_TRYMAXTIMES;
 	private FileNode.Format m_fileformat = FileNode.Format.all;
@@ -637,17 +638,19 @@ public class FileBrowserFragment extends Fragment {
 				sortfile();
 				if (isstatusVideo) {
 					isstatusVideo = false;
+					if (!result.isCompleted() && sFileListVIDEO.size() < 6) {
+						new ContiunedDownloadTask().execute(rowsers);
+					}else mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
 				}
-				mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
-
-				if (isstatusPhoto)
+//				mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
+				else if (isstatusPhoto)
 				{
 					isstatusPhoto = true;
 					if (!result.isCompleted() && sFileListJPG.size() < 6) {
 							new ContiunedDownloadTask().execute(rowsers);
 					} else {
 						isstatusPhoto = false;
-						mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
+						 mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
 					}
 				}
 					if (!result.isCompleted() && fileList.size() != 0) {
@@ -701,7 +704,6 @@ public class FileBrowserFragment extends Fragment {
 			Activity activity = getActivity() ;
 			if (activity != null) {
 				List<FileNode> fileList = result.getFileList() ;
-
 				if(!result.mIsError)
 				{
 					Log.d(TAG,"onPostExecute() !IsError");
@@ -716,7 +718,6 @@ public class FileBrowserFragment extends Fragment {
 				{
 					//try again!
 					Log.d(TAG, "error! try again");
-					Log.i("moop", "IsError---");
 					mHandler.sendEmptyMessage(MSG_CONNECTERROREXIT);
 //					mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_GETFILELIST),G_TRYTIME);
 				}
@@ -742,12 +743,12 @@ public class FileBrowserFragment extends Fragment {
 					Log.i("moop", "第一次，视频不足六个，继续请求" );
 				}
 				if (!result.isCompleted() && fileList.size() > 0) {
-					mFileListVIDEOAdapter.notifyDataSetChanged();
 					mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
 				} else {
 					mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
 					setWaitingState(false) ;
 				}
+				mFileListVIDEOAdapter.notifyDataSetChanged();
 			}
 		}
 	}
@@ -1517,7 +1518,9 @@ public class FileBrowserFragment extends Fragment {
 				btn_video.setEnabled(false);
 				btn_sosvideo.setEnabled(true);
 				btn_photo.setEnabled(true);
-
+				btn_frontvideo.setEnabled(false);
+				btn_backvideo.setEnabled(true);
+				myHandler.sendEmptyMessage(MSG_CLEARSELECT);
 				mFileListView.setVisibility(View.VISIBLE);
 				jpgFileListview.setVisibility(View.GONE);
 				backFileListview.setVisibility(View.GONE);
@@ -1537,7 +1540,9 @@ public class FileBrowserFragment extends Fragment {
 				mFileListView.setVisibility(View.GONE);
 				sosfrontListview.setVisibility(View.VISIBLE);
 				sosbackListview.setVisibility(View.GONE);
+				myHandler.sendEmptyMessage(MSG_CLEARSELECT);
 				btn_sosvideo.setEnabled(false);
+				btn_sosfrontvideo.setEnabled(false);
 				btn_video.setEnabled(true);
 				btn_photo.setEnabled(true);
 				if (isfirstSOSfrontViedeo) {
@@ -1558,7 +1563,7 @@ public class FileBrowserFragment extends Fragment {
 				jpgFileListview.setVisibility(View.VISIBLE);
 				fblayout.setVisibility(View.GONE);
 				sosfb_layout.setVisibility(View.GONE);
-
+				myHandler.sendEmptyMessage(MSG_CLEARSELECT);
 				isvideo = false;
 				btn_photo.setEnabled(false);
 				btn_sosvideo.setEnabled(true);
@@ -1600,6 +1605,7 @@ public class FileBrowserFragment extends Fragment {
 				isvideo = true;
 				btn_frontvideo.setEnabled(false);
 				btn_backvideo.setEnabled(true);
+				myHandler.sendEmptyMessage(MSG_CLEARSELECT);
 
 				//m_fileformat = FileNode.Format.all;
 				mFileListView.setAdapter(mFileListVIDEOAdapter);
@@ -1616,6 +1622,7 @@ public class FileBrowserFragment extends Fragment {
 				backFileListview.setVisibility(View.VISIBLE);
 				sosfrontListview.setVisibility(View.GONE);
 				sosbackListview.setVisibility(View.GONE);
+				myHandler.sendEmptyMessage(MSG_CLEARSELECT);
 				if (isfirstBackViedeo) {
 					mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
 					new BackViedoDownFileListTask().execute(new FileBrowser(threebackviedourl,
@@ -1637,6 +1644,7 @@ public class FileBrowserFragment extends Fragment {
 				backFileListview.setVisibility(View.GONE);
 				sosfrontListview.setVisibility(View.VISIBLE);
 				sosbackListview.setVisibility(View.GONE);
+				myHandler.sendEmptyMessage(MSG_CLEARSELECT);
 
 			}
 		});
@@ -1651,6 +1659,7 @@ public class FileBrowserFragment extends Fragment {
 				backFileListview.setVisibility(View.GONE);
 				sosfrontListview.setVisibility(View.GONE);
 				sosbackListview.setVisibility(View.VISIBLE);
+				myHandler.sendEmptyMessage(MSG_CLEARSELECT);
 				if (isfirstSOSbackViedeo) {
 					mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
 					new SOSBackViedoDownFileListTask().execute(new FileBrowser(threesosbackvideo,
@@ -1660,7 +1669,6 @@ public class FileBrowserFragment extends Fragment {
 				mFileListSOSBACKVIDEOAdapter.notifyDataSetChanged();
 			}
 		});
-
 
 		initVideoListview();
 		initJPGListView();
@@ -1836,8 +1844,8 @@ public class FileBrowserFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				moreProgressBar.setVisibility(View.VISIBLE);
-					new BackViedoDownFileListTask().execute(new FileBrowser(threebackviedourl,
-                            FileBrowser.COUNT_MAX)) ;
+				new BackViedoDownFileListTask().execute(new FileBrowser(threebackviedourl,
+						FileBrowser.COUNT_MAX));
 				mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
 			}
 		});
@@ -1917,9 +1925,9 @@ public class FileBrowserFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Log.d("moop", "SOS前路加载更多");
-				if (VERSION==3){
+				if (VERSION == 3) {
 					new SOSFrontViedoDownFileListTask().execute(new FileBrowser(threesosfrontvideo,
-							FileBrowser.COUNT_MAX)) ;
+							FileBrowser.COUNT_MAX));
 				}
 				mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
 			}
@@ -1951,7 +1959,20 @@ public class FileBrowserFragment extends Fragment {
 			}
 		});
 	}
+	private void clsSelect(){
 
+		Log.d("moop", "sSelectedFiles.size="+sSelectedFiles.size());
+		if (sSelectedFiles.size()>0){
+			FileNode fileNode= sSelectedFiles.remove(0);
+			fileNode.mSelected=false;
+			Log.d("moop", "取消");
+			mFileListVIDEOAdapter.notifyDataSetChanged();
+		}
+		if(sSelectedFiles.size()>0){
+			clsSelect();
+		}
+
+	}
 	//点击加载更多listview结果处理
 	private Handler myHandler = new Handler(){
 
@@ -1970,6 +1991,8 @@ public class FileBrowserFragment extends Fragment {
 //					mFileListView.setSelection(0);
 					mFileListView.onRefreshComplete();
 					break;
+				case MSG_CLEARSELECT:
+					clsSelect();
 				default:
 					break;
 			}
@@ -1990,6 +2013,7 @@ public class FileBrowserFragment extends Fragment {
 		LayoutInflater layoutInflater = LayoutInflater.from(activity);
 		View v = layoutInflater.inflate(R.layout.loading_dialog, null);
 		mProgressDialog.show() ;
+		mProgressDialog.setCancelable(false);
 		mProgressDialog.setContentView(v);
 	}
 	private void dismissdialog()
@@ -2126,21 +2150,7 @@ public class FileBrowserFragment extends Fragment {
 						Log.d("moop", "  第三个版本请求");
 				}
 				if (VERSION==0){
-					CustomDialog alertDialog = new CustomDialog.Builder(getActivity())
-							.setTitle(getResources().getString(R.string.verify))
-							.setMessage(R.string.verify_error)
-							.setPositiveButton(R.string.label_ok,new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface arg0, int arg1) {
-// TODO Auto-generated method stub
-									arg0.dismiss();
-									Activity act = getActivity();
-									if(act!=null)
-										act.finish();
-								}
-							}).create();
-
-					alertDialog.show() ;
+					mHandler.sendEmptyMessage(MSG_CONNECTERROREXIT);
 				}else
 				showWattingDialog();
 			} catch (MalformedURLException e) {

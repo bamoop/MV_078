@@ -389,8 +389,8 @@ public class MainActivity extends Activity {
 		s_Activity = this;
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 		int v = pref.getInt(g_version_check,G_UNKNOWN_VERSION);
-//		if(v ==G_UNKNOWN_VERSION)
-		if(true)
+		if(v ==G_UNKNOWN_VERSION)
+//		if(true)
 		{
 			Log.i("moop","请求版本信息");
 			new CameraFWVersion().execute();

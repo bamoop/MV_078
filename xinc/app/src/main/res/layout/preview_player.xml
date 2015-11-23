@@ -80,7 +80,8 @@
                android:layout_alignParentRight="true"
                android:background="@drawable/btn_shape_round"
                android:text="后"
-               android:textColor="@color/red"/>
+               android:textColor="@color/red"
+               android:visibility="gone"/>
            <LinearLayout android:background="@drawable/contro_bar_bg"
                android:layout_alignParentBottom="true"
                android:layout_width="fill_parent"
