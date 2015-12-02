@@ -147,11 +147,8 @@ public class FileBrowser {
 		}
 		return null ;
 	}
-	int x=0;
 	/*获取文件列表(目录,格式,是否首次请求)*/
 	public void retrieveFileList(String directory, Format format, boolean fromHead) {
-		x++;
-		Log.i("FileBrowser-----", String.valueOf(x)) ;
 		if (mCompleted && !fromHead) {
 			return ;
 		}
@@ -159,11 +156,13 @@ public class FileBrowser {
 		mFileList.clear() ;
 		//判断是否发送第一次请求
 		String query = fromHead ? buildFirstQuery(directory, format, mCount) : buildQuery(directory, format, mCount) ;
+		Log.d("moop","请求数据接口FB159---"+query);
 		URL url = null ;
 		try {
 			URI uri = new URI(mUrl.getProtocol(), mUrl.getUserInfo(), mUrl.getHost(), mUrl.getPort(),
 					mUrl.getPath(), query, mUrl.getRef()) ;
 			url = uri.toURL() ;
+
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -174,9 +173,8 @@ public class FileBrowser {
 		if (url == null) {
 			return ;
 		}
-		Log.i("FileBrowser90", url.toString()) ;
+		Log.i("moop","176--"+ url.toString()) ;
 		Document document = sendRequest(url) ;
-		Log.i("FileBrowser90",document.toString()) ;
 		if (document == null) {
 			mIsError = true;
 			return ;

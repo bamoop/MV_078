@@ -20,7 +20,7 @@
     <string name="SyncDeviceBTN">点击按钮与装置同步</string>
     <string name="Timesettings">时间设置</string>
     <string name="app_Version">应用程序版本</string>
-    <string name="app_name">E车E拍</string>
+    <string name="app_name">你开我拍</string>
     <string name="connecting_to_camera">Connecting to Camera</string>
     <string name="dialog_DHCP_error">请检查DHCP设定</string>
     <string name="dialog_no_connection_message">1. 确认相机WiFi已开启.\n2. 确认手机WiFi已开启.\n3. 将手机连线至相机.</string>

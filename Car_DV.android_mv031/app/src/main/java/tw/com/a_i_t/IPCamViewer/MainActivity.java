@@ -616,60 +616,58 @@ public class MainActivity extends Activity {
 						SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(s_Activity);
 					  final SharedPreferences.Editor editor = pref.edit();
 
-	    //add by John 15-11-3
-						final String versionok[]=new String[]{"第一个版本","第二个版本"};
-						Dialog alertDialog = new AlertDialog.Builder(MainActivity.this).
-						setTitle(R.string.title_selectversion)
-						.setCancelable(false)
-						.setSingleChoiceItems(versionok, 0, new DialogInterface.OnClickListener() {
-							@Override
-					public void onClick(DialogInterface dialog, int which) {
-						selectedFruitIndex = which;
-			}
-		}).
-				setPositiveButton("确认", new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Toast.makeText(MainActivity.this, versionok[selectedFruitIndex], Toast.LENGTH_SHORT).show();
-						switch (selectedFruitIndex){
-							case 0:
-								versionvalue = G_OLD_VERSION;
-								editor.putInt(g_version_check, versionvalue);
-								editor.commit();
-								break;
-							case 1:
-								versionvalue = G_NEW_VERSION;
-								editor.putInt(g_version_check, versionvalue);
-								editor.commit();
-								break;
-						}
-					}
-				}).
-				setNegativeButton("取消", new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						finish();
-					}
-				}).
-				create();
-						alertDialog.show();
-
-//						if(fwVersion.startsWith("1"))
-//						{
-//							value = G_OLD_VERSION;
-//						}
-//						else if(fwVersion.startsWith("2") || fwVersion.startsWith("3"))
-//						{
-////							value = G_NEW_VERSION;
-////							value = G_OLD_VERSION;
-//						}
-//						editor.putInt(g_version_check, versionvalue);
-//						Log.i("moop", "versionvalue"+versionvalue);
+//	    //add by John 15-11-3
+//						final String versionok[]=new String[]{"第一个版本","第二个版本"};
+//						Dialog alertDialog = new AlertDialog.Builder(MainActivity.this).
+//						setTitle(R.string.title_selectversion)
+//						.setCancelable(false)
+//						.setSingleChoiceItems(versionok, 0, new DialogInterface.OnClickListener() {
+//							@Override
+//					public void onClick(DialogInterface dialog, int which) {
+//						selectedFruitIndex = which;
+//			}
+//		}).
+//				setPositiveButton("确认", new DialogInterface.OnClickListener() {
+//
+//					@Override
+//					public void onClick(DialogInterface dialog, int which) {
+//						Toast.makeText(MainActivity.this, versionok[selectedFruitIndex], Toast.LENGTH_SHORT).show();
+//						switch (selectedFruitIndex){
+//							case 0:
+//								versionvalue = G_OLD_VERSION;
+//								editor.putInt(g_version_check, versionvalue);
 //								editor.commit();
+//								break;
+//							case 1:
+//								versionvalue = G_NEW_VERSION;
+//								editor.putInt(g_version_check, versionvalue);
+//								editor.commit();
+//								break;
+//						}
+//					}
+//				}).
+//				setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//
+//					@Override
+//					public void onClick(DialogInterface dialog, int which) {
+//						finish();
+//					}
+//				}).
+//				create();
+//						alertDialog.show();
 
-
+						if(fwVersion.startsWith("1"))
+						{
+							versionvalue = G_OLD_VERSION;
+						}
+						else if(fwVersion.startsWith("2") || fwVersion.startsWith("3"))
+						{
+							versionvalue = G_NEW_VERSION;
+//							versionvalue = G_OLD_VERSION;
+						}
+						editor.putInt(g_version_check, versionvalue);
+						Log.i("moop", "versionvalue"+versionvalue);
+								editor.commit();
 					}
 				}
 

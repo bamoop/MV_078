@@ -184,8 +184,11 @@ public class MediaList {
              * for 320x170 H.264, a few packets less on higher resolutions.
              * On Nexus S, the decoder latency seems to be about 7 packets.
              */
-            options.add(":file-caching=1500");
-            options.add(":network-caching=1500");
+            int its=1500;
+            options.add(":file-caching="+its);// 文件缓存
+            options.add(":network-caching="+its);//网络缓存
+            options.add(":live-caching="+its);//直播缓存
+            options.add(":sout-mux-caching="+1000);//输出缓存
             options.add(":codec=mediacodec,iomx,all");
         }
         if (noVideo)

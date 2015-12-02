@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tw.com.a_i_t.IPCamViewer"
     android:versionCode="12"
-    android:versionName="1.0.3" >
+    android:versionName="1.0.32" >
 
 
     <uses-sdk

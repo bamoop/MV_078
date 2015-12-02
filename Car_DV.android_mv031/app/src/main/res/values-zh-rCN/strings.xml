@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">E车E拍</string>
+    <string name="app_name">你开我拍</string>
     <string name="label_file_browser">档案浏览</string>
     <string name="label_camera_control">相机控制</string>
     <string name="label_network_configurations">连线设定</string>

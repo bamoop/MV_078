@@ -43,7 +43,6 @@ public class PlayerControlClassic extends LinearLayout implements IPlayerControl
         super(context);
 
         LayoutInflater.from(context).inflate(R.layout.player_contol_classic, this, true);
-
         mBackward = (ImageButton) findViewById(R.id.player_overlay_backward);
         mBackward.setOnClickListener(mBackwardListener);
         mPlayPause = (ImageButton) findViewById(R.id.player_overlay_play);

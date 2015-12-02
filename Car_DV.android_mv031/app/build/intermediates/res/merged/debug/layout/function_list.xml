@@ -25,7 +25,7 @@
 			android:src="@drawable/app_title"
 			android:layout_gravity="bottom"
 			android:layout_width="220dp"
-			android:layout_height="70dp" />"
+			android:layout_height="60dp" />"
 		<TextView
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
 				android:layout_alignParentLeft="true"
 				android:layout_alignParentTop="true"
 				android:background="@drawable/moon_bg"
-				/>
+				>
 			<tw.com.a_i_t.IPCamViewer.Button_main
 				android:id="@+id/video_btn"
 				android:layout_height="162dp"
@@ -91,7 +91,7 @@
 				android:layout_marginLeft="176dp"
 				android:layout_marginTop="-48dp"
 				/>
-
+			</RelativeLayout>
 			<ImageView
 				android:id="@+id/help"
 				android:layout_width="40dp"
