@@ -7,7 +7,19 @@
     android:gravity="top"
     android:background="@android:color/transparent">
     <tw.com.a_i_t.IPCamViewer.MyBanner android:layout_marginTop="0dp" android:layout_width="match_parent"
-    android:layout_height="@dimen/top_banner_height" MyBanner:text="@string/label_motion_detection" />
+    android:layout_height="@dimen/top_banner_height" MyBanner:text="@string/main_settings" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/setting_listselect">
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:text="@string/label_motion_detection"
+            android:gravity="center"
+            style="@style/layout_full"/>
+    </LinearLayout>
     <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"

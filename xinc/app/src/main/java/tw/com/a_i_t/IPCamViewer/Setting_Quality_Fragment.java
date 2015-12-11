@@ -26,11 +26,12 @@ public class Setting_Quality_Fragment extends Setting_Base_Fragment implements S
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		SettingItem item0 = new SettingItem("1080p 30", 0);
-		SettingItem item1 = new SettingItem("720p 30", 1);
-		SettingItem item2 = new SettingItem("720p 60", 2);
-		SettingItem item3 = new SettingItem("VGA", 3);
-		SettingItem[] items = new SettingItem[]{item0,item1,item2,item3};
+		SettingItem item0 = new SettingItem("1080P 	30", 0);
+		SettingItem item1 = new SettingItem("720P 	 30", 1);
+//		SettingItem item2 = new SettingItem("720p 60", 2);
+//		SettingItem item3 = new SettingItem("VGA", 3);
+//		SettingItem[] items = new SettingItem[]{item0,item1,item2,item3};
+		SettingItem[] items = new SettingItem[]{item0,item1};
 		setData(items);
 		setBannerTxt(getResources().getString(R.string.label_DV_quality));
 		setOnItemClieckListener(this);
@@ -51,7 +52,7 @@ public class Setting_Quality_Fragment extends Setting_Base_Fragment implements S
 		{
 			URL url = CameraCommand.commandSetmovieresolutionUrl(item.value) ;		
 			if (url != null) {	
-				new CameraSettingsSendRequest().execute(url) ;
+				new CameraSettingsSendRequest().execute(url);
 			}
 		}
 	}

@@ -5,7 +5,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 	<tw.com.a_i_t.IPCamViewer.MyBanner android:layout_width="match_parent"
-    android:layout_height="@dimen/top_banner_height" MyBanner:text="@string/label_network_configurations" />
+    android:layout_height="@dimen/top_banner_height"
+        MyBanner:text="@string/main_settings"
+       />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/setting_listselect">
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:text="@string/label_network_configurations"
+            android:gravity="center"
+            style="@style/layout_full"/>
+    </LinearLayout>
 	<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,20 +65,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:gravity="center" >
-                <Button
-                    android:id="@+id/cameraControlUpdateButton"
-                    style="@style/dialog_button"
-                    android:textSize="16sp"
-                    android:layout_width="120dp"
-                    android:text="@string/label_update"
-                    android:layout_marginRight="20dp"/>
+
                 <Button
                     android:id="@+id/cameraControlResetButton"
                     style="@style/dialog_button"
                     android:textSize="16sp"
-                    android:layout_width="120dp"
+                    android:layout_width="150dp"
                     android:text="@string/label_re_activate_network"
-                    android:textColor="@android:color/black"
+                    android:textColor="@drawable/setting_btn_text_color"
                      />
      </LinearLayout>
 </LinearLayout><!-- From: file:/E:/john_work/xinc/app/src/main/res/layout/network_configurations.xml -->

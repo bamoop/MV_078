@@ -3,7 +3,9 @@ package tw.com.a_i_t.IPCamViewer ;
 import java.io.File ;
 import java.net.URL;
 import java.text.SimpleDateFormat ;
+import java.util.ArrayList;
 import java.util.Date ;
+import java.util.List;
 import java.util.Locale ;
 
 import org.videolan.vlc.VLCApplication ;
@@ -23,6 +25,7 @@ import android.content.SharedPreferences ;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration ;
 import android.database.Cursor ;
+import android.net.DhcpInfo;
 import android.net.Uri ;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager ;
@@ -49,37 +52,42 @@ import android.view.Window ;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import tw.com.a_i_t.IPCamViewer.FileBrowser.Model.CameraStatus;
+import tw.com.a_i_t.IPCamViewer.Viewer.MjpegPlayerFragment;
+import tw.com.a_i_t.IPCamViewer.Viewer.StreamPlayerFragment;
+
 public class MainActivity extends Activity {
 	private static Activity s_Activity;
 	public static final String g_version_check = "checkversion";
-    public static String mRecordStatus="";
-    public static String mRecordmode="";
-    private static final int MSG_STARTRECORD =1;
-    private static final int DELAY_TIME=60*3000;   //60s modify by eric 
-    private static final int STATUS_RECORD_BACKKEY = 1;
-    private static final int STATUS_RECORD_PAUSE = 2;
-    private static final int STATUS_REOCORD_NOMAL= 0;
-    private int mRecordSenderStatus = STATUS_REOCORD_NOMAL;
-    private static final String TAG="ipviewer";
-    public static final int G_UNKNOWN_VERSION=0;
-    public static final int G_OLD_VERSION=1;
-    public static final int G_NEW_VERSION=2;
-    private WifiInfo mWifiInfo; 
-    private WifiManager mWifiManager; 
-    
-    ///begin added by eric for update recording status
-    public static boolean mNeedUpdateRecordStatus = false ;
-    
-    public static boolean getUpdateRecordStatusFlag()
-    {
-    	return mNeedUpdateRecordStatus;
-    }
-    public static void setUpdateRecordStatusFlag(boolean recStatusFlag)
-    {
-    	mNeedUpdateRecordStatus = recStatusFlag;
-    }
-    ///end 
-    
+	public static String mRecordStatus="";
+	public static String mRecordmode="";
+	private static final int MSG_STARTRECORD =1;
+	private static final int DELAY_TIME=60*3000;   //60s modify by eric
+	private static final int STATUS_RECORD_BACKKEY = 1;
+	private static final int STATUS_RECORD_PAUSE = 2;
+	private static final int STATUS_REOCORD_NOMAL= 0;
+	private int mRecordSenderStatus = STATUS_REOCORD_NOMAL;
+	private static final String TAG="ipviewer";
+	public static final int G_UNKNOWN_VERSION=0;
+	public static final int G_OLD_VERSION=1;
+	public static final int G_NEW_VERSION=2;
+	private WifiInfo mWifiInfo;
+
+	private WifiManager mWifiManager;
+
+	///begin added by eric for update recording status
+	public static boolean mNeedUpdateRecordStatus = false ;
+	public static boolean getUpdateRecordStatusFlag()
+	{
+		return mNeedUpdateRecordStatus;
+	}
+	public static void setUpdateRecordStatusFlag(boolean recStatusFlag)
+	{
+		mNeedUpdateRecordStatus = recStatusFlag;
+	}
+
+	///end
+
 	public static String intToIp(int addr) {
 
 		return ((addr & 0xFF) + "." + ((addr >>>= 8) & 0xFF) + "." + ((addr >>>= 8) & 0xFF) + "." + ((addr >>>= 8) & 0xFF)) ;
@@ -100,8 +108,8 @@ public class MainActivity extends Activity {
 
 		return currentDateandTime ;
 	}
-
 	public static String sAppName = "" ;
+
 	public static String sAppDir = "" ;
 
 	public static File getAppDir() {
@@ -113,7 +121,7 @@ public class MainActivity extends Activity {
 	}
 
 	public static Uri addImageAsApplication(ContentResolver contentResolver, String name, long dateTaken,
-			String directory, String filename) {
+											String directory, String filename) {
 
 		String filePath = directory + File.separator + filename ;
 
@@ -174,7 +182,6 @@ public class MainActivity extends Activity {
 				.addToBackStack(newFragment.getClass().getName()).commit() ;
 		fragmentManager.executePendingTransactions() ;
 	}
-
 	public static void backToFristFragment(Activity activity) {
 		FragmentManager fragmentManager = activity.getFragmentManager() ;
 		if (fragmentManager.getBackStackEntryCount() == 0)
@@ -189,6 +196,7 @@ public class MainActivity extends Activity {
 		fragmentManager.popBackStack(rootFragment, FragmentManager.POP_BACK_STACK_INCLUSIVE) ;
 
 	}
+
 	public static void backToPreFragment() {
 		if(s_Activity == null)
 		{
@@ -208,15 +216,15 @@ public class MainActivity extends Activity {
 		{
 			s_Activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		}
-		
+
 		int rootFragment = preEntry.getId() ;
 		fragmentManager.popBackStack(rootFragment, FragmentManager.POP_BACK_STACK_INCLUSIVE) ;
 
 	}
 
 	public boolean mEngineerMode = false ;
-
 	private static Locale sDefaultLocale ;
+
 	private static Locale sSelectedLocale ;
 
 	static {
@@ -233,12 +241,12 @@ public class MainActivity extends Activity {
 		Locale.setDefault(locale) ;
 		sSelectedLocale = locale ;
 	}
-
 	public static Locale getAppLocale() {
 
 		return sSelectedLocale == null ? sDefaultLocale : sSelectedLocale ;
 	}
 	private CustomDialog mdialog;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -248,19 +256,17 @@ public class MainActivity extends Activity {
 		{
 			ViewPagerDemoActivity.instance.finish();
 		}
-		int W = mDisplay.getWidth();
+        /*发送同步时间指令*/
+//		URL url = CameraCommand.commandCameraTimeSettingsUrl() ;
+//		CameraCommand cameraCommand=new CameraCommand();
+//		if (url != null) {
+//			new CameraCommand.SendRequest().execute(url) ;
+//		}
 
-		int H = mDisplay.getHeight();
-
-		Log.i("Main", "Width = " + W);
-
-		Log.i("Main", "Height = " + H);
-		Bundle args=new Bundle();
-		args.putString("nima","123");
 		System.setProperty("http.keepAlive", "false") ;
 		super.onCreate(savedInstanceState) ;
-		mWifiManager = (WifiManager)this  
-				 .getSystemService(Context.WIFI_SERVICE);
+		mWifiManager = (WifiManager)this
+				.getSystemService(Context.WIFI_SERVICE);
 		mWifiInfo = mWifiManager.getConnectionInfo();
 		requestWindowFeature(Window.FEATURE_NO_TITLE) ;  //added by eric
 		if (sSelectedLocale == null) {
@@ -279,6 +285,8 @@ public class MainActivity extends Activity {
 		config.locale = sSelectedLocale ;
 		getResources().updateConfiguration(config, null) ;
 
+
+
 		sAppDir = Environment.getExternalStorageDirectory().getPath() + File.separator + sAppName ;
 		Log.i("Fragment Activity", sAppDir) ;
 		File appDir = new File(sAppDir) ;
@@ -289,7 +297,7 @@ public class MainActivity extends Activity {
 		// setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) ;
 
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS) ;
-		
+
 		setContentView(R.layout.activity_main) ;
 
 		setTitle(getResources().getString(R.string.app_name)) ;
@@ -315,19 +323,19 @@ public class MainActivity extends Activity {
 				fragmentTransaction.commit() ;
 
 			} else {
-				LayoutInflater layoutInflater = LayoutInflater.from(this); 
+				LayoutInflater layoutInflater = LayoutInflater.from(this);
 				View myDialogView = layoutInflater.inflate(R.layout.dialog_setting_connet, null);
 				LinearLayout btn_open_wifi=(LinearLayout)myDialogView.findViewById(R.id.open_wifi);
 				btn_open_wifi.setOnClickListener(new View.OnClickListener() {
-					
+
 					@Override
 					public void onClick(View arg0) {
 						// TODO Auto-generated method stub
 						if(android.os.Build.VERSION.SDK_INT > 10) {
-							startActivity(new Intent( android.provider.Settings.ACTION_SETTINGS)); 
-							} else { 
-							startActivity(new Intent( android.provider.Settings.ACTION_WIRELESS_SETTINGS)); 
-							}
+							startActivity(new Intent( android.provider.Settings.ACTION_SETTINGS));
+						} else {
+							startActivity(new Intent( android.provider.Settings.ACTION_WIRELESS_SETTINGS));
+						}
 					}
 				});
 				//String title = getResources().getString(R.string.dialog_no_connection_title) ;
@@ -342,7 +350,7 @@ public class MainActivity extends Activity {
 				Fragment fragment_bg = new ConnectConfigBg() ;
 				fragmentTransaction.add(R.id.mainMainFragmentLayout, fragment_bg) ;
 				fragmentTransaction.commit() ;
-				
+
 				mdialog = new CustomDialog.Builder(this)
 						.setTitle(R.string.dialog_no_connection_message_title)
 						.setContentView(myDialogView)
@@ -351,7 +359,7 @@ public class MainActivity extends Activity {
 							public void onClick(DialogInterface dialog, int arg1) {
 								// TODO Auto-generated method stub
 								dialog.dismiss();
-								
+
 								FragmentManager fragmentManager = getFragmentManager() ;
 								FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction() ;
 
@@ -373,7 +381,7 @@ public class MainActivity extends Activity {
 
 										// MainActivity.this.finish() ;
 										dialog.dismiss() ;
-										
+
 										FragmentManager fragmentManager = getFragmentManager() ;
 										FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction() ;
 
@@ -389,25 +397,98 @@ public class MainActivity extends Activity {
 		s_Activity = this;
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 		int v = pref.getInt(g_version_check,G_UNKNOWN_VERSION);
-		if(v ==G_UNKNOWN_VERSION)
-//		if(true)
+//		if(v ==G_UNKNOWN_VERSION)
+		if(true)
 		{
 			Log.i("moop","请求版本信息");
 			new CameraFWVersion().execute();
+			new GetRTPS_AV1().execute();
 		}
 	}
+	private class GetRTPS_AV1 extends AsyncTask<URL, Integer, String> {
 
+		protected void onPreExecute() {
+			super.onPreExecute() ;
+		}
+		@Override
+		protected String doInBackground(URL... params) {
+			URL url = CameraCommand.commandQueryAV1Url() ;
+			Log.i("moop","请求属性"+url);
+			if (url != null) {
+				return CameraCommand.sendRequest(url) ;
+			}
+			return null ;
+		}
+		@Override
+		protected void onPostExecute(String result) {
+			String	liveStreamUrl;
+			WifiManager wifiManager = (WifiManager)
+					MainActivity.this.getSystemService(Context.WIFI_SERVICE);
+			DhcpInfo dhcpInfo = wifiManager.getDhcpInfo();
+			if (dhcpInfo == null || dhcpInfo.gateway == 0) {
+				AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create() ;
+				alertDialog.setTitle(getResources().getString(R.string.dialog_DHCP_error)) ;
+				alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,
+						getResources().getString(R.string.label_ok),
+						new DialogInterface.OnClickListener() {
+
+							public void onClick(DialogInterface dialog, int id) {
+								dialog.dismiss() ;
+							}
+						}) ;
+//				alertDialog.show() ;
+				return;
+			}
+			String gateway = MainActivity.intToIp(dhcpInfo.gateway) ;
+			// set http push as default for streaming
+			liveStreamUrl = "http://" + gateway + MjpegPlayerFragment.DEFAULT_MJPEG_PUSH_URL ;
+//			liveStreamUrl = null;
+			if (result != null) {
+				String[] lines;
+				SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(s_Activity);
+				SharedPreferences.Editor editor = pref.edit();
+				try {
+					String[] lines_temp = result.split("Camera.Preview.RTSP.av=");
+					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
+					int av = Integer.valueOf(lines[0]);
+					Log.i("moop","请求属4--"+av);
+					switch (av) {
+						case 1:	// liveRTSP/av1 for RTSP MJPEG+AAC
+							liveStreamUrl = "rtsp://" + gateway + MjpegPlayerFragment.DEFAULT_RTSP_MJPEG_AAC_URL ;
+							break;
+						case 2: // liveRTSP/v1 for RTSP H.264
+							liveStreamUrl = "rtsp://" + gateway + MjpegPlayerFragment.DEFAULT_RTSP_H264_URL ;
+							break;
+						case 3: // liveRTSP/av2 for RTSP H.264+AAC
+							liveStreamUrl = "rtsp://" + gateway + MjpegPlayerFragment.DEFAULT_RTSP_H264_AAC_URL ;
+							break;
+					}
+					Log.i("moop","请求属3"+liveStreamUrl);
+					editor.putString("liveStreamUrl", liveStreamUrl);
+					editor.commit();
+				} catch (Exception e) {/* not match, for firmware of MJPEG only */}
+			}
+			else {
+				Log.i("moop", "没有拿到视频属性");
+			}
+
+//			Intent intent = new Intent(getActivity(), StreamPlayerActivity.class) ;
+//			intent.putExtra("KEY_MEDIA_URL",liveStreamUrl);
+//			startActivity(intent) ;
+			super.onPostExecute(result) ;
+		}
+	}
 	SubMenu mLanguageSubMenu ;
 	String[] mLanguageNames ;
+
 	Locale[] mLocales ;
-	
 	SubMenu mNetworkCacheSizeMenu ;
+
 	int[] mCacheSize ;
-	
 	SubMenu mConnectionDelayMenu ;
 	int[] mConnectionDelay ;
-	public static int sConnectionDelay = 2000 ;
 
+	public static int sConnectionDelay = 1500 ;
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -416,7 +497,7 @@ public class MainActivity extends Activity {
 				"English",
 				getResources().getString(R.string.label_language_TChinese),
 				getResources().getString(R.string.label_language_SChinese)} ;
-		
+
 		mLocales = new Locale[] { MainActivity.getDefaultLocale(), Locale.ENGLISH,
 				Locale.TRADITIONAL_CHINESE, Locale.SIMPLIFIED_CHINESE} ;
 
@@ -431,19 +512,19 @@ public class MainActivity extends Activity {
 			item.setCheckable(true) ;
 
 		}
-/*		
+/*
 		mNetworkCacheSizeMenu = menu.addSubMenu(0, 0, 0, "Cache Size") ;
 		mCacheSize = new int[] {100, 1000, 1500, 2000, 2500} ;
-*/	
+*/
 //		int cacheSize = 100 ;
 //        Context context = VLCApplication.getAppContext();
 //        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
-        
-        //set value of cache size to VLC settings.
+
+		//set value of cache size to VLC settings.
 //        SharedPreferences.Editor editor = pref.edit() ;
 //        editor.putInt("network_caching_value", 2000) ;//set default value of cache size with 100ms.
 //        editor.commit() ;
-				
+
         /*
          * i = 0 ;
 		for (int cacheSize : mCacheSize) {
@@ -452,10 +533,10 @@ public class MainActivity extends Activity {
 			item.setCheckable(true) ;
 		}
 		*/
-        /*		
+        /*
 		mConnectionDelayMenu = menu.addSubMenu(0, 0, 0, "Connection Delay") ;
 		mConnectionDelay = new int[] {500, 1000, 1500, 2000, 2500, 3000, 3500, 4000} ;
-	
+
 		i = 0 ;
 		for (int connectionDelay : mConnectionDelay) {
 
@@ -468,34 +549,34 @@ public class MainActivity extends Activity {
 	}
 	public Handler mRecordStatusHandler = new Handler() {
 		public void handleMessage(Message msg){
-			
+
 			if (mRecordmode.equals("Videomode"))
 			{
 				if(!mRecordStatus.equals("Recording"))
 				{
 					CustomDialog alertDialog = new CustomDialog.Builder(s_Activity)
-					.setTitle(getResources().getString(R.string.trip))
-					.setMessage(R.string.exit_trip)
-					.setPositiveButton(R.string.yes,new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface arg0, int arg1) {
-							// TODO Auto-generated method stub
-							arg0.dismiss();
-							new CameraVideoRecord().execute();
-							Log.i("moop", "481");
-							finish();
-						}
-					})
-					.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss() ;
-							disconnectWifi();///added by eric for disconnect wifi
-							finish();
-						}
-					}).create();
+							.setTitle(getResources().getString(R.string.trip))
+							.setMessage(R.string.exit_trip)
+							.setPositiveButton(R.string.yes,new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface arg0, int arg1) {
+									// TODO Auto-generated method stub
+									arg0.dismiss();
+									new CameraVideoRecord().execute();
+									Log.i("moop", "481");
+									finish();
+								}
+							})
+							.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									dialog.dismiss() ;
+									disconnectWifi();///added by eric for disconnect wifi
+									finish();
+								}
+							}).create();
 					alertDialog.show();
-					super.handleMessage(msg);  
+					super.handleMessage(msg);
 					return;
 				}
 				else
@@ -504,7 +585,7 @@ public class MainActivity extends Activity {
 				}
 			}
 			finish();
-            super.handleMessage(msg);  
+			super.handleMessage(msg);
 		}
 	};
 	private class GetRecordStatus extends AsyncTask<URL, Integer, String> {
@@ -523,20 +604,20 @@ public class MainActivity extends Activity {
 		@Override
 		protected void onPostExecute(String result) {
 			if (result != null) {
-				String[] lines;		
+				String[] lines;
 				String[] lines_temp = result.split("Camera.Preview.MJPEG.status.record=");
 				if(null != lines_temp && 1 < lines_temp.length)
 				{
 					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
 					if(lines!=null)
-					mRecordStatus = lines[0];
+						mRecordStatus = lines[0];
 				}
 				lines_temp = result.split("Camera.Preview.MJPEG.status.mode=");
 				if(null != lines_temp && 1 < lines_temp.length)
 				{
 					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
 					if(lines!=null)
-					mRecordmode = lines[0];
+						mRecordmode = lines[0];
 				}
 			}
 			else
@@ -561,8 +642,8 @@ public class MainActivity extends Activity {
 			}
 			super.onPostExecute(result) ;
 
+		}
 	}
-}	
 	private class CameraVideoRecord extends AsyncTask<URL, Integer, String> {
 		@Override
 		protected void onPreExecute() {
@@ -583,11 +664,11 @@ public class MainActivity extends Activity {
 			{
 				disconnectWifi();///added by eric for disconnect wifi
 			}
-			
+
 			super.onPostExecute(result) ;
 
+		}
 	}
-}	
 	private class CameraFWVersion extends AsyncTask<URL, Integer, String> {
 		@Override
 		protected void onPreExecute() {
@@ -595,7 +676,7 @@ public class MainActivity extends Activity {
 		}
 		@Override
 		protected String doInBackground(URL... params) {
-			URL url = CameraCommand.commandGetMenuSettingsValuesUrl() ;
+			URL url = CameraCommand.commanRecordStatusCustomerUrl() ;
 			if (url != null) {
 				return CameraCommand.sendRequest(url) ;
 			}
@@ -605,7 +686,7 @@ public class MainActivity extends Activity {
 		protected void onPostExecute(String result) {
 			if (result != null)
 			{
-				String[] lines;		
+				String[] lines;
 				String[] lines_temp = result.split("Camera.Menu.DefaultValue.FWversion=");
 				if(lines_temp!=null && lines_temp.length>1)
 				{
@@ -640,14 +721,15 @@ public class MainActivity extends Activity {
 
 			super.onPostExecute(result) ;
 
+		}
 	}
-}	
+
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
-	
-		if((keyCode == KeyEvent.KEYCODE_BACK) && getFragmentManager().getBackStackEntryCount()==0) 
+
+		if((keyCode == KeyEvent.KEYCODE_BACK) && getFragmentManager().getBackStackEntryCount()==0)
 		{
 			mRecordSenderStatus = STATUS_RECORD_BACKKEY;
 			new GetRecordStatus().execute();
@@ -662,7 +744,7 @@ public class MainActivity extends Activity {
 			Log.d(TAG,"KeyEvent.KEYCODE_BACK");///added by eric for disconnect wifi
 			return true;
 		}
-		return super.onKeyDown(keyCode, event); 
+		return super.onKeyDown(keyCode, event);
 	}
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
@@ -801,12 +883,12 @@ public class MainActivity extends Activity {
 		//menu.findItem(R.id.engineerMode).setChecked(mEngineerMode) ;
 		//menu.findItem(R.id.engineerMode).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 
-			//@Override
-			//public boolean onMenuItemClick(MenuItem item) {
-				//item.setChecked(!item.isChecked()) ;
-				//mEngineerMode = item.isChecked() ;
-				//return true ;
-			//}
+		//@Override
+		//public boolean onMenuItemClick(MenuItem item) {
+		//item.setChecked(!item.isChecked()) ;
+		//mEngineerMode = item.isChecked() ;
+		//return true ;
+		//}
 		//}) ;
 
 		return super.onPrepareOptionsMenu(menu) ;
@@ -815,25 +897,25 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
+			case android.R.id.home:
+				// This ID represents the Home or Up button. In the case of this
+				// activity, the Up button is shown. Use NavUtils to allow users
+				// to navigate up one level in the application structure. For
+				// more details, see the Navigation pattern on Android Design:
+				//
+				// http://developer.android.com/design/patterns/navigation.html#up-vs-back
+				//
 
-			// NavUtils.navigateUpFromSameTask(this) ;
+				// NavUtils.navigateUpFromSameTask(this) ;
 
-			backToFristFragment(this) ;
-			return true ;
+				backToFristFragment(this) ;
+				return true ;
 		}
 		return super.onOptionsItemSelected(item) ;
 	}
-	
-	@Override 
-	public void onConfigurationChanged(Configuration newConfig){ 
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig){
 		super.onConfigurationChanged(newConfig);
 	}
 
@@ -841,25 +923,25 @@ public class MainActivity extends Activity {
 		public void handleMessage(Message msg){
 			switch(msg.what)
 			{
-			case MSG_STARTRECORD:
-				mRecordSenderStatus = STATUS_RECORD_PAUSE;
-				new GetRecordStatus().execute();
-				Log.i("moop","MSG_STARTRECORD");
+				case MSG_STARTRECORD:
+					mRecordSenderStatus = STATUS_RECORD_PAUSE;
+					new GetRecordStatus().execute();
+					Log.i("moop","MSG_STARTRECORD");
 					break;
-			default:
-				break;
+				default:
+					break;
 			}
 		}
 	};
-	
-	@Override 
+
+	@Override
 	public void onPause()
 	{
 		Log.d(TAG,"on pause");
 		//mTimerHandler.sendMessageDelayed(mTimerHandler.obtainMessage(MSG_STARTRECORD),DELAY_TIME);
 		super.onPause();
 	}
-	
+
 	public void onResume()
 	{
 		mTimerHandler.removeMessages(MSG_STARTRECORD);
@@ -870,14 +952,14 @@ public class MainActivity extends Activity {
 		mTimerHandler.removeMessages(MSG_STARTRECORD);
 		super.onDestroy();
 	}
-	private int getNetworkId() {  
-		return (mWifiInfo == null) ? 0 : mWifiInfo.getNetworkId();  
+	private int getNetworkId() {
+		return (mWifiInfo == null) ? 0 : mWifiInfo.getNetworkId();
 	}
-	
-	private void disconnectWifi() {  
-		 int netId = getNetworkId();  
-		 mWifiManager.disableNetwork(netId);  
-		 mWifiManager.disconnect();  
-		 mWifiInfo = null;  
-	  }
+
+	private void disconnectWifi() {
+		int netId = getNetworkId();
+		mWifiManager.disableNetwork(netId);
+		mWifiManager.disconnect();
+		mWifiInfo = null;
+	}
 }

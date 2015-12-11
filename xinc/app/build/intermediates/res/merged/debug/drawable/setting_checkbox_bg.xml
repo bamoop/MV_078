@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android" >
-  <item android:state_checked="false" android:drawable="@android:color/transparent" />
-  <item android:state_checked="true"  android:drawable="@drawable/yes" /> 
+  <item android:state_checked="false"  android:drawable="@color/transparency"/>
+  <item android:state_checked="true"  android:drawable="@drawable/settint_checkbox_pass" />
 </selector>
 <!-- From: file:/E:/john_work/xinc/app/src/main/res/drawable/setting_checkbox_bg.xml -->

@@ -115,7 +115,9 @@
     <string name="open">Open</string>
     <string name="photo">Photo</string>
     <string name="backvideo">BackVideo</string>
-    <string name="video">FrontVideo</string>
+    <string name="sosfile">SOS</string>
+    <string name="frontvideo">FrontVideo</string>
+    <string name="video">Video</string>
     <string name="label_download">Download</string>
     <string name="label_DV_quality">DV Quality</string>
     <string name="label_move">Motion Detection</string>
@@ -158,4 +160,22 @@
     <string name="label_video_out">TV-OUT</string>
     <string name="sd_browser_stoprecord">Need Stop Record</string>
     <string name="sd_browser_open_stoprecord">Need Stop Record when opening file</string>
+    <string name="updating">Recent Update：</string>
+    <string name="nomore">No More</string>
+    <string name="lodemore">To load more</string>
+
+    <string name="intraday">Intraday</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="threedaysago">Threedaysago</string>
+    <string name="sevendaysago">Sevendaysago</string>
+    <string name="connecterror">ConnectError</string>
+    <string name="message_command_camer">Capturedsuccessfully！</string>
+    <string name="message_command_uncamer">Snapfailure！</string>
+
+    <string name="erroroneopenfile">Every time can only open a file!</string>
+    <string name="erroronesharefile">Every time can only share a file!</string>
+    <string name="playVideoError">Video playback error, please check whether the camera is abnormal operation！</string>
+    <string name="deletefileincamera">Delete file in Camera</string>
+    <string name="unabledeleteSOSFile">SOS file cannot be deleted</string>
+
 </resources>

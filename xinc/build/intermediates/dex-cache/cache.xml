@@ -2,6 +2,13 @@
 <items version="2" >
 
     <item
+        jar="E:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
+        jumboMode="false"
+        revision="23.0.0 rc3"
+        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa">
+        <dex dex="E:\john_work\xinc\app\build\intermediates\pre-dexed\release\support-annotations-20.0.0-5b16f73fbc8a40c20d77aefb75b595d0c21c6c23.jar" />
+    </item>
+    <item
         jar="E:\john_work\xinc\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\jars\libs\internal_impl-20.0.0.jar"
         jumboMode="false"
         revision="23.0.0 rc3"
@@ -14,13 +21,6 @@
         revision="23.0.0 rc3"
         sha1="8694693636ab36910c8100ce527c258ff3ebece0">
         <dex dex="E:\john_work\xinc\app\build\intermediates\pre-dexed\release\classes-1ae8c724301d8c7a096cf8dae7389d505cac0fd4.jar" />
-    </item>
-    <item
-        jar="E:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
-        jumboMode="false"
-        revision="23.0.0 rc3"
-        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa">
-        <dex dex="E:\john_work\xinc\app\build\intermediates\pre-dexed\release\support-annotations-20.0.0-5b16f73fbc8a40c20d77aefb75b595d0c21c6c23.jar" />
     </item>
 
 </items>

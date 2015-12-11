@@ -46,9 +46,11 @@ import android.net.wifi.WifiManager ;
 import android.net.wifi.WifiManager.WifiLock ;
 import android.os.AsyncTask ;
 import android.os.Bundle ;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager ;
+import android.os.StatFs;
 import android.preference.PreferenceManager;
 import android.util.Log ;
 import android.view.LayoutInflater ;
@@ -110,7 +112,7 @@ public class FileBrowserFragment extends Fragment {
 	private ProgressBar moreProgressBar;
 	Activity activitytoals;
 
-	private RTPullListView mFileListView,jpgFileListview,backFileListview,sosfrontListview,sosbackListview;
+	private RTPullListView mFileListView,jpgFileListview,backFileListview,sosfrontListview;
 	public FileBrowser rowsers=null;
 	private boolean isstatusVideo; //判断是照片还是视频加载更多
 	private boolean isstatusPhoto=false; //判断是照片还是视频加载更多
@@ -119,19 +121,18 @@ public class FileBrowserFragment extends Fragment {
 	private boolean isfirstonePhoto=true;//判断第一次点击照片选项
 	private boolean isfirstBackViedeo=true;//判断第一次点击后路视频选项
 	private boolean isfirstViedeo=true;//判断第一次点击视频选项
+
 	private boolean isfirstSOSfrontViedeo=true;//判断第一次点击视频选项
-	private boolean isfirstSOSbackViedeo=true;//判断第一次点击视频选项
 	//add by John 2015.11.3
 	public boolean isdeletesos=false;
 	public boolean isdeletSOStoast=false;
+	public boolean isdeleteSOSfileforthree=true;//判断第三个版本SOS文件删除
 	private int VERSION=0;
 	URL threeviedourl;//第三版本URl地址
 	URL threebackviedourl;//第三版本URl地址
-	URL threephotourl;//第三版本URl地址
+	URL threephotourl;//第三版本URl地址试试
 	URL threesosfrontvideo;
-	URL threesosbackvideo;
 	FileBrowser fileBrowser;
-	String qingqiu;
 	private int mycompare(FileNode arg0, FileNode arg1)
 	{
 		try
@@ -341,11 +342,10 @@ public class FileBrowserFragment extends Fragment {
 							// For HTTP File Streaming
 							intent.setDataAndType(Uri.parse("http://" + mIp + fileNode.mName), "video/3gp") ;
 							startActivity(intent);
-
 							// For HTML5 Video Streaming
 //							String filename = fileNode.mName.replaceAll("/", "\\$");
 //							Intent browserIntent = new Intent(Intent.ACTION_VIEW,
-//										Uri.parse("http://"+mIp+"/cgi-bin/Config.cgi?action=play&property=" + filename));
+//							Uri.parse("http://"+mIp+"/cgi-bin/Config.cgi?action=play&property=" + filename));
 //							startActivity(browserIntent);
 //							mSaveButton.setEnabled(false) ;
 //							mDeleteButton.setEnabled(false) ;
@@ -382,12 +382,8 @@ public class FileBrowserFragment extends Fragment {
 			mFileListBACKVIDEOAdapter.notifyDataSetChanged();
 			stackFileListSOSFrontVIDEO.clear();
 			mFileListSOSFrontVIDEOAdapter.notifyDataSetChanged();
-			sFilelistSOSBACKVIDEO.clear();
-			mFileListSOSBACKVIDEOAdapter.notifyDataSetChanged();
 			sFilelistSOSFrontVIDEO.clear();
 			mFileListSOSFrontVIDEOAdapter.notifyDataSetChanged();
-			sFilelistSOSBACKVIDEO.clear();
-			mFileListSOSBACKVIDEOAdapter.notifyDataSetChanged();
 			}
 			super.onPreExecute() ;
 		}
@@ -563,47 +559,6 @@ public class FileBrowserFragment extends Fragment {
 			}
 		}
 	}
-	/*请求SOS后路摄像头视频文件（单独）*/
-	private class SOSBackViedoDownFileListTask extends AsyncTask<FileBrowser,Integer,FileBrowser>{
-		@Override
-		protected FileBrowser doInBackground(FileBrowser... browsers) {
-			if(isfirstSOSbackViedeo){
-			browsers[0].retrieveFileList(mDirectory, m_fileformatRsos, true,sFilelistSOSBACKVIDEO.size());
-				isfirstSOSbackViedeo=false;
-			}else
-				browsers[0].retrieveFileList(mDirectory, m_fileformatRsos, false, sFilelistSOSBACKVIDEO.size());
-
-			return browsers[0];
-		}
-		@Override
-		protected void onPostExecute(FileBrowser result) {
-			Activity activity=getActivity();
-			if (activity==null){
-				return;
-			}
-			if(activity!=null){
-				List<FileNode>fileNodeList=result.getFileList();
-				Log.d("moop","SOS后路视频请求返---"+fileNodeList.size());
-				for (int i = 0; i < fileNodeList.size(); i++) {
-					sFilelistSOSBACKVIDEO.add(fileNodeList.get(i));
-				}
-				sortfile();
-				mFileListSOSBACKVIDEOAdapter.notifyDataSetChanged();
-					if (!result.isCompleted()&&fileNodeList.size()>0){
-						mFileListSOSBACKVIDEOAdapter.notifyDataSetChanged();
-						mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
-						moreProgressBar.setVisibility(View.GONE);
-					}
-					else {
-						moreProgressBar.setVisibility(View.GONE);
-						mHandler.sendEmptyMessage(MSG_SOSBACKVIDEONOMORE);
-						mHandler.sendEmptyMessage(MSG_DISMISSDIALOG);
-						setWaitingState(false) ;
-					}
-
-			}
-		}
-	}
 
 	/*继续请求SD卡文件列表*/
 	private class ContiunedDownloadTask extends AsyncTask<FileBrowser, Integer, FileBrowser> {
@@ -684,7 +639,6 @@ public class FileBrowserFragment extends Fragment {
 			stackFileListJPG.clear();
 			stackFileListVIDEO.clear();
 			sFilelistSOSFrontVIDEO.clear();
-			sFilelistSOSBACKVIDEO.clear();
 			mFileListJPGAdapter.notifyDataSetChanged();
 			mFileListVIDEOAdapter.notifyDataSetChanged();
 			sSelectedFiles.clear() ;
@@ -765,20 +719,17 @@ public class FileBrowserFragment extends Fragment {
 	private static ArrayList<FileNode> sFileListVIDEO = new ArrayList<FileNode>() ;
 	private static ArrayList<FileNode> sFilelistBACKVIDEO=new ArrayList<FileNode>();
 	private static ArrayList<FileNode> sFilelistSOSFrontVIDEO=new ArrayList<FileNode>();
-	private static ArrayList<FileNode> sFilelistSOSBACKVIDEO=new ArrayList<FileNode>();
 
 	private static ArrayList<FileNode> stackFileListVIDEO = new ArrayList<FileNode>();
 	private static ArrayList<FileNode> stackFileListJPG = new ArrayList<FileNode>();
 	private static ArrayList<FileNode> stackFileListBACKVIDEO=new ArrayList<FileNode>();
 	private static ArrayList<FileNode> stackFileListSOSFrontVIDEO=new ArrayList<FileNode>();
-	private static ArrayList<FileNode> stackFileListSOSBACKVIDEO=new ArrayList<FileNode>();
 
 	private static List<FileNode> sSelectedFiles = new LinkedList<FileNode>() ;
 
 	private static FileListAdapter mFileListJPGAdapter ;
 	private static FileListAdapter mFileListVIDEOAdapter ;
 	private static FileListAdapter mFileListBACKVIDEOAdapter;
-	private static FileListAdapter mFileListSOSBACKVIDEOAdapter;
 	private static FileListAdapter mFileListSOSFrontVIDEOAdapter;
 	//private TextView mFileListTitle ;
 	private LinearLayout mSaveButton ;
@@ -793,8 +744,7 @@ public class FileBrowserFragment extends Fragment {
 	private LinearLayout btn_backvideo;
 	private LinearLayout btn_sosvideo;
 	private LinearLayout btn_sosfrontvideo;
-	private LinearLayout btn_sosbackvideo;
-	private LinearLayout sosfb_layout,fblayout;
+	private LinearLayout fblayout;
 	private Boolean isvideo = true;	/*video is default*/
 	private boolean isfirstOpen=true;
 	private static String gDownloadStr;
@@ -895,6 +845,7 @@ public class FileBrowserFragment extends Fragment {
 	private static int sNotificationCount = 0 ;
 	private static DownloadTask sDownloadTask = null ;
 
+	/*文件下载*/
 	private static class DownloadTask extends AsyncTask<URL, Long, Boolean> {
 
 		String mFileName ;
@@ -1041,14 +992,13 @@ public class FileBrowserFragment extends Fragment {
 				mProgressDialog.setMax(max) ;
 				mProgressDialog.setProgress(progress) ;
 				mProgressDialog.setProgressNumberFormat("%1d/%2d " + unit) ;
+
 			}
 			super.onProgressUpdate(values) ;
 		}
 
 		private void cancelDownload() {
-
 			mCancelled = true ;
-
 			for (FileNode fileNode : sSelectedFiles) {
 				fileNode.mSelected = false ;
 			}
@@ -1184,9 +1134,11 @@ public class FileBrowserFragment extends Fragment {
 		}
 	}
 
+
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState) ;
+		super.onCreate(savedInstanceState);
 
 		mIp = getArguments().getString(KEY_IP) ;
 
@@ -1216,13 +1168,35 @@ public class FileBrowserFragment extends Fragment {
 
 			mDirectory = DEFAULT_DIR ;
 		}
-
 	}
-
+	public static long getAvailableInternalMemorySize() {
+		File path = Environment.getDataDirectory();
+		StatFs stat = new StatFs(path.getPath());
+		long blockSize = stat.getBlockSize();
+		long availableBlocks = stat.getAvailableBlocks();
+		return availableBlocks * blockSize;
+	}
+	/*视频储存到本地*/
 	private static void downloadFile(final Context context, String ip) {
+
 		if (sSelectedFiles.size() == 0) {
+			Log.i("Path", "退出  sSelectedFiles.size()=" + sSelectedFiles.size()) ;
+			return ;
+		} else if (getAvailableInternalMemorySize()<sSelectedFiles.get(0).mSize){
+			CustomDialog alertDialog = new CustomDialog.Builder(context)
+					.setTitle(R.string.trip)
+					.setMessage(R.string.memorysizedeficiency)
+					.setCancelable(false)
+					.setPositiveButton(R.string.label_ok, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int arg1) {
+							dialog.dismiss();
+						}
+					}).create();
+			alertDialog.show();
 			return ;
 		}
+		Log.i("Path", "sSelectedFiles.size()="+sSelectedFiles.size()) ;
 		FileNode fileNode = sSelectedFiles.remove(0) ;
 		fileNode.mSelected = false ;
 		mFileListJPGAdapter.notifyDataSetChanged() ;
@@ -1232,15 +1206,12 @@ public class FileBrowserFragment extends Fragment {
 
 		File appDir = MainActivity.getAppDir() ;
 		final File file = new File(appDir, filename) ;
-
 		Log.i("Path", appDir.getPath() + File.separator + filename) ;
-
 		if (file.exists()) {
 			CustomDialog alertDialog = new CustomDialog.Builder(context)
 			.setTitle(filename)
 			.setMessage(R.string.message_overwrite_file)
 			.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					file.delete();
@@ -1260,8 +1231,8 @@ public class FileBrowserFragment extends Fragment {
 					dialog.dismiss();
 				}
 			}).create();
+			alertDialog.setCancelable(false);
 			alertDialog.show() ;
-
 		} else {
 			try {
 				sDownloadTask = new DownloadTask(context) ;
@@ -1325,7 +1296,6 @@ public class FileBrowserFragment extends Fragment {
 					sFileListJPG.remove(fileNode);
 					sFilelistBACKVIDEO.remove(fileNode);
 					sFilelistSOSFrontVIDEO.remove(fileNode);
-					sFilelistSOSBACKVIDEO.remove(fileNode);
 					stackFileListBACKVIDEO.remove(fileNode);
 					stackFileListVIDEO.remove(fileNode);
 					stackFileListJPG.remove(fileNode);
@@ -1333,7 +1303,6 @@ public class FileBrowserFragment extends Fragment {
 					mFileListVIDEOAdapter.notifyDataSetChanged();
 					mFileListBACKVIDEOAdapter.notifyDataSetChanged();
 					mFileListSOSFrontVIDEOAdapter.notifyDataSetChanged();
-					mFileListSOSBACKVIDEOAdapter.notifyDataSetChanged();
 
 					//mFileListTitle.setText(mFileBrowser + " : " + mDirectory + " (" + sFileList.size()
 					//		+ " " + mItems + ")") ;
@@ -1379,12 +1348,13 @@ public class FileBrowserFragment extends Fragment {
 			   super.onInvalidated();
 		   }
 	};
-
-	public void OnDestory()
+	@Override
+	public void onDestroy()
 	{
+		Log.i("moopopen", "onDestroy");
 		getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		mHandler.removeMessages(MSG_GETFILELIST);
-
+		sSelectedFiles.clear() ;
 		super.onDestroy();
 	}
 
@@ -1396,7 +1366,6 @@ public class FileBrowserFragment extends Fragment {
 		mFileListVIDEOAdapter = new FileListAdapter(inflater, sFileListVIDEO) ;
 		mFileListBACKVIDEOAdapter = new FileListAdapter(inflater, stackFileListBACKVIDEO) ;
 		mFileListSOSFrontVIDEOAdapter=new FileListAdapter(inflater,sFilelistSOSFrontVIDEO);
-		mFileListSOSBACKVIDEOAdapter=new FileListAdapter(inflater,sFilelistSOSBACKVIDEO);
 		mSaveButton = (LinearLayout) view.findViewById(R.id.browserDownloadButton) ;
 		mDeleteButton = (LinearLayout) view.findViewById(R.id.browserDeleteButton) ;
 
@@ -1405,17 +1374,13 @@ public class FileBrowserFragment extends Fragment {
 		btn_photo = (LinearLayout) view.findViewById(R.id.btn_photo) ;
 		btn_video= (LinearLayout) view.findViewById(R.id.btn_video);
 		btn_sosvideo= (LinearLayout) view.findViewById(R.id.btn_sosfile);
-		btn_sosfrontvideo= (LinearLayout) view.findViewById(R.id.btn_sosfrontvideo);
-		btn_sosbackvideo= (LinearLayout) view.findViewById(R.id.btn_sosbackvideo);
 		mOpenButton = (LinearLayout) view.findViewById(R.id.browserOpenButton) ;
-		sosfb_layout= (LinearLayout) view.findViewById(R.id.sosfb_layout);
 		fblayout= (LinearLayout) view.findViewById(R.id.fb_layout);
 
 		mFileListView = (RTPullListView) view.findViewById(R.id.browserList) ;
 		jpgFileListview= (RTPullListView) view.findViewById(R.id.browserList_jpg);
 		backFileListview= (RTPullListView) view.findViewById(R.id.browserList_backvideo);
 		sosfrontListview= (RTPullListView) view.findViewById(R.id.browserList_sosfrontvideo);
-		sosbackListview= (RTPullListView) view.findViewById(R.id.browserList_sosbackvideo);
 		//mFileListAdapter.registerDataSetObserver(mDataSetobserver);
 		mFileBrowser = getActivity().getResources().getString(R.string.label_file_browser) ;
 		mReading = getActivity().getResources().getString(R.string.label_reading) ;
@@ -1425,7 +1390,6 @@ public class FileBrowserFragment extends Fragment {
 			threeviedourl=new URL("http://"+mIp+ mPath);
 			threebackviedourl=new URL("http://"+mIp+ mPath);
 			threephotourl=new URL("http://"+mIp+ mPath);
-			threesosbackvideo=new URL("http://"+mIp+ mPath);
 			threesosfrontvideo=new URL("http://"+mIp+ mPath);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -1460,33 +1424,66 @@ public class FileBrowserFragment extends Fragment {
 			public void onClick(View v) {
 				///downloadFile(getActivity(), mIp) ;///modify by eric for show stop record dialog first
 				mCurrentButton = BUTTON_DOWNLOAD;
-				new GetRecordStatus().execute();
-				mSaveButton.setEnabled(false) ;
-				mDeleteButton.setEnabled(false) ;
-				mOpenButton.setEnabled(false) ;
+				FileNode filenode=sSelectedFiles.get(0);
+
+				if(sSelectedFiles.size()>0)
+				{
+					if (getAvailableInternalMemorySize()<filenode.mSize){
+//					if (false){
+						CustomDialog alertDialog = new CustomDialog.Builder(getActivity())
+								.setTitle(R.string.trip)
+								.setMessage(R.string.memorysizedeficiency)
+								.setCancelable(false)
+								.setPositiveButton(R.string.label_ok, new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int arg1) {
+										dialog.dismiss();
+//										MainActivity.addFragment(FileBrowserFragment.this, new LocalFileBrowserFragment()) ;
+									}
+								}).
+//										setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+//									@Override
+//									public void onClick(DialogInterface dialog, int which) {
+//										dialog.dismiss();
+//									}
+//								}).
+										create();
+						alertDialog.show();
+					}
+					else {
+						new GetRecordStatus().execute();
+						mSaveButton.setEnabled(false) ;
+						mDeleteButton.setEnabled(false) ;
+						mOpenButton.setEnabled(false) ;
+					}
+				}
 			}
 		}) ;
 
 		mDeleteButton.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				mTotalFile = sSelectedFiles.size();
+				if (!isdeleteSOSfileforthree){
+					Toast.makeText(getActivity(), R.string.unabledeleteSOSFile,
+							Toast.LENGTH_SHORT).show();
+					return;
+				}
 				if (mTotalFile > 0) {
 					mProgDlg = new ProgressDialog(getActivity());
 					mProgDlg.setCancelable(false);
 					mProgDlg.setMax(mTotalFile);
 					mProgDlg.setProgress(0);
 					mProgDlg.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-					mProgDlg.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
+					mProgDlg.setButton(DialogInterface.BUTTON_NEGATIVE, getResources().getString(R.string.label_cancel),
 							new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									mCancelDelete = true;
 								}
 							});
-					mProgDlg.setTitle("Delete file in Camera");
-					mProgDlg.setMessage("Please wait ...");
+					mProgDlg.setTitle(getResources().getString(R.string.deletefileincamera));
+					mProgDlg.setMessage(getResources().getString(R.string.pleasewait));
 					mCancelDelete = false;
 					mProgDlg.show();
 					isdeletSOStoast = true;
@@ -1502,7 +1499,24 @@ public class FileBrowserFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				mCurrentButton = BUTTON_OPEN;
-				new GetRecordStatus().execute();
+				Log.i("moopopen", "onClick" + sSelectedFiles.size());
+				if (sSelectedFiles.size() == 1) {
+					new GetRecordStatus().execute();
+				} else {
+					CustomDialog alertDialog = new CustomDialog.Builder(getActivity())
+							.setTitle(getResources().getString(R.string.trip))
+							.setMessage(getResources().getString(R.string.erroroneopenfile))
+							.setCancelable(false)
+							.setPositiveButton(R.string.label_ok, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface arg0, int arg1) {
+									arg0.dismiss();
+									return;
+								}
+							}).create();
+					alertDialog.show();
+				}
+
 			}
 		}) ;
 
@@ -1512,20 +1526,19 @@ public class FileBrowserFragment extends Fragment {
 			public void onClick(View v) {
 				if(VERSION>2){
 					fblayout.setVisibility(View.VISIBLE);
-					sosfb_layout.setVisibility(View.GONE);
 				}
-
 				btn_video.setEnabled(false);
 				btn_sosvideo.setEnabled(true);
 				btn_photo.setEnabled(true);
 				btn_frontvideo.setEnabled(false);
 				btn_backvideo.setEnabled(true);
+				mDeleteButton.setEnabled(true);
+				isdeleteSOSfileforthree=true;
 				myHandler.sendEmptyMessage(MSG_CLEARSELECT);
 				mFileListView.setVisibility(View.VISIBLE);
 				jpgFileListview.setVisibility(View.GONE);
 				backFileListview.setVisibility(View.GONE);
 				sosfrontListview.setVisibility(View.GONE);
-				sosbackListview.setVisibility(View.GONE);
 
 			}
 		});
@@ -1533,16 +1546,15 @@ public class FileBrowserFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				fblayout.setVisibility(View.GONE);
-				sosfb_layout.setVisibility(View.VISIBLE);
-
 				jpgFileListview.setVisibility(View.GONE);
 				backFileListview.setVisibility(View.GONE);
 				mFileListView.setVisibility(View.GONE);
 				sosfrontListview.setVisibility(View.VISIBLE);
-				sosbackListview.setVisibility(View.GONE);
 				myHandler.sendEmptyMessage(MSG_CLEARSELECT);
 				btn_sosvideo.setEnabled(false);
-				btn_sosfrontvideo.setEnabled(false);
+				isdeleteSOSfileforthree=false;
+
+				mDeleteButton.setEnabled(true);
 				btn_video.setEnabled(true);
 				btn_photo.setEnabled(true);
 				if (isfirstSOSfrontViedeo) {
@@ -1562,13 +1574,13 @@ public class FileBrowserFragment extends Fragment {
 				backFileListview.setVisibility(View.GONE);
 				jpgFileListview.setVisibility(View.VISIBLE);
 				fblayout.setVisibility(View.GONE);
-				sosfb_layout.setVisibility(View.GONE);
 				myHandler.sendEmptyMessage(MSG_CLEARSELECT);
 				isvideo = false;
+				isdeleteSOSfileforthree=true;
 				btn_photo.setEnabled(false);
 				btn_sosvideo.setEnabled(true);
 				btn_video.setEnabled(true);
-
+				mDeleteButton.setEnabled(true);
 				if (isfirstPhoto) {
 					isfirstPhoto = false;
 					isstatusPhoto = true;
@@ -1601,7 +1613,6 @@ public class FileBrowserFragment extends Fragment {
 				jpgFileListview.setVisibility(View.GONE);
 				backFileListview.setVisibility(View.GONE);
 				sosfrontListview.setVisibility(View.GONE);
-				sosbackListview.setVisibility(View.GONE);
 				isvideo = true;
 				btn_frontvideo.setEnabled(false);
 				btn_backvideo.setEnabled(true);
@@ -1621,7 +1632,6 @@ public class FileBrowserFragment extends Fragment {
 				jpgFileListview.setVisibility(View.GONE);
 				backFileListview.setVisibility(View.VISIBLE);
 				sosfrontListview.setVisibility(View.GONE);
-				sosbackListview.setVisibility(View.GONE);
 				myHandler.sendEmptyMessage(MSG_CLEARSELECT);
 				if (isfirstBackViedeo) {
 					mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
@@ -1633,54 +1643,17 @@ public class FileBrowserFragment extends Fragment {
 				mFileListBACKVIDEOAdapter.notifyDataSetChanged();
 			}
 		});
-		btn_sosfrontvideo.setEnabled(false);
-		btn_sosfrontvideo.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				btn_sosfrontvideo.setEnabled(false);
-				btn_sosbackvideo.setEnabled(true);
-				mFileListView.setVisibility(View.GONE);
-				jpgFileListview.setVisibility(View.GONE);
-				backFileListview.setVisibility(View.GONE);
-				sosfrontListview.setVisibility(View.VISIBLE);
-				sosbackListview.setVisibility(View.GONE);
-				myHandler.sendEmptyMessage(MSG_CLEARSELECT);
 
-			}
-		});
-
-		btn_sosbackvideo.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				btn_sosbackvideo.setEnabled(false);
-				btn_sosfrontvideo.setEnabled(true);
-				mFileListView.setVisibility(View.GONE);
-				jpgFileListview.setVisibility(View.GONE);
-				backFileListview.setVisibility(View.GONE);
-				sosfrontListview.setVisibility(View.GONE);
-				sosbackListview.setVisibility(View.VISIBLE);
-				myHandler.sendEmptyMessage(MSG_CLEARSELECT);
-				if (isfirstSOSbackViedeo) {
-					mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
-					new SOSBackViedoDownFileListTask().execute(new FileBrowser(threesosbackvideo,
-							FileBrowser.COUNT_MAX));
-				}
-				sosbackListview.setAdapter(mFileListSOSBACKVIDEOAdapter);
-				mFileListSOSBACKVIDEOAdapter.notifyDataSetChanged();
-			}
-		});
 
 		initVideoListview();
 		initJPGListView();
 		initBackVideoListview();
 		initSOSFrontvideoListView();
-		initSOSBcakvideoListView();
 
 		mFileListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE) ;
 		jpgFileListview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE) ;
 		backFileListview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		sosfrontListview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-		sosbackListview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		if(isvideo)
 		{
 			mFileListView.setAdapter(mFileListVIDEOAdapter);
@@ -1736,11 +1709,11 @@ public class FileBrowserFragment extends Fragment {
 							mOpenButton.setEnabled(true);
 						}
 						mSaveButton.setEnabled(true) ;
-						mDeleteButton.setEnabled(true) ;
+//						mDeleteButton.setEnabled(true) ;
 					} else {
 						mOpenButton.setEnabled(false) ;
 						mSaveButton.setEnabled(false) ;
-						mDeleteButton.setEnabled(false) ;
+//						mDeleteButton.setEnabled(false) ;
 					}
 				}
 			}
@@ -1763,12 +1736,12 @@ public class FileBrowserFragment extends Fragment {
 							mOpenButton.setEnabled(true);
 						}
 						mSaveButton.setEnabled(true) ;
-						mDeleteButton.setEnabled(true) ;
+//						mDeleteButton.setEnabled(true) ;
 					}
 					else {
 						mOpenButton.setEnabled(false) ;
 						mSaveButton.setEnabled(false) ;
-						mDeleteButton.setEnabled(false) ;
+//						mDeleteButton.setEnabled(false) ;
 					}
 				}
 			}
@@ -1791,40 +1764,12 @@ public class FileBrowserFragment extends Fragment {
 							mOpenButton.setEnabled(true);
 						}
 						mSaveButton.setEnabled(true) ;
-						mDeleteButton.setEnabled(true) ;
+//						mDeleteButton.setEnabled(true) ;
 					}
 					else {
 						mOpenButton.setEnabled(false) ;
 						mSaveButton.setEnabled(false) ;
-						mDeleteButton.setEnabled(false) ;
-					}
-				}
-			}
-		});
-		sosbackListview.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				ViewTag viewTag= (ViewTag) view.getTag();
-				if (viewTag!=null){
-					FileNode file=viewTag.mFileNode;
-					CheckedTextView checkBox = (CheckedTextView) view.findViewById(R.id.fileListCheckBox) ;
-					checkBox.setChecked(!checkBox.isChecked()) ;
-					file.mSelected = checkBox.isChecked() ;
-					if (file.mSelected)
-						sSelectedFiles.add(file);
-					else
-						sSelectedFiles.remove(file);
-					if (sSelectedFiles.size() > 0) {
-						if(sSelectedFiles.size() < 2) {
-							mOpenButton.setEnabled(true);
-						}
-						mSaveButton.setEnabled(true) ;
-						mDeleteButton.setEnabled(true) ;
-					}
-					else {
-						mOpenButton.setEnabled(false) ;
-						mSaveButton.setEnabled(false) ;
-						mDeleteButton.setEnabled(false) ;
+//						mDeleteButton.setEnabled(false) ;
 					}
 				}
 			}
@@ -1933,32 +1878,6 @@ public class FileBrowserFragment extends Fragment {
 			}
 		});
 	}
-	TextView tv_sosbackvideonomore;
-	private void initSOSBcakvideoListView() {
-		RelativeLayout footerView;
-		LayoutInflater inflater;
-		View vieww;
-		//添加listview底部获取更多按钮（可自定义）
-		Activity activity = getActivity();
-		inflater = LayoutInflater.from(activity);
-		vieww = inflater.inflate(R.layout.list_footview, null);
-		footerView =(RelativeLayout) vieww.findViewById(R.id.list_footview);
-		tv_sosbackvideonomore=	 (TextView)vieww.findViewById(R.id.text_view) ;
-		moreProgressBar = (ProgressBar) vieww.findViewById(R.id.footer_progress);
-		sosbackListview.addFooterView(footerView);
-		//获取更多监听器
-		footerView.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Log.d("moop", "SOS后路加载更多");
-				if (VERSION==3){
-					new SOSBackViedoDownFileListTask().execute(new FileBrowser(threesosfrontvideo,
-							FileBrowser.COUNT_MAX)) ;
-				}
-				mHandler.sendEmptyMessage(MSG_SHOWDIALOG);
-			}
-		});
-	}
 	private void clsSelect(){
 
 		Log.d("moop", "sSelectedFiles.size="+sSelectedFiles.size());
@@ -1966,12 +1885,10 @@ public class FileBrowserFragment extends Fragment {
 			FileNode fileNode= sSelectedFiles.remove(0);
 			fileNode.mSelected=false;
 			Log.d("moop", "取消");
-			mFileListVIDEOAdapter.notifyDataSetChanged();
-		}
+			mFileListVIDEOAdapter.notifyDataSetChanged(); }
 		if(sSelectedFiles.size()>0){
 			clsSelect();
 		}
-
 	}
 	//点击加载更多listview结果处理
 	private Handler myHandler = new Handler(){
@@ -2065,19 +1982,16 @@ public class FileBrowserFragment extends Fragment {
 			{
 
 				case MSG_VIDEONOMORE:
-					videoNomore.setText("没有更多了");
+					videoNomore.setText(getResources().getString(R.string.nomore));
 					break;
 				case MSG_BACKVIDEONOMORE:
-					backvideoNomre.setText("没有更多了");
+					backvideoNomre.setText(getResources().getString(R.string.nomore));
 					break;
 				case MSG_PHOTONOMORE:
-					tv_photonomore.setText("没有更多了");
+					tv_photonomore.setText(getResources().getString(R.string.nomore));
 					break;
 				case MSG_SOSFRONTVIDEONOMORE:
-					tv_sosfrontvideonomore.setText("没有更多了");
-					break;
-				case MSG_SOSBACKVIDEONOMORE:
-					tv_sosbackvideonomore.setText("没有更多了");
+					tv_sosfrontvideonomore.setText(getResources().getString(R.string.nomore));
 					break;
 			case MSG_SHOWDIALOG:
 					showWattingDialog();
@@ -2112,7 +2026,6 @@ public class FileBrowserFragment extends Fragment {
 								@Override
 								public void onClick(DialogInterface arg0, int arg1) {
 // TODO Auto-generated method stub
-									Log.i("moop", "点击退出");
 									getFragmentManager().popBackStack();
 									arg0.dismiss();
 									return;
@@ -2127,39 +2040,38 @@ public class FileBrowserFragment extends Fragment {
 	};
 	@Override
 	public void onResume() {
-		Log.d("moop","  onResume");
+		Log.d("moop", "  onResume");
 		restoreWaitingIndicator() ;
-		if (isfirstOpen){
-		if (sDownloadTask != null) {
-			sDownloadTask.showProgress(getActivity()) ;
 
-		} else {
-			try {
-				mTryTimes = G_TRYMAXTIMES;
-				switch (VERSION){
-					case 1:	new DownloadFileListTask().execute(new FileBrowser(new URL("http://" + mIp + mPath),
-							FileBrowser.COUNT_MAX)) ;
-						Log.d("moop", "  第一个版本请求");
-						break;
-					case 2:new DownloadFileListTask().execute(new FileBrowser(new URL("http://" + mIp + mPath),
-							FileBrowser.COUNT_MAX)) ;
-						Log.d("moop", "  第二个版本请求");
-						break;
-					case 3:new VideoDownFileListTask().execute(new FileBrowser(threeviedourl,
-							FileBrowser.COUNT_MAX)) ;
-						Log.d("moop", "  第三个版本请求");
+			if (sDownloadTask != null) {
+				sDownloadTask.showProgress(getActivity()) ;
+			} if (isfirstOpen) {
+				try {
+					mTryTimes = G_TRYMAXTIMES;
+					switch (VERSION){
+						case 1:	new DownloadFileListTask().execute(new FileBrowser(new URL("http://" + mIp + mPath),
+								FileBrowser.COUNT_MAX)) ;
+							Log.d("moop", "  第一个版本请求");
+							break;
+						case 2:new DownloadFileListTask().execute(new FileBrowser(new URL("http://" + mIp + mPath),
+								FileBrowser.COUNT_MAX)) ;
+							Log.d("moop", "  第二个版本请求");
+							break;
+						case 3:new VideoDownFileListTask().execute(new FileBrowser(threeviedourl,
+								FileBrowser.COUNT_MAX)) ;
+							Log.d("moop", "  第三个版本请求");
+					}
+					if (VERSION==0){
+						mHandler.sendEmptyMessage(MSG_CONNECTERROREXIT);
+					}else
+						showWattingDialog();
+				} catch (MalformedURLException e) {
+					e.printStackTrace() ;
 				}
-				if (VERSION==0){
-					mHandler.sendEmptyMessage(MSG_CONNECTERROREXIT);
-				}else
-				showWattingDialog();
-			} catch (MalformedURLException e) {
-				e.printStackTrace() ;
-			}
-		}
+
 			isfirstOpen=false;
 		}
-	    ////begin added by eric for update record status
+		////begin added by eric for update record status
 		MainActivity.setUpdateRecordStatusFlag(false);
 		///end
 		super.onResume() ;
@@ -2168,8 +2080,9 @@ public class FileBrowserFragment extends Fragment {
 	@Override
 	public void onPause() {
 		clearWaitingIndicator() ;
+//		clsSelect();
+//		sSelectedFiles.clear() ;
 		if (sDownloadTask != null) {
-
 			sDownloadTask.hideProgress() ;
 		}
 		////begin added by eric for update record status 

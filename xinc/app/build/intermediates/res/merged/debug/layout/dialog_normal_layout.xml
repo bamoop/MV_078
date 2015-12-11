@@ -65,14 +65,16 @@
                 style="@style/dialog_button"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="@string/label_ok" />
+                android:text="@string/label_ok"
+                />
 
             <Button
                 android:id="@+id/negativeButton"
                 style="@style/dialog_button"
                 android:layout_gravity="center"
                 android:text="@string/label_cancel"
-                android:visibility="gone" />
+                android:layout_marginLeft="30dp"
+                android:visibility="visible" />
 
         </LinearLayout>
     </LinearLayout>

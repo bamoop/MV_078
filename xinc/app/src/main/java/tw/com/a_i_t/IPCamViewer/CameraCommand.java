@@ -45,6 +45,8 @@ public class CameraCommand {
 	public static String PROPERTY_TIMESTAMP = "Camera.Preview.MJPEG.TimeStamp" ;
 	public static String PROPERTY_RTSP_AV = "Camera.Preview.RTSP.av";///added by eric
 	public static String PROPERTY_RECORDSTATUS = "Camera.Preview.MJPEG.status" ;
+	public static String PROPERTY_RECORDSTATUSCUSTOMER = "Camera.Preview.MJPEG.status.customer";
+	public static String PROPERTY_GETFWVERSION = "Camera.Menu.DefaultValue.FWversion";
 	public static String PROPERTY_FORMATSDCARD = "Camera.Cruise.Seq2.Count";
 	public static String PROPERTY_LOCKPROTECT = "Camera.Cruise.Seq3.Count";
 	public static String PROPERTY_LDWS_Y = "Camera.Cruise.AutoPan.RightLimit.Pan";
@@ -52,7 +54,10 @@ public class CameraCommand {
 	public static String PROPERTY_LDWS_EN = "Camera.Cruise.AutoPan.Speed.Pan";
 	public static String PROPERTY_TVOUT = "Camera.Cruise.ActiveSeq";
 	public static String PROPERTY_PARKING = "Camera.Cruise.Seq4.Count";
-	
+	public static String PROPERTY_SDCARDLIFETIME = "Camera.Preview.MJPEG.status.dwDegreOfWear";
+	public static String PROPERTY_FACTORYREST = "FactoryReset";
+
+
 	public static String PROPERTY_VIDEO = "Videores" ;
 	public static String PROPERTY_IMAGE = "Imageres" ;
 	public static String PROPERTY_VIDEO_FRAGTIME ="VideoClipTime";
@@ -67,7 +72,7 @@ public class CameraCommand {
 	private static String COMMAND_IMAGERES = "5M" ;
 	private static String COMMAND_VIDEORECORD = "record" ;
 	private static String COMMAND_VIDEOCAPTURE = "capture" ;
-	private static String COMMAND_FORMATSDCARD = "formatSD" ;
+	private static String COMMAND_FORMATSDCARD = " " ;
 	
 	
 	public static String PROPERTY_VIDEORECORD = "Video" ;
@@ -90,6 +95,8 @@ public class CameraCommand {
 	private static String COMMAND_MuteOn = "MuteOn" ;
 	private static Toast mToast_success = null;
 	private static Toast mToast_failed = null;
+	public String message_command_succeed="指令成功";
+	public String message_command_failed="指令失败";
 	private static String getCameraIp() {
 
 		Context context = VLCApplication.getAppContext() ;
@@ -193,11 +200,26 @@ public class CameraCommand {
 
 		return buildRequestUrl(CGI_PATH, ACTION_SET, buildArgumentList(arguments)) ;
 	}
+	/*请求查看SD卡剩余寿命
+	* add john 2015-11-25
+	* */
+	public static URL commandSDcardLifeTime(){
+		String[] arguments=new String[1];
+		arguments[0] = buildArgument(PROPERTY_SDCARDLIFETIME) ;
+		return buildRequestUrl(CGI_PATH,ACTION_GET,buildArgumentList(arguments));
+	}
+
 	public static URL commandformatsdcardSettingsUrl() {
 		
 		String[] arguments = new String[1] ;
 		arguments[0] = buildArgument(PROPERTY_FORMATSDCARD, COMMAND_FORMATSDCARD) ;
 		return buildRequestUrl(CGI_PATH, ACTION_SET, buildArgumentList(arguments)) ;
+	}
+	/*恢复出厂设置*/
+	public static URL commandfactorySettingsUrl() {
+		String[] arguments = new String[1] ;
+		arguments[0] = buildArgument(PROPERTY_FACTORYREST, "") ;
+		return buildRequestUrl(CGI_PATH, ACTION_GET, buildArgumentList(arguments)) ;
 	}
 	public static URL commandGetlockprotectSettingsUrl() {
 		
@@ -305,6 +327,16 @@ public class CameraCommand {
 
 		arguments[0] = buildArgument(PROPERTY_MUTE, COMMAND_MuteOn) ;
 
+		return buildRequestUrl(CGI_PATH, ACTION_SET, buildArgumentList(arguments)) ;
+	}
+	public static URL commandParkCerOnUrl() {
+		String[] arguments = new String[1] ;
+		arguments[0] = buildArgument(PROPERTY_PARKING,  "3") ;
+		return buildRequestUrl(CGI_PATH, ACTION_SET, buildArgumentList(arguments)) ;
+	}
+	public static URL commandParkCerOffUrl() {
+		String[] arguments = new String[1] ;
+		arguments[0] = buildArgument(PROPERTY_PARKING, "0") ;
 		return buildRequestUrl(CGI_PATH, ACTION_SET, buildArgumentList(arguments)) ;
 	}
 	public static URL commandSetmovieresolutionUrl(int pos) {
@@ -696,6 +728,20 @@ public class CameraCommand {
 		arguments[0] = buildArgument(PROPERTY_RECORDSTATUS) ;
 		
 		return buildRequestUrl(CGI_PATH, ACTION_GET, buildArgumentList(arguments)) ;
+	}
+	public static URL commandRecordStatusCustomerUrl() {
+
+		String[] arguments = new String[1] ;
+
+		arguments[0] = buildArgument(PROPERTY_RECORDSTATUSCUSTOMER) ;
+
+		return buildRequestUrl(CGI_PATH, ACTION_GET, buildArgumentList(arguments)) ;
+	}
+	public static URL commanRecordStatusCustomerUrl(){
+
+		String[] arguments=new String[1];
+		arguments[0]=buildArgument(PROPERTY_GETFWVERSION);
+		return buildRequestUrl(CGI_PATH, ACTION_GET, buildArgumentList(arguments));
 	}
 	
 	public static String sendRequest(URL url) {

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tw.com.a_i_t.IPCamViewer"
     android:versionCode="12"
-    android:versionName="1.0.24" >
+    android:versionName="1.0.29" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -23,6 +23,9 @@
         android:largeScreens="true"
         android:normalScreens="true"
         android:smallScreens="true" />
+
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name="org.videolan.vlc.VLCApplication"
@@ -97,6 +100,8 @@
 
                 <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             </intent-filter>
+        </activity>
+        <activity android:name="tw.com.a_i_t.IPCamViewer.Viewer.StreamPlayerActivity" >
         </activity>
     </application>
 

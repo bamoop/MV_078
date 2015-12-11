@@ -42,7 +42,6 @@ public class Setting_photo_Quality_Fragment extends Setting_Base_Fragment implem
 	public void OnMyClickListener(View view) {
 		// TODO Auto-generated method stub
 		SettingItem item = (SettingItem)view.getTag();
-		
 		if(item!=null)
 		{
 			URL url = CameraCommand.commandSetVideoFragTimeUrl(item.value) ;		

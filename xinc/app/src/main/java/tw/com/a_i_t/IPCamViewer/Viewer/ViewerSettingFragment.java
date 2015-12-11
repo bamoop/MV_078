@@ -112,13 +112,13 @@ public class ViewerSettingFragment extends Fragment {
 				mMediaUrl = "" ;
 				
 				if (mjpeg.isChecked()) {
-					
+
 					mMediaUrl = "http://" + gateway + url.getText().toString() ;
 					Fragment fragment = MjpegPlayerFragment.newInstance(mMediaUrl, mMjpegPush) ;
 					MainActivity.addFragment(ViewerSettingFragment.this, fragment) ;
 					
 				} else if (h264.isChecked()) {
-				
+
 					mMediaUrl = "rtsp://" + gateway + url.getText().toString() ;
 					Fragment fragment = StreamPlayerFragment.newInstance(mMediaUrl) ;
 					MainActivity.addFragment(ViewerSettingFragment.this, fragment) ;

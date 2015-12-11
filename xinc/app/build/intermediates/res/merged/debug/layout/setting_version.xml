@@ -2,28 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:background="@android:color/transparent">
+    android:background="@color/white"
+    >
     <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:layout_gravity="center"
        android:layout_margin="25dp"
-       android:background="@drawable/setting_layout_shap"
        android:orientation="vertical" >
      <LinearLayout
        android:layout_width="match_parent"
-       android:layout_height="30dp"
+       android:layout_height="wrap_content"
        android:layout_margin="25dp"
        android:background="@android:color/transparent"
        android:orientation="horizontal" >
        <TextView 
         android:gravity="center_vertical|right"
         android:layout_gravity="center"
-        android:layout_width="100dp"
+        android:layout_width="110dp"
         android:text="@string/version_hardware"
-        android:layout_height="match_parent" 
+        android:layout_height="match_parent"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:background="@android:color/transparent" 
@@ -43,10 +40,9 @@
         android:layout_marginRight="20dp"
          />
       </LinearLayout>
-      <ImageView android:layout_width="fill_parent" android:layout_height="1dp" android:background="@color/settings_list_line"/>
       <LinearLayout
        android:layout_width="match_parent"
-       android:layout_height="30dp"
+       android:layout_height="wrap_content"
        android:layout_margin="25dp"
        android:background="@android:color/transparent"
        android:orientation="horizontal" >
@@ -54,7 +50,7 @@
         android:gravity="center_vertical|right"
         android:layout_gravity="center"
         android:text="@string/version_software"
-        android:layout_width="100dp"
+        android:layout_width="110dp"
         android:layout_height="match_parent" 
         android:textColor="@android:color/black"
         android:textSize="18sp"

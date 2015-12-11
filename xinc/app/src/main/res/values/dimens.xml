@@ -11,7 +11,7 @@
     <dimen name="bottom_banner_txt_size">14sp</dimen>
     <dimen name="top_banner_txt_size">18sp</dimen>
     <dimen name="top_tab_height">42dp</dimen>
-    <dimen name="top_back_height">30dp</dimen>
+    <dimen name="top_back_height">40dp</dimen>
     <dimen name="top_back_width">35dp</dimen>
     <dimen name="top_banner_height">50dp</dimen>
     <dimen name="top_dv_label_time_height">30dp</dimen>

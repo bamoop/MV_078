@@ -225,24 +225,6 @@ public class  NetworkConfigurationsFragment extends Fragment {
 			}
 		}) ;
 
-		Button updateButton = (Button) view.findViewById(R.id.cameraControlUpdateButton) ;
-		mViewList.add(updateButton) ;
-
-		updateButton.setOnClickListener(new Button.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				
-				URL url = CameraCommand.commandUpdateUrl(mSsid.getText().toString(), mEncryptionKey.getText()
-						.toString()) ;
-				
-				if (url != null) {
-					
-					new NetworkConfigurationSendRequest().execute(url) ;
-				}
-			}
-		}) ;
-
 		Button resetButton = (Button) view.findViewById(R.id.cameraControlResetButton) ;
 		mViewList.add(resetButton) ;
 
@@ -250,12 +232,18 @@ public class  NetworkConfigurationsFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
+				URL url = CameraCommand.commandUpdateUrl(mSsid.getText().toString(), mEncryptionKey.getText()
+						.toString()) ;
 
-				URL url = CameraCommand.commandReactivateUrl() ;
-				
 				if (url != null) {
-					
+
 					new NetworkConfigurationSendRequest().execute(url) ;
+				}
+				URL url1 = CameraCommand.commandReactivateUrl() ;
+				
+				if (url1 != null) {
+					
+					new NetworkConfigurationSendRequest().execute(url1) ;
 				}
 			}
 		}) ;

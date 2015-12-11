@@ -15,7 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bric.util.Text;
 
 
 public class Setting_Base_Fun_Fragment extends Fragment {
@@ -67,6 +70,7 @@ public class Setting_Base_Fun_Fragment extends Fragment {
 				Log.d(TAG, "result="+result);
 				String[] lines;		
 				String[] lines_temp = result.split("Camera.Menu.DefaultValue.VideoRes=");
+
 				if(null != lines_temp && 1 < lines_temp.length)
 				{
 					lines = lines_temp[1].split(System.getProperty("line.separator")) ;
@@ -207,8 +211,11 @@ public class Setting_Base_Fun_Fragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.setting_list_base, container, false) ;
-		MyBanner banner = (MyBanner)view.findViewById(R.id.banner);
-		banner.setTitile(mBannerTxt);
+		//by john 2015-11-25
+		TextView text= (TextView) view.findViewById(R.id.setting_base_title);
+		text.setText(mBannerTxt);
+//		MyBanner banner = (MyBanner)view.findViewById(R.id.banner);
+//		banner.setTitile(mBannerTxt);
 		if(mIsGetMenuCommand)
 		{
 			new GetMenuSettingsValues().execute();

@@ -15,6 +15,7 @@ import java.util.Locale ;
 import java.util.Map;
 
 
+import tw.com.a_i_t.IPCamViewer.CustomDialog;
 import tw.com.a_i_t.IPCamViewer.MainActivity ;
 import tw.com.a_i_t.IPCamViewer.R ;
 import tw.com.a_i_t.IPCamViewer.FileBrowser.Model.FileBrowserModel.ModelException ;
@@ -45,6 +46,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView ;
 import android.widget.TextView ;
+import android.widget.Toast;
 
 public class LocalFileBrowserFragment extends Fragment {
 
@@ -101,6 +103,8 @@ public class LocalFileBrowserFragment extends Fragment {
 		View view = inflater.inflate(R.layout.activity_local_file_list, container, false) ;
 		photofileExpListview= (ExpandableListView) view.findViewById(R.id.expandlist_photo);
 		videofileExpListview= (ExpandableListView) view.findViewById(R.id.expandlist_video);
+
+//		videofileExpListview.setGroupIndicator(null);
 		//mFileListAdapter = new LocalFileListAdapter(inflater, mFileList) ;
 		//mPhotoFileListAdapter = new LocalFileListAdapter(inflater, mPhotoFilelist) ;
 		String fileBrowser = getActivity().getResources().getString(R.string.label_file_browser) ;
@@ -109,18 +113,26 @@ public class LocalFileBrowserFragment extends Fragment {
 		videoexpandableAdapter=new LocalFileExpandableAdapter(getActivity(),inflater,videomap,photoParent);
 		photofileExpListview.setAdapter(photoexpandableAdapter);
 		videofileExpListview.setAdapter(videoexpandableAdapter);
-		this.photoParent.add("一天内");
-		this.photoParent.add("一天前");
-		this.photoParent.add("三天前");
-		this.photoParent.add("七天前");
+		this.photoParent.add(getResources().getString(R.string.intraday));
+		this.photoParent.add(getResources().getString(R.string.yesterday));
+		this.photoParent.add(getResources().getString(R.string.threedaysago));
+		this.photoParent.add(getResources().getString(R.string.sevendaysago));
+
+		selectgroupPositionlistvideo.add( photoParent.get(0));
+		selectgroupPositionlistvideo.add( photoParent.get(1));
+		selectgroupPositionlistvideo.add( photoParent.get(2));
+		selectgroupPositionlistvideo.add( photoParent.get(3));
+		selectgroupPositionlist.add(photoParent.get(0));
+		selectgroupPositionlist.add(photoParent.get(1));
+		selectgroupPositionlist.add(photoParent.get(2));
+		selectgroupPositionlist.add(photoParent.get(3));
 		photofileExpListview.expandGroup(0);
 		videofileExpListview.expandGroup(0);
 
 		photofileExpListview.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View view, int groupPosition, int childPosition, long id) {
-				selectgroupPositionlist.add( photoParent.get(groupPosition));
-				final FileNode fileNode = photomap.get(selectgroupPositionlist.get(0)).get(childPosition);
+				final FileNode fileNode = photomap.get(selectgroupPositionlist.get(groupPosition)).get(childPosition);
 				if (fileNode != null) {
 					ViewTag viewTag = (ViewTag) view.getTag();
 					if (viewTag != null) {
@@ -136,7 +148,7 @@ public class LocalFileBrowserFragment extends Fragment {
 						if (mSelectedFiles.size() == 1) {
 							mOpenButton.setEnabled(true);
 						} else {
-							mOpenButton.setEnabled(false);
+							mOpenButton.setEnabled(true);
 						}
 						if (mSelectedFiles.size() > 0) {
 							mDeleteButton.setEnabled(true);
@@ -151,8 +163,7 @@ public class LocalFileBrowserFragment extends Fragment {
 		videofileExpListview.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View view, int groupPosition, int childPosition, long id) {
-				selectgroupPositionlistvideo.add( photoParent.get(groupPosition));
-				final FileNode fileNode = videomap.get(selectgroupPositionlistvideo.get(0)).get(childPosition);
+				final FileNode fileNode = videomap.get(selectgroupPositionlistvideo.get(groupPosition)).get(childPosition);
 				if (fileNode != null) {
 					ViewTag viewTag = (ViewTag) view.getTag();
 					if (viewTag != null) {
@@ -168,7 +179,7 @@ public class LocalFileBrowserFragment extends Fragment {
 						if (mSelectedFiles.size() == 1) {
 							mOpenButton.setEnabled(true);
 						} else {
-							mOpenButton.setEnabled(false);
+							mOpenButton.setEnabled(true);
 						}
 						if (mSelectedFiles.size() > 0) {
 							mDeleteButton.setEnabled(true);
@@ -264,6 +275,7 @@ public class LocalFileBrowserFragment extends Fragment {
 //				fileListView.setVisibility(View.VISIBLE);
 				photofileExpListview.setVisibility(View.GONE);
 				videofileExpListview.setVisibility(View.VISIBLE);
+				clsSelect();
 				isvideo = true;
 //				mSelectedFiles.clear();
 //				fileListView.setAdapter(mFileListAdapter);
@@ -283,6 +295,8 @@ public class LocalFileBrowserFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 //				mSelectedFiles.clear();
+				clsSelect();
+
 				photofileExpListview.setVisibility(View.VISIBLE);
 				videofileExpListview.setVisibility(View.GONE);
 //				filePhotoListView.setAdapter(mPhotoFileListAdapter);
@@ -318,11 +332,29 @@ public class LocalFileBrowserFragment extends Fragment {
 					} //else if (fileNode.mFormat == Format.avi) {
 						/* call self player */
 						//VideoPlayerActivity.start(getActivity(), "file://"+ fileNode.mName);
-					//} 
+					//}
 				     else if (fileNode.mFormat == Format.jpeg) {
-						intent.setDataAndType(Uri.fromFile(file), "image/jpeg") ;
-						startActivity(intent) ;
+						try{
+							intent.setDataAndType(Uri.fromFile(file), "image/jpeg") ;
+							startActivity(intent) ;
+						}catch (Exception e){
+							Toast.makeText(getActivity(), "打开失败，请更换系统图片默认的打开方式",
+									Toast.LENGTH_SHORT).show();
+						}
 					}
+				}else {
+					CustomDialog alertDialog = new CustomDialog.Builder(getActivity())
+							.setTitle(getResources().getString(R.string.trip))
+							.setMessage(getResources().getString(R.string.erroroneopenfile))
+							.setCancelable(false)
+							.setPositiveButton(R.string.label_ok, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface arg0, int arg1) {
+									arg0.dismiss();
+									return;
+								}
+							}).create();
+					alertDialog.show();
 				}
 //				mSelectedFiles.clear() ;
 //				photoexpandableAdapter.notifyDataSetChanged();
@@ -355,9 +387,22 @@ public class LocalFileBrowserFragment extends Fragment {
 					} else{
 						intent.setType("video/*") ;
 					}
-					intent.putExtra(Intent.EXTRA_STREAM, u); 
-					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); 
-					startActivity(Intent.createChooser(intent, getString(R.string.label_shared))); 
+					intent.putExtra(Intent.EXTRA_STREAM, u);
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(Intent.createChooser(intent, getString(R.string.label_shared)));
+				} else {
+					CustomDialog alertDialog = new CustomDialog.Builder(getActivity())
+							.setTitle(getResources().getString(R.string.trip))
+							.setMessage(getResources().getString(R.string.erroronesharefile))
+							.setCancelable(false)
+							.setPositiveButton(R.string.label_ok, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface arg0, int arg1) {
+									arg0.dismiss();
+									return;
+								}
+							}).create();
+					alertDialog.show();
 				}
 			}
 		}) ;
@@ -478,15 +523,15 @@ public class LocalFileBrowserFragment extends Fragment {
 			}
 			Log.i("moop", "i=" + i);
 			Log.i("LocalFileBrowserFragment", "file parsed");
-			photomap.put("一天内", plist1);
-			photomap.put("一天前", plist2);
-			photomap.put("三天前", plist3);
-			photomap.put("七天前", plist4);
-			videomap.put("一天内", vlist1);
-			videomap.put("一天前", vlist2);
-			videomap.put("三天前", vlist3);
-			videomap.put("七天前", vlist4);
-//			photomap.get("三天内").size();
+			photomap.put(getResources().getString(R.string.intraday), plist1);
+			photomap.put(getResources().getString(R.string.yesterday), plist2);
+			photomap.put(getResources().getString(R.string.threedaysago), plist3);
+			photomap.put(getResources().getString(R.string.sevendaysago), plist4);
+			videomap.put(getResources().getString(R.string.intraday), vlist1);
+			videomap.put(getResources().getString(R.string.yesterday), vlist2);
+			videomap.put(getResources().getString(R.string.threedaysago), vlist3);
+			videomap.put(getResources().getString(R.string.sevendaysago), vlist4);
+//			photomap.get(getResources().getString(R.string.intraday)).size();
 			/*根据下载到本地的时间有近到远进行排序*/
 			Collections.sort(fileList, new Comparator<FileNode>() {
 						@Override
@@ -524,7 +569,7 @@ public class LocalFileBrowserFragment extends Fragment {
 			super.onPostExecute(result) ;
 		}
 	}
-	
+
 	private boolean mWaitingState = false ;
 	private boolean mWaitingVisible = false ;
 	/*获取当前系统时间*/
@@ -578,7 +623,20 @@ public class LocalFileBrowserFragment extends Fragment {
 				mDeleteButton.setEnabled(false) ;
 		}
 	}
+	private void clsSelect(){
 
+		Log.d("moop", "sSelectedFiles.size=" + mSelectedFiles.size());
+		if (mSelectedFiles.size()>0){
+			FileNode fileNode= mSelectedFiles.remove(0);
+			fileNode.mSelected=false;
+			Log.d("moop", "取消");
+			photoexpandableAdapter.notifyDataSetChanged();
+			videoexpandableAdapter.notifyDataSetChanged();
+		}
+		if(mSelectedFiles.size()>0){
+			clsSelect();
+		}
+	}
 	private void setWaitingState(boolean waiting) {
 
 		if (mWaitingState != waiting) {
@@ -640,6 +698,8 @@ public class LocalFileBrowserFragment extends Fragment {
 
 	@Override
 	public void onPause() {
+		clsSelect();
+		mSelectedFiles.clear();
 		super.onPause() ;
 	}
 	@Override

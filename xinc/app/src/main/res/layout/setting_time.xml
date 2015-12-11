@@ -7,13 +7,7 @@
     android:background="@android:color/transparent">
     <tw.com.a_i_t.IPCamViewer.MyBanner android:layout_marginTop="0dp" android:layout_width="match_parent"
     android:layout_height="@dimen/top_banner_height" MyBanner:text="@string/Timesettings" />
-    <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="150dp"
-       android:layout_gravity="center"
-       android:layout_margin="25dp"
-       android:background="@drawable/setting_layout_shap"
-       android:orientation="vertical" >
+
     <TextView 
         android:gravity="center_vertical|left"
         android:layout_width="wrap_content"
@@ -38,5 +32,4 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_gravity="center_vertical" />
-	</LinearLayout>
 </LinearLayout>

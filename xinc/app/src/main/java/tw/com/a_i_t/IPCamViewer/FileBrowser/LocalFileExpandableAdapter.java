@@ -37,7 +37,6 @@ public class LocalFileExpandableAdapter  extends BaseExpandableListAdapter{
     }
     @Override
     public int getGroupCount() {
-        Log.i("moopadap", "父栏目大小" + parent.size());
         return  parent.size();
     }
 
@@ -46,35 +45,30 @@ public class LocalFileExpandableAdapter  extends BaseExpandableListAdapter{
         String str =this.parent.get(groupPosition);
         int size=0;
         if (map.size()>0){
-          size=this.map.get(str).size();
-        this.childrencoun=size;
+            size=this.map.get(str).size();
+            this.childrencoun=size;
         }
-        Log.i("moopadap", "子栏目数量" +size);
         return size;
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        Log.i("moopadap", "getGroup" + (String)this.parent.get(groupPosition));
         return this.parent.get(groupPosition);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
         String str = parent.get(groupPosition);
-        Log.i("moopadap", "getChild" + ((List) this.map.get(str)).get(childPosition));
         return (map.get(str)).get(childPosition);
     }
 
     @Override
     public long getGroupId(int groupPosition) {
-        Log.i("moopadap", "getGroupId" + groupPosition);
         return groupPosition;
     }
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        Log.i("moopadap", "getChildId" + childPosition);
         return childPosition;
     }
 
@@ -85,12 +79,10 @@ public class LocalFileExpandableAdapter  extends BaseExpandableListAdapter{
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        Log.i("moopadap", "getGroupView" );
         Holder holder = null;
         String key=this.parent.get(groupPosition);
         String childposition="0";
         if (map.size()>0){
-        Log.i("moopadap","map.get(key).size()="+ String.valueOf(map.get(key).size()));
             childposition=  String.valueOf(map.get(key).size());
         }
         if (convertView==null){
@@ -110,7 +102,6 @@ public class LocalFileExpandableAdapter  extends BaseExpandableListAdapter{
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        Log.i("moopadap", "getChildView" );
         ViewTag viewTag;
         String key=this.parent.get(groupPosition);
         if (convertView==null){

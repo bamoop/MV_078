@@ -500,10 +500,7 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState) ;
-		URL url = CameraCommand.commandCameraTimeSettingsUrl() ;
-		if (url != null) {
-			new CameraCommand.SendRequest().execute(url) ;
-		}
+
 		if (savedInstanceState == null) {
 			mRecordthread = true;
 			new GetTimeStamp().execute();
@@ -843,7 +840,7 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 //                msg.what = MSG_PLYDISSMISS;
 //                mHandler_ui.sendMessage(msg);
 						if (!isfirstOpenView){
-							mHandler_ui.sendEmptyMessageDelayed(MSG_PLYDISSMISS, 1800);
+							mHandler_ui.sendEmptyMessageDelayed(MSG_PLYDISSMISS, 1800 );
 						}
 //                Log.i("moop", mMediaUrl);
 //                  mProgressDialog = null ;
@@ -1087,38 +1084,42 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 		{
 			dw = getActivity().getWindow().getDecorView().getWidth() ;
 			dh = getActivity().getWindow().getDecorView().getHeight() ;
+			Log.i("moop","获取屏幕尺寸=="+dw+"    "+dh);
 		}
 // getWindow().getDecorView() doesn't always take orientation into
 		// account, we have to correct the values
-		boolean isPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ;
+		boolean isPortrait = getResources().getConfiguration().orientation ==Configuration.ORIENTATION_PORTRAIT ;
+		Log.i("moop", String.valueOf(getResources().getConfiguration().orientation)+"        "+ Configuration.ORIENTATION_PORTRAIT);
 		if (dw > dh && isPortrait || dw < dh && !isPortrait) {
 			int d = dw ;
 			dw = dh ;
 			dh = d ;
+			Log.i("moop", "转换过的尺寸==" + dw + "    " + dh);
 		}
 
 // sanity check
+		//无效尺寸
 		if (dw * dh == 0 || mVideoWidth * mVideoHeight == 0) {
 			Log.e(TAG, "Invalid surface size") ;
 			return ;
 		}
 
-// compute the aspect ratio
+// compute the aspect ratio  计算比例
 		double ar, vw ;
 		double density = (double) mSarNum / (double) mSarDen ;
 		if (density == 1.0) {
-/* No indication about the density, assuming 1:1 */
+/* No indication about the density, assuming 1:1   假设密度1!1 */
 			vw = mVideoVisibleWidth ;
 			ar = (double) mVideoVisibleWidth / (double) mVideoVisibleHeight ;
 		} else {
-/* Use the specified aspect ratio */
+/* Use the specified aspect ratio   使用指定的长宽比*/
 			vw = mVideoVisibleWidth * density ;
 			ar = vw / mVideoVisibleHeight ;
 		}
 
-// compute the display aspect ratio
+// compute the display aspect ratio   计算显示比例
 		double dar = (double) dw / (double) dh ;
-
+		Log.i("moop", "显示比例是 ="+mCurrentSize);
 		switch (mCurrentSize) {
 			case SURFACE_BEST_FIT:
 				if (dar < ar)
@@ -1157,16 +1158,18 @@ public class StreamPlayerFragment extends Fragment implements IVideoPlayer {
 // force surface buffer size
 		mSurfaceHolder.setFixedSize(mVideoWidth, mVideoHeight) ;
 
-// set display size
+// set display size  设置显示大小
 		LayoutParams lp = mSurface.getLayoutParams() ;
 		lp.width = dw * mVideoWidth / mVideoVisibleWidth ;
 		lp.height = dh * mVideoHeight / mVideoVisibleHeight ;
+		Log.i("moop", "mSurface ="+lp.width+"    "+lp.height);
 		mSurface.setLayoutParams(lp) ;
 
-// set frame size (crop if necessary)
+// set frame size (crop if necessary)  设置帧尺寸(如有必要)
 		lp = mSurfaceFrame.getLayoutParams() ;
 		lp.width = dw ;
 		lp.height = dh ;
+		Log.i("moop", "mSurfaceFrame ="+lp.width+"    "+lp.height);
 		mSurfaceFrame.setLayoutParams(lp) ;
 		mSurfaceFrame.setBackgroundColor(Color.BLACK);
 		mSurface.invalidate() ;

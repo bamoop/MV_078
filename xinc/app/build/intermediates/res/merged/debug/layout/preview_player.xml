@@ -1,12 +1,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:MyBanner="http://schemas.android.com/apk/res/tw.com.a_i_t.IPCamViewer" 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     android:orientation="vertical" >
-   <tw.com.a_i_t.IPCamViewer.MyBanner android:layout_width="match_parent"
-    android:layout_height="@dimen/top_banner_height" MyBanner:text="@string/main_video" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:layout_height="@dimen/top_banner_height"
+        android:background="@drawable/banner_bg">
+
+        <ImageButton android:scaleType="fitXY"
+            android:layout_marginLeft="@dimen/banner_cord_margin_left"
+            android:layout_centerVertical="true"
+            android:id="@+id/btn_back"
+            android:background="@drawable/back"
+            android:layout_width="@dimen/top_back_width"
+            android:layout_height="@dimen/top_back_height" />
+        <TextView
+            android:id="@+id/txt_title"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:text="@string/main_video"
+            android:gravity="center"
+            style="@style/layout_full"/>
+
+    </RelativeLayout>
     <LinearLayout style="@style/layout_vertical" android:layout_weight="1"
         android:background="@android:color/black">
        <RelativeLayout android:layout_width="fill_parent"
@@ -15,8 +36,7 @@
     	<FrameLayout
 	        android:id="@+id/player_frame"
 	        android:layout_width="fill_parent"
-	        android:layout_height="fill_parent"
-	        >
+	        android:layout_height="fill_parent">
 
 	        <FrameLayout
 	            android:id="@+id/player_surface_frame"
@@ -34,7 +54,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textSize="15dp"
-                    android:textColor="@color/white"
+                    android:textColor="#68f431"
                    android:text="@string/playVideoError"
                     android:layout_gravity="center"
                     android:gravity="center"/>
@@ -49,39 +69,38 @@
                 android:layout_gravity="left"
                 android:layout_marginTop="@dimen/top_dv_sound_margin"
                 android:layout_alignParentLeft="true"
-                android:textColor="#ffff00"
+                android:textColor="@color/white"
                 android:layout_marginLeft="@dimen/top_dv_sound_margin"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-         <ImageButton android:layout_alignParentTop="true"
+           <ImageButton
+               android:layout_alignParentTop="true"
+               android:scaleType="fitXY"
+               android:background="@drawable/sound_disable"
+               android:layout_marginTop="@dimen/top_dv_sound_margin"
+               android:layout_marginRight="80dp"
+               android:layout_alignParentRight="true"
+               android:id="@+id/sound_disable"
+               android:layout_width="35dp"
+               android:layout_height="@dimen/top_dv_sound_size"/>
+           <ImageButton android:layout_alignParentTop="true"
              android:scaleType="fitXY"
              android:background="@drawable/sound_enable"
              android:layout_marginTop="@dimen/top_dv_sound_margin"
              android:layout_marginRight="80dp"
              android:layout_alignParentRight="true"
              android:id="@+id/sound"
-             android:layout_width="@dimen/top_dv_sound_size"
+             android:layout_width="35dp"
              android:layout_height="@dimen/top_dv_sound_size"/>
-		<ImageButton
-            android:layout_alignParentTop="true"
-            android:scaleType="fitXY"
-            android:background="@drawable/sound_disable"
-            android:layout_marginTop="@dimen/top_dv_sound_margin"
-            android:layout_marginRight="80dp"
-            android:layout_alignParentRight="true"
-            android:id="@+id/sound_disable"
-            android:layout_width="@dimen/top_dv_sound_size"
-            android:layout_height="@dimen/top_dv_sound_size"/>
            <Button
                android:id="@+id/btn_changemedia"
-               android:layout_width="60dp"
+               android:layout_width="50dp"
                android:layout_height="35dp"
                android:layout_marginRight="10dp"
                android:layout_marginTop="@dimen/top_dv_sound_margin"
                android:layout_alignParentRight="true"
-               android:background="@drawable/btn_shape_round"
-               android:text="后"
-               android:textColor="@color/red"
-               android:visibility="gone"/>
+               android:background="@drawable/play_btn_simplewipe_bg"
+               android:visibility="gone"
+               />
            <LinearLayout android:background="@drawable/contro_bar_bg"
                android:layout_alignParentBottom="true"
                android:layout_width="fill_parent"
@@ -94,23 +113,25 @@
                    android:layout_weight="1"
                    android:gravity="right"
                    android:orientation="horizontal">
-                   <Button
-                       android:gravity="right"
-                       android:id="@+id/cameraRecordButton"
-                       android:background="@drawable/start_record"
+                   <Button android:id="@+id/cameraStopButton"
+                       android:background="@drawable/record_stop"
+                       android:layout_marginRight="10dp"
                        android:layout_gravity="center"
                        android:layout_width="@dimen/bottom_dv_record_size"
-                       android:layout_height="@dimen/bottom_dv_record_size"/>
+                       android:layout_height="@dimen/bottom_dv_record_size"
+                       android:visibility="visible"/>
 
                </LinearLayout>
                <LinearLayout
                    android:layout_width="fill_parent"
                    android:layout_height="fill_parent"
                    android:layout_weight="1">
-                   <Button android:id="@+id/cameraStopButton"
-                       android:background="@drawable/record_stop"
-                       android:layout_marginLeft="10dp"
+                   <Button
+                       android:gravity="right"
+                       android:id="@+id/cameraRecordButton"
+                       android:background="@drawable/start_record"
                        android:layout_gravity="center"
+                       android:layout_marginLeft="10dp"
                        android:layout_width="@dimen/bottom_dv_record_size"
                        android:layout_height="@dimen/bottom_dv_record_size"/>
                </LinearLayout>
@@ -133,15 +154,25 @@
 	</LinearLayout>
 	
 	<LinearLayout android:layout_width="match_parent"
-	       android:background="@android:color/transparent"
            android:layout_height="@dimen/bottom_banner_height">
-        <LinearLayout style="@style/bottom_layout" android:id="@+id/snapshotButton" >
-            <ImageButton style="@style/bottom_button" android:background="@drawable/app_spon_bg"/>
-            <TextView android:duplicateParentState="true" style="@style/bottom_button_text"  android:text="@string/label_app_snapshot"/>
+        <LinearLayout style="@style/bottom_layout"
+            android:id="@+id/snapshotButton" >
+            <ImageButton style="@style/bottom_button"
+                android:background="@drawable/app_spon_bg"/>
+            <TextView android:duplicateParentState="true"
+                style="@style/bottom_button_text"
+                android:text="@string/label_app_snapshot"
+                android:layout_marginLeft="10dp"
+                />
         </LinearLayout>
     	<LinearLayout style="@style/bottom_layout" android:id="@+id/recordButton"  >
-        	<ImageButton style="@style/bottom_button" android:background="@drawable/app_record_bg" />   
-    		<TextView android:id="@+id/record_txt" android:duplicateParentState="true" android:text="@string/label_app_record" style="@style/bottom_button_text" />
+            <ImageButton style="@style/bottom_button"
+                android:background="@drawable/app_record_bg"/>
+    		<TextView android:id="@+id/record_txt"
+                android:duplicateParentState="true"
+                android:text="@string/label_app_record"
+                style="@style/bottom_button_text"
+                android:layout_marginLeft="10dp"/>
     	</LinearLayout>
       </LinearLayout>
 </LinearLayout><!-- From: file:/E:/john_work/xinc/app/src/main/res/layout/preview_player.xml -->

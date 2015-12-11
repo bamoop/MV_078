@@ -57,7 +57,6 @@ public class Setting_Base_Fragment extends Setting_Base_Fun_Fragment {
 				item.setItemTag(items[i]);
 				list_items.add(item);
 				item.setMyOnClickListener(new View.OnClickListener() {
-					
 					@Override
 					public void onClick(View arg0) {
 						// TODO Auto-generated method stub
@@ -66,6 +65,7 @@ public class Setting_Base_Fragment extends Setting_Base_Fun_Fragment {
 							if(!list_items.get(i).getItemTag().equals(arg0.getTag()))
 							{
 								list_items.get(i).setChecked(false);
+								Log.i("moop", "list_items.get(i)="+String.valueOf(list_items.get(i)));
 							}
 						}
 						if(mListener!=null)

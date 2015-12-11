@@ -1,4 +1,6 @@
 package tw.com.a_i_t.IPCamViewer ;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -8,7 +10,10 @@ import tw.com.a_i_t.IPCamViewer.FileBrowser.FileBrowser;
 import tw.com.a_i_t.IPCamViewer.FileBrowser.FileBrowserFragment ;
 import tw.com.a_i_t.IPCamViewer.FileBrowser.BrowserSettingFragment ;
 import tw.com.a_i_t.IPCamViewer.FileBrowser.LocalFileBrowserFragment ;
+import tw.com.a_i_t.IPCamViewer.FileBrowser.Model.CameraStatus;
+import tw.com.a_i_t.IPCamViewer.Viewer.MenuViewItem;
 import tw.com.a_i_t.IPCamViewer.Viewer.MjpegPlayerFragment ;
+import tw.com.a_i_t.IPCamViewer.Viewer.StreamPlayerActivity;
 import tw.com.a_i_t.IPCamViewer.Viewer.StreamPlayerFragment ;
 import tw.com.a_i_t.IPCamViewer.Viewer.ViewerSettingFragment ;
 import android.annotation.SuppressLint;
@@ -18,6 +23,8 @@ import android.app.Fragment ;
 import android.app.ProgressDialog;
 import android.content.Context ;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.net.DhcpInfo ;
 import android.net.wifi.WifiManager ;
@@ -25,6 +32,7 @@ import android.os.AsyncTask;
 import android.os.Bundle ;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater ;
@@ -39,7 +47,7 @@ import android.widget.RelativeLayout ;
 import android.widget.Toast;
 
 @SuppressLint("HandlerLeak")
-public class FunctionListFragment extends Fragment {
+public class FunctionListFragment extends Fragment implements OnClickListener {
 	private static final String TAG = "FunctionListFragment";
 	private int mB = -1;
 	private int mlocalB=0;
@@ -49,6 +57,9 @@ public class FunctionListFragment extends Fragment {
     public static String mRecordStatus="";
     public static String mRecordmode="";
     private boolean mclicksetting = false;
+	public CameraStatus cameraStatus;
+	public List<CameraStatus>cameraStatusList=new ArrayList<CameraStatus>();
+
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
@@ -62,7 +73,7 @@ public class FunctionListFragment extends Fragment {
 			}
 		}).start();*/
 	}
-	
+
 	///added by eric for stop record when downloading
 	private class CameraVideoSendRecordCmd extends AsyncTask<URL, Integer, String> {
 		@Override
@@ -134,7 +145,54 @@ public class FunctionListFragment extends Fragment {
 
 	}
 }	
-	
+	//add john 2015-12-3
+	private class CameraStatusCustomer extends AsyncTask<URL,Integer,String>{
+
+		@Override
+		protected String doInBackground(URL... params) {
+			URL url=CameraCommand.commandRecordStatusCustomerUrl();
+			if (url!=null){
+				return CameraCommand.sendRequest(url);
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			if (result!=null){
+				String[] lines;
+				String[] lines_temp=result.split("Camera.Preview.MJPEG.status.customer=weioa.com");
+				String[] item=lines_temp[0].split(",");
+
+				String te=",20151030,3003,2015-12-2 17:51:1,1,0,1,1,0,0,1,0,0,0,6,1,NPD_CarDV_WiFi,1234567890,1";
+				String [] tt = te.split(",");
+				Log.i("--", tt[0]);
+				if (lines_temp!=null&& lines_temp.length>1){
+					lines = lines_temp[1].split(",") ;
+					if (lines!=null){
+						cameraStatus.setfWversion(lines[0]);
+						cameraStatus.setTimeStamp(lines[1]);
+						cameraStatus.setStatusRecord(lines[2]);
+						cameraStatus.setSoundIndicator(lines[3]);
+						cameraStatus.setMenuSD(lines[4]);
+						cameraStatus.setMenuAWB(lines[5]);
+						cameraStatus.setMenuVideoRes(lines[6]);
+						cameraStatus.setVideoClipTime(lines[7]);
+						cameraStatus.setMenuImageRes(lines[8]);
+						cameraStatus.setMenuMTD(lines[9]);
+						cameraStatus.setMenuFlicker(lines[10]);
+						cameraStatus.setMenuEV(lines[11]);
+						cameraStatus.setMenuVidemodel(lines[12]);
+						cameraStatus.setApSSID(lines[13]);
+						cameraStatus.setPossword(lines[14]);
+						cameraStatus.setSys(lines[15]);
+						cameraStatusList.add(cameraStatus);
+					}
+				}
+			}
+			super.onPostExecute(result);
+		}
+	}
 	
 	private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg){
@@ -318,7 +376,7 @@ public class FunctionListFragment extends Fragment {
 				
 				Toast.makeText(activity,
 						activity.getResources().getString(R.string.message_command_failed),
-						Toast.LENGTH_SHORT).show() ;	
+						Toast.LENGTH_SHORT).show() ;
 			}
 			super.onPostExecute(result) ;
 
@@ -391,9 +449,7 @@ public class FunctionListFragment extends Fragment {
 						new DialogInterface.OnClickListener() {
 
 							public void onClick(DialogInterface dialog, int id) {
-
 								dialog.dismiss() ;
-
 							}
 						}) ;
 				alertDialog.show() ;
@@ -424,18 +480,28 @@ public class FunctionListFragment extends Fragment {
 					Log.i("moop","请求属3"+liveStreamUrl);
 				} catch (Exception e) {/* not match, for firmware of MJPEG only */}
 			}
-			else Log.i("moop","没有拿到视频属性");
+			else {
+				Log.i("moop", "没有拿到视频属性");
+			}
 			Fragment fragment = StreamPlayerFragment.newInstance(liveStreamUrl) ;
 			MainActivity.addFragment(FunctionListFragment.this, fragment) ;
+//			Intent intent = new Intent(getActivity(), StreamPlayerActivity.class) ;
+//			intent.putExtra("KEY_MEDIA_URL",liveStreamUrl);
+//			startActivity(intent) ;
 			super.onPostExecute(result) ;
 		}
 	}
+	private Toast mToast;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.function_list, container, false) ;
-		OnTouchListener onTouch = new OnTouchListener() {
+		view.findViewById(R.id.dv_btn).setOnClickListener( this);
+		view.findViewById(R.id.local_btn).setOnClickListener( this);
+		view.findViewById(R.id.settings_btn).setOnClickListener( this);
+		view.findViewById(R.id.video_btn).setOnClickListener( this);
 
+		OnTouchListener onTouch = new OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 
@@ -449,10 +515,9 @@ public class FunctionListFragment extends Fragment {
 			}
 		} ;
 
-		Button_main control = (Button_main) view.findViewById(R.id.settings_btn) ;
 
+	/*	 MenuViewItem  control= (MenuViewItem) view.findViewById(R.id.settings_btn) ;
 		control.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				if(!mclicksetting)
@@ -463,13 +528,9 @@ public class FunctionListFragment extends Fragment {
 				//MainActivity.addFragment(FunctionListFragment.this, new SettingFragment()) ;
 			}
 		}) ;
-
 		control.setOnTouchListener(onTouch) ;
-
-		Button_main preview = (Button_main) view.findViewById(R.id.video_btn) ;
-
+		MenuViewItem preview = (MenuViewItem) view.findViewById(R.id.video_btn) ;
 		preview.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				Log.d("Button_main","ONCLICK");
@@ -477,56 +538,16 @@ public class FunctionListFragment extends Fragment {
 				if (engineerMode) {
 					MainActivity.addFragment(FunctionListFragment.this, new ViewerSettingFragment()) ;
 				} else {
-					
-					////modify by eric
 					new GetRTPS_AV1().execute();
-					/*WifiManager wifiManager = (WifiManager) getActivity().getSystemService(
-							Context.WIFI_SERVICE) ;
-
-					DhcpInfo dhcpInfo = wifiManager.getDhcpInfo() ;
-
-					if (dhcpInfo != null && dhcpInfo.gateway != 0) {
-
-						String gateway = MainActivity.intToIp(dhcpInfo.gateway) ;
-
-						String mediaUrl = "http://" + gateway + MjpegPlayerFragment.DEFAULT_MJPEG_PUSH_URL ;
-						getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-						Fragment fragment = StreamPlayerFragment.newInstance(mediaUrl) ;
-						MainActivity.addFragment(FunctionListFragment.this, fragment) ;
-					}
-					else
-					{
-						CustomDialog alertDialog = new CustomDialog.Builder(getActivity())
-						.setTitle(getResources().getString(R.string.dialog_DHCP_error))
-						.setPositiveButton(R.string.label_ok,new DialogInterface.OnClickListener() {
-							
-							@Override
-							public void onClick(DialogInterface arg0, int arg1) {
-								// TODO Auto-generated method stub
-								arg0.dismiss();
-							}
-						}).create();
-						
-						alertDialog.show() ;
-					}
-					*/
 				}
 			}
 		}) ;
-
-		//preview.setOnTouchListener(onTouch) ;
-
-		Button_main browser = (Button_main) view.findViewById(R.id.dv_btn) ;
-
+		MenuViewItem browser = (MenuViewItem) view.findViewById(R.id.dv_btn) ;
 		browser.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
-
 				boolean engineerMode = ((MainActivity) getActivity()).mEngineerMode ;
-
 				if (engineerMode) {
-
 					MainActivity.addFragment(FunctionListFragment.this, new BrowserSettingFragment()) ;
 				} else {
 					Fragment fragment = FileBrowserFragment.newInstance(null, null, null) ;
@@ -538,7 +559,7 @@ public class FunctionListFragment extends Fragment {
 
 		browser.setOnTouchListener(onTouch) ;
 
-		Button_main localAlbum = (Button_main) view.findViewById(R.id.local_btn) ;
+		MenuViewItem localAlbum = (MenuViewItem) view.findViewById(R.id.local_btn) ;
 
 		localAlbum.setOnClickListener(new OnClickListener() {
 
@@ -549,19 +570,84 @@ public class FunctionListFragment extends Fragment {
 			}
 		}) ;
 
-		localAlbum.setOnTouchListener(onTouch) ;
-		ImageButton help_btn = (ImageButton) view.findViewById(R.id.help) ;
-		help_btn.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				MainActivity.addFragment(FunctionListFragment.this, new HelpFramgment()) ;
-			}
-		});
+//		localAlbum.setOnTouchListener(onTouch) ;
+//		ImageButton help_btn = (ImageButton) view.findViewById(R.id.help) ;
+//		help_btn.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View arg0) {
+//				// TODO Auto-generated method stub
+//				MainActivity.addFragment(FunctionListFragment.this, new HelpFramgment()) ;
+//			}
+//		});*/
 		return view ;
 	}
-	
+
+	@Override
+	public void onClick(View v) {
+		if(null != mToast) {
+			mToast.cancel();
+		}
+		switch(v.getId()) {
+			case R.id.dv_btn:
+				boolean engineerMode = ((MainActivity) getActivity()).mEngineerMode ;
+				if (engineerMode) {
+					MainActivity.addFragment(FunctionListFragment.this, new BrowserSettingFragment()) ;
+				} else {
+					Fragment fragment = FileBrowserFragment.newInstance(null, null, null) ;
+
+					MainActivity.addFragment(FunctionListFragment.this, fragment) ;
+				}
+				break;
+
+			case R.id.local_btn:
+				MainActivity.addFragment(FunctionListFragment.this, new LocalFileBrowserFragment()) ;
+				break;
+
+			case R.id.settings_btn:
+				if(!mclicksetting)
+				{
+					mclicksetting = true;
+					new GetRecordStatus().execute();
+					break;
+				}
+				MainActivity.addFragment(FunctionListFragment.this, new SettingFragment()) ;
+				break;
+			case R.id.video_btn:
+				WifiManager wifiManager = (WifiManager)
+						getActivity().getSystemService(Context.WIFI_SERVICE);
+				DhcpInfo dhcpInfo = wifiManager.getDhcpInfo();
+				if (dhcpInfo == null || dhcpInfo.gateway == 0) {
+					AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create() ;
+					alertDialog.setTitle(getResources().getString(R.string.dialog_DHCP_error)) ;
+					alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,
+							getResources().getString(R.string.label_ok),
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int id) {
+									dialog.dismiss();
+								}
+							}) ;
+				alertDialog.show() ;
+					return;
+				}
+				engineerMode = ((MainActivity) getActivity()).mEngineerMode;
+				if (engineerMode) {
+					MainActivity.addFragment(FunctionListFragment.this, new ViewerSettingFragment()) ;
+				} else {
+//					new GetRTPS_AV1().execute();
+					SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+					String liurl=null;
+					liurl = pref.getString("liveStreamUrl", "");
+					Intent intent = new Intent(getActivity(), StreamPlayerActivity.class) ;
+				    intent.putExtra("KEY_MEDIA_URL",liurl);
+			        startActivity(intent) ;
+					Log.i("moop", "Streamplay--827");
+				}
+				break;
+		}
+//		mToast.show();
+	}
+
 	@Override
 	public void onResume() {
 

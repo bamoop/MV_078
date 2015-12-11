@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">  
-<item android:state_pressed="true"   android:drawable="@android:color/transparent">
-    <solid android:color="#ffffff" />  
-    <stroke  
-        android:width="1dp"         
-        android:color="@color/settings_list_line" />  
-    <corners android:topLeftRadius="10dp"   
-                android:topRightRadius="10dp"    
-                android:bottomRightRadius="0dp"   
-                android:bottomLeftRadius="0dp"/>  
-</item>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-<item android:state_pressed="false"  android:drawable="@android:color/transparent" >
-    <solid android:color="#ffffff" />  
-    <stroke  
-         android:width="1dp"   
-         android:color="@color/settings_list_line" />  
-    <corners    android:topLeftRadius="10dp"   
-                android:topRightRadius="10dp"    
-                android:bottomRightRadius="0dp"   
-                android:bottomLeftRadius="0dp"/> 
-</item>   
-</selector>
-<!-- From: file:/E:/john_work/xinc/app/src/main/res/drawable/setting_list_btn.xml -->
+    <item android:state_selected="true">
+        <shape>
+            <gradient
+                android:startColor="@color/setting_listselect"
+                android:endColor="@color/setting_listselect"
+                />
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape>
+            <gradient
+                android:startColor="@color/setting_listselect"
+                android:endColor="@color/setting_listselect"
+                />
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <gradient
+                android:startColor="@color/setting_bg_color"
+                android:endColor="@color/setting_bg_color"
+  />
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+</selector> <!-- From: file:/E:/john_work/xinc/app/src/main/res/drawable/setting_list_btn.xml -->
