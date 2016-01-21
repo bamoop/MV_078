@@ -7,7 +7,6 @@
     android:background="@drawable/banner_bg">
 
     <ImageButton android:scaleType="fitXY"
-        android:layout_marginLeft="@dimen/banner_cord_margin_left"
         android:layout_centerVertical="true"
         android:id="@+id/btn_back"
         android:background="@drawable/back"

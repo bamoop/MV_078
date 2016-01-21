@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:MyBanner="http://schemas.android.com/apk/res/tw.com.a_i_t.IPCamViewer" 
+    xmlns:MyBanner="http://schemas.android.com/apk/res/cn.com.MKD_CarDV_WiFi.IPCamViewer"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-	<tw.com.a_i_t.IPCamViewer.MyBanner android:layout_width="match_parent"
+	<cn.com.MKD_CarDV_WiFi.IPCamViewer.MyBanner
+		android:layout_width="match_parent"
     android:layout_height="@dimen/top_banner_height" MyBanner:text="@string/main_settings"
 		/>
    <ScrollView  
@@ -60,9 +61,9 @@
 			 <TextView  android:text="@string/label_image_resolution" style="@style/row_text" />
 			 <ImageView style="@style/row_arrow" />
 		 </LinearLayout>
-		 <!-- 视频输出 -->
+		 <!--&lt;!&ndash; 视频输出 &ndash;&gt;-->
 		 <LinearLayout style="@style/row_layout" android:id="@+id/settings_videoout"  >
-			 <TextView  android:text="@string/label_video_out" style="@style/row_text" />
+			 <TextView  android:text="@string/label_TVSystem" style="@style/row_text" />
 			 <ImageView style="@style/row_arrow"/>
 			 <!--<ToggleButton style="@style/layout_horizontal"-->
 			 <!--android:id="@+id/tgl_tvout" android:background="@drawable/toggle_btn_bg"-->

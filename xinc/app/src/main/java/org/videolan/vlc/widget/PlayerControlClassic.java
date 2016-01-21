@@ -23,7 +23,7 @@ package org.videolan.vlc.widget;
 import org.videolan.vlc.interfaces.IPlayerControl;
 import org.videolan.vlc.interfaces.OnPlayerControlListener;
 
-import tw.com.a_i_t.IPCamViewer.R ;
+import cn.com.MKD_CarDV_WiFi.IPCamViewer.R ;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="tw.com.a_i_t.IPCamViewer.test">
+    package="cn.com.MKD_CarDV_WiFi.IPCamViewer.test">
 
     <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="18" />
 
@@ -9,8 +9,8 @@
     </application>
 
     <instrumentation android:name="android.test.InstrumentationTestRunner"
-                     android:targetPackage="tw.com.a_i_t.IPCamViewer"
+                     android:targetPackage="cn.com.MKD_CarDV_WiFi.IPCamViewer"
                      android:handleProfiling="false"
                      android:functionalTest="false"
-                     android:label="Tests for tw.com.a_i_t.IPCamViewer"/>
+                     android:label="Tests for cn.com.MKD_CarDV_WiFi.IPCamViewer"/>
 </manifest>

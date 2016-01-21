@@ -21,6 +21,7 @@
         <TextView
             android:id="@+id/title"
 			style="@style/dialog_title"
+            android:text="提示"
             android:visibility="visible" />
        <View
             android:layout_width="fill_parent"
@@ -65,8 +66,7 @@
                 style="@style/dialog_button"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="@string/label_ok"
-                />
+                android:text="@string/label_ok" />
 
             <Button
                 android:id="@+id/negativeButton"

@@ -1,10 +1,10 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:2:1-108:12
+ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:2:1-110:12
 	xmlns:android
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:2:11-69
 	package
-		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:3:5-39
+		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:3:5-48
 		INJECTED from E:\john_work\xinc\app\src\main\AndroidManifest.xml
 		INJECTED from E:\john_work\xinc\app\src\main\AndroidManifest.xml
 	android:versionName
@@ -22,8 +22,6 @@ MERGED from [com.android.support:support-v4:20.0.0] E:\john_work\xinc\app\build\
 		INJECTED from E:\john_work\xinc\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:8:9-35
-		INJECTED from E:\john_work\xinc\app\src\main\AndroidManifest.xml
-		INJECTED from E:\john_work\xinc\app\src\main\AndroidManifest.xml
 uses-permission#android.permission.INTERNET
 ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:11:5-67
 	android:name
@@ -79,7 +77,7 @@ ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:28:5-88
 	android:name
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:28:30-85
 application
-ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:30:5-106:19
+ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:30:5-108:19
 MERGED from [com.android.support:support-v4:20.0.0] E:\john_work\xinc\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\AndroidManifest.xml:17:5-19
 	android:label
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:34:9-41
@@ -91,7 +89,7 @@ MERGED from [com.android.support:support-v4:20.0.0] E:\john_work\xinc\app\build\
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:35:9-56
 	android:name
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:31:9-55
-activity#tw.com.a_i_t.IPCamViewer.MainActivityUI
+activity#cn.com.MKD_CarDV_WiFi.IPCamViewer.MainActivityUI
 ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:36:9-45:20
 	android:noHistory
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:39:13-37
@@ -105,7 +103,7 @@ action#android.intent.action.MAIN
 ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:41:17-69
 	android:name
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:41:25-66
-activity#tw.com.a_i_t.IPCamViewer.ViewPagerDemoActivity
+activity#cn.com.MKD_CarDV_WiFi.IPCamViewer.ViewPagerDemoActivity
 ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:46:9-57:20
 	android:screenOrientation
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:51:13-49
@@ -123,7 +121,7 @@ category#android.intent.category.LAUNCHER
 ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:55:17-77
 	android:name
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:55:27-74
-activity#tw.com.a_i_t.IPCamViewer.MainActivity
+activity#cn.com.MKD_CarDV_WiFi.IPCamViewer.MainActivity
 ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:58:9-64:20
 	android:screenOrientation
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:62:13-49
@@ -133,7 +131,7 @@ ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:58:9-64:20
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:60:13-63
 	android:name
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:59:13-41
-activity#tw.com.a_i_t.IPCamViewer.FileBrowser.VideoPlayerActivity
+activity#cn.com.MKD_CarDV_WiFi.IPCamViewer.FileBrowser.VideoPlayerActivity
 ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:65:9-94:20
 	android:label
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:67:13-45
@@ -157,13 +155,21 @@ data
 ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:73:17-43
 	android:scheme
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:73:23-40
-activity#tw.com.a_i_t.IPCamViewer.LocalFileListActivity
+activity#cn.com.MKD_CarDV_WiFi.IPCamViewer.LocalFileListActivity
 ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:95:9-103:20
 	android:label
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:97:13-67
 	android:name
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:96:13-50
-activity#tw.com.a_i_t.IPCamViewer.Viewer.StreamPlayerActivity
-ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:104:9-105:20
+activity#cn.com.MKD_CarDV_WiFi.IPCamViewer.Viewer.StreamPlayerActivity
+ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:104:9-105:82
+	android:configChanges
+		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:105:19-80
 	android:name
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:104:19-62
+activity#cn.com.MKD_CarDV_WiFi.IPCamViewer.Viewer.NewPlayerActivity
+ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:106:9-107:82
+	android:configChanges
+		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:107:19-80
+	android:name
+		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:106:19-59

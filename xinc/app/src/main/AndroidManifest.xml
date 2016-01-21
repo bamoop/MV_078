@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="tw.com.a_i_t.IPCamViewer"
+    package="cn.com.MKD_CarDV_WiFi.IPCamViewer"
     android:versionCode="12"
-    android:versionName="1.0.29" >
+    android:versionName="1.0.48" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -101,8 +101,10 @@
                 <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             </intent-filter>
         </activity>
-        <activity android:name=".Viewer.StreamPlayerActivity" >
-        </activity>
+        <activity android:name=".Viewer.StreamPlayerActivity"
+                  android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity android:name=".Viewer.NewPlayerActivity"
+                  android:configChanges="orientation|keyboardHidden|screenSize"/>
     </application>
 
 </manifest>

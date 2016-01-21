@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:MyBanner="http://schemas.android.com/apk/res/tw.com.a_i_t.IPCamViewer"
+    xmlns:MyBanner="http://schemas.android.com/apk/res/cn.com.MKD_CarDV_WiFi.IPCamViewer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/transparent">
-    <tw.com.a_i_t.IPCamViewer.MyBanner android:layout_marginTop="0dp" android:layout_width="match_parent"
+    <cn.com.MKD_CarDV_WiFi.IPCamViewer.MyBanner
+        android:layout_marginTop="0dp" android:layout_width="match_parent"
     android:layout_height="@dimen/top_banner_height" MyBanner:text="@string/help" />
     <LinearLayout
        android:layout_width="match_parent"

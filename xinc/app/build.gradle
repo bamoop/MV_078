@@ -5,9 +5,8 @@ android {
     buildToolsVersion "23.0.0 rc3"
 
     defaultConfig {
-        applicationId "tw.com.a_i_t.IPCamViewer"
-        minSdkVersion 14
-        targetSdkVersion 18
+        applicationId "cn.com.MKD_CarDV_WiFi.IPCamViewer"
+         targetSdkVersion 18
     }
 
     buildTypes {

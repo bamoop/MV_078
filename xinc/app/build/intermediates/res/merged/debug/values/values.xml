@@ -3,7 +3,7 @@
     <!-- From: file:/E:/john_work/xinc/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="button_txt">#000000</color>
-    <color name="button_txt_clicked">#FFFFFF</color>
+    <color name="button_txt_clicked">#9a9a9a</color>
     <color name="red">#ff0000</color>
     <color name="setting_bg_color">#cacbcd</color>
     <color name="setting_listselect">#d12342</color>
@@ -37,7 +37,7 @@
     <dimen name="dialog_button_width">80dp</dimen>
     <dimen name="dialog_content_txt_size">18sp</dimen>
     <dimen name="dialog_title_height">40dp</dimen>
-    <dimen name="dialog_title_txt_size">22sp</dimen>
+    <dimen name="dialog_title_txt_size">20sp</dimen>
     <dimen name="dialog_video_save_txt_size">15sp</dimen>
     <dimen name="dialog_wifi_ok_width">100dp</dimen>
     <dimen name="dialog_wifi_row_txt_margin_left">20dp</dimen>
@@ -55,12 +55,12 @@
     <dimen name="setting_list_txt_size">20sp</dimen>
     <dimen name="setting_row_height">40dp</dimen>
     <dimen name="setting_row_txt_margin_left">50dp</dimen>
-    <dimen name="top_back_height">40dp</dimen>
-    <dimen name="top_back_width">35dp</dimen>
+    <dimen name="top_back_height">48dp</dimen>
+    <dimen name="top_back_width">45dp</dimen>
     <dimen name="top_banner_height">50dp</dimen>
     <dimen name="top_banner_txt_size">18sp</dimen>
     <dimen name="top_dv_label_time_height">30dp</dimen>
-    <dimen name="top_dv_sound_margin">20dp</dimen>
+    <dimen name="top_dv_sound_margin">10dp</dimen>
     <dimen name="top_dv_sound_size">30dp</dimen>
     <dimen name="top_pic_height">30dp</dimen>
     <dimen name="top_pic_width">35dp</dimen>
@@ -85,6 +85,7 @@
     <string name="FW_Version">Firmware Version</string>
     <string name="Flicker_50">50 Hz</string>
     <string name="Flicker_60">60 Hz</string>
+    <string name="SDCaedWarning">SDCard is unusual, please check!</string>
     <string name="SyncDevice">Synchronized with the device</string>
     <string name="SyncDeviceBTN">Press to "Manual Sync"</string>
     <string name="Timesettings">Time Settings</string>
@@ -123,7 +124,10 @@
     <string name="label_High">High</string>
     <string name="label_Low">Low</string>
     <string name="label_Middle">Middle</string>
+    <string name="label_Nsystem">N system</string>
     <string name="label_Off">Off</string>
+    <string name="label_Psystem">P system</string>
+    <string name="label_TVSystem"> Video starnard</string>
     <string name="label_TV_style">Flicker Frequency</string>
     <string name="label_app_record">App Record</string>
     <string name="label_app_snapshot">App Snapshot</string>
@@ -202,6 +206,7 @@
     <string name="label_white_balance">White Balance</string>
     <string name="label_wifi_ssid">WiFi SSID</string>
     <string name="loading">Loading...</string>
+    <string name="loading_tip"> PLEASE WAIT</string>
     <string name="lodemore">To load more</string>
     <string name="main_dv">SD Files</string>
     <string name="main_enter">Enter</string>
@@ -211,6 +216,7 @@
     <string name="main_title">CarDV Recorder</string>
     <string name="main_title_detail">指尖上的行车记录神器</string>
     <string name="main_video">Video View</string>
+    <string name="memorysizedeficiency">Phone storage space is insufficient, can not download this file, please try again after cleaning up memory!</string>
     <string name="message_command_camer">Capturedsuccessfully！</string>
     <string name="message_command_failed">Command Failed!</string>
     <string name="message_command_succeed">Command Succeed!</string>
@@ -224,16 +230,23 @@
     <string name="msg_stoprecord">Stop Record</string>
     <string name="no">No</string>
     <string name="nomore">No More</string>
+    <string name="onKeyDown">Exit can make disconnect with the firmware, whether to continue to exit?</string>
     <string name="open">Open</string>
     <string name="photo">Photo</string>
     <string name="playVideoError">Video playback error, please check whether the camera is abnormal operation！</string>
+    <string name="pleaseSelectFile">Please select a file！</string>
     <string name="pleasewait">Please wait</string>
+    <string name="quality_1080">1080P 	60fps</string>
+    <string name="quality_720">1080P 	30fps</string>
+    <string name="quality_72060">720P 	60fps</string>
     <string name="recording">APP Recording</string>
+    <string name="running">running...</string>
     <string name="sd_browser_open_stoprecord">Need Stop Record when opening file</string>
     <string name="sd_browser_stoprecord">Need Stop Record</string>
+    <string name="setting_wifi">SettingWifi</string>
     <string name="sevendaysago">Sevendaysago</string>
     <string name="sosfile">SOS</string>
-    <string name="threedaysago">Threedaysago</string>
+    <string name="threedaysago">Earlier</string>
     <string name="title_activity_local_file_list">LocalFileListActivity</string>
     <string name="title_activity_main_activity_ui">MainActivityUI</string>
     <string name="trip">Trips</string>
@@ -246,7 +259,7 @@
     <string name="video">Video</string>
     <string name="warnnig">Warnnig!</string>
     <string name="yes">Yes</string>
-    <string name="yesterday">Yesterday</string>
+    <string name="yesterday">Fivedays</string>
     <!-- From: file:/E:/john_work/xinc/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Light">
@@ -334,7 +347,7 @@
        <item name="android:layout_gravity">center</item>
        <item name="android:gravity">center</item>
        <item name="android:background">@drawable/dialog_title_bg</item>
-       <item name="android:textSize">@dimen/dialog_title_txt_size</item>
+       <item name="android:textSize">22sp</item>
        <item name="android:textColor">@android:color/black</item>
        <item name="android:textStyle">bold</item>
     </style>
