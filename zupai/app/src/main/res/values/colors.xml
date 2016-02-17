@@ -1,0 +1,21 @@
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="button_txt">#000000</color>
+    <color name="button_txt_clicked">#9a9a9a</color>
+    <color name="red">#ff0000</color>
+    <color name="title_layout_color">#F5F5F5</color>
+    <color name="settings_list_bg">#EBEBEB</color>
+    <color name="settings_list_line">#CCCCCC</color>
+    <color name="setting_bg_color">#f5f5f5</color>
+    <color name="setting_listselect">#d12342</color>
+    <color name="transparency">#00FFFFFF</color>
+    <color name="help_bgcolor">#FFF5F5F5</color>
+    <color name="help_q_textcolor">#000000</color>
+    <color name="banner_bgcoblor">#51c6f3</color>
+    <color name="preview_title_bgcolor">#3b3b3b</color>
+    <color name="filebrows_btn_bg">#f5f5f5</color>
+    <color name="black">#000000</color>
+    <color name="listview_item_bg">#51c7f2</color>
+    <color name="setting_net_edittext_bg">#cdcdcd</color>
+    <color name="setting_net_btn_bg">#05d1be</color>
+</resources>

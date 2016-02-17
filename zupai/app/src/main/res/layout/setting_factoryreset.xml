@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:MyBanner="http://schemas.android.com/apk/res/cn.com.ZhuPai_CarDv_WIFI.IPCamViewer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+    <cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.MyBanner
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_banner_height"
+        MyBanner:text="@string/main_settings"
+        />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/setting_listselect">
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:text="@string/label_factoryreset"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            style="@style/layout_full"/>
+    </LinearLayout>
+
+    <TextView 
+        android:gravity="center_vertical|left"
+        android:layout_width="wrap_content"
+        android:text="@string/label_factoryresettrip"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="wrap_content" 
+        android:textColor="@color/button_txt"
+        android:textSize="20sp"
+
+        android:background="@android:color/transparent" 
+        android:layout_marginLeft="35dp"
+         />
+    <Button android:id="@+id/format_btn"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:textColor="@drawable/setting_btn_text_color"
+        android:text="@string/label_factoryreset"
+        style="@style/dialog_button"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_gravity="center_horizontal" />
+
+</LinearLayout>

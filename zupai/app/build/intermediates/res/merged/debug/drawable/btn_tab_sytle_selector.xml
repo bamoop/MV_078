@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:state_pressed="true"   android:drawable="@color/transparency" />
+<item android:state_enabled="false"  android:drawable="@color/white" />
+<item android:state_pressed="false"  android:drawable="@color/title_layout_color" />
+</selector>
+<!-- From: file:/E:/john_work/zupai/app/src/main/res/drawable/btn_tab_sytle_selector.xml -->

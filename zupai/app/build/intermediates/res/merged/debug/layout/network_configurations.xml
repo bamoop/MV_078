@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:MyBanner="http://schemas.android.com/apk/res/cn.com.ZhuPai_CarDv_WIFI.IPCamViewer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+	<cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.MyBanner
+        android:layout_width="match_parent"
+    android:layout_height="@dimen/top_banner_height"
+        MyBanner:text="@string/label_network_configurations" />
+
+	<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+	        android:layout_marginRight="25dp"
+	        android:layout_marginTop="25dp"
+            android:background="@drawable/setting_net_bg"
+            android:orientation="vertical" >
+       <LinearLayout style="@style/wifi_row_layout"
+           android:layout_marginLeft="30dp"
+           android:layout_marginRight="30dp"
+           android:layout_marginTop="40dp">
+			<TextView android:text="@string/label_wifi_ssid" style="@style/wifi_row_text" />
+        	 <EditText
+        	    android:layout_weight="3"
+                android:id="@+id/cameraControlWifiName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:ems="10"
+                android:background="@null"
+                android:inputType="textNoSuggestions"
+                android:singleLine="true" >
+            </EditText>
+        </LinearLayout>
+        <LinearLayout style="@style/wifi_row_layout"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp">
+			<TextView  android:text="@string/label_encryption_key" style="@style/wifi_row_text" />
+            <EditText
+                android:id="@+id/cameraControlWifiEncryptionKey"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:ems="10"
+                android:textColor="@android:color/black"
+                android:background="@null"
+                android:inputType="textVisiblePassword"
+                android:singleLine="true" >
+            </EditText>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/cameraControlResetButton"
+                style="@style/dialog_button"
+                android:textSize="16sp"
+                android:layout_width="150dp"
+                android:text="@string/label_re_activate_network"
+                android:background="@drawable/setting_net__btnbg"
+                android:textColor="@drawable/setting_btn_text_color"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout><!-- From: file:/E:/john_work/zupai/app/src/main/res/layout/network_configurations.xml -->

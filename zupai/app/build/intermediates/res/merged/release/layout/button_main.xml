@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/btn_main"
+    android:orientation="vertical"
+    android:layout_height="@dimen/btn_main"
+    android:background="@android:color/transparent">
+<LinearLayout
+    android:id="@+id/main_button"
+    android:layout_width="@dimen/btn_main"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:layout_height="@dimen/btn_main"
+    android:background="@drawable/button_main_bg">
+    <ImageButton 
+         android:clickable="false"
+         android:layout_gravity="center_horizontal"
+         android:layout_marginTop="10dp"
+         android:scaleType="fitXY"
+         android:duplicateParentState="true" android:id="@+id/btn"
+         android:layout_width="@dimen/btn_main_pic_size" 
+         android:layout_height="@dimen/btn_main_pic_size" />
+	<TextView android:layout_gravity="center_horizontal"
+	    android:id="@+id/txt" android:textStyle="bold" 
+	    android:textColor="@android:color/black" 
+	    android:textSize="@dimen/bottom_banner_txt_size" 
+	    android:gravity="center_horizontal|top"
+	    android:layout_width="match_parent"
+	    android:layout_height="@dimen/btn_main_text_size" />"
+</LinearLayout>
+</LinearLayout><!-- From: file:/E:/john_work/zupai/app/src/main/res/layout/button_main.xml -->

@@ -1,0 +1,169 @@
+-- Merging decision tree log ---
+manifest
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:2:1-108:12
+	xmlns:android
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:2:11-69
+	package
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:3:5-51
+		INJECTED from E:\john_work\zupai\app\src\main\AndroidManifest.xml
+		INJECTED from E:\john_work\zupai\app\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:5:5-33
+	android:versionCode
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:4:5-29
+		INJECTED from E:\john_work\zupai\app\src\main\AndroidManifest.xml
+		INJECTED from E:\john_work\zupai\app\src\main\AndroidManifest.xml
+uses-sdk
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:support-v4:20.0.0] E:\john_work\zupai\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\AndroidManifest.xml:16:5-42
+	android:targetSdkVersion
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:9:9-38
+		INJECTED from E:\john_work\zupai\app\src\main\AndroidManifest.xml
+		INJECTED from E:\john_work\zupai\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:8:9-35
+uses-permission#android.permission.INTERNET
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:11:5-67
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:11:22-64
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:12:5-76
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:12:22-73
+uses-permission#android.permission.CHANGE_WIFI_MULTICAST_STATE
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:13:5-86
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:13:22-83
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:14:5-79
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:14:22-76
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:15:5-81
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:15:22-78
+uses-permission#android.permission.WRITE_SETTINGS
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:16:5-73
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:16:22-70
+uses-permission#android.permission.WAKE_LOCK
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:17:5-68
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:17:22-65
+uses-permission#android.permission.CHANGE_NETWORK_STATE
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:18:5-79
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:18:22-76
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:19:5-76
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:19:22-73
+supports-screens
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:21:5-25:39
+	android:largeScreens
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:23:9-36
+	android:anyDensity
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:22:9-34
+	android:normalScreens
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:24:9-37
+	android:smallScreens
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:25:9-36
+android:uses-permission#android.permission.READ_PHONE_STATE
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:27:5-83
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:27:30-80
+android:uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:28:5-88
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:28:30-85
+application
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:30:5-106:19
+MERGED from [com.android.support:support-v4:20.0.0] E:\john_work\zupai\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\AndroidManifest.xml:17:5-19
+	android:label
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:34:9-41
+	android:allowBackup
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:32:9-35
+	android:icon
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:33:9-42
+	android:theme
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:35:9-56
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:31:9-55
+activity#cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.MainActivityUI
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:36:9-45:20
+	android:noHistory
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:39:13-37
+	android:label
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:38:13-45
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:37:13-43
+intent-filter#android.intent.action.MAIN
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:40:13-44:29
+action#android.intent.action.MAIN
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:41:17-69
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:41:25-66
+activity#cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.ViewPagerDemoActivity
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:46:9-57:20
+	android:screenOrientation
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:51:13-49
+	android:noHistory
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:50:13-37
+	android:label
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:49:13-45
+	android:configChanges
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:48:13-63
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:47:13-86
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:52:13-56:29
+category#android.intent.category.LAUNCHER
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:55:17-77
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:55:27-74
+activity#cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.MainActivity
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:58:9-64:20
+	android:screenOrientation
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:62:13-49
+	android:label
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:61:13-45
+	android:configChanges
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:60:13-63
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:59:13-77
+activity#cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.FileBrowser.VideoPlayerActivity
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:65:9-94:20
+	android:label
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:67:13-45
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:66:13-96
+intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:68:13-78:29
+action#android.intent.action.VIEW
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:69:17-69
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:69:25-66
+category#android.intent.category.DEFAULT
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:71:17-76
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:71:27-73
+category#android.intent.category.BROWSABLE
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:72:17-78
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:72:27-75
+data
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:73:17-43
+	android:scheme
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:73:23-40
+activity#cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.LocalFileListActivity
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:95:9-103:20
+	android:label
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:97:13-67
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:96:13-86
+activity#cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.Viewer.StreamPlayerActivity
+ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:104:9-105:82
+	android:configChanges
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:105:19-80
+	android:name
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:104:19-98

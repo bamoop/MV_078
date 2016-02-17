@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:MyBanner="http://schemas.android.com/apk/res/cn.com.ZhuPai_CarDv_WIFI.IPCamViewer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="top"
+    android:background="@android:color/transparent">
+    <cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.MyBanner
+        android:layout_marginTop="0dp" android:layout_width="match_parent"
+    android:layout_height="@dimen/top_banner_height" MyBanner:text="@string/main_settings" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/setting_listselect">
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:text="@string/label_motion_detection"
+            android:gravity="center"
+            style="@style/layout_full"/>
+    </LinearLayout>
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="top"
+    android:layout_marginTop="20dp"
+    android:background="@android:color/transparent">
+    <ImageView android:layout_width="fill_parent" android:layout_height="1dp" android:background="@color/settings_list_line"/>
+       <ListView
+        android:id="@+id/listview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fastScrollEnabled="true"
+        android:listSelector="#ffffff"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null">
+        </ListView>
+ 	</LinearLayout>
+</LinearLayout>
+<!-- From: file:/E:/john_work/zupai/app/src/main/res/layout/setting_quanlity.xml -->

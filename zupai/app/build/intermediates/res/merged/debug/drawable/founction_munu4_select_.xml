@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/bg_function_menu4g" android:state_pressed="true"/>
+    <item android:drawable="@drawable/bg_function_menu4" />
+</selector><!-- From: file:/E:/john_work/zupai/app/src/main/res/drawable/founction_munu4_select_.xml -->

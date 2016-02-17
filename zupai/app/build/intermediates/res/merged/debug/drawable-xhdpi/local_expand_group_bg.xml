@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_expanded="true" android:drawable="@drawable/exdpang_ground_press" />
+
+    <item android:drawable="@drawable/exdpang_ground_normal" />
+
+</selector>  <!-- From: file:/E:/john_work/zupai/app/src/main/res/drawable-xhdpi/local_expand_group_bg.xml -->

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:MyBanner="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+	<cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.MyBanner
+		android:layout_width="match_parent"
+    android:layout_height="@dimen/top_banner_height" MyBanner:text="@string/main_settings"
+		/>
+   <ScrollView  
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@android:color/transparent"
+        android:scrollbarStyle="outsideOverlay" >
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/transparent"
+		android:layout_marginBottom="5dp"
+            android:orientation="vertical" >
+      <LinearLayout android:layout_height="1dp" android:layout_width="10dp"
+		  android:background="@android:color/transparent"
+		  android:id="@+id/tmp"
+		  android:visibility="visible">
+			    <TextView  android:text="" style="@style/row_text" />
+      </LinearLayout>
+
+     <LinearLayout
+            android:id="@+id/main_LinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="0dp"
+            android:orientation="vertical" >
+		 <!-- 连接设定 -->
+		 <LinearLayout style="@style/row_layout"
+			 android:id="@+id/cameraControlNetworkConfigurations"  >
+			 <TextView  android:text="@string/label_network_configurations" style="@style/row_text" />
+			 <ImageView style="@style/row_arrow"/>
+		 </LinearLayout>
+		 <View
+			 android:layout_width="match_parent"
+			 android:layout_height="0.5dp"
+			 android:background="#a2a2a2"/>
+		 <!-- 录音设置 -->
+		 <LinearLayout style="@style/row_layout"  >
+			 <TextView android:text="@string/label_record_setting" style="@style/row_text" />
+			 <ToggleButton style="@style/layout_horizontal"
+				 android:id="@+id/tgl_record" android:background="@drawable/toggle_btn_bg"
+				 android:layout_width="60dp" android:layout_height="25dp"
+				 android:checked="false" android:textOn="" android:textOff=""
+				 android:layout_marginRight="15dp"
+				 android:text="" />
+		 </LinearLayout>
+		 <View
+			 android:layout_width="match_parent"
+			 android:layout_height="0.5dp"
+			 android:background="#a2a2a2"/>
+		 <!-- 停车监控 -->
+		 <LinearLayout style="@style/row_layout" android:id="@+id/settings_parkcar"  >
+			 <TextView  android:text="@string/label_parkcar" style="@style/row_text" />
+			 <ToggleButton style="@style/layout_horizontal"
+				 android:id="@+id/tgl_parkcar" android:background="@drawable/toggle_btn_bg"
+				 android:layout_width="60dp" android:layout_height="25dp"
+				 android:checked="false" android:textOn="" android:textOff=""
+				 android:layout_marginRight="15dp"
+				 android:text="" />
+		 </LinearLayout>
+
+		 <View
+			 android:layout_width="match_parent"
+			 android:layout_height="0.5dp"
+			 android:background="#a2a2a2"/>
+		 <!-- 录像质量-->
+		 <LinearLayout style="@style/row_layout" android:id="@+id/settings_DV_quality"  >
+			 <TextView  android:text="@string/label_DV_quality" style="@style/row_text" />
+			 <ImageView style="@style/row_arrow" />
+		 </LinearLayout>
+		 <View
+			 android:layout_width="match_parent"
+			 android:layout_height="0.5dp"
+			 android:background="#a2a2a2"/>
+		 <LinearLayout
+			 android:id="@+id/settings_DV_quality_row"
+			 style="@style/row_layout"
+			 android:background="@color/white">
+
+		 </LinearLayout>
+		 <View
+			 android:layout_width="match_parent"
+			 android:layout_height="0.5dp"
+			 android:background="#a2a2a2"/>
+		 <!-- 视频分段-->
+		 <LinearLayout style="@style/row_layout" android:id="@+id/settings_photo_quality"  >
+			 <TextView  android:text="@string/label_image_resolution" style="@style/row_text"/>
+			 <ImageView style="@style/row_arrow" />
+		 </LinearLayout>
+		 <View
+			 android:layout_width="match_parent"
+			 android:layout_height="0.5dp"
+			 android:background="#a2a2a2"/>
+		 <LinearLayout
+			 android:id="@+id/settings_photo_quality_row"
+			 style="@style/row_layout"
+			 android:background="@color/white">
+		 </LinearLayout>
+		 <View
+			 android:layout_width="match_parent"
+			 android:layout_height="0.5dp"
+			 android:background="#a2a2a2"/>
+		 <!--&lt;!&ndash; 视频输出 &ndash;&gt;-->
+		 <LinearLayout style="@style/row_layout" android:id="@+id/settings_videoout"  >
+			 <TextView  android:text="@string/label_TVSystem" style="@style/row_text" />
+			 <ImageView style="@style/row_arrow"/>
+		 </LinearLayout>
+		 <View
+			 android:layout_width="match_parent"
+			 android:layout_height="0.5dp"
+			 android:background="#a2a2a2"/>
+		 <LinearLayout
+			 android:id="@+id/settings_photo_videoout_row"
+			 style="@style/row_layout"
+			 android:background="@color/white">
+		 </LinearLayout>
+		 <!-- 移动侦测-->
+		 <LinearLayout style="@style/row_layout" android:id="@+id/settings_move"
+			 android:visibility="gone">
+			 <TextView  android:text="@string/label_move" style="@style/row_text" />
+			 <ImageView style="@style/row_arrow" />
+		 </LinearLayout>
+
+		 <!-- 恢复出厂设置-->
+		 <LinearLayout style="@style/row_layout" android:id="@+id/setting_factoryreset"
+			 android:visibility="gone">
+			 <TextView  android:text="@string/label_factoryreset" style="@style/row_text" />
+			 <ImageView style="@style/row_arrow"/>
+		 </LinearLayout>
+
+
+
+			<!-- 加锁保护灵敏度-->
+	   		<LinearLayout style="@style/row_layout" android:id="@+id/settings_lockProtect"
+				android:visibility="gone">
+			    <TextView  android:text="@string/label_lockproetect" style="@style/row_text" />
+	       		<ImageView style="@style/row_arrow"/>
+	   		</LinearLayout>
+		 <View
+			 android:layout_width="match_parent"
+			 android:layout_height="0.5dp"
+			 android:background="#a2a2a2"/>
+		 <!-- 内存卡寿命-->
+	   		<LinearLayout style="@style/row_layout" android:id="@+id/settings_sdcard_lifetime"
+				android:visibility="gone">
+			    <TextView  android:text="@string/label_sdcardlifttime" style="@style/row_text" />
+	       		<ImageView style="@style/row_arrow"/>
+	   		</LinearLayout>
+			<!-- 格式化存储卡-->
+	   		<LinearLayout style="@style/row_layout" android:id="@+id/settings_formatsdcard"  >
+			    <TextView  android:text="@string/label_formatsdcard" style="@style/row_text" />
+	       		<ImageView style="@style/row_arrow"/>
+	   		</LinearLayout>
+		 <View
+			 android:layout_width="match_parent"
+			 android:layout_height="0.5dp"
+			 android:background="#a2a2a2"/>
+	   		<!-- 版本信息 -->
+	   		<LinearLayout style="@style/row_layout" android:id="@+id/settings_version"  >
+			  	<TextView  android:text="@string/label_version" style="@style/row_text" />
+	       		<ImageView style="@style/row_arrow" />
+	   		</LinearLayout>
+		 <View
+			 android:layout_width="match_parent"
+			 android:layout_height="0.5dp"
+			 android:background="#a2a2a2"/>
+		 <!-- 帮助页面 -->
+	   		<LinearLayout style="@style/row_layout" android:id="@+id/settings_help"  >
+			  	<TextView  android:text="@string/help" style="@style/row_text" />
+	       		<ImageView style="@style/row_arrow" />
+	   		</LinearLayout>
+		 <View
+			 android:layout_width="match_parent"
+			 android:layout_height="0.5dp"
+			 android:background="#a2a2a2"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
+</LinearLayout>

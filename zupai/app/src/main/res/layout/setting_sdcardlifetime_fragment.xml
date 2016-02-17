@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:MyBanner="http://schemas.android.com/apk/res/cn.com.ZhuPai_CarDv_WIFI.IPCamViewer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.MyBanner
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_banner_height"
+        MyBanner:text="@string/main_settings"
+        />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/setting_listselect">
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:text="@string/label_sdcardlifttime"
+            android:gravity="center"
+            style="@style/layout_full"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/button_txt"
+        android:text="@string/setting_sdcardfiletime"
+        android:textSize="22dp"/>
+<TextView
+    android:layout_marginLeft="5dp"
+    android:id="@+id/tv_setting_sdlifetime"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:textColor="@color/button_txt"
+    android:text="100"
+    android:textSize="22dp"/>
+    </LinearLayout>
+</LinearLayout>

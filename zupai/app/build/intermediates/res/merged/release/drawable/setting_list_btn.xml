@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_selected="true">
+        <shape>
+            <gradient
+                android:startColor="@color/setting_listselect"
+                android:endColor="@color/setting_listselect"
+                />
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape>
+            <gradient
+                android:startColor="@color/setting_listselect"
+                android:endColor="@color/setting_listselect"
+                />
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <gradient
+                android:startColor="@color/setting_bg_color"
+                android:endColor="@color/setting_bg_color"
+  />
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+</selector> <!-- From: file:/E:/john_work/zupai/app/src/main/res/drawable/setting_list_btn.xml -->
