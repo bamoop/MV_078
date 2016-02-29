@@ -69,6 +69,34 @@
                 style="@style/top_button.txt" />
         </LinearLayout>
     </LinearLayout>
+    <LinearLayout
+          android:id="@+id/fj_layout"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/top_tab_height"
+          android:visibility="gone">
+
+        <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_frontjpg"  >
+            <ImageButton style="@style/top_button.pic"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/local_front_bg" />
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:duplicateParentState="true"
+                android:text="@string/frontvideo"
+                style="@style/top_button.txt"/>
+        </LinearLayout>
+
+        <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_backjpg"  >
+            <ImageButton style="@style/top_button.pic"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/local_back_bg" />
+            <TextView android:duplicateParentState="true" android:text="@string/backvideo"
+                android:layout_marginLeft="5dp"
+                style="@style/top_button.txt" />
+        </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout style="@style/layout_vertical" android:layout_weight="1">
         <cn.com.MKD_CarDV_WiFi.IPCamViewer.RTPullListView
@@ -86,10 +114,9 @@
             android:id="@+id/browserList_backvideo"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-        />
+            android:visibility="gone"/>
         <cn.com.MKD_CarDV_WiFi.IPCamViewer.RTPullListView
-            android:id="@+id/browserList_sosbackvideo"
+            android:id="@+id/browserList_blackjpg"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:visibility="gone" />

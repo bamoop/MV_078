@@ -22,6 +22,9 @@
     <string name="app_Version">应用程序版本</string>
     <string name="app_name">行车拍拍</string>
     <string name="backvideo">后视频</string>
+    <string name="calloffdown_tip">正在取消下载</string>
+    <string name="changshot_dialog_text">切换中，请稍后...</string>
+    <string name="changshot_dialog_title">切换镜头</string>
     <string name="connecterror">连接错误</string>
     <string name="connecting_to_camera">连接到相机</string>
     <string name="deletefileincamera">删除相机文件</string>
@@ -36,6 +39,7 @@
     <string name="ensure">确定</string>
     <string name="error_key_too_long">密码字符过长.</string>
     <string name="error_key_too_short">请输入八位长度的密码.</string>
+    <string name="error_maxselect2">最多只能下载两个文件</string>
     <string name="error_no_key">请输入密码.</string>
     <string name="error_no_ssid">请输入 WiFi SSID.</string>
     <string name="error_ssid_too_long">SSID 超过长度限制.</string>
@@ -185,10 +189,12 @@
     <string name="sosfrontvideo">前sos视频</string>
     <string name="threedaysago">更早</string>
     <string name="trip">提示</string>
+    <string name="unabledeleteREARFile">后路视频文件不能删除</string>
     <string name="unabledeleteSOSFile">SOS文件不能删除</string>
     <string name="updating">最近更新：</string>
     <string name="verify">版本校验</string>
     <string name="verify_error">请确认已连接到行车记录仪！</string>
+    <string name="verify_ok">行车记录仪已连接！</string>
     <string name="verify_version">请确认连接上行车记录仪后再点击确定！</string>
     <string name="version_hardware">固件版本号：</string>
     <string name="version_software">软件版本号：</string>

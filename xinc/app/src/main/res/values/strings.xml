@@ -190,5 +190,23 @@
     <string name="quality_1080">1080P 	60fps</string>
     <string name="quality_720">1080P 	30fps</string>
     <string name="quality_72060">720P 	60fps</string>
+    <string name="label_factoryreset">Restore factory settings</string>
+    <string name="label_factoryresettrip">Restore factory Settings reset all Settings, the machine will resume after the completion of the will exit the Settings interface, please reconnect the wifi on the machine before use!</string>
+    <string name="label_help">help</string>
+    <string name="label_sdcardlifttime">SD Card lift time</string>
+    <string name="pull_to_refresh">Pull-refresh</string>
+    <string name="refreshing">Recording</string>
+    <string name="release_to_refresh">Loosen the refresh</string>
+    <string name="setting_sdcardfiletime">SD card residual life:</string>
+    <string name="sosbackvideo">back SOS video</string>
+    <string name="sosfrontvideo">front SOS Video</string>
+    <string name="verify_version">Please make sure the connection on the vehicle traveling data recorder then click on ok!</string>
+    <string name="warn_ondeletesos">Can\'t delete the lock SOS file</string>
+    <string name="factortreset_attaction">To restore the factory Settings</string>
+    <string name="calloffdown_tip">Is to cancel the download</string>
+    <string name="error_maxselect2">Only download the two files</string>
+    <string name="verify_ok">Vehicle traveling data recorder is connected!</string>
+    <string name="changshot_dialog_title">Simple wipe</string>
+    <string name="changshot_dialog_text">In the switch, please later...</string>
 
 </resources>

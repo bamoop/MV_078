@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.com.MKD_CarDV_WiFi.IPCamViewer"
-    android:versionCode="12"
-    android:versionName="1.0.48" >
+    android:versionCode="14"
+    android:versionName="1.0.53" >
 
     <uses-sdk
+
         android:minSdkVersion="14"
         android:targetSdkVersion="18" />
 

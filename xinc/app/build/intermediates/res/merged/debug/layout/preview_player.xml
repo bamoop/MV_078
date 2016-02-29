@@ -105,7 +105,7 @@
                 android:layout_marginTop="@dimen/top_dv_sound_margin"
                 android:layout_alignParentRight="true"
                 android:visibility="gone"
-                android:background="@drawable/play_btn_simplewipe_bg"
+                android:background="@drawable/play_btn_simplewipe_no_bg"
                 />
             <LinearLayout android:background="@drawable/contro_bar_bg"
                 android:layout_alignParentBottom="true"
@@ -175,7 +175,7 @@
             android:layout_width="0.5dp"
             android:layout_height="match_parent"
             android:background="@color/white"/>
-        <LinearLayout style="@style/bottom_layout" android:id="@+id/recordButton"  >
+        <LinearLayout style="@style/bottom_layout" android:id="@+id/recordButton">
             <ImageButton style="@style/bottom_button"
                 android:background="@drawable/app_record_bg"/>
             <TextView android:id="@+id/record_txt"
