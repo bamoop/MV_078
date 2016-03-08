@@ -201,6 +201,8 @@
     <string name="unabledeleteREARFile">后路视频文件不能删除</string>
     <string name="changshot_dialog_title">切换镜头</string>
     <string name="changshot_dialog_text">切换中，请稍后...</string>
+    <string name="frontphoto">前照片</string>
+    <string name="backphoto">后照片</string>
 
 
 

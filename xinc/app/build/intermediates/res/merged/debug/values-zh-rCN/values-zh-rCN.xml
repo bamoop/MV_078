@@ -21,6 +21,7 @@
     <string name="Timesettings">时间设置</string>
     <string name="app_Version">应用程序版本</string>
     <string name="app_name">行车拍拍</string>
+    <string name="backphoto">后照片</string>
     <string name="backvideo">后视频</string>
     <string name="calloffdown_tip">正在取消下载</string>
     <string name="changshot_dialog_text">切换中，请稍后...</string>
@@ -48,6 +49,7 @@
     <string name="exit_trip">退出后是否继续录像?</string>
     <string name="factortreset_attaction">即将恢复出厂设置</string>
     <string name="format_attaction">即将执行格式化存储卡操作</string>
+    <string name="frontphoto">前照片</string>
     <string name="frontvideo">前视频</string>
     <string name="help">使用指南</string>
     <string name="intraday">一天内</string>
