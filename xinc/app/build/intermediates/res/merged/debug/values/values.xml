@@ -264,6 +264,7 @@
     <string name="sosfile">SOS</string>
     <string name="sosfrontvideo">front SOS Video</string>
     <string name="threedaysago">Earlier</string>
+    <string name="tipnobackshop">Please check the rear.</string>
     <string name="title_activity_local_file_list">LocalFileListActivity</string>
     <string name="title_activity_main_activity_ui">MainActivityUI</string>
     <string name="trip">Trips</string>

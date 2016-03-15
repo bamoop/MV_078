@@ -6,6 +6,7 @@
     <JAVADOC />
     <SOURCES>
       <root url="jar://E:/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0-sources.jar!/" />
+      <root url="jar://D:/Android develop kit/adt-bundle-windows-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

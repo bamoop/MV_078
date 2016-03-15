@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 20
-    buildToolsVersion "23.0.0 rc3"
+    buildToolsVersion "23.0.01"
 
     defaultConfig {
         applicationId "cn.com.MKD_CarDV_WiFi.IPCamViewer"

@@ -23,13 +23,14 @@ package org.videolan.vlc.widget;
 import org.videolan.vlc.interfaces.IPlayerControl;
 import org.videolan.vlc.interfaces.OnPlayerControlListener;
 
-import cn.com.MKD_CarDV_WiFi.IPCamViewer.R ;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
+import cn.com.MKD_CarDV_WiFi.IPCamViewer.R;
 
 public class PlayerControlClassic extends LinearLayout implements IPlayerControl {
     public final static String TAG = "VLC/PlayerControlClassic";

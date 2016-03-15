@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:2:1-111:12
+ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:2:1-109:12
 	xmlns:android
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:2:11-69
 	package
@@ -77,7 +77,7 @@ ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:29:5-88
 	android:name
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:29:30-85
 application
-ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:31:5-109:19
+ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:31:5-107:19
 MERGED from [com.android.support:support-v4:20.0.0] E:\john_work\xinc\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\AndroidManifest.xml:17:5-19
 	android:label
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:35:9-41
@@ -167,9 +167,3 @@ ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:105:9-106:82
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:106:19-80
 	android:name
 		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:105:19-62
-activity#cn.com.MKD_CarDV_WiFi.IPCamViewer.Viewer.NewPlayerActivity
-ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:107:9-108:82
-	android:configChanges
-		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:108:19-80
-	android:name
-		ADDED from E:\john_work\xinc\app\src\main\AndroidManifest.xml:107:19-59

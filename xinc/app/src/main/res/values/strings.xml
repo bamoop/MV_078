@@ -210,5 +210,6 @@
     <string name="changshot_dialog_text">In the switch, please later...</string>
     <string name="frontphoto">FrontPhoto</string>
     <string name="backphoto">RearPhoto</string>
+    <string name="tipnobackshop">Please check the rear.</string>
 
 </resources>

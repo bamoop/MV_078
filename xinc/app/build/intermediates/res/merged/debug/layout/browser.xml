@@ -73,18 +73,18 @@
           android:id="@+id/fj_layout"
           android:layout_width="match_parent"
           android:layout_height="@dimen/top_tab_height"
-          android:visibility="gone"
+        android:visibility="gone"
          >
         <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_frontjpg"
             >
             <ImageButton style="@style/top_button.pic"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="@drawable/local_photo_bg" />
+                android:background="@drawable/file_photo_btn_bg" />
             <TextView
                 android:layout_marginLeft="5dp"
                 android:duplicateParentState="true"
-                android:text="@string/frontvideo"
+                android:text="@string/frontphoto"
                 style="@style/top_button.txt"/>
         </LinearLayout>
 
@@ -92,7 +92,7 @@
             <ImageButton style="@style/top_button.pic"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="@drawable/local_photo_bg" />
+                android:background="@drawable/file_photo_btn_bg" />
             <TextView android:duplicateParentState="true" android:text="@string/backphoto"
                 android:layout_marginLeft="5dp"
                 style="@style/top_button.txt" />
