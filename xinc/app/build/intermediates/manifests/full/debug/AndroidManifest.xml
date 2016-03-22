@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.com.MKD_CarDV_WiFi.IPCamViewer"
     android:versionCode="15"
-    android:versionName="1.0.57" >
+    android:versionName="1.0.58" >
 
     <uses-sdk
         android:minSdkVersion="14"

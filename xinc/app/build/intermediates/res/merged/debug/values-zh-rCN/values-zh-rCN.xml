@@ -192,7 +192,7 @@
     <string name="threedaysago">更早</string>
     <string name="tipnobackshop">请检查后路镜头</string>
     <string name="trip">提示</string>
-    <string name="unabledeleteREARFile">后路视频文件不能删除</string>
+    <string name="unabledeleteREARFile">后路文件不能删除</string>
     <string name="unabledeleteSOSFile">SOS文件不能删除</string>
     <string name="updating">最近更新：</string>
     <string name="verify">版本校验</string>

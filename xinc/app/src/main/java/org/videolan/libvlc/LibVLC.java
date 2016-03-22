@@ -68,7 +68,7 @@ public class LibVLC {
     private boolean verboseMode = true;
     private float[] equalizer = null;
     private boolean frameSkip = false;
-    private int networkCaching = 1500;////�Ӵ�caching��������ʱ����ȡ������ def=100
+    private int networkCaching = 1000;////�Ӵ�caching��������ʱ����ȡ������ def=100
     private int clockJitter    = 400;
 
     /** Check in libVLC already initialized otherwise crash */
