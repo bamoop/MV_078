@@ -54,6 +54,18 @@
                 android:textSize="12sp"
                 android:layout_marginLeft="35dp"
                 android:background="@color/transparency"
+                android:visibility="gone"
+                />
+            <TextView android:id="@+id/function_text"
+                android:duplicateParentState="true"
+                android:text="@string/videorecording"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:layout_marginLeft="35dp"
+                android:background="@color/transparency"
                 />
             <TextView
                 android:layout_alignParentTop="true"
@@ -82,11 +94,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="right">
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/preview_bottom_btn_sdvideo"/>
+
+            <ImageView
+                android:id="@+id/recordButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:background="@drawable/preview_recoed_btn_bg"/>
         </LinearLayout>
         <LinearLayout
             android:layout_weight="1"
@@ -95,7 +109,7 @@
             android:layout_gravity="center_vertical"
             android:gravity="center">
         <ImageView
-            android:id="@+id/snapshotButton"
+            android:id="@+id/preview_function_btn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
@@ -106,12 +120,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical">
-        <ImageView
-            android:id="@+id/recordButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:background="@drawable/preview_bottom_btn_mode1"/>
+            <ImageView
+                android:id="@+id/snapshotButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/preview_snapshot_btn_bg"/>
         </LinearLayout>
 
     </LinearLayout>

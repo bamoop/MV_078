@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">WIFI掌控行车记录仪</string>
+    <string name="app_name">WIFI记录仪</string>
     <string name="label_file_browser">档案浏览</string>
     <string name="label_camera_control">相机控制</string>
     <string name="label_network_configurations">连线设置</string>
@@ -42,8 +42,8 @@
     <string name="label_ok">确定</string>
     <string name="label_cancel">取消</string>
     <string name="label_open">播放</string>
-    <string name="label_Psystem">视频制式 PAL</string>
-    <string name="label_Nsystem">视频制式 NTSC</string>
+    <string name="label_Psystem">PAL</string>
+    <string name="label_Nsystem">NTSC</string>
     <string name="label_save">储存</string>
     <string name="label_delete">删除</string>
     <string name="label_connect">连线</string>
@@ -111,10 +111,10 @@
     <string name="main_title_detail">指尖上的行车记录神器</string>
     <string name="main_video">相机预览</string>
     <string name="main_dv">SD档案</string>
-    <string name="main_local">手机文档</string>
+    <string name="main_local">手机档案</string>
     <string name="main_settings">设置</string>
     <string name="setting_wifi">设置wifi</string>
-    <string name="setting_sdcardfiletime">SD卡剩余寿命：</string>
+    <string name="setting_sdcardfiletime">剩余寿命:</string>
     <string name="open">打开</string>
     <string name="photo">照片</string>
     <string name="video">视频</string>
@@ -165,11 +165,11 @@
     <string name="label_formatsdcard">格式化存储卡</string>
     <string name="label_sdcardlifttime">内存卡剩余寿命</string>
     <string name="label_formattrip">删除卡内所有数据，请谨慎使用！</string>
-    <string name="label_factoryresettrip">恢复出厂设置将重置机器所有设置，恢复完成后会退出设置界面，请重新连接上机器wifi后再使用!</string>
+    <string name="label_factoryresettrip">恢复出厂设置将会清空您的记录仪中所有的配置信息。</string>
     <string name="label_formatbtn">执行格式化</string>
     <string name="format_attaction">格式化将删除记录仪SD卡上的所有数据。不可恢复
     若想格式化该SD卡，请单击“确定”，若想退出，请点击“取消”。</string>
-    <string name="factortreset_attaction">即将恢复出厂设置</string>
+    <string name="factortreset_attaction">正在恢复出厂设置</string>
     <string name="warnnig">警告</string>
     <string name="ensure">确定</string>
     <string name="message_overwrite_file">文件已存在,是否覆盖?</string>
@@ -195,9 +195,10 @@
     <string name="onKeyDown">退出会使断开与固件的连接，是否继续退出？</string>
     <string name="pleaseSelectFile">请选择文件！</string>
     <string name="SDCaedWarning">请插入SD卡</string>
-    <string name="quality_1080">1080P 超高清</string>
-    <string name="quality_720">1080P 高清版</string>
-    <string name="quality_72060">720P 	高清</string>
+    <string name="quality_1080">1080P/30</string>
+    <string name="quality_720">720P/30</string>
+    <string name="quality_72060">720P/60</string>
+    <string name="quality_vga">VGA</string>
 
     <string name="help_question1">Q1:不开机</string>
     <string name="help_question2">Q2:APP无法连接 </string>
@@ -207,6 +208,22 @@
     <string name="help_answer2">请确保SD卡是否故障或系统正常，可通过更换SD卡或【复位】进行重启系统。</string>
     <string name="help_answer3">请确保SD卡是否故障或系统正常，可通过更换SD卡或【复位】进行重启系统。</string>
     <string name="help_answer4">尽量关掉手机后台不必要的软件，并将手机靠近记录仪。或关闭APP，重新启动。</string>
+    <string name="min1">1分钟</string>
+    <string name="min3">3分钟</string>
+    <string name="min5">5分钟</string>
+    <string name="label_Close">关闭</string>
+    <string name="action_settings">设置</string>
+    <string name="exposalmodel">记录仪拍照模式</string>
+    <string name="videorecording">记录仪录像模式</string>
+
+    <string name="errorsd">SD卡剩余寿命偏低,请注意更换SD卡</string>
+    <string name="capacityused">已用</string>
+    <string name="newbadblock">坏区信息:</string>
+    <string name="sdcapacity">TF卡容量:</string>
+    <string name="surpluscapacity">可用空间</string>
+    <string name="capcity">存储状态</string>
+    <string name="capcityrecord">存储档案</string>
+
 
 
 </resources>

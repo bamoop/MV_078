@@ -149,6 +149,7 @@ public class FileBrowserFragment extends Fragment {
     private boolean returnBlankScreen=false;//待机黑屏
     private int version;
     Toast mToast;
+
     private int mycompare(FileNode arg0, FileNode arg1)
     {
         try

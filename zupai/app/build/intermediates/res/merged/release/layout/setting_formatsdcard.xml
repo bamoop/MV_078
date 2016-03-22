@@ -8,20 +8,8 @@
     <cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.MyBanner
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_banner_height"
-        MyBanner:text="@string/main_settings"
+        MyBanner:text="@string/label_formatsdcard"
         />
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:background="@color/setting_listselect">
-        <TextView
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:text="@string/label_formatsdcard"
-            android:gravity="center"
-            style="@style/layout_full"/>
-    </LinearLayout>
 
     <TextView 
         android:gravity="center_vertical|left"
@@ -34,8 +22,7 @@
         android:textSize="20sp"
 
         android:background="@android:color/transparent" 
-        android:layout_marginLeft="35dp"
-         />
+        android:layout_marginLeft="35dp"/>
     <Button android:id="@+id/format_btn"
         android:layout_width="250dp"
         android:layout_height="50dp"

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.com.ZhuPai_CarDv_WIFI.IPCamViewer"
-    android:versionCode="13"
-    android:versionName="1.0.50" >
+    android:versionCode="3"
+    android:versionName="1.0.4" >
 
     <uses-sdk
         android:minSdkVersion="14"

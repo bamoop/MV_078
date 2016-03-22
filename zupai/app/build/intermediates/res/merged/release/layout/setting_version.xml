@@ -3,18 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-        android:layout_margin="25dp"
-        android:background="@drawable/setting_layout_shap"
         android:orientation="vertical" >
      <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_margin="25dp"
+       android:layout_margin="20dp"
        android:background="@android:color/transparent"
        android:orientation="horizontal" >
        <TextView 
@@ -32,13 +30,13 @@
         <TextView android:id="@+id/hardware_version"
         android:gravity="center_vertical|left"
         android:layout_gravity="center"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_weight="2"
         android:layout_height="match_parent" 
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:background="@android:color/transparent" 
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginRight="20dp"
          />
       </LinearLayout>
@@ -49,7 +47,7 @@
       <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_margin="25dp"
+       android:layout_margin="20dp"
        android:background="@android:color/transparent"
        android:orientation="horizontal" >
         <TextView 
@@ -67,16 +65,20 @@
         <TextView android:id="@+id/app_version"
         android:gravity="center_vertical|left"
         android:layout_gravity="center"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_weight="2"
         android:layout_height="match_parent" 
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:background="@android:color/transparent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="50dp"
             android:layout_marginRight="20dp"
          />
        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/settings_list_line"/>
     </LinearLayout>
 </LinearLayout>
 <!-- From: file:/E:/john_work/zupai/app/src/main/res/layout/setting_version.xml -->

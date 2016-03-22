@@ -65,8 +65,8 @@ public class MainActivity extends Activity {
 	public static final int G_UNKNOWN_VERSION=0;
 	public static final int G_OLD_VERSION=1;
 	public static final int G_NEW_VERSION=2;
-	public static final int TOUNCHTIME=55;//最后一次触摸开始计算，自动开启录像
-	public static final int DOUWNTIME=60;//下载完成之后，自动开启录像的时间
+	public static final int TOUNCHTIME=86400;//最后一次触摸开始计算，自动开启录像
+	public static final int DOUWNTIME=86400;//下载完成之后，自动开启录像的时间
 	public static final int GETSDSTATUSTIME=15000;//设置轮询SD卡状态的时间
 	private WifiInfo mWifiInfo;
 	public static int M_VERSION=0;//全局版本号
@@ -408,6 +408,7 @@ public class MainActivity extends Activity {
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 		int v = pref.getInt(g_version_check,G_UNKNOWN_VERSION);
 		if(v ==G_UNKNOWN_VERSION)
+//		if(false)
 		{
 		new CameraFWVersion().execute();
 		new GetRTPS_AV1().execute();
@@ -725,16 +726,16 @@ public class MainActivity extends Activity {
 						int value = G_UNKNOWN_VERSION;
 						if(fwVersion.startsWith("1"))
 						{
-							Log.i("moop","版本1");
+							Log.i("moop","获取到版本1");
 							value = G_OLD_VERSION;
 						}
 						else if(fwVersion.startsWith("2"))
 						{
-							Log.i("moop","版本2");
+							Log.i("moop","获取到版本2");
 							value = G_NEW_VERSION;
 //							value = 3;
 						}else if (fwVersion.startsWith("3")){
-							Log.i("moop","版本3");
+							Log.i("moop","获取到版本3");
 							value = 3;
 						}
 						editor.putInt(g_version_check, value);

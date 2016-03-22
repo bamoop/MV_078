@@ -26,7 +26,8 @@
                 />
 
         </LinearLayout>
-        <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_sosfile"  >
+        <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_sosfile"
+            android:visibility="gone">
             <ImageButton style="@style/top_button.pic" android:background="@drawable/local_sosvideo_bg" />
             <TextView
                 android:layout_marginLeft="5dp"
@@ -46,9 +47,11 @@
     <LinearLayout
         android:id="@+id/fb_layout"
           android:layout_width="match_parent"
-          android:layout_height="@dimen/top_tab_height">
+          android:layout_height="@dimen/top_tab_height"
+        android:visibility="gone">
 
-        <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_frontvideo"  >
+        <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_frontvideo"
+            >
             <ImageButton style="@style/top_button.pic"
                 android:layout_width="30dp"
                 android:layout_height="30dp"

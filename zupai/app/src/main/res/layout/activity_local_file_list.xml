@@ -26,33 +26,37 @@
     </LinearLayout>
     <LinearLayout style="@style/layout_vertical" android:layout_weight="1">
 
-        <ExpandableListView
+        <ListView
             android:id="@+id/expandlist_video"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:cacheColorHint="#00000000"
-            android:groupIndicator = "@drawable/local_expand_group_bg"
+            android:fastScrollEnabled="true"
+            android:listSelector="@drawable/listview_item_bg"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@null">
             >
-        </ExpandableListView>
-        <ExpandableListView
+        </ListView>
+        <ListView
             android:visibility="gone"
             android:id="@+id/expandlist_photo"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:cacheColorHint="#00000000"
-            android:groupIndicator = "@drawable/local_expand_group_bg"
+            android:fastScrollEnabled="true"
+            android:listSelector="@drawable/listview_item_bg"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@null">
             >
-        </ExpandableListView>
+        </ListView>
 
     </LinearLayout>
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_banner_height">
 
-        <LinearLayout style="@style/bottom_layout" android:id="@+id/browserSharedButton"
-            android:orientation="vertical">
-            <ImageButton style="@style/bottom_button" android:background="@drawable/dv_shared_bg" />
-            <TextView android:duplicateParentState="true" android:text="@string/label_shared" style="@style/bottom_button_text" />
-        </LinearLayout>
+        <!--<LinearLayout style="@style/bottom_layout" android:id="@+id/browserSharedButton"-->
+            <!--android:orientation="vertical">-->
+            <!--<ImageButton style="@style/bottom_button" android:background="@drawable/dv_shared_bg" />-->
+            <!--<TextView android:duplicateParentState="true" android:text="@string/label_shared" style="@style/bottom_button_text" />-->
+        <!--</LinearLayout>-->
         <View
             android:layout_width="0.5dp"
             android:layout_height="fill_parent"

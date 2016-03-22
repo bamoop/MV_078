@@ -15,16 +15,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_tab_height">
-        <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_video"  >
-            <ImageButton style="@style/top_button.pic" android:background="@drawable/local_video_bg" />
+        <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_video"
+            android:orientation="vertical">
             <TextView
                 android:layout_marginLeft="5dp"
                 android:id="@+id/txt_video"
                 android:duplicateParentState="true"
                 android:text="@string/video"
-                style="@style/top_button.txt"/>
+                style="@style/top_button.txt"
+                />
+
         </LinearLayout>
-        <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_sosfile"  >
+        <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_sosfile"
+            android:visibility="gone">
             <ImageButton style="@style/top_button.pic" android:background="@drawable/local_sosvideo_bg" />
             <TextView
                 android:layout_marginLeft="5dp"
@@ -33,7 +36,6 @@
                 style="@style/top_button.txt"/>
         </LinearLayout>
         <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_photo"  >
-            <ImageButton style="@style/top_button.pic" android:background="@drawable/local_photo_bg" />
             <TextView
                 android:layout_marginLeft="5dp"
                 android:duplicateParentState="true"
@@ -45,9 +47,11 @@
     <LinearLayout
         android:id="@+id/fb_layout"
           android:layout_width="match_parent"
-          android:layout_height="@dimen/top_tab_height">
+          android:layout_height="@dimen/top_tab_height"
+        android:visibility="gone">
 
-        <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_frontvideo"  >
+        <LinearLayout style="@style/top_banner_layout" android:id="@+id/btn_frontvideo"
+            >
             <ImageButton style="@style/top_button.pic"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -70,12 +74,14 @@
         </LinearLayout>
     </LinearLayout>
 
+
     <LinearLayout style="@style/layout_vertical" android:layout_weight="1">
         <cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.RTPullListView
             android:id="@+id/browserList"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-              />
+            android:listSelector="@drawable/listview_item_bg"
+            />
         <cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.RTPullListView
             android:id="@+id/browserList_jpg"
             android:layout_width="fill_parent"
@@ -103,7 +109,8 @@
     </LinearLayout>
 	 <LinearLayout android:layout_width="match_parent"
            android:layout_height="@dimen/bottom_banner_height">
-         <LinearLayout style="@style/bottom_layout" android:id="@+id/browserDownloadButton" >
+         <LinearLayout style="@style/bottom_layout" android:id="@+id/browserDownloadButton"
+             android:orientation="vertical">
              <ImageButton style="@style/bottom_button" android:background="@drawable/dv_download_bg"/>
              <TextView android:duplicateParentState="true" android:text="@string/label_download" style="@style/bottom_button_text"/>
          </LinearLayout>
@@ -111,7 +118,8 @@
              android:layout_width="1px"
              android:background="@color/setting_bg_color"
              android:layout_height="@dimen/bottom_banner_height"/>
-         <LinearLayout style="@style/bottom_layout" android:id="@+id/browserDeleteButton"  >
+         <LinearLayout style="@style/bottom_layout" android:id="@+id/browserDeleteButton"
+             android:orientation="vertical">
              <ImageButton style="@style/bottom_button" android:background="@drawable/dv_delete_bg" />
              <TextView android:duplicateParentState="true" android:text="@string/label_delete" style="@style/bottom_button_text" />
          </LinearLayout>
@@ -119,7 +127,8 @@
              android:layout_width="1px"
              android:background="@color/setting_bg_color"
              android:layout_height="@dimen/bottom_banner_height"/>
-         <LinearLayout style="@style/bottom_layout" android:id="@+id/browserOpenButton"  >
+         <LinearLayout style="@style/bottom_layout" android:id="@+id/browserOpenButton"
+             android:orientation="vertical">
              <ImageButton style="@style/bottom_button" android:background="@drawable/dv_open_bg" />
              <TextView android:duplicateParentState="true" android:text="@string/label_open" style="@style/bottom_button_text" />
          </LinearLayout>

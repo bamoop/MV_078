@@ -199,7 +199,7 @@ public class LocalFileListAdapter extends BaseAdapter {
 				.substring(viewTag.mFileNode.mName.lastIndexOf("/") + 1);
 		viewTag.mFilename.setText(filename);
 		viewTag.mTime.setText(viewTag.mFileNode.mTime);
-		viewTag.mCheckBox.setChecked(viewTag.mFileNode.mSelected); 
+		viewTag.mCheckBox.setChecked(viewTag.mFileNode.mSelected);
 		viewTag.setSize(viewTag.mFileNode.mSize);
 		if (viewTag.mFileNode.mFormat == Format.mov ||
 			viewTag.mFileNode.mFormat == Format.avi) {

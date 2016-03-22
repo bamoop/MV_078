@@ -165,6 +165,14 @@
        <item name="android:textColor">@android:color/white</item>
        <item name="android:textStyle">bold</item>
     </style>
+    <style name="setting_btn">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:textColor">@drawable/setting_btn_textcolor</item>
+        <item name="android:background">@drawable/setting_btn_bg</item>
+    </style>
    <style name="Transparent">  
     <item name="android:windowBackground">@android:color/transparent</item>  
     <item name="android:windowNoTitle">true</item>

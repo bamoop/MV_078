@@ -26,7 +26,6 @@ import android.widget.TextView;
 public class Setting_formatsdcard_Fragment extends Fragment {
 	private CustomDialog malertDialog;
 	private ProgressDialog mProgressDialog ;
-
 	MainActivity.MyOnTouchListener myOnTouchListener;
 	private GestureDetector mGestureDetector;
 	private static boolean isINFilebrowser=true;//当前fragment是否打开
@@ -107,7 +106,6 @@ public class Setting_formatsdcard_Fragment extends Fragment {
 							{
 								mProgressDialog.show() ;
 							}
-
 							try {
 								URL url = CameraCommand.commandformatsdcardSettingsUrl() ;
 								if (url != null) {
@@ -140,7 +138,6 @@ public class Setting_formatsdcard_Fragment extends Fragment {
 		returnBlankScreen=false;
 		super.onPause() ;
 	}
-
 	@Override
 	public void onResume() {
 		isINFilebrowser=true;

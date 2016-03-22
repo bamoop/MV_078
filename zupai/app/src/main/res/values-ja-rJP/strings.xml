@@ -99,5 +99,6 @@
     <string name="dialog_DHCP_error">DHCPの設定を確認してください</string>
     <string name="Timesettings">時刻の設定</string>
     <string name="SyncDevice">デバイスと同期</string>
-    
+    <string name="videorecording"></string>
+
 </resources>

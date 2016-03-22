@@ -40,7 +40,7 @@
                  android:layout_marginTop="1dp"
                  />
              <TextView
-                 android:text="设置"
+                 android:text="@string/main_settings"
                  style="@style/bottom_button_text"
                  android:layout_below ="@+id/settings_btn"
                  />
@@ -58,7 +58,7 @@
                     android:background="@drawable/capacity_btn_seletor"
                     android:layout_marginTop="62dp" />
              <TextView
-                 android:text="存储状态"
+                 android:text="@string/capcity"
                  style="@style/bottom_button_text"
                  android:layout_below ="@+id/capacity_btn"
                  />
@@ -76,7 +76,7 @@
                  android:background="@drawable/video_btn_seletor"
                  android:layout_marginTop="77dp" />
              <TextView
-                 android:text="相机预览"
+                 android:text="@string/label_ip_camera_preview"
                  android:layout_width="65dp"
 
                  style="@style/bottom_button_text"
@@ -95,7 +95,7 @@
                  android:src="@drawable/dv_btn_seletor"
                  android:layout_marginTop="62dp" />
              <TextView
-                 android:text="存储档案"
+                 android:text="@string/capcityrecord"
                  style="@style/bottom_button_text"
                  android:layout_below ="@+id/dv_btn"
                  />
@@ -112,7 +112,7 @@
                  android:background="@drawable/local_btn_seletor"
                  android:layout_marginTop="1dp" />
              <TextView
-                 android:text="手机档案"
+                 android:text="@string/main_local"
                  style="@style/bottom_button_text"
                  android:layout_below ="@+id/local_btn"
                  />
@@ -137,7 +137,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:gravity="center"
-            android:text="帮助"/>
+            android:text="@string/label_help"/>
 
     </RelativeLayout>
 

@@ -8,9 +8,9 @@ ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:2:1-108:12
 		INJECTED from E:\john_work\zupai\app\src\main\AndroidManifest.xml
 		INJECTED from E:\john_work\zupai\app\src\main\AndroidManifest.xml
 	android:versionName
-		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:5:5-33
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:5:5-32
 	android:versionCode
-		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:4:5-29
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:4:5-28
 		INJECTED from E:\john_work\zupai\app\src\main\AndroidManifest.xml
 		INJECTED from E:\john_work\zupai\app\src\main\AndroidManifest.xml
 uses-sdk

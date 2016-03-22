@@ -5,12 +5,12 @@
 
     <ImageView
         android:id="@+id/fileListThumbnail"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginBottom="10dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/type_video" />

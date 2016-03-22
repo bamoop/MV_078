@@ -154,7 +154,6 @@ public class FunctionListFragment extends Fragment  {
 }
 	//add john 2015-12-3
 	private class CameraStatusCustomer extends AsyncTask<URL,Integer,String>{
-
 		@Override
 		protected String doInBackground(URL... params) {
 			URL url=CameraCommand.commandRecordStatusCustomerUrl();
@@ -249,7 +248,7 @@ public class FunctionListFragment extends Fragment  {
 //				toast.show();
 				toast = Toast.makeText(getActivity(),
 						getActivity().getResources().getString(R.string.SDCaedWarning), Toast.LENGTH_LONG);
-				toast.setGravity(Gravity.CENTER, 0, 0);
+				toast.setGravity(Gravity.BOTTOM, 0, 20);
 				toast.show();
 					break;
 			default:
@@ -570,73 +569,22 @@ public class FunctionListFragment extends Fragment  {
 				MainActivity.addFragment(FunctionListFragment.this, new HelpFramgment()) ;
 			}
 		});
+		/*存储状态*/
+		ImageView capacity_btn = (ImageView) view.findViewById(R.id.capacity_btn) ;
+		capacity_btn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				if (version==1){
+					return;
+				}else if(version==2){
+					MainActivity.addFragment(FunctionListFragment.this, new CapacityFragment());
+				}
+			}
+		});
 		return view ;
 	}
 
-	/*
-	@Override
-	public void onClick(View v) {
-		if(null != mToast) {
-			mToast.cancel();
-		}
-		switch(v.getId()) {
-			case R.id.dv_btn:
-				boolean engineerMode = ((MainActivity) getActivity()).mEngineerMode ;
-				if (engineerMode) {
-					MainActivity.addFragment(FunctionListFragment.this, new BrowserSettingFragment()) ;
-				} else {
-					Fragment fragment = FileBrowserFragment.newInstance(null, null, null) ;
-
-					MainActivity.addFragment(FunctionListFragment.this, fragment) ;
-				}
-				break;
-
-			case R.id.local_btn:
-				MainActivity.addFragment(FunctionListFragment.this, new LocalFileBrowserFragment()) ;
-				break;
-
-			case R.id.settings_btn:
-				if(isIntoSetting)
-				{
-					mclicksetting = true;
-					new GetRecordStatus().execute();
-					break;
-				}
-				MainActivity.addFragment(FunctionListFragment.this, new SettingFragment()) ;
-				break;
-			case R.id.video_btn:
-				WifiManager wifiManager = (WifiManager)
-						getActivity().getSystemService(Context.WIFI_SERVICE);
-				DhcpInfo dhcpInfo = wifiManager.getDhcpInfo();
-				if (dhcpInfo == null || dhcpInfo.gateway == 0) {
-					AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create() ;
-					alertDialog.setTitle(getResources().getString(R.string.dialog_DHCP_error)) ;
-					alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,
-							getResources().getString(R.string.label_ok),
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog, int id) {
-									dialog.dismiss();
-								}
-							}) ;
-				alertDialog.show() ;
-					return;
-				}
-				engineerMode = ((MainActivity) getActivity()).mEngineerMode;
-				if (engineerMode) {
-					MainActivity.addFragment(FunctionListFragment.this, new ViewerSettingFragment()) ;
-				} else {
-//					new GetRTPS_AV1().execute();
-					SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-					String liurl=null;
-					liurl = pref.getString("liveStreamUrl", "");
-					Intent intent = new Intent(getActivity(), StreamPlayerActivity.class) ;
-				    intent.putExtra("KEY_MEDIA_URL",liurl);
-			        startActivity(intent) ;
-				}
-				break;
-		}
-//		mToast.show();
-	}*/
 
 	//added by john
 	/**
@@ -715,14 +663,13 @@ public class FunctionListFragment extends Fragment  {
 		}
 	}
 
-
 	@Override
 	public void onResume() {
 		version=new MainActivity().M_VERSION;
 		Log.i("moop","版本号"+ String.valueOf(version));
 		if (firstgetscard){
 			firstgetscard=false;
-		if(version > 2)
+		if(version == 2)
 		{
 			getSDCardStatus = new GetSDCardStatus();
 			getSDCardStatus.start();

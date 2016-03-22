@@ -75,7 +75,9 @@ public class StreamPlayerActivity extends Activity implements IVideoPlayer{
     private Button cameraRecordButton;
     private ImageView snapshotButton;
     private ImageView recordButton;
+    private ImageView preview_function_btn;
     private TextView mRecordTxt;
+    private TextView mFunctionTxt;
     private ImageButton btn_back;
     private LinearLayout rela_preview_bottom;
     private RelativeLayout rela_preview_title;
@@ -140,6 +142,7 @@ public class StreamPlayerActivity extends Activity implements IVideoPlayer{
     private Boolean isMideaURL=false;//默认是前路视频，第一次点击换后路
     private Boolean isfirstOpenView=false;
     private Boolean isVisiibleBottom=true;//显示隐藏底部布局
+    private Boolean isfunction=true;//默认function功能是录像
     private int version;
 
     /*用来记录handle延时发送的时间，防止延时发送产生重复的指令*/
@@ -152,15 +155,6 @@ public class StreamPlayerActivity extends Activity implements IVideoPlayer{
             @Override
             public void run() {
                 mHandlerUI.sendEmptyMessage(MSG_SNAPSHOTONCLICK);
-            }
-        };timer.schedule(task, 1000 * 2);
-    }
-    public  void irecordButtonsinterval(){
-        countTime=0;
-        TimerTask task=new TimerTask() {
-            @Override
-            public void run() {
-                mHandlerUI.sendEmptyMessage(MSG_SINTERVAlCLICK);
             }
         };timer.schedule(task, 1000 * 2);
     }
@@ -203,7 +197,7 @@ public class StreamPlayerActivity extends Activity implements IVideoPlayer{
                         isINVISIABLEs();}
                     break;
                 case MSG_REFRESH_MUTE_STATE:
-                    Log.i("muteo","muteo="+mMuteStatus);
+                    Log.i("muteo", "muteo=" + mMuteStatus);
                     if(mMuteStatus.equals(MuteOff))
                     {
                         Log.i("muteo","muteo="+1);
@@ -224,10 +218,7 @@ public class StreamPlayerActivity extends Activity implements IVideoPlayer{
                     }
                     break;
                 case MSG_SNAPSHOTONCLICK:
-                    snapshotButton.setEnabled(true);
-                    break;
-                case MSG_SINTERVAlCLICK:
-                    recordButton.setEnabled(true);
+                    preview_function_btn.setEnabled(true);
                     break;
                 default:
                     break;
@@ -580,20 +571,22 @@ public class StreamPlayerActivity extends Activity implements IVideoPlayer{
         em.addHandler(eventHandler) ;
         timestampthread = new TimeThread();
         timestampthread.start();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-// TODO Auto-generated method stub
-                new GSetRandomValues().execute();
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//// TODO Auto-generated method stub
+//                new GSetRandomValues().execute();
+//            }
+//        }).start();
 
         cameraRecordButton = (Button) findViewById(R.id.cameraRecordButton) ;
 
         btn_back= (ImageButton) findViewById(R.id.btn_back);
         snapshotButton = (ImageView) findViewById(R.id.snapshotButton) ;
         recordButton = (ImageView) findViewById(R.id.recordButton) ;
+        preview_function_btn = (ImageView) findViewById(R.id.preview_function_btn) ;
         mRecordTxt = (TextView) findViewById(R.id.record_txt) ;
+        mFunctionTxt = (TextView) findViewById(R.id.function_text) ;
         curdate = (TextView) findViewById(R.id.TimeStampLabel);
         mSurface = (SurfaceView) findViewById(R.id.player_surface) ;
         mSurfaceFrame = (RelativeLayout) findViewById(R.id.player_surface_frame) ;
@@ -628,11 +621,11 @@ public class StreamPlayerActivity extends Activity implements IVideoPlayer{
                     if (!isVisiibleBottom) {
                         layoutanimationGONE();
                         isVisiibleBottom = true;
-                        Log.i(TAG,"点击surfface1");
+                        Log.i(TAG, "点击surfface1");
                     } else {
                         layoutanimationVISIBLE();
                         isVisiibleBottom = false;
-                        Log.i(TAG,"点击surfface2");
+                        Log.i(TAG, "点击surfface2");
                     }
                 }
             }
@@ -646,9 +639,24 @@ public class StreamPlayerActivity extends Activity implements IVideoPlayer{
         snapshotButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                snapshotButton.setEnabled(false);
                 isSnapshotButtonsinterval();
-                new CameraSnapShot().execute();
+                isfunction=false;
+                snapshotButton.setEnabled(false);
+                recordButton.setEnabled(true);
+                mFunctionTxt.setText(R.string.exposalmodel);
+
+            }
+        }) ;
+        preview_function_btn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isfunction){
+                    new CameraVideoRecord().execute();
+                }else {
+                    new CameraSnapShot().execute();
+                }
+                preview_function_btn.setEnabled(false);
+                isSnapshotButtonsinterval();
             }
         }) ;
 //        btn_changemedia.setOnClickListener(new View.OnClickListener() {
@@ -664,16 +672,17 @@ public class StreamPlayerActivity extends Activity implements IVideoPlayer{
 //            }
 //        });
 
-        final String appRecord = context.getResources().getString(R.string.label_app_record) ;
-        final String recording = context.getResources().getString(R.string.recording) ;
 
+        recordButton.setEnabled(false);
         recordButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 recordButton.setEnabled(false);
-                irecordButtonsinterval();
+                snapshotButton.setEnabled(true);
+                mFunctionTxt.setText(R.string.videorecording);
+                isfunction=true;
+//                irecordButtonsinterval();
 //                new StartRecord().startRecord();
-                new CameraVideoRecord().execute();
             }
         }) ;
 
@@ -996,8 +1005,8 @@ public class StreamPlayerActivity extends Activity implements IVideoPlayer{
 //		mSoundControlButtonDisable.setVisibility(View.VISIBLE);
 //		mSoundControlButton.setVisibility(View.VISIBLE);
         curdate.setVisibility(View.VISIBLE);
-        recordButton.setEnabled(true);
-        snapshotButton.setEnabled(true);
+//        recordButton.setEnabled(true);
+//        snapshotButton.setEnabled(true);
     }
 
     private void handleVout(Message msg) {
@@ -1254,7 +1263,7 @@ public class StreamPlayerActivity extends Activity implements IVideoPlayer{
         protected void onPreExecute() {
             Log.i("moop", "GSetRandomValues");
             int v = getRandomvalue();
-            mlocalB = (v^2014) -1;
+            mlocalB = (v^2015) -1;
             URL url = CameraCommand.commandSetRandomValueUrl(v) ;
             if (url != null) {
                 CameraCommand.sendRequest(url) ;
@@ -1319,7 +1328,7 @@ public class StreamPlayerActivity extends Activity implements IVideoPlayer{
         alphaAnimation.setDuration(500);
         animationSet.addAnimation(alphaAnimation);
         rela_preview_bottom.startAnimation(animationSet);
-        rela_preview_title.startAnimation(animationSet);
+//        rela_preview_title.startAnimation(animationSet);
         alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -1345,7 +1354,7 @@ public class StreamPlayerActivity extends Activity implements IVideoPlayer{
         alphaAnimation.setDuration(500);
         animationSet.addAnimation(alphaAnimation);
         rela_preview_bottom.startAnimation(animationSet);
-        rela_preview_title.startAnimation(animationSet);
+//        rela_preview_title.startAnimation(animationSet);
         alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -1355,7 +1364,7 @@ public class StreamPlayerActivity extends Activity implements IVideoPlayer{
             @Override
             public void onAnimationEnd(Animation animation) {
                 rela_preview_bottom.setVisibility(View.VISIBLE);
-                rela_preview_title.setVisibility(View.VISIBLE);
+//                rela_preview_title.setVisibility(View.VISIBLE);
             }
 
             @Override

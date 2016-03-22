@@ -54,8 +54,9 @@ public class CameraCommand {
 	public static String PROPERTY_TVOUT = "Camera.Cruise.ActiveSeq";
 	public static String PROPERTY_TVSYSTEM = "TVSystem";
 	public static String PROPERTY_PARKING = "Camera.Cruise.Seq4.Count";
-	public static String PROPERTY_SDCARDLIFETIME = "Camera.Preview.MJPEG.status.dwDegreOfWear";
+	public static String PROPERTY_SDCARDLIFETIME = "Camera.Cruise.Mode";
 	public static String PROPERTY_FACTORYREST = "FactoryReset";
+	public static String PROPERTY_RESTSETTINGT = "LCDPowerSave";
 
 
 	public static String PROPERTY_VIDEO = "Videores" ;
@@ -96,6 +97,8 @@ public class CameraCommand {
 	
 	private static String COMMAND_MuteOff = "MuteOff" ;
 	private static String COMMAND_MuteOn = "MuteOn" ;
+	private static String COMMAND_OldMuteOff = "audiooff" ;
+	private static String COMMAND_OldMuteOn = "audioon" ;
 	private static Toast mToast_success = null;
 	private static Toast mToast_failed = null;
 	public String message_command_succeed="指令成功";
@@ -234,8 +237,8 @@ public class CameraCommand {
 	/*恢复出厂设置*/
 	public static URL commandfactorySettingsUrl() {
 		String[] arguments = new String[1] ;
-		arguments[0] = buildArgument(PROPERTY_FACTORYREST, "") ;
-		return buildRequestUrl(CGI_PATH, ACTION_GET, buildArgumentList(arguments)) ;
+		arguments[0] = buildArgument(PROPERTY_RESTSETTINGT, "1") ;
+		return buildRequestUrl(CGI_PATH, ACTION_SET, buildArgumentList(arguments)) ;
 	}
 	public static URL commandGetlockprotectSettingsUrl() {
 		
@@ -373,9 +376,23 @@ public class CameraCommand {
 
 		return buildRequestUrl(CGI_PATH, ACTION_SET, buildArgumentList(arguments)) ;
 	}
+	public static URL commamdOldMuteOnUrl(){
+		String[] arguments = new String[1] ;
+
+		arguments[0] = buildArgument("Video", COMMAND_OldMuteOn) ;
+		return buildRequestUrl(CGI_PATH, ACTION_SET, buildArgumentList(arguments)) ;
+
+	}
+	public static URL commamdOldMuteOffUrl(){
+		String[] arguments = new String[1] ;
+		arguments[0] = buildArgument("Video", COMMAND_OldMuteOff) ;
+		return buildRequestUrl(CGI_PATH, ACTION_SET, buildArgumentList(arguments)) ;
+
+	}
+
 	public static URL commandParkCerOnUrl() {
 		String[] arguments = new String[1] ;
-		arguments[0] = buildArgument(PROPERTY_PARKING,  "3") ;
+		arguments[0] = buildArgument(PROPERTY_PARKING,  "2") ;
 		return buildRequestUrl(CGI_PATH, ACTION_SET, buildArgumentList(arguments)) ;
 	}
 	public static URL commandParkCerOffUrl() {
@@ -394,7 +411,7 @@ public class CameraCommand {
 	    		break;
 	    		
 		case 1:
-	    		COMMAND_MOVIERES ="720P60fps";
+	    		COMMAND_MOVIERES ="720P30fps";
 	    		break;
 	    		
 		case 2:
