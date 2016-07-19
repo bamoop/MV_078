@@ -50,4 +50,4 @@
             android:text="@string/label_delete"
             android:layout_weight="1" />
 </LinearLayout>
-</RelativeLayout><!-- From: file:/E:/john_work/xinc/app/src/main/res/layout/local_browser.xml -->
+</RelativeLayout>

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/E:/john_work/xinc/app/src/main/res/values/colors.xml -->
-    <eat-comment/>
     <color name="button_txt">#000000</color>
     <color name="button_txt_clicked">#9a9a9a</color>
     <color name="red">#ff0000</color>
@@ -14,8 +12,6 @@
     <color name="white">#FFFFFF</color>
     <declare-styleable name="Main_button"><attr format="reference|string" name="txt"/><attr format="reference" name="picblackground"/></declare-styleable>
     <declare-styleable name="MyBanner"><attr format="reference|string" name="text"/></declare-styleable>
-    <!-- From: file:/E:/john_work/xinc/app/src/main/res/values/dimens.xml -->
-    <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="arrow_margin_right">40dp</dimen>
@@ -66,12 +62,8 @@
     <dimen name="top_pic_width">35dp</dimen>
     <dimen name="top_tab_height">42dp</dimen>
     <dimen name="wifi_row_txt_margin_right">5dp</dimen>
-    <!-- From: file:/E:/john_work/xinc/app/src/main/res/values/integar.xml -->
-    <eat-comment/>
     <integer name="card_flip_time_full">500</integer>
     <integer name="card_flip_time_half">250</integer>
-    <!-- From: file:/E:/john_work/xinc/app/src/main/res/values/strings.xml -->
-    <eat-comment/>
     <string name="AWB_Auto">Auto</string>
     <string name="AWB_Cloudy">Cloudy</string>
     <string name="AWB_Daylight">Daylight</string>
@@ -268,6 +260,7 @@
     <string name="title_activity_local_file_list">LocalFileListActivity</string>
     <string name="title_activity_main_activity_ui">MainActivityUI</string>
     <string name="trip">Trips</string>
+    <string name="unabledeleteREARFile">Posterior file cannot be deleted</string>
     <string name="unabledeleteSOSFile">SOS file cannot be deleted</string>
     <string name="updating">Recent Update：</string>
     <string name="verify">Verification</string>
@@ -281,8 +274,6 @@
     <string name="warnnig">Warnnig!</string>
     <string name="yes">Yes</string>
     <string name="yesterday">Fivedays</string>
-    <!-- From: file:/E:/john_work/xinc/app/src/main/res/values/styles.xml -->
-    <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
@@ -382,8 +373,6 @@
        <item name="android:textColor">@android:color/black</item>
        <item name="android:layout_marginLeft">@dimen/dialog_wifi_row_txt_margin_left</item>
     </style>
-    <!-- From: file:/E:/john_work/xinc/app/src/main/res/values/style_layout.xml -->
-    <eat-comment/>
     <style name="layout_full">  
     <item name="android:layout_width">fill_parent</item>  
     <item name="android:layout_height">fill_parent</item>  
@@ -398,8 +387,6 @@
     <item name="android:layout_width">wrap_content</item>  
     <item name="android:layout_height">wrap_content</item>  
   </style>
-    <!-- From: file:/E:/john_work/xinc/app/src/main/res/values/styles.xml -->
-    <eat-comment/>
     <style name="loading_dialog" parent="android:style/Theme.Dialog">  
        <item name="android:windowFrame">@null</item>  
        <item name="android:windowNoTitle">true</item>

@@ -9,6 +9,7 @@
     <string name="label_image_resolution">视频分段</string>
     <string name="label_motion_detection">移动侦测</string>
     <string name="label_TVSystem">视频输出</string>
+    <string name="label_Close">关闭</string>
     <string name="label_on">开</string>
     <string name="label_off">关</string>
     <string name="label_flicker_frequency">闪烁频率</string>
@@ -204,7 +205,11 @@
     <string name="frontphoto">前照片</string>
     <string name="backphoto">后照片</string>
     <string name="tipnobackshop">请检查后路镜头</string>
-
+    <string name="label_net_disconnected">断开网络</string>
+    <string name="title_activity_main_activity_ui">MainActivityUI</string>
+    <string name="action_settings">设置</string>
+    <string name="sevendaysago">保存</string>
+    <string name="title_activity_local_file_list">LocalFileListActivity</string>
 
 
 </resources>

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/E:/john_work/xinc/app/src/main/res/values-zh-rCN/strings.xml -->
-    <eat-comment/>
     <string name="AWB_Auto">自动</string>
     <string name="AWB_Cloudy">阴天</string>
     <string name="AWB_Daylight">日光</string>
@@ -19,6 +17,7 @@
     <string name="SyncDevice">与装置同步</string>
     <string name="SyncDeviceBTN">点击按钮与装置同步</string>
     <string name="Timesettings">时间设置</string>
+    <string name="action_settings">设置</string>
     <string name="app_Version">应用程序版本</string>
     <string name="app_name">行车拍拍</string>
     <string name="backphoto">后照片</string>
@@ -55,6 +54,7 @@
     <string name="intraday">一天内</string>
     <string name="label_50Hz">50Hz</string>
     <string name="label_60Hz">60Hz</string>
+    <string name="label_Close">关闭</string>
     <string name="label_DV_quality">录像质量</string>
     <string name="label_High">高</string>
     <string name="label_Low">低</string>
@@ -121,6 +121,7 @@
     <string name="label_lockproetect">SOS灵敏度</string>
     <string name="label_motion_detection">移动侦测</string>
     <string name="label_move">移动侦测</string>
+    <string name="label_net_disconnected">断开网络</string>
     <string name="label_network_configurations">连线设置</string>
     <string name="label_off">关</string>
     <string name="label_ok">确定</string>
@@ -186,11 +187,14 @@
     <string name="sd_browser_stoprecord">需要停止录像才能完成该操作</string>
     <string name="setting_sdcardfiletime">SD卡剩余寿命：</string>
     <string name="setting_wifi">设置wifi</string>
+    <string name="sevendaysago">保存</string>
     <string name="sosbackvideo">后sos视频</string>
     <string name="sosfile">加锁视频</string>
     <string name="sosfrontvideo">前sos视频</string>
     <string name="threedaysago">更早</string>
     <string name="tipnobackshop">请检查后路镜头</string>
+    <string name="title_activity_local_file_list">LocalFileListActivity</string>
+    <string name="title_activity_main_activity_ui">MainActivityUI</string>
     <string name="trip">提示</string>
     <string name="unabledeleteREARFile">后路文件不能删除</string>
     <string name="unabledeleteSOSFile">SOS文件不能删除</string>

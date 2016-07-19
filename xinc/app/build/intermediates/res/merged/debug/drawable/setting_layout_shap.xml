@@ -11,4 +11,4 @@
        android:right="8dp"
        android:top="8dp" />
     <corners android:radius="10dp" />
-</shape><!-- From: file:/E:/john_work/xinc/app/src/main/res/drawable/setting_layout_shap.xml -->
+</shape>

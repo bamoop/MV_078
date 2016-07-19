@@ -3,4 +3,3 @@
     <item android:state_enabled="true" android:drawable="@drawable/dot_dark" />  
     <item android:state_enabled="false" android:drawable="@drawable/dot_white" />  
 </selector>
-<!-- From: file:/E:/john_work/xinc/app/src/main/res/drawable/dot.xml -->

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:MyBanner="http://schemas.android.com/apk/res/cn.com.MKD_CarDV_WiFi.IPCamViewer"
+    xmlns:MyBanner="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -40,4 +40,3 @@
         </ListView>
  	</LinearLayout>
 </LinearLayout>
-<!-- From: file:/E:/john_work/xinc/app/src/main/res/layout/setting_quanlity.xml -->

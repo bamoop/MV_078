@@ -28,4 +28,4 @@
             <corners android:radius="8dp" />
         </shape>
     </item>
-</selector> <!-- From: file:/E:/john_work/xinc/app/src/main/res/drawable/setting_list_btn.xml -->
+</selector> 

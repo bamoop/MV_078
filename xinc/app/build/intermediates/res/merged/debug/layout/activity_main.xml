@@ -9,8 +9,7 @@
         android:id="@+id/mainMainFragmentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/mainTitleFragmentLayout"
         android:layout_centerHorizontal="true" >
     </RelativeLayout>
 
-</RelativeLayout><!-- From: file:/E:/john_work/xinc/app/src/main/res/layout/activity_main.xml -->
+</RelativeLayout>

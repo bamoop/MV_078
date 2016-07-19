@@ -211,5 +211,6 @@
     <string name="frontphoto">FrontPhoto</string>
     <string name="backphoto">RearPhoto</string>
     <string name="tipnobackshop">Please check the rear.</string>
+    <string name="unabledeleteREARFile">Posterior file cannot be deleted</string>
 
 </resources>

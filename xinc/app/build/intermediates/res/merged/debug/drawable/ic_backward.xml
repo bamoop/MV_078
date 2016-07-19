@@ -4,4 +4,4 @@
     <item android:drawable="@drawable/ic_backward_glow" android:state_focused="true" android:state_pressed="true"/>
     <item android:drawable="@drawable/ic_backward_glow" android:state_focused="false" android:state_pressed="true"/>
     <item android:drawable="@drawable/ic_backward_normal"/>
-</selector><!-- From: file:/E:/john_work/xinc/app/src/main/res/drawable/ic_backward.xml -->
+</selector>

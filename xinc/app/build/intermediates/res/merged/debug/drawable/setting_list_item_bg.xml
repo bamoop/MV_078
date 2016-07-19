@@ -4,4 +4,3 @@
 <item android:state_pressed="false"  android:drawable="@color/settings_list_bg" />   
 </selector>
 
-<!-- From: file:/E:/john_work/xinc/app/src/main/res/drawable/setting_list_item_bg.xml -->

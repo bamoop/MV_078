@@ -105,7 +105,7 @@
                 android:layout_marginTop="@dimen/top_dv_sound_margin"
                 android:layout_alignParentRight="true"
                 android:visibility="gone"
-                android:background="@drawable/play_btn_simplewipe_no_bg"
+                android:background="@drawable/bg_changesnop"
                 />
             <LinearLayout android:background="@drawable/contro_bar_bg"
                 android:layout_alignParentBottom="true"
@@ -155,7 +155,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:text="@string/label_camera_snapshot"
-                android:visibility="gone" />
+                android:visibility="gone"
+                />
         </RelativeLayout>
     </LinearLayout>
 
@@ -186,4 +187,4 @@
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
-    </FrameLayout><!-- From: file:/E:/john_work/xinc/app/src/main/res/layout/preview_player.xml -->
+    </FrameLayout>
