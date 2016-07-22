@@ -100,7 +100,7 @@
     <string name="Timesettings">Time Settings</string>
     <string name="action_settings">Settings</string>
     <string name="app_Version">APP Version</string>
-    <string name="app_name">WIFI Recorder</string>
+    <string name="app_name">DVGo</string>
     <string name="backvideo">BackVideo</string>
     <string name="calloffdown_tip">Is to cancel the download</string>
     <string name="capacityused">Used</string>
@@ -263,6 +263,7 @@
     <string name="newbadblock">BadareaInfo:</string>
     <string name="no">No</string>
     <string name="nomore">No More</string>
+    <string name="nonsupport_querysdlife">SD card does not support special query</string>
     <string name="onKeyDown">Exit can make disconnect with the firmware, whether to continue to exit?</string>
     <string name="open">Open</string>
     <string name="photo">Photo</string>

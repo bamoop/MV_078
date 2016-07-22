@@ -4,7 +4,7 @@ ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:2:1-108:12
 	xmlns:android
 		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:2:11-69
 	package
-		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:3:5-51
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:3:5-48
 		INJECTED from E:\john_work\zupai\app\src\main\AndroidManifest.xml
 		INJECTED from E:\john_work\zupai\app\src\main\AndroidManifest.xml
 	android:versionName
@@ -89,7 +89,7 @@ MERGED from [com.android.support:support-v4:20.0.0] E:\john_work\zupai\app\build
 		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:35:9-56
 	android:name
 		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:31:9-55
-activity#cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.MainActivityUI
+activity#cn.com.Macvision_YLSX.IPCamViewer.MainActivityUI
 ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:36:9-45:20
 	android:noHistory
 		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:39:13-37
@@ -103,7 +103,7 @@ action#android.intent.action.MAIN
 ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:41:17-69
 	android:name
 		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:41:25-66
-activity#cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.ViewPagerDemoActivity
+activity#cn.com.Macvision_YLSX.IPCamViewer.ViewPagerDemoActivity
 ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:46:9-57:20
 	android:screenOrientation
 		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:51:13-49
@@ -114,14 +114,14 @@ ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:46:9-57:20
 	android:configChanges
 		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:48:13-63
 	android:name
-		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:47:13-86
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:47:13-83
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
 ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:52:13-56:29
 category#android.intent.category.LAUNCHER
 ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:55:17-77
 	android:name
 		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:55:27-74
-activity#cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.MainActivity
+activity#cn.com.Macvision_YLSX.IPCamViewer.MainActivity
 ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:58:9-64:20
 	android:screenOrientation
 		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:62:13-49
@@ -130,13 +130,13 @@ ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:58:9-64:20
 	android:configChanges
 		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:60:13-63
 	android:name
-		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:59:13-77
-activity#cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.FileBrowser.VideoPlayerActivity
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:59:13-74
+activity#cn.com.Macvision_YLSX.IPCamViewer.FileBrowser.VideoPlayerActivity
 ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:65:9-94:20
 	android:label
 		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:67:13-45
 	android:name
-		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:66:13-96
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:66:13-93
 intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
 ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:68:13-78:29
 action#android.intent.action.VIEW
@@ -155,15 +155,15 @@ data
 ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:73:17-43
 	android:scheme
 		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:73:23-40
-activity#cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.LocalFileListActivity
+activity#cn.com.Macvision_YLSX.IPCamViewer.LocalFileListActivity
 ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:95:9-103:20
 	android:label
 		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:97:13-67
 	android:name
-		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:96:13-86
-activity#cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.Viewer.StreamPlayerActivity
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:96:13-83
+activity#cn.com.Macvision_YLSX.IPCamViewer.Viewer.StreamPlayerActivity
 ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:104:9-105:82
 	android:configChanges
 		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:105:19-80
 	android:name
-		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:104:19-98
+		ADDED from E:\john_work\zupai\app\src\main\AndroidManifest.xml:104:19-95

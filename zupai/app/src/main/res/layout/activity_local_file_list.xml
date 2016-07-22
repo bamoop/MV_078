@@ -1,12 +1,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:MyBanner="http://schemas.android.com/apk/res/cn.com.ZhuPai_CarDv_WIFI.IPCamViewer"
+    xmlns:MyBanner="http://schemas.android.com/apk/res/cn.com.Macvision_YLSX.IPCamViewer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     android:orientation="vertical"
     tools:context=".LocalFileListActivity" >
-    <cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.MyBanner
+    <cn.com.Macvision_YLSX.IPCamViewer.MyBanner
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_banner_height" MyBanner:text="@string/main_local" />
     <LinearLayout

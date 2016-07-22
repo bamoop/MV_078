@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:MyBanner="http://schemas.android.com/apk/res/cn.com.ZhuPai_CarDv_WIFI.IPCamViewer"
+    xmlns:MyBanner="http://schemas.android.com/apk/res/cn.com.Macvision_YLSX.IPCamViewer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     android:orientation="vertical">
-	<cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.MyBanner
+	<cn.com.Macvision_YLSX.IPCamViewer.MyBanner
         android:layout_width="match_parent"
     android:layout_height="@dimen/top_banner_height" MyBanner:text="@string/main_dv" />
     <LinearLayout
@@ -76,30 +76,30 @@
 
 
     <LinearLayout style="@style/layout_vertical" android:layout_weight="1">
-        <cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.RTPullListView
+        <cn.com.Macvision_YLSX.IPCamViewer.RTPullListView
             android:id="@+id/browserList"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:listSelector="@drawable/listview_item_bg"
             />
-        <cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.RTPullListView
+        <cn.com.Macvision_YLSX.IPCamViewer.RTPullListView
             android:id="@+id/browserList_jpg"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
         />
-        <cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.RTPullListView
+        <cn.com.Macvision_YLSX.IPCamViewer.RTPullListView
             android:id="@+id/browserList_backvideo"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
         />
-        <cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.RTPullListView
+        <cn.com.Macvision_YLSX.IPCamViewer.RTPullListView
             android:id="@+id/browserList_sosbackvideo"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:visibility="gone" />
-        <cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.RTPullListView
+        <cn.com.Macvision_YLSX.IPCamViewer.RTPullListView
             android:id="@+id/browserList_sosfrontvideo"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

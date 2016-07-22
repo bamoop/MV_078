@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">WIFI记录仪</string>
+    <string name="app_name">DVGo</string>
     <string name="label_file_browser">档案浏览</string>
     <string name="label_camera_control">相机控制</string>
     <string name="label_network_configurations">连线设置</string>
@@ -217,6 +217,7 @@
     <string name="videorecording">记录仪录像模式</string>
 
     <string name="errorsd">SD卡剩余寿命偏低,请注意更换SD卡</string>
+    <string name="nonsupport_querysdlife">SD卡不支持特殊查询</string>
     <string name="capacityused">已用</string>
     <string name="newbadblock">坏区信息:</string>
     <string name="sdcapacity">TF卡容量:</string>

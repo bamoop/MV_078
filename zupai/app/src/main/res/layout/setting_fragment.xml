@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-	<cn.com.ZhuPai_CarDv_WIFI.IPCamViewer.MyBanner
+	<cn.com.Macvision_YLSX.IPCamViewer.MyBanner
 		android:layout_width="match_parent"
     android:layout_height="@dimen/top_banner_height" MyBanner:text="@string/main_settings"
 		/>
@@ -163,6 +163,7 @@
 				 android:id="@+id/settings_videoout_row_1"
 				 android:text="@string/label_Off"
 				 style="@style/setting_btn"
+				 android:visibility="gone"
 				 android:layout_marginLeft="20dp"/>
 			 <Button
 				 android:id="@+id/settings_videoout_row_2"

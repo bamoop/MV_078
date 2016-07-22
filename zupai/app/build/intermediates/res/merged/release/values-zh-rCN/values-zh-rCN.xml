@@ -21,7 +21,7 @@
     <string name="Timesettings">时间设置</string>
     <string name="action_settings">设置</string>
     <string name="app_Version">应用程序版本</string>
-    <string name="app_name">WIFI记录仪</string>
+    <string name="app_name">DVGo</string>
     <string name="backvideo">后视频</string>
     <string name="calloffdown_tip">正在取消下载</string>
     <string name="capacityused">已用</string>
@@ -183,6 +183,7 @@
     <string name="newbadblock">坏区信息:</string>
     <string name="no">否</string>
     <string name="nomore">没有更多了</string>
+    <string name="nonsupport_querysdlife">SD卡不支持特殊查询</string>
     <string name="onKeyDown">退出会使断开与固件的连接，是否继续退出？</string>
     <string name="open">打开</string>
     <string name="photo">照片</string>

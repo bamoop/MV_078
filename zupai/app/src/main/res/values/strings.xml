@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">WIFI Recorder</string>
+    <string name="app_name">DVGo</string>
     <string name="label_file_browser">File Browser</string>
     <string name="label_camera_control">Camera Control</string>
     <string name="label_network_configurations">Network Settings</string>
@@ -219,6 +219,7 @@
     <string name="exposalmodel">To restore the factory Settings</string>
     <string name="quality_vga">VGA</string>
     <string name="videorecording">Video recorder</string>
+    <string name="nonsupport_querysdlife">SD card does not support special query</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
