@@ -21,24 +21,20 @@
     	</LinearLayout>
     </LinearLayout>
     <LinearLayout style="@style/layout_vertical" android:layout_weight="1">
-        <ListView
-        android:id="@+id/browserList"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:fastScrollEnabled="true"
-        android:listSelector="#ffffff"
-        android:cacheColorHint="@android:color/transparent"
-        android:divider="@null">
-        </ListView>
-        <ListView
-        android:id="@+id/browserPhotoList"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:fastScrollEnabled="true"
-        android:listSelector="#ffffff"
-        android:cacheColorHint="@android:color/transparent"
-        android:divider="@null">
-        </ListView>
+
+        <ExpandableListView
+            android:id="@+id/expandlist_video"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        </ExpandableListView>
+        <ExpandableListView
+            android:visibility="gone"
+            android:id="@+id/expandlist_photo"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+           >
+        </ExpandableListView>
+
     </LinearLayout>
     <LinearLayout android:layout_width="match_parent"
            android:layout_height="@dimen/bottom_banner_height">
@@ -56,4 +52,4 @@
     	</LinearLayout>
     </LinearLayout>
 </LinearLayout>
-<!-- From: file:/E:/john_work/Car_DV.android_mv0311/app/src/main/res/layout/activity_local_file_list.xml -->
+<!-- From: file:/C:/Users/bzmoop/Desktop/xinc/app/src/main/res/layout/activity_local_file_list.xml -->

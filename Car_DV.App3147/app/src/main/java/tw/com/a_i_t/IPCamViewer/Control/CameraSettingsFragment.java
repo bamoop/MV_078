@@ -175,7 +175,8 @@ public class CameraSettingsFragment extends Fragment {
 			//Log.d(TAG, "TimeStamp property "+result) ;
 			if (result != null) {
 
-				String[] lines;		
+				String[] lines;
+				Log.i("moop",result);
 				String[] lines_temp = result.split("Camera.Menu.DefaultValue.VideoRes=");
 				lines = lines_temp[1].split(System.getProperty("line.separator")) ;
 				mVideoresRet = Integer.valueOf(lines[0]);

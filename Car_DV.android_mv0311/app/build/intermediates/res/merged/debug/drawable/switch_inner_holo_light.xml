@@ -31,4 +31,4 @@
     <item android:drawable="@drawable/switch_thumb_activated_holo_light" android:state_checked="true"/>
     <item android:drawable="@drawable/switch_thumb_activated_holo_light"/>
 
-</selector><!-- From: file:/E:/john_work/Car_DV.android_mv0311/app/src/main/res/drawable/switch_inner_holo_light.xml -->
+</selector><!-- From: file:/C:/Users/bzmoop/Desktop/xinc/app/src/main/res/drawable/switch_inner_holo_light.xml -->

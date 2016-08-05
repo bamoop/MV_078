@@ -42,7 +42,11 @@
                 android:textColor="#ffff00"
                 android:layout_marginLeft="@dimen/top_dv_sound_margin"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-         <ImageButton android:layout_alignParentTop="true" android:scaleType="fitXY" android:background="@drawable/sound_enable" android:layout_marginTop="@dimen/top_dv_sound_margin"  android:layout_marginRight="@dimen/top_dv_sound_margin"
+         <ImageButton android:layout_alignParentTop="true"
+             android:scaleType="fitXY"
+             android:background="@drawable/sound_enable"
+             android:layout_marginTop="@dimen/top_dv_sound_margin"
+             android:layout_marginRight="@dimen/top_dv_sound_margin"
              android:layout_alignParentRight="true" android:id="@+id/sound" android:layout_width="@dimen/top_dv_sound_size" android:layout_height="@dimen/top_dv_sound_size"/>                
 		<ImageButton android:layout_alignParentTop="true" android:scaleType="fitXY"
             android:background="@drawable/sound_disable" android:layout_marginTop="@dimen/top_dv_sound_margin"

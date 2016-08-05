@@ -14,4 +14,4 @@
         android:propertyName="alpha"
         android:startOffset="@integer/card_flip_time_half"
         android:duration="1" />
-</set><!-- From: file:/E:/john_work/Car_DV.android_mv0311/app/src/main/res/anim/right_out.xml -->
+</set><!-- From: file:/C:/Users/bzmoop/Desktop/xinc/app/src/main/res/anim/right_out.xml -->

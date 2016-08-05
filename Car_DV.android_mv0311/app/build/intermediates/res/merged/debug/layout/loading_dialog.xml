@@ -31,4 +31,4 @@
 			    <TextView android:id="@+id/content_txt"  android:layout_marginTop="20dp" android:textSize="@dimen/dialog_content_txt_size" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/loading" style="@style/title_txt" />
     		</LinearLayout>
 </LinearLayout>
-<!-- From: file:/E:/john_work/Car_DV.android_mv0311/app/src/main/res/layout/loading_dialog.xml -->
+<!-- From: file:/C:/Users/bzmoop/Desktop/xinc/app/src/main/res/layout/loading_dialog.xml -->
