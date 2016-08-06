@@ -1,0 +1,33 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--视频列表Item-->
+    <dimen name="videoList_Item_im_headImage_width">36dp</dimen>
+    <dimen name="videoList_Item__im_headImage_height">36dp</dimen>
+    <dimen name="videoList_Item_ly_headLayout_height">52dp</dimen>
+    <dimen name="videoList_Item_tv_play_size">10sp</dimen>
+    <dimen name="videoList_Item_tv_playCount_size">14sp</dimen>
+    <dimen name="videoList_Item_tv_userName_size">14sp</dimen>
+    <dimen name="videoList_Item_ly_middle_Layout_height">52dp</dimen>
+    <dimen name="videoList_Item_btn_zan_width">60dp</dimen>
+    <dimen name="videoList_Item_btn_zan_height">40dp</dimen>
+    <dimen name="videoList_Item_tv_count_size">14sp</dimen>
+    <dimen name="videoList_Item_paddingLeft">15dp</dimen>
+    <dimen name="videoList_Item_paddingRight">10dp</dimen>
+    <dimen name="videoList_Item_image_VideoThumb_height">200dp</dimen>
+    <!--文件导航条-->
+    <dimen name="FileList_TabLayout_Height">42dp</dimen>
+    <dimen name="FileList_Item_paddingTop">10dp</dimen>
+
+    <!--文件列表Item-->
+    <dimen name="fileList_Item_paddingWidth">15dp</dimen>
+    <dimen name="fileList_Item_paddingHeight">10dp</dimen>
+    <dimen name="fileList_Item_marginTop_time">32dp</dimen>
+    <dimen name="fileList_Item_img_thumb_HW">64dp</dimen>
+    <dimen name="fileList_Item_tv_name_size">14sp</dimen>
+    <dimen name="fileList_Item_tv_time_size">12sp</dimen>
+
+
+</resources>

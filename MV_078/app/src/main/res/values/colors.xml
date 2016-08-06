@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--通用-->
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFFF</color>
+    <color name="theme_fragment_bgColor">#eeeef3</color>
+
+    <!--底部菜单-->
+    <color name="bottom_white">#FFFFFF</color>
+    <color name="bottom_topbar_bg">#12AF4D</color>
+    <color name="bottom_tab_bg">#f9f9f9</color>
+    <color name="bottom_tab_text_bg">#bababa</color>
+    <color name="bottom_line_bg">#f0f0f0</color>
+
+    <!--主页导航条-->
+    <color name="mainTable_textColor">#000000</color>
+    <color name="mainTable_selectedTextColor">#3d45a8</color>
+    <color name="mainTable_tabIndicatorColor">#c3c3c3</color>
+    <color name="mainTable_bgColor">#fdfdfe</color>
+
+    <!--视频列表-->
+    <color name="VideoList_linearBgColor">#c3c3c3</color>
+    <color name="videoList_textColor">#000000</color>
+    <color name="videoList_Tag_textColor">#FF777BB6</color>
+
+    <!--文件导航-->
+    <color name="fileTable_textColor">#666666</color>
+    <color name="fileTable_selectedTextColor">#3B43A8</color>
+    <color name="fileTable_tabIndicatorColor">#D8D8D8</color>
+    <color name="fileTable_bgColor">#FFFF</color>
+
+    <!--文件Item-->
+    <color name="fileList_tv_timeColor">#FF999999</color>
+    <color name="fileList_tv_nameColor">#FF222222</color>
+
+
+
+</resources>

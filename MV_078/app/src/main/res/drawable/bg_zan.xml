@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">    
+<!--&lt;!&ndash;选中时的图片背景&ndash;&gt;-->
+<!--<item android:state_pressed="true"   android:drawable="@mipmap/zan_pressed" />-->
+<!--&lt;!&ndash;获得焦点时的图片背景&ndash;&gt;  -->
+<!--<item android:state_pressed="false"   android:drawable="@mipmap/zan_normal" />-->
+    <item android:state_pressed="true" android:drawable="@mipmap/zan_pressed" />
+    <item android:state_pressed="false" android:state_enabled="true" android:drawable="@mipmap/zan_normal" />
+    <item android:state_enabled="false" android:state_pressed="false" android:drawable="@mipmap/zan_pressed" />
+</selector>
+

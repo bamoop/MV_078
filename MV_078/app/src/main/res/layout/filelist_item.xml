@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.macvision.mv_078.util.SlideRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/fileList_Item_paddingHeight"
+    android:paddingLeft="@dimen/fileList_Item_paddingWidth"
+    android:paddingRight="@dimen/fileList_Item_paddingWidth"
+    android:paddingTop="@dimen/fileList_Item_paddingHeight"
+    android:background="@color/white">
+
+    <FrameLayout
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:background="#ff11">
+
+        <CheckBox
+            android:id="@+id/item_checkbox"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:button="@drawable/selector_checkbox"
+            android:clickable="false"
+            android:enabled="false"
+            android:focusable="false" />
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/item_content_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:id="@+id/image_fileThumb"
+            android:layout_width="@dimen/fileList_Item_img_thumb_HW"
+            android:layout_height="@dimen/fileList_Item_img_thumb_HW"
+            android:layout_marginRight="@dimen/FileList_Item_paddingTop"
+            android:background="#052" />
+
+        <TextView
+            android:id="@+id/tv_fileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/image_fileThumb"
+            android:text="视频名字"
+            android:textColor="@color/fileList_tv_nameColor"
+            android:textSize="@dimen/fileList_Item_tv_name_size" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fileList_Item_marginTop_time"
+            android:layout_toRightOf="@id/image_fileThumb"
+            android:text="2012/12/12"
+            android:textColor="@color/fileList_tv_timeColor"
+            android:textSize="@dimen/fileList_Item_tv_time_size" />
+
+        <TextView
+            android:id="@+id/tv_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/image_fileThumb"
+            android:layout_toRightOf="@id/image_fileThumb"
+            android:text="4.3M"
+            android:textColor="@color/fileList_tv_timeColor"
+            android:textSize="@dimen/fileList_Item_tv_time_size" />
+
+        <Button
+            android:id="@+id/btn_select"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="#e8e8e8" />
+    </RelativeLayout>
+</com.macvision.mv_078.util.SlideRelativeLayout>

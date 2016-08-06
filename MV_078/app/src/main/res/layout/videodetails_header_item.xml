@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/videoList_Item_ly_middle_Layout_height"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/videoList_Item_paddingLeft">
+
+        <Button
+            android:id="@+id/btn_ping_detail"
+            android:layout_width="@dimen/videoList_Item_btn_zan_width"
+            android:layout_height="@dimen/videoList_Item_btn_zan_height"
+            android:text="评" />
+
+        <TextView
+            android:id="@+id/tv_pingCount_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="99"
+            android:textSize="@dimen/videoList_Item_tv_count_size" />
+
+        <Button
+            android:id="@+id/btn_zan_detail"
+            android:layout_width="@dimen/videoList_Item_btn_zan_width"
+            android:layout_height="@dimen/videoList_Item_btn_zan_height"
+            android:layout_marginLeft="20dp"
+            android:text="赞" />
+
+        <TextView
+            android:id="@+id/tv_zanCount_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="99"
+            android:textSize="@dimen/videoList_Item_tv_count_size" />
+
+        <Button
+            android:id="@+id/btn_fen_detail"
+            android:layout_width="@dimen/videoList_Item_btn_zan_width"
+            android:layout_height="@dimen/videoList_Item_btn_zan_height"
+            android:layout_marginLeft="20dp"
+            android:text="分享" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/VideoList_linearBgColor" />
+
+    <TextView
+        android:id="@+id/tv_videoState_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="@dimen/videoList_Item_paddingLeft"
+        android:text="详情详情详情详情详情详情详情详情详情详情\n详情详情详情详情"
+        android:textColor="@color/videoList_textColor"
+        android:textSize="@dimen/videoList_Item_tv_count_size" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_type_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#tag1"
+            android:textColor="@color/videoList_Tag_textColor"
+            android:textSize="@dimen/videoList_Item_tv_count_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10.3dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_pingCount2_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全部99条评论"
+            android:textSize="@dimen/videoList_Item_tv_count_size" />
+    </LinearLayout>
+
+
+</LinearLayout>

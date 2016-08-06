@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="10dp"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/videoList_Item_ly_headLayout_height"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/videoList_Item_paddingLeft"
+        >
+
+        <com.macvision.mv_078.util.CircleImageView
+            android:id="@+id/image_head"
+            android:layout_width="@dimen/videoList_Item_im_headImage_width"
+            android:layout_height="@dimen/videoList_Item__im_headImage_height"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/image_head"
+            android:textColor="@color/videoList_textColor"
+            android:text="用户名"
+            android:layout_marginLeft="5dp"
+            android:textSize="@dimen/videoList_Item_tv_userName_size" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/videoList_Item_paddingRight"
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/videoList_textColor"
+                android:text="36666"
+                android:textSize="@dimen/videoList_Item_tv_playCount_size" />
+
+            <TextView
+                android:id="@+id/tv_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="播放"
+                android:textSize="@dimen/videoList_Item_tv_play_size" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/image_thumb"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/videoList_Item_image_VideoThumb_height" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/videoList_Item_ly_middle_Layout_height"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/videoList_Item_paddingLeft"
+        >
+
+        <Button
+            android:id="@+id/btn_ping"
+            android:layout_width="@dimen/videoList_Item_btn_zan_width"
+            android:layout_height="@dimen/videoList_Item_btn_zan_height"
+            android:text="评" />
+
+        <TextView
+            android:id="@+id/tv_pingCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="99"
+            android:textSize="@dimen/videoList_Item_tv_count_size" />
+
+        <Button
+            android:id="@+id/btn_zan"
+            android:layout_width="@dimen/videoList_Item_btn_zan_width"
+            android:layout_height="@dimen/videoList_Item_btn_zan_height"
+            android:layout_marginLeft="20dp"
+            android:text="赞" />
+
+        <TextView
+            android:id="@+id/tv_zanCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="99"
+            android:textSize="@dimen/videoList_Item_tv_count_size" />
+
+        <Button
+            android:id="@+id/btn_fen"
+            android:layout_width="@dimen/videoList_Item_btn_zan_width"
+            android:layout_height="@dimen/videoList_Item_btn_zan_height"
+            android:layout_marginLeft="20dp"
+            android:text="分享" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/VideoList_linearBgColor"
+        />
+
+    <TextView
+        android:id="@+id/tv_videoid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="详情详情详情详情详情详情详情详情详情详情\n详情详情详情详情"
+        android:paddingLeft="@dimen/videoList_Item_paddingLeft"
+        android:textColor="@color/videoList_textColor"
+        android:textSize="@dimen/videoList_Item_tv_count_size"
+        android:layout_marginTop="10dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="16dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#tag1"
+            android:textColor="@color/videoList_Tag_textColor"
+            android:textSize="@dimen/videoList_Item_tv_count_size"/>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MV_078</string>
+    <string name="bottom1">社区</string>
+    <string name="bottom2">云狗</string>
+    <string name="bottom3">设备</string>
+    <string name="bottom4">文件</string>
+    <string name="bottom5">个人</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
