@@ -61,7 +61,6 @@ public class VideoDetails_Activiey extends BaseActivity implements VideoDetailCo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_details);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-
 //        ButterKnife.bind(this);
         initData();
         initView();
@@ -222,6 +221,18 @@ public class VideoDetails_Activiey extends BaseActivity implements VideoDetailCo
     @Override
     public void fillCommentData(CommentEntity entity) {
         mCommentEntity.addAll(entity.getData());
+
+    }
+
+    @Override
+    public void hasNoMoreData() {
+        mHasMoreData = false;
+
+    }
+
+    @Override
+    public void appendMoreDataToView(VideoEntity entity) {
+        currentPage++;
 
     }
 

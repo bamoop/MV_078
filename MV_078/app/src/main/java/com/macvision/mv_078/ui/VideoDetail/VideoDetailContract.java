@@ -16,15 +16,35 @@ import com.macvision.mv_078.ui.VideoList.VideoContract;
  */
 public interface VideoDetailContract {
     interface View extends BaseView<VideoContract.Presenter> {
-        /**填充数据*/
+        /**
+         * 填充数据
+         */
         void fillData(VideoDetailEntity entity);
+
+        /**
+         * 加载评论数据
+         **/
         void fillCommentData(CommentEntity entity);
 
-        /**数据加载完成*/
-        void  getDataFinish();
+        /**
+         * 没有更多数据
+         */
+        void hasNoMoreData();
+
+        /**
+         * 添加更多数据
+         */
+        void appendMoreDataToView(VideoEntity entity);
+
+        /**
+         * 数据加载完成
+         */
+        void getDataFinish();
     }
-    interface Presenter extends BasePresenter{
+
+    interface Presenter extends BasePresenter {
         void getData(int videoID);
-        void getComment(int video,int page);
+
+        void getComment(int video, int page);
     }
-    }
+}

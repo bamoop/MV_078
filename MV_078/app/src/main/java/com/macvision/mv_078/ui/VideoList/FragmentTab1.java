@@ -109,7 +109,6 @@ public class FragmentTab1 extends BaseFragment implements VideoContract.View,Mai
                 if (!mSwipeRefreshLayout.isRefreshing() && isBottom && mHasMoreData) {
                     mPresenter.start(currentPage, type, true);
                     Logger.i("onScrolled: onScrolled"+ "page=" + currentPage);
-
                     showRefresh();
                 }
             }

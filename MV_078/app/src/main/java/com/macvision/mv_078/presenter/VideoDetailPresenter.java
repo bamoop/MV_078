@@ -23,7 +23,7 @@ import rx.Subscriber;
 public class VideoDetailPresenter implements VideoDetailContract.Presenter {
     private BusinessTask mVideoTask;
     private VideoDetailContract.View mVideoView;
-    private final static int PAGESIZE = 20;
+    private final static int PAGESIZE = 10;
 
     public VideoDetailPresenter(VideoDetailContract.View mVideoView) {
         this.mVideoView = mVideoView;
@@ -32,7 +32,7 @@ public class VideoDetailPresenter implements VideoDetailContract.Presenter {
 
     @Override
     public void getData(int videoID) {
-        getVideoDetail(videoID);
+//        getVideoDetail(videoID);
     }
 
     @Override
@@ -80,9 +80,9 @@ public class VideoDetailPresenter implements VideoDetailContract.Presenter {
             public void onNext(String s) {
                 if (!TextUtils.isEmpty(s)) {
                     mVideoView.fillCommentData(GsonUtil.changeGsonToBean(s, CommentEntity.class));
+                    Log.i("comment", "视频详情请求返回:" + s);
+                    mVideoView.getDataFinish();
                 }
-                Log.i("comment", "视频详情请求返回:" + s);
-
             }
         }, videoId, page, pageSize);
     }
