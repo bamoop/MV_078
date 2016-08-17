@@ -44,6 +44,7 @@ public class FragmentTab1 extends BaseSwipeRefreshAFragment<VideoListPresenter> 
     @Override
     public void initData() {
         initRecycleView();
+//        rv_mainvideo.notifyAll();
         getData();
 
 
@@ -61,6 +62,7 @@ public class FragmentTab1 extends BaseSwipeRefreshAFragment<VideoListPresenter> 
     @Override
     public void fillData(List<VideoMain> data) {
         mAdapter.update(data);
+        rv_mainvideo.notifyAll();
     }
 
     @Override

@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-	<cn.com.MKD_CarDV_WiFi.IPCamViewer.MyBanner
+	<cn.com.mkd.WiFiDVR4800.MyBanner
 		android:layout_width="match_parent"
     android:layout_height="@dimen/top_banner_height" MyBanner:text="@string/main_settings"
 		/>

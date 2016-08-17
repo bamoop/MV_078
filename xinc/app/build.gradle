@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.01"
 
     defaultConfig {
-        applicationId "cn.com.MKD_CarDV_WiFi.IPCamViewer"
+        applicationId "cn.com.mkd.WiFiDVR4800"
          targetSdkVersion 18
     }
 

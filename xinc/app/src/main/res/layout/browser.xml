@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     android:orientation="vertical">
-	<cn.com.MKD_CarDV_WiFi.IPCamViewer.MyBanner
+	<cn.com.mkd.WiFiDVR4800.MyBanner
         android:layout_width="match_parent"
     android:layout_height="@dimen/top_banner_height" MyBanner:text="@string/main_dv" />
     <LinearLayout
@@ -128,34 +128,34 @@
     </LinearLayout>
 
     <LinearLayout style="@style/layout_vertical" android:layout_weight="1">
-        <cn.com.MKD_CarDV_WiFi.IPCamViewer.RTPullListView
+        <cn.com.mkd.WiFiDVR4800.RTPullListView
             android:id="@+id/browserList"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
               />
-        <cn.com.MKD_CarDV_WiFi.IPCamViewer.RTPullListView
+        <cn.com.mkd.WiFiDVR4800.RTPullListView
             android:id="@+id/browserList_jpg"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
         />
-        <cn.com.MKD_CarDV_WiFi.IPCamViewer.RTPullListView
+        <cn.com.mkd.WiFiDVR4800.RTPullListView
             android:id="@+id/browserList_backvideo"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"/>
-        <cn.com.MKD_CarDV_WiFi.IPCamViewer.RTPullListView
+        <cn.com.mkd.WiFiDVR4800.RTPullListView
             android:id="@+id/browserList_blackjpg"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:visibility="gone" />
-        <cn.com.MKD_CarDV_WiFi.IPCamViewer.RTPullListView
+        <cn.com.mkd.WiFiDVR4800.RTPullListView
             android:id="@+id/browserList_sosfrontvideo"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
             android:listSelector="@android:color/transparent" />
-        <cn.com.MKD_CarDV_WiFi.IPCamViewer.RTPullListView
+        <cn.com.mkd.WiFiDVR4800.RTPullListView
             android:id="@+id/browserList_sosbackvideo"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

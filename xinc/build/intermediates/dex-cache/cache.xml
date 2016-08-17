@@ -2,6 +2,13 @@
 <items version="2" >
 
     <item
+        jar="E:\john_work\xinc\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\jars\libs\internal_impl-20.0.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d">
+        <dex dex="E:\john_work\xinc\app\build\intermediates\pre-dexed\release\internal_impl-20.0.0_be095b60cdcb167bd9fd4d3bbf728da64ee7b4a7.jar" />
+    </item>
+    <item
         jar="E:\john_work\xinc\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
@@ -14,13 +21,6 @@
         revision="23.0.1"
         sha1="9d9013e9ff35fc3756411e62873c363c70c638fa">
         <dex dex="E:\john_work\xinc\app\build\intermediates\pre-dexed\release\support-annotations-20.0.0_5b16f73fbc8a40c20d77aefb75b595d0c21c6c23.jar" />
-    </item>
-    <item
-        jar="E:\john_work\xinc\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\jars\libs\internal_impl-20.0.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d">
-        <dex dex="E:\john_work\xinc\app\build\intermediates\pre-dexed\release\internal_impl-20.0.0_be095b60cdcb167bd9fd4d3bbf728da64ee7b4a7.jar" />
     </item>
 
 </items>

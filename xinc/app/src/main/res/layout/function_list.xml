@@ -21,25 +21,25 @@
         android:layout_marginTop="120dp"
         android:background="@drawable/bg_function_round"
         >
-        <cn.com.MKD_CarDV_WiFi.IPCamViewer.Viewer.MenuViewItem
+        <cn.com.mkd.WiFiDVR4800.Viewer.MenuViewItem
             android:id="@+id/dv_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/founction_munu1_select_" />
-        <cn.com.MKD_CarDV_WiFi.IPCamViewer.Viewer.MenuViewItem
+        <cn.com.mkd.WiFiDVR4800.Viewer.MenuViewItem
             android:id="@+id/local_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/founction_munu2_select_" />
-        <cn.com.MKD_CarDV_WiFi.IPCamViewer.Viewer.MenuViewItem
+        <cn.com.mkd.WiFiDVR4800.Viewer.MenuViewItem
             android:id="@+id/settings_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/founction_munu3_select_" />
-        <cn.com.MKD_CarDV_WiFi.IPCamViewer.Viewer.MenuViewItem
+        <cn.com.mkd.WiFiDVR4800.Viewer.MenuViewItem
             android:id="@+id/video_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

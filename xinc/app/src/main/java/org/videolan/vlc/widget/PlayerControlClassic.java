@@ -30,7 +30,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import cn.com.MKD_CarDV_WiFi.IPCamViewer.R;
+import cn.com.mkd.WiFiDVR4800.R;
 
 public class PlayerControlClassic extends LinearLayout implements IPlayerControl {
     public final static String TAG = "VLC/PlayerControlClassic";

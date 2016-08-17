@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.com.MKD_CarDV_WiFi.IPCamViewer"
+    package="cn.com.mkd.WiFiDVR4800"
     android:versionCode="30"
     android:versionName="1.0.67" >
 
@@ -34,17 +34,7 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar" >
         <activity
-            android:name="cn.com.MKD_CarDV_WiFi.IPCamViewer.MainActivityUI"
-            android:label="@string/app_name"
-            android:noHistory="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="cn.com.MKD_CarDV_WiFi.IPCamViewer.ViewPagerDemoActivity"
+            android:name="cn.com.mkd.WiFiDVR4800.ViewPagerDemoActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
             android:noHistory="true"
@@ -56,13 +46,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="cn.com.MKD_CarDV_WiFi.IPCamViewer.MainActivity"
+            android:name="cn.com.mkd.WiFiDVR4800.MainActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="cn.com.MKD_CarDV_WiFi.IPCamViewer.FileBrowser.VideoPlayerActivity"
+            android:name="cn.com.mkd.WiFiDVR4800.FileBrowser.VideoPlayerActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -93,7 +83,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="cn.com.MKD_CarDV_WiFi.IPCamViewer.LocalFileListActivity"
+            android:name="cn.com.mkd.WiFiDVR4800.LocalFileListActivity"
             android:label="@string/title_activity_local_file_list" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -102,7 +92,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="cn.com.MKD_CarDV_WiFi.IPCamViewer.Viewer.StreamPlayerActivity"
+            android:name="cn.com.mkd.WiFiDVR4800.Viewer.StreamPlayerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
     </application>
 

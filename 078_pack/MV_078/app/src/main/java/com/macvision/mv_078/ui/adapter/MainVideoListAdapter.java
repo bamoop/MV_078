@@ -43,6 +43,7 @@ public class MainVideoListAdapter extends RecyclerView.Adapter<MainVideoListAdap
     public void update(List<VideoMain> data) {
         mVideoList.addAll(data);
         notifyDataSetChanged();
+        notifyAll();
     }
 
     @Override

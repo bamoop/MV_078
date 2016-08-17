@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.com.MKD_CarDV_WiFi.IPCamViewer"
-    android:versionCode="30"
-    android:versionName="1.0.67" >
+    package="cn.com.mkd.WiFiDVR4800"
+    android:versionCode="31"
+    android:versionName="1.0.68" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -23,8 +23,8 @@
         android:largeScreens="true"
         android:normalScreens="true"
         android:smallScreens="true" />
-
     <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -33,16 +33,7 @@
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar" >
-        <activity
-            android:name=".MainActivityUI"
-            android:label="@string/app_name"
-            android:noHistory="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            </intent-filter>
-        </activity>
         <activity
             android:name=".ViewPagerDemoActivity"
             android:configChanges="keyboardHidden|orientation"
